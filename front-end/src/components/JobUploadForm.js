@@ -1,7 +1,7 @@
 import React from "react";
 
-const JobUpload = () => {
+const JobUploadForm = () => {
   return <div className="centered">Job Upload Form</div>;
 };
 
-export default JobUpload;
+export default JobUploadForm;
