@@ -9,14 +9,39 @@ html {
 }
 
 body {
+  height: 100vh;
+  width: 100vw;
   margin: 0;
   background-color: whitesmoke;
 }
 
+#root {
+  height: 100%;
+  width: 100%;
+}
+
 .centered {
-  margin: 3rem auto;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.nav-bar {
+  height: 10%; /* 10% of body height which is the viewport height */
+  background-color: antiquewhite;
+}
+
+.footer {
+  height: 25%; /* 25% of body height which is the viewport height */
+  background-color: orange;
+}
+
+.universal-landing {
+  height: 65%; /* 65% of body height which is the viewport height */
+}
+
+.jobSeeker-landing,
+.employer-landing {
+  height: 70%; /* 70% of body height which is the viewport height */
 }
