@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/navBar/NavBar";
 import Footer from "./components/footer/Footer";
-import EmployerLanding from "./pages/EmployerLanding";
-import JobSeekerLanding from "./pages/JobSeekerLanding";
+import EmployerLanding from "./pages/employerLanding/EmployerLanding";
+import JobSeekerLanding from "./pages/jobSeekerLanding/JobSeekerLanding";
 import UniversalLanding from "./pages/universalLanding/UniversalLanding";
-import JobListings from "./pages/JobListings";
-import Login from "./pages/Login";
-import JobSeekerProfile from "./pages/JobSeekerProfile";
-import EmployerProfile from "./pages/EmployerProfile";
-import JobSeekerProfileForm from "./pages/JobSeekerProfileForm";
-import JobUploadForm from "./pages/JobUploadForm";
-import JobPost from "./pages/JobPost";
+import JobListings from "./pages/jobListings/JobListings";
+import Login from "./pages/login/Login";
+import JobSeekerProfile from "./pages/jobSeekerProfile/JobSeekerProfile";
+import EmployerProfile from "./pages/employerProfile/EmployerProfile";
+import JobSeekerProfileForm from "./pages/jobSeekerProfileForm/JobSeekerProfileForm";
+import JobUploadForm from "./pages/jobUploadForm/JobUploadForm";
+import JobPost from "./pages/jobPost/JobPost";
 
 function App() {
   // Change this initial value to jobSeeker/employer if you need to access those landing/profile pages
