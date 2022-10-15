@@ -48,6 +48,8 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={landingPage} />
+        <Route path="/job-seekers" element={<JobSeekerLanding />} />
+        <Route path="/employers" element={<EmployerLanding />} />
         <Route path="/job-listings" element={<JobListings />} />
         <Route path="/profile" element={profilePage} />
         <Route path="/profile-form" element={<JobSeekerProfileForm />} />
