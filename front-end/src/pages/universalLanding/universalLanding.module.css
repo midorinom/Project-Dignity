@@ -1,4 +1,8 @@
 .universalLanding {
-  height: 100%;
-  flex: 1;
+  min-height: 64%;
+}
+
+.banner {
+  height: 50%;
+  width: 100%;
 }

@@ -5,7 +5,11 @@ import jobSeekerImage from "./jobSeekerImage.png";
 import employerImage from "./employerImage.png";
 
 const UniversalHome = () => {
-  return <div className={styles.universalLanding}></div>;
+  return (
+    <div className={styles.universalLanding}>
+      <img src={banner} alt="banner" className={styles.banner} />
+    </div>
+  );
 };
 
 export default UniversalHome;
