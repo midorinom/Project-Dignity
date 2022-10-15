@@ -8,18 +8,16 @@ const NavBar = () => {
   return (
     <div className={styles.navBar}>
       <div className={styles.dignityCareersLogoContainer}>
-        <Link to="/" className={styles.linkDignityCareersLogo}>
+        <Link to="/">
           <img
             src={dignityCareersLogo}
             alt="Dignity Careers Logo"
             className={styles.dignityCareersLogo}
           ></img>
-        </Link>
-        <p className={styles.dignityCareersName}>
-          <Link to="/">
+          <p className={styles.dignityCareersName}>
             <span className={styles.dignityWord}>Dignity</span>Careers
-          </Link>
-        </p>
+          </p>
+        </Link>
       </div>
       <div className={styles.navBarRight}>
         <div className={styles.accessibilityButton}>
@@ -35,7 +33,6 @@ const NavBar = () => {
               alt="Profile Button"
               className={styles.profileIcon}
             />
-
             <p>Profile</p>
           </Link>
         </div>
