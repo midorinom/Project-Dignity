@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 import Footer from "./components/Footer";
 import EmployerLanding from "./pages/EmployerLanding";
 import JobSeekerLanding from "./pages/JobSeekerLanding";
