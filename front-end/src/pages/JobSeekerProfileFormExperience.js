@@ -2,8 +2,11 @@ import React from "react";
 
 const JobSeekerProfileFormExperience = () => {
   return (
-    <section className="container-md" id="jobSeekerProfileFormAboutSection">
-      <form id="jobSeekerProfileFormAbout">
+    <section
+      className="container-md"
+      id="jobSeekerProfileForm-ExperienceSection"
+    >
+      <form id="jobSeekerProfileForm-Experience">
         <div className="row m-5">
           <div className="col-md-8">
             {/*<-------------------------- job title -------------------------->*/}
@@ -47,34 +50,34 @@ const JobSeekerProfileFormExperience = () => {
             </div>
             {/*<------------------------- start date ------------------------->*/}
             <div className="form-group mb-4">
-              <label className="form-label" htmlFor="start-date">
+              <label className="form-label" htmlFor="start-date-job">
                 Start Date
               </label>
               <input
                 className="form-control p-3"
-                id="start-date"
+                id="start-date-job"
                 type="date"
               ></input>
             </div>
             {/*<-------------------------- end date -------------------------->*/}
             <div className="form-group mb-4">
-              <label className="form-label" htmlFor="end-date">
+              <label className="form-label" htmlFor="end-date-job">
                 End Date
               </label>
               <input
                 className="form-control mb-2 p-3"
-                id="end-date"
+                id="end-date-job"
                 type="date"
               ></input>
               <div class="form-check">
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  id="flexCheckDefault"
+                  id="flexCheckDefault-experience"
                 ></input>
                 <label
                   className="form-check-label text-muted"
-                  htmlFor="flexCheckDefault"
+                  htmlFor="flexCheckDefault-experience"
                 >
                   I am currently working here
                 </label>
@@ -82,13 +85,13 @@ const JobSeekerProfileFormExperience = () => {
             </div>
             {/*<---------------------- job description ---------------------->*/}
             <div className="form-group mb-4">
-              <label className="form-label" htmlFor="personal-brand">
+              <label className="form-label" htmlFor="job-description">
                 Description
               </label>
               <textarea
                 className="form-control mb-2 p-3"
                 type="text"
-                id="personal-brand"
+                id="job-description"
                 style={{ height: 200 }}
                 placeholder={"Enter here"}
               ></textarea>

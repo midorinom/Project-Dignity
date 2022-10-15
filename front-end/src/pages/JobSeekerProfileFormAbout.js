@@ -2,8 +2,8 @@ import React from "react";
 
 const JobSeekerProfileFormAbout = () => {
   return (
-    <section className="container-md" id="jobSeekerProfileFormAboutSection">
-      <form id="jobSeekerProfileFormAbout">
+    <section className="container-md" id="jobSeekerProfileForm-AboutSection">
+      <form id="jobSeekerProfileForm-About">
         <div className="row m-5">
           <div className="col-md-8">
             {/*<----------------------------- name ----------------------------->*/}
