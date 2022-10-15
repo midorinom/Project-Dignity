@@ -2,8 +2,8 @@ import React from "react";
 
 const JobSeekerProfileFormSkills = () => {
   return (
-    <section className="container-md" id="jobSeekerProfileFormAboutSection">
-      <form id="jobSeekerProfileFormAbout">
+    <section className="container-md" id="jobSeekerProfileForm-SkillsSection">
+      <form id="jobSeekerProfileForm-Skills">
         <div className="row m-5">
           <div className="col-md-8">
             {/*<-------------------------- skill set -------------------------->*/}
@@ -21,11 +21,11 @@ const JobSeekerProfileFormSkills = () => {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  id="flexCheckDefault"
+                  id="flexCheckDefault-skills"
                 ></input>
                 <label
                   className="form-check-label text-muted"
-                  htmlFor="flexCheckDefault"
+                  htmlFor="flexCheckDefault-skills"
                 >
                   I have accreditation for this skill
                 </label>
@@ -60,12 +60,12 @@ const JobSeekerProfileFormSkills = () => {
             {/*<-------------------- issuing date -------------------->*/}
             {/* to show when accreditation checked */}
             <div className="form-group mb-4">
-              <label className="form-label" htmlFor="issue-date">
+              <label className="form-label" htmlFor="issue-date-cert">
                 Issue Date (Optional)
               </label>
               <input
                 className="form-control p-3"
-                id="issue-date"
+                id="issue-date-cert"
                 type="date"
               ></input>
             </div>
@@ -112,7 +112,7 @@ const JobSeekerProfileFormSkills = () => {
         {/*<----------------------- proceed next btn ----------------------->*/}
         <div className="row justify-content-center m-5">
           <button className="bottom-button p-3">
-            Proceed to Skills Section
+            Proceed to Ability Differences Section
           </button>
         </div>
       </form>
