@@ -11,9 +11,8 @@ const UniversalHome = () => {
       <div className={styles.bannerContainer}>
         <img src={banner} alt="banner" className={styles.banner} />
         <p className={styles.bannerText}>
-          Since day one, our mission has been to <br />
-          restore dignity to the differently-abled
-          <br /> through vocation with passion.
+          Since day one, our mission has been to restore dignity to the
+          differently-abled through vocation with passion.
         </p>
       </div>
 
