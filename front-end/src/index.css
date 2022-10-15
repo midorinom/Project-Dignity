@@ -28,11 +28,6 @@ body {
   align-items: center;
 }
 
-.jobSeeker-landing,
-.employer-landing {
-  height: 70%; /* 70% of body height which is the viewport height */
-}
-
 a {
   text-decoration: none;
   color: black;

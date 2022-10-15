@@ -31,14 +31,17 @@
 
 .universalLandingBottom {
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: center;
   flex: 1;
 }
 
 .universalLandingBottomText {
+  height: 100%;
+  width: 35%;
   padding: 1em;
   font-size: 40px;
+  text-align: left;
 }
 
 .iAmAJobSeekerAndEmployerContainer {
@@ -62,6 +65,7 @@
 
 .iAmAJobSeekerImage {
   height: 100%; /* fill up the imageLink container entirely */
+  max-width: 100%; /*prevent image from overflowing on small screens */
 }
 
 .iAmAJobSeekerButton {
