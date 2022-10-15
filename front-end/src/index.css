@@ -34,11 +34,6 @@ body {
   background-color: #fec501;
 }
 
-.universal-landing {
-  height: 100%;
-  flex: 1;
-}
-
 .jobSeeker-landing,
 .employer-landing {
   height: 70%; /* 70% of body height which is the viewport height */

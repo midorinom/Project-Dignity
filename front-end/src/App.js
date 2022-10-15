@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import NavBar from "./components/NavBar/NavBar";
+import NavBar from "./components/navBar/NavBar";
 import Footer from "./components/Footer";
 import EmployerLanding from "./pages/EmployerLanding";
 import JobSeekerLanding from "./pages/JobSeekerLanding";
-import UniversalLanding from "./pages/UniversalLanding";
+import UniversalLanding from "./pages/universalLanding/UniversalLanding";
 import JobListings from "./pages/JobListings";
 import Login from "./pages/Login";
 import JobSeekerProfile from "./pages/JobSeekerProfile";
