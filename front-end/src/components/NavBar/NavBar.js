@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./navBar.module.css";
-import dignityCareersLogo from "./dignity-careers-logo.png";
-import profileIcon from "./profile-icon.png";
+import dignityCareersLogo from "./dignityCareersLogo.png";
+import profileIcon from "./profileIcon.png";
 
 const NavBar = () => {
   return (
