@@ -1,4 +1,4 @@
-[
+const dummyProfileData = [
   {
     about: {
       name: "Tan Li Choon",
@@ -56,3 +56,5 @@
     ],
   },
 ];
+
+export default dummyProfileData;
