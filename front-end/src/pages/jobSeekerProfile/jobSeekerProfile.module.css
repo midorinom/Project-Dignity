@@ -1,5 +1,7 @@
+/* NoProfile Page */
 .noProfileJobSeeker {
-  min-height: 64%;
+  min-height: 64%; /* 64% of body height which is the viewport height */
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,4 +30,59 @@
 .noProfileText {
   position: relative;
   bottom: 10%;
+}
+
+/* CompletedProfile Page */
+.completedProfileJobSeeker {
+  min-height: 64%; /* 64% of body height which is the viewport height */
+  width: 90%;
+  flex-shrink: 0;
+  align-self: center;
+  margin-bottom: 4%;
+  border: 1px solid pink;
+  display: flex;
+  flex-direction: column;
+}
+
+.savePrintResumeContainer {
+  height: 10%;
+  display: flex;
+  justify-content: end;
+  gap: 2%;
+  align-items: center;
+}
+
+.savePrintResumeButton {
+  height: 60%;
+  color: white;
+  background-color: #011036;
+  font-size: 16px;
+  border-radius: 0.5em;
+  padding: 0.3em 2em;
+}
+
+.completedProfileJobSeekerBottom {
+  min-height: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.resume {
+  height: 150%;
+  width: 74%;
+  border: 1px solid blue;
+}
+
+.resumeBanner {
+  height: 25%;
+  background-color: #fec501;
+}
+
+.profileRecommendedJobs {
+  width: 25%;
+  border: 1px solid green;
+}
+
+.resumeText {
+  min-height: 100%;
 }
