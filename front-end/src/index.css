@@ -18,6 +18,8 @@ body {
 #root {
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .centered {
@@ -27,21 +29,26 @@ body {
   align-items: center;
 }
 
-.nav-bar {
-  height: 10%; /* 10% of body height which is the viewport height */
-  background-color: antiquewhite;
-}
-
 .footer {
-  height: 25%; /* 25% of body height which is the viewport height */
-  background-color: orange;
+  min-height: 25%; /* 25% of body height which is the viewport height */
+  background-color: #fec501;
 }
 
 .universal-landing {
-  height: 65%; /* 65% of body height which is the viewport height */
+  height: 100%;
+  flex: 1;
 }
 
 .jobSeeker-landing,
 .employer-landing {
   height: 70%; /* 70% of body height which is the viewport height */
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: black;
 }
