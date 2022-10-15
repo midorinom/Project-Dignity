@@ -17,9 +17,9 @@ const UniversalHome = () => {
       </div>
 
       <div className={styles.universalLandingBottom}>
-        <p className={styles.universalLandingBottomText}>
+        <div className={styles.universalLandingBottomText}>
           Let us help you fulfil your employment needs today
-        </p>
+        </div>
         <div className={styles.iAmAJobSeekerAndEmployerContainer}>
           <div className={styles.iAmAjobSeekerImageContainer}>
             <Link to="/job-seekers" className={styles.imageLink}>
