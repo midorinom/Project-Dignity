@@ -29,11 +29,6 @@ body {
   align-items: center;
 }
 
-.footer {
-  min-height: 25%; /* 25% of body height which is the viewport height */
-  background-color: #fec501;
-}
-
 .jobSeeker-landing,
 .employer-landing {
   height: 70%; /* 70% of body height which is the viewport height */

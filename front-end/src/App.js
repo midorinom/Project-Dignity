@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/navBar/NavBar";
-import Footer from "./components/Footer";
+import Footer from "./components/footer/Footer";
 import EmployerLanding from "./pages/EmployerLanding";
 import JobSeekerLanding from "./pages/JobSeekerLanding";
 import UniversalLanding from "./pages/universalLanding/UniversalLanding";
