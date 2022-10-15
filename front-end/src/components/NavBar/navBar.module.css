@@ -1,0 +1,36 @@
+.navBar {
+  min-height: 20%; /* 10% of body height which is the viewport height */
+  width: 100%;
+  position: relative; /* making this position non-static in order to align other components with position: absolute*/
+  background-color: white;
+  border-bottom: 1px solid black;
+}
+
+.dignityCareersLogoContainer {
+  height: 80%;
+  width: 10%;
+  position: absolute;
+  top: 2%;
+  left: 5%;
+  display: flex; /* makes the logo image responsive*/
+  flex-direction: column;
+}
+
+.dignityCareersLogo {
+  height: 100%;
+}
+
+.linkDignityCareersLogo {
+  height: 100%;
+}
+
+.dignityCareersName {
+  position: relative;
+  bottom: 5%;
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+.dignityWord {
+  font-weight: bold;
+}
