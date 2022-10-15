@@ -8,14 +8,15 @@ import UniversalLanding from "./pages/universalLanding/UniversalLanding";
 import JobListings from "./pages/jobListings/JobListings";
 import Login from "./pages/login/Login";
 import JobSeekerProfile from "./pages/jobSeekerProfile/JobSeekerProfile";
-import EmployerProfile from "./pages/employerProfile/EmployerProfile";
 import JobSeekerProfileForm from "./pages/jobSeekerProfileForm/JobSeekerProfileForm";
+import EmployerProfile from "./pages/employerProfile/EmployerProfile";
+import EmployerProfileForm from "./pages/employerProfileForm/EmployerProfileForm";
 import JobUploadForm from "./pages/jobUploadForm/JobUploadForm";
 import JobPost from "./pages/jobPost/JobPost";
 
 function App() {
-  // Change this initial value to jobSeeker/employer if you need to access those landing/profile pages
-  const [userType, setUserType] = useState("none");
+  // Change this userType initial value to jobSeeker/employer if you need to access those landing/profile/profileForm pages
+  const [userType, setUserType] = useState("jobSeeker");
 
   // Render the landing page depending on what type of user is logged in
   function displayLandingPage() {
@@ -43,6 +44,17 @@ function App() {
   }
   const profilePage = displayProfilePage();
 
+  // Render the profile form page depending on what type of user is logged in
+  function displayProfileFormPage() {
+    if (userType === "jobSeeker") {
+      return <JobSeekerProfileForm />;
+    } else if (userType === "employer") {
+      return <EmployerProfileForm />;
+    }
+  }
+
+  const profileFormPage = displayProfileFormPage();
+
   return (
     <>
       <NavBar />
@@ -52,7 +64,7 @@ function App() {
         <Route path="/employers" element={<EmployerLanding />} />
         <Route path="/job-listings" element={<JobListings />} />
         <Route path="/profile" element={profilePage} />
-        <Route path="/profile-form" element={<JobSeekerProfileForm />} />
+        <Route path="/profile-form" element={profileFormPage} />
         <Route path="/job-upload-form" element={<JobUploadForm />} />
         <Route path="/job-post" element={<JobPost />} />
       </Routes>
