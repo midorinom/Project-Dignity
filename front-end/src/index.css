@@ -36,3 +36,9 @@ a {
 a:hover {
   color: black;
 }
+
+/* for accessibility reasons */
+button {
+  min-height: 44px;
+  min-width: 44px;
+}

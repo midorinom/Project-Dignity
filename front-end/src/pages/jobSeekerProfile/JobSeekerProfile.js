@@ -41,11 +41,29 @@ const JobSeekerProfile = () => {
           </div>
           <div className={styles.completedProfileJobSeekerBottom}>
             <div className={styles.resume}>
-              <div className={styles.resumeBanner}>banner</div>
-              <div className={styles.resumeText}>resumeText</div>
+              <div className={styles.resumeBanner}>
+                <button className={styles.editProfileButton}>
+                  Edit Profile
+                </button>
+                <div className={styles.bannerContents}>
+                  <img className={styles.bannerPhoto} />
+                  <div className={styles.bannerText}>
+                    <p>Name</p>
+                    <p>Aspiration</p>
+                    <p>Brand Statement</p>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className={styles.profileRecommendedJobs}>
-              Recommended Jobs
+              <div className={styles.recommendedJobsHeader}>
+                <div className={styles.recommendedJobsHeaderLineOne}>
+                  Only visible to you
+                </div>
+                <div className={styles.recommendedJobsHeaderLineTwo}>
+                  Jobs Recommended For You
+                </div>
+              </div>
             </div>
           </div>
         </div>
