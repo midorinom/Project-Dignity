@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./jobSeekerProfileForm.module.css";
 
 const JobSeekerProfileFormEducation = () => {
   return (
@@ -99,9 +100,9 @@ const JobSeekerProfileFormEducation = () => {
               <small className="text-muted">200 / 200 characters left</small>
             </div>
             {/*<-------------------- add new education -------------------->*/}
-            {/* on click will show another set of this form below */}
+            {/* TODO: on click will show another set of this form below */}
             <div className="form-group mb-4">
-              <button className="circle-btn" id="add-new-edu">
+              <button className={styles.circle_btn} id="add-new-edu">
                 <i className="bi bi-plus-lg"></i>
               </button>
               <label className="form-label" htmlFor="add-new-edu">
@@ -114,17 +115,18 @@ const JobSeekerProfileFormEducation = () => {
           {/* <------------------------ side panel ------------------------> */}
           <div className="col-md-3">
             <div className=" sidePanel row mt-5">
-              <button className="side-buttons mt-3 mb-4 p-3">
+              <button className={`${styles.side_buttons} mt-3 mb-4 p-3`}>
                 Save Changes
               </button>
-              <button className="side-buttons mb-4 p-3">Cancel</button>
+              <button className={`${styles.side_buttons} mb-4 p-3`}>
+                Cancel
+              </button>
               {/* <--------------------- progress bar ---------------------> */}
               <div className="form-group">
-                <div class="progress mb-1">
+                <div className={`${styles.progress} progress mb-1`}>
                   <div
-                    class="progress-bar"
+                    className={styles.progress_bar}
                     role="progressbar"
-                    aria-label="Basic example"
                     style={{ width: "90%" }}
                     aria-valuenow="90"
                     aria-valuemin="0"
@@ -140,7 +142,7 @@ const JobSeekerProfileFormEducation = () => {
         </div>
         {/*<------------------------- complete btn ------------------------->*/}
         <div className="row justify-content-center m-5">
-          <button className="bottom-button p-3" type="submit">
+          <button className={`${styles.bottom_button} p-3`} type="submit">
             Complete Profile
           </button>
         </div>

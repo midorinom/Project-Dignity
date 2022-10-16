@@ -1,0 +1,64 @@
+/* my css */
+form {
+  font-weight: 600;
+}
+
+small {
+  font-weight: 400;
+}
+
+.side_buttons {
+  background-color: transparent;
+  border: 2px solid #fb8500;
+  opacity: 0.7;
+  border-radius: 5px;
+  margin-left: 12px;
+  width: 276px;
+  font-weight: 600;
+}
+
+.side_buttons:hover {
+  background-color: #fb8500;
+  color: white;
+  transition: 0.5s;
+}
+
+.progress {
+  background-color: #fff8f0;
+  border-radius: 3px;
+  width: 100%;
+  height: 25px;
+}
+
+.progress_bar {
+  background-color: #fb8500;
+}
+
+.bottom_button {
+  background-color: #011036;
+  border-radius: 5px;
+  color: white;
+  margin-left: 12px;
+  width: 552px;
+  font-weight: 600;
+}
+
+.bottom_button:hover {
+  background-color: transparent;
+  border: 2px solid #011036;
+  color: #011036;
+  transition: 0.5s;
+}
+
+.circle_btn {
+  height: 35px;
+  width: 35px;
+  margin-right: 10px;
+  background-color: transparent;
+  border: solid 2px #011036;
+  border-radius: 50%;
+}
+
+.circle_btn:hover {
+  border: solid 3px #011036;
+}
