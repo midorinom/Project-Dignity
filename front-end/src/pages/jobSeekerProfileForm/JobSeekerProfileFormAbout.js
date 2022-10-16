@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./jobSeekerProfileForm.module.css";
 
 const JobSeekerProfileFormAbout = () => {
   return (
@@ -90,17 +91,18 @@ const JobSeekerProfileFormAbout = () => {
           {/* <------------------------ side panel ------------------------> */}
           <div className="col-md-3">
             <div className=" sidePanel row mt-5">
-              <button className="side-buttons mt-3 mb-4 p-3">
+              <button className={`${styles.side_buttons} mt-3 mb-4 p-3`}>
                 Save Changes
               </button>
-              <button className="side-buttons mb-4 p-3">Cancel</button>
+              <button className={`${styles.side_buttons} mb-4 p-3`}>
+                Cancel
+              </button>
               {/* <--------------------- progress bar ---------------------> */}
               <div className="form-group">
-                <div class="progress mb-1">
+                <div className={`${styles.progress} progress mb-1`}>
                   <div
-                    class="progress-bar"
+                    className={styles.progress_bar}
                     role="progressbar"
-                    aria-label="Basic example"
                     style={{ width: "10%" }}
                     aria-valuenow="10"
                     aria-valuemin="0"
@@ -116,7 +118,7 @@ const JobSeekerProfileFormAbout = () => {
         </div>
         {/*<----------------------- proceed next btn ----------------------->*/}
         <div className="row justify-content-center m-5">
-          <button className="bottom-button p-3">
+          <button className={`${styles.bottom_button} p-3`}>
             Proceed to Skills Section
           </button>
         </div>
