@@ -5,6 +5,11 @@ import RecommendedJobsCard from "../../components/jobSeekerProfile/RecommendedJo
 import SkillsetsCard from "../../components/jobSeekerProfile/SkillsetsCard";
 import dummyProfileData from "./job-seeker-profile-dummy";
 import dummyRecommendedJobsData from "./recommendedJobs-dummy";
+import autismIcon from "../../components/jobSeekerProfile/images/autism.png";
+import hearingIcon from "../../components/jobSeekerProfile/images/hearing.png";
+import intellectualIcon from "../../components/jobSeekerProfile/images/intellectual.png";
+import physicalIcon from "../../components/jobSeekerProfile/images/physical.png";
+import visualIcon from "../../components/jobSeekerProfile/images/visual.png";
 
 const JobSeekerProfile = () => {
   // Change this profileIsCompleted initial value to false/true to access the NoProfile/CompletedProfile pages
@@ -44,6 +49,44 @@ const JobSeekerProfile = () => {
         <SkillsetsCard skillset={element} key={Math.random()} />
       ));
 
+      // Map AbilityDifferencesIcons
+      const abilityDifferencesIcons = profileData.abilityDifferences.diff.map(
+        (element) => {
+          let iconImage = "";
+
+          switch (element) {
+            case "Autism":
+              iconImage = autismIcon;
+              break;
+            case "Hearing":
+              iconImage = hearingIcon;
+              break;
+            case "Intellectual":
+              iconImage = intellectualIcon;
+              break;
+            case "Physical":
+              iconImage = physicalIcon;
+              break;
+            case "Visual":
+              iconImage = visualIcon;
+              break;
+            default:
+              break;
+          }
+
+          return (
+            <div className={styles.abilityDifferencesIcon} key={Math.random()}>
+              <img
+                src={iconImage}
+                alt={`${element} Ability Difference Icon`}
+                className={styles.abilityDifferencesImage}
+              />
+              <p className={styles.abilityDifferencesName}>{element}</p>
+            </div>
+          );
+        }
+      );
+
       // CompletedProfile Page
       return (
         <div className={styles.completedProfileJobSeeker}>
@@ -81,7 +124,64 @@ const JobSeekerProfile = () => {
                   <p className={styles.skillsetsTitle}>SkillSets</p>
                   <ul className={styles.skillsetsCards}>{skillsetsCards}</ul>
                 </div>
-                <div className={styles.resumeAbilityDifferences}></div>
+                <div className={styles.resumeAbilityDifferences}>
+                  <p className={styles.abilityDifferencesTitle}>
+                    About My Ability Differences
+                  </p>
+                  <div className={styles.abilityDifferencesIconsAndDescription}>
+                    <div className={styles.abilityDifferencesIcons}>
+                      {abilityDifferencesIcons}
+                    </div>
+                    <div className={styles.abilityDifferencesDescription}>
+                      {profileData.abilityDifferences.diffDesc}
+                    </div>
+                  </div>
+                  <div className={styles.abilityDifferencesSupport}>
+                    <li>
+                      <span className={styles.supportRequiredTypeWords}>
+                        Type of Support Required:{" "}
+                      </span>
+                      {profileData.abilityDifferences.support.length === 1
+                        ? profileData.abilityDifferences.support[0]
+                        : [...profileData.abilityDifferences.support].join(
+                            ", "
+                          )}
+                    </li>
+                    <br />
+                    {profileData.abilityDifferences.supportDesc}
+                  </div>
+                  <div className={styles.abilityDifferencesExtraInfo}>
+                    <li>
+                      <span className={styles.supportRequiredTypeWords}>
+                        My Preferred Mode of Communication:{" "}
+                      </span>
+                      {profileData.abilityDifferences.comm.length === 1
+                        ? profileData.abilityDifferences.comm[0]
+                        : [...profileData.abilityDifferences.comm].join(", ")}
+                    </li>
+                    <br />
+                    <li>
+                      <span className={styles.supportRequiredTypeWords}>
+                        My Aids Used:{" "}
+                      </span>
+                      {profileData.abilityDifferences.aids.length === 1
+                        ? profileData.abilityDifferences.aids[0]
+                        : [...profileData.abilityDifferences.aids].join(", ")}
+                    </li>
+                    <br />
+                    <li>
+                      <span className={styles.supportRequiredTravel}>
+                        I am{" "}
+                        <b>
+                          {profileData.abilityDifferences.travel
+                            ? "able"
+                            : "unable"}
+                        </b>{" "}
+                        to travel independently.
+                      </span>
+                    </li>
+                  </div>
+                </div>
                 <div className={styles.resumeExperience}></div>
                 <div className={styles.resumeEducation}></div>
               </div>

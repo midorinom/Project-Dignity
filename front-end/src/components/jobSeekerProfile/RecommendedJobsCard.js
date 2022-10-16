@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./recommendedJobsCard.module.css";
-import saveIcon from "./saveIcon.png";
+import saveIcon from "./images/saveIcon.png";
 
 const RecommendedJobsCard = (props) => {
   return (
