@@ -16,7 +16,7 @@ import JobPost from "./pages/jobPostForm/JobPost";
 
 function App() {
   // Change this userType initial value to jobSeeker/employer if you need to access those landing/profile/profileForm pages
-  const [userType, setUserType] = useState("jobSeeker");
+  const [userType, setUserType] = useState("none");
 
   // Render the landing page depending on what type of user is logged in
   function displayLandingPage() {

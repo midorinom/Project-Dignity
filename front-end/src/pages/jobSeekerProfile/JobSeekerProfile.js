@@ -13,7 +13,7 @@ import visualIcon from "../../components/jobSeekerProfile/images/visual.png";
 
 const JobSeekerProfile = () => {
   // Change this profileIsCompleted initial value to false/true to access the NoProfile/CompletedProfile pages
-  const [profileIsCompleted, setProfileIsComplete] = useState(true);
+  const [profileIsCompleted, setProfileIsComplete] = useState(false);
   const [profileData, setProfileData] = useState(dummyProfileData);
   const [recommendedJobsData, setRecommendedJobsData] = useState(
     dummyRecommendedJobsData
