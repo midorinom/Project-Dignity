@@ -135,6 +135,7 @@
 
 .bannerBrandStatement {
   font-size: 18px;
+  line-height: 100%;
 }
 
 /* ==========
@@ -302,7 +303,7 @@
 }
 
 .recommendedJobsHeader {
-  height: 14%;
+  min-height: 14%;
   color: white;
   background-color: #344054;
   display: flex;
