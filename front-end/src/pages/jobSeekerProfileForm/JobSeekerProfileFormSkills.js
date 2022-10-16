@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./jobSeekerProfileForm.module.css";
 
 const JobSeekerProfileFormSkills = () => {
   return (
@@ -70,9 +71,9 @@ const JobSeekerProfileFormSkills = () => {
               ></input>
             </div>
             {/*<-------------------- add new skill -------------------->*/}
-            {/* on click will show another set of this form below */}
+            {/* TODO: on click will show another set of this form below */}
             <div className="form-group mb-4">
-              <button className="circle-btn" id="add-new-skill">
+              <button className={styles.circle_btn} id="add-new-skill">
                 <i className="bi bi-plus-lg"></i>
               </button>
               <label className="form-label" htmlFor="add-new-skill">
@@ -85,15 +86,17 @@ const JobSeekerProfileFormSkills = () => {
           {/* <------------------------ side panel ------------------------> */}
           <div className="col-md-3">
             <div className=" sidePanel row mt-5">
-              <button className="side-buttons mt-3 mb-4 p-3">
+              <button className={`${styles.side_buttons} mt-3 mb-4 p-3`}>
                 Save Changes
               </button>
-              <button className="side-buttons mb-4 p-3">Cancel</button>
+              <button className={`${styles.side_buttons} mb-4 p-3`}>
+                Cancel
+              </button>
               {/* <--------------------- progress bar ---------------------> */}
               <div className="form-group">
-                <div class="progress mb-1">
+                <div class={`${styles.progress} progress mb-1`}>
                   <div
-                    class="progress-bar"
+                    class={styles.progress_bar}
                     role="progressbar"
                     aria-label="Basic example"
                     style={{ width: "20%" }}
@@ -111,7 +114,7 @@ const JobSeekerProfileFormSkills = () => {
         </div>
         {/*<----------------------- proceed next btn ----------------------->*/}
         <div className="row justify-content-center m-5">
-          <button className="bottom-button p-3">
+          <button className={`${styles.bottom_button} p-3`}>
             Proceed to Ability Differences Section
           </button>
         </div>
