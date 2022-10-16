@@ -9,8 +9,8 @@ import autism from "../filters/abilityDifference/icons/autism.png";
 
 const Card = () => {
   return (
-    <div className="container mb-3">
-      <div className="row w-100 bg-light">
+    <div className="container mb-3 mx-0 px-0">
+      <div className="row w-100 bg-light mx-0">
         <div className="col-1 d-flex flex-column align-items-center mt-3">
           <img src={save} alt="save icon" className="w-50" />
           <p className="text-secondary text-center">Save</p>
