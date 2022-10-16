@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./jobSeekerProfile.module.css";
 import RecommendedJobsCard from "../../components/jobSeekerProfile/RecommendedJobsCard";
+import SkillsetsCard from "../../components/jobSeekerProfile/SkillsetsCard";
 import dummyProfileData from "./job-seeker-profile-dummy";
 import dummyRecommendedJobsData from "./recommendedJobs-dummy";
 
@@ -33,9 +34,14 @@ const JobSeekerProfile = () => {
         </div>
       );
     } else {
-      // Map RecommendedJobs Cards
+      // Map RecommendedJobsCard
       const recommendedJobsCards = recommendedJobsData.map((element) => (
-        <RecommendedJobsCard jobData={element} />
+        <RecommendedJobsCard jobData={element} key={Math.random()} />
+      ));
+
+      // Map SkillsetsCard
+      const skillsetsCards = profileData.skills.map((element) => (
+        <SkillsetsCard skillset={element} key={Math.random()} />
       ));
 
       // CompletedProfile Page
@@ -56,18 +62,28 @@ const JobSeekerProfile = () => {
                   Edit Profile
                 </button>
                 <div className={styles.bannerContents}>
-                  <img className={styles.bannerPhoto} />
+                  <img className={styles.bannerPhoto} alt="Banner Mugshot" />
                   <div className={styles.bannerText}>
-                    <p className={styles.bannerName}>Justin Lee</p>
+                    <p className={styles.bannerName}>
+                      {profileData.about.name}
+                    </p>
                     <p className={styles.bannerAspirations}>
-                      Aspiring Pastry Chef
+                      {profileData.about.aspiration}
                     </p>
                     <p className={styles.bannerBrandStatement}>
-                      I am highly meticulous, organised, and passionate about
-                      all things dessert
+                      {profileData.about.brand}
                     </p>
                   </div>
                 </div>
+              </div>
+              <div className={styles.resumeMain}>
+                <div className={styles.resumeSkillsets}>
+                  <p className={styles.skillsetsTitle}>SkillSets</p>
+                  <ul className={styles.skillsetsCards}>{skillsetsCards}</ul>
+                </div>
+                <div className={styles.resumeAbilityDifferences}></div>
+                <div className={styles.resumeExperience}></div>
+                <div className={styles.resumeEducation}></div>
               </div>
             </div>
             <div className={styles.profileRecommendedJobs}>

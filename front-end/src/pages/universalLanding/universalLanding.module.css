@@ -6,6 +6,9 @@
   flex-direction: column;
 }
 
+/* =====
+/ Banner
+/ =====*/
 .bannerContainer {
   height: 50%;
   width: 100%;
@@ -29,6 +32,9 @@
   line-height: 3.5rem;
 }
 
+/* =============
+/ Bottom Section
+/ =============*/
 .universalLandingBottom {
   display: flex;
   align-items: center;

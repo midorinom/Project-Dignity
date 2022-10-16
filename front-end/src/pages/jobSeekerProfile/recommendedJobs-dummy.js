@@ -2,7 +2,7 @@ const dummyRecommendedJobsData = [
   {
     jobTitle: "Assistant Pastry Chef",
     employer: "VOXY",
-    employmentType: "Full-Time",
+    employmentType: "Part-Time",
     location: "Bugis",
   },
   {
