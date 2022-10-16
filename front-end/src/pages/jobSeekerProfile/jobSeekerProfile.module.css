@@ -95,24 +95,39 @@
 }
 
 .bannerContents {
-  height: 80%;
+  height: 50%;
   width: 80%;
-  background-color: white;
   display: flex;
+  align-items: center;
 }
 
 .bannerPhoto {
   height: 100%;
   width: 20%;
-  border: 1px solid red;
+  border: thin solid black;
 }
 
 .bannerText {
-  padding-left: 2%;
+  height: 80%;
+  padding-left: 3%;
   display: grid;
-  grid-template-rows: 40% 30% 30%;
+  grid-template-rows: 33% 33% 33%;
+  gap: 8%;
   align-items: center;
   justify-content: start;
+}
+
+.bannerName {
+  font-size: 34px;
+  font-weight: bold;
+}
+
+.bannerAspirations {
+  font-size: 24px;
+}
+
+.bannerBrandStatement {
+  font-size: 18px;
 }
 
 .profileRecommendedJobs {
@@ -123,7 +138,7 @@
 }
 
 .recommendedJobsHeader {
-  min-height: 18%;
+  height: 20%;
   color: white;
   background-color: #344054;
   display: flex;
