@@ -11,7 +11,7 @@ const JobListings = () => {
     <div className="job-listings">
       <Search />
       <p className="px-4 text-muted font-weight-light font-italic">
-        Main Page > What would you like to do today? > Job Listing
+        Main Page &gt; What would you like to do today? &gt; Job Listing
       </p>
       <h1 className="text-left w-50 mx-4 mt-4">Dignity Career</h1>
       <div className="d-flex justify-content-end mx-4">
