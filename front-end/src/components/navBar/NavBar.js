@@ -6,7 +6,7 @@ import profileIcon from "./profileIcon.png";
 
 const NavBar = () => {
   return (
-    <div className={styles.navBar}>
+    <div className={`${styles.navBar} border-bottom`}>
       <div className={styles.dignityCareersLogoContainer}>
         <Link to="/">
           <img
