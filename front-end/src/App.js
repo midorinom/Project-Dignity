@@ -12,7 +12,7 @@ import JobSeekerProfileForm from "./pages/jobSeekerProfileForm/JobSeekerProfileF
 import EmployerProfile from "./pages/employerProfile/EmployerProfile";
 import EmployerProfileForm from "./pages/employerProfileForm/EmployerProfileForm";
 import JobUploadForm from "./pages/jobUploadForm/JobUploadForm";
-import JobPost from "./pages/jobPost/JobPost";
+import JobPost from "./pages/jobPostForm/JobPost";
 
 function App() {
   // Change this userType initial value to jobSeeker/employer if you need to access those landing/profile/profileForm pages
