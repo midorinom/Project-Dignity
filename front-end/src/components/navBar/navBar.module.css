@@ -1,7 +1,6 @@
 .navBar {
   min-height: 11%; /* 11% of body height which is the viewport height */
   width: 100%;
-  /*position: relative;  making this position non-static in order to align other components with position: absolute*/
   background-color: white;
   border-bottom: thin solid black;
   display: flex;
