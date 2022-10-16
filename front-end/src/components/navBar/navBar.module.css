@@ -1,0 +1,78 @@
+.navBar {
+  min-height: 11%; /* 10% of body height which is the viewport height */
+  width: 100%;
+  /*position: relative;  making this position non-static in order to align other components with position: absolute*/
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.dignityCareersLogoContainer {
+  height: 80%;
+  width: 10%;
+  position: relative;
+  top: 15%;
+  left: 4%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.linkDignityCareersLogo {
+  height: 100%;
+}
+
+.dignityCareersName {
+  position: relative;
+  bottom: 5%;
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+.dignityWord {
+  font-weight: bold;
+}
+
+.navBarRight {
+  height: 100%;
+  width: 20%;
+  position: relative;
+  right: 2%;
+  font-size: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.accessibilityButton {
+  height: 50%;
+  background-color: #fec501;
+  padding: 0.5em;
+  border-radius: 0.3em;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  display: flex; /* centering the text */
+  justify-content: center;
+  align-items: center;
+}
+
+.jobListingsButton {
+  position: relative;
+  top: 25%;
+  font-weight: bold;
+}
+
+.profileIconContainer {
+  position: relative;
+  left: 5%;
+  font-weight: bold;
+}
+
+.profileIcon {
+  position: relative;
+  left: 5%;
+}
