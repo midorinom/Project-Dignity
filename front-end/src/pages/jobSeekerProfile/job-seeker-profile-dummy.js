@@ -16,6 +16,30 @@ const dummyProfileData = {
       issueMonth: "January",
       issueYear: "2020",
     },
+    {
+      skill: "Digital Marketing",
+      //cert -> issueYear only input if user indicated available accreditation
+      cert: "Google Certificate for Digital Marketing",
+      issuer: "Google",
+      issueMonth: "January",
+      issueYear: "2020",
+    },
+    {
+      skill: "Digital Marketing",
+      //cert -> issueYear only input if user indicated available accreditation
+      cert: "Google Certificate for Digital Marketing",
+      issuer: "Google",
+      issueMonth: "January",
+      issueYear: "2020",
+    },
+    {
+      skill: "Digital Marketing",
+      //cert -> issueYear only input if user indicated available accreditation
+      cert: "Google Certificate for Digital Marketing",
+      issuer: "Google",
+      issueMonth: "January",
+      issueYear: "2020",
+    },
   ],
   abilityDifferences: {
     diff: ["Hearing", "Autism"],
