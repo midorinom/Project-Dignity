@@ -1,8 +1,9 @@
 import React from "react";
-import AbilityDifference from "../components/jobListings/filters/AbilityDifference/AbilityDifference";
-import JobEnvironment from "../components/jobListings/filters/JobEnvironment";
-import JobInteractionType from "../components/jobListings/filters/JobInteractionType";
-import SupportProvided from "../components/jobListings/filters/SupportProvided";
+import AbilityDifference from "../../components/jobListings/filters/abilityDifference/AbilityDifference";
+import Card from "../../components/jobListings/filters/jobCards/Card";
+import JobEnvironment from "../../components/jobListings/filters/JobEnvironment";
+import JobInteractionType from "../../components/jobListings/filters/JobInteractionType";
+import SupportProvided from "../../components/jobListings/filters/SupportProvided";
 
 const JobListings = () => {
   return (
@@ -16,7 +17,9 @@ const JobListings = () => {
           <JobInteractionType />
           <SupportProvided />
         </div>
-        <div className="postings"></div>
+        <div className="postings w-75 p-4">
+          <Card />
+        </div>
       </div>
     </div>
   );
