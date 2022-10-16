@@ -1,5 +1,5 @@
 import React from "react";
-import AbilityDifference from "../../components/jobListings/filters/abilityDifference/AbilityDifference";
+// import AbilityDifference from "../../components/jobListings/filters/abilityDifference/AbilityDifference";
 import Card from "../../components/jobListings/jobCards/Card";
 import JobEnvironment from "../../components/jobListings/filters/JobEnvironment";
 import JobInteractionType from "../../components/jobListings/filters/JobInteractionType";
@@ -21,7 +21,7 @@ const JobListings = () => {
       </div>
       <div className="results d-flex">
         <div className="filters w-25 px-4 mb-4">
-          <AbilityDifference />
+          {/* <AbilityDifference /> */}
           <JobEnvironment />
           <JobInteractionType />
           <SupportProvided />
