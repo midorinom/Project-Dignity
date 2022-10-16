@@ -121,7 +121,7 @@ const JobSeekerProfile = () => {
               </div>
               <div className={styles.resumeMain}>
                 <div className={styles.resumeSkillsets}>
-                  <p className={styles.skillsetsTitle}>SkillSets</p>
+                  <p className={styles.skillsetsTitle}>Skillsets</p>
                   <ul className={styles.skillsetsCards}>{skillsetsCards}</ul>
                 </div>
                 <div className={styles.resumeAbilityDifferences}>
