@@ -181,7 +181,11 @@ const EmployerAccessibility=()=>{
 {/* ================================================================================================== */}
 {/*================================== Physical Job Environment ================================== */}
 {/* Noise Level */}
+<label for="noiselevel" class="form-label">Noise Level</label>
+<input type="range" class="form-range" id="noiselevel"></input>
 {/* Light Intensity */}
+<label for="lightintensity" class="form-label mt-4">Light Intensity</label>
+<input type="range" class="form-range" id="lightintensity"></input>
 {/* Upload Image(s) of the Workplace */}
 {/* Other Information About the Physical Job Environment, optional */}
 {/* ================================================================================================== */}
