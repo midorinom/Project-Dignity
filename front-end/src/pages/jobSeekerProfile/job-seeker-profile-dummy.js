@@ -45,13 +45,20 @@ const dummyProfileData = {
     diff: ["Hearing", "Autism"],
     diagnosis: "Autism Spectrum Disorder (Level 1)",
     diffDesc:
-      "I am diagnsed with Level 1 Autism Spectrum Disorder. However, I am high functioning.",
-    support: ["Shadowing by a Dedicated Job Coach"],
-    supportDesc: "I hope to have a coach who can guide me",
-    comm: "Verbal",
+      "I am diagnosed with Level 1 Autism Spectrum Disorder. However, I am high functioning and can work independently. I also have Strabismus, and experience slight double vision but can still see and read. I require a work environment that is relatively quiet, with no flashing lights as they are sensory triggers.",
+    support: [
+      "Shadowing by a Dedicated Job Coach",
+      "Workplace Redesign",
+      "Social Integration",
+      "Assistive Technology(AT)",
+      "Trial Period",
+    ],
+    supportDesc:
+      "I hope to have a coach who can shadow me during the first few weeks on the job, as I need someone who can guide me and ensure that I am performing tasks up to expectations.",
+    comm: ["Verbal", "Written"],
     //if comm: "others"
     //   commSpec: "",
-    aids: "Hearing",
+    aids: ["Hearing"],
     //if aids: "others"
     //   aidsSpec: "",
     travel: true,
