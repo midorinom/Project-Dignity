@@ -3,6 +3,7 @@
   width: 100%;
   /*position: relative;  making this position non-static in order to align other components with position: absolute*/
   background-color: white;
+  border-bottom: thin solid black;
   display: flex;
   justify-content: space-between;
   flex-shrink: 0;
