@@ -1,9 +1,10 @@
-/* .btn:hover {
-  background-color: transparent !important;
+.btn:hover {
+  background-color: orange !important;
   color: rgb(108, 117, 125) !important;
+  border-color: transparent !important;
 }
 
-.btn:active,
+/* .btn:active,
 .btn:target {
   background-color: #fb8500 !important;
   color: rgb(108, 117, 125) !important;

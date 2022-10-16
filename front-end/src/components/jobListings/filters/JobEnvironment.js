@@ -3,7 +3,7 @@ import React from "react";
 const JobEnvironment = () => {
   return (
     <div className="mt-3 d-flex flex-column w-100 bg-light align-center">
-      <h5 className="mx-1 mb-2 text-muted">Job Environment</h5>
+      <h5 className="mx-1 mt-2 text-muted">Job Environment</h5>
       <label htmlFor="noise" className="form-label mx-1">
         Noise Level
       </label>
