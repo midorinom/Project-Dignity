@@ -1,0 +1,19 @@
+.skillsetCard {
+  padding: 1%;
+}
+
+.skillsetName {
+  position: relative;
+  right: 1%;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.skillsetCert,
+.skillsetCertAcquired {
+  font-size: 16px;
+  font-style: italic;
+  padding-left: 8%;
+  margin: 0;
+}
