@@ -1,4 +1,16 @@
 .experienceCard {
-  padding-top: 3%;
-  padding-left: 7%;
+  padding: 5%;
+  padding-bottom: 0;
+}
+
+.experienceCardHeader {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.3rem;
+  font-size: 16px;
+}
+
+.experienceCardTitle {
+  font-size: 18px;
+  font-weight: bold;
 }
