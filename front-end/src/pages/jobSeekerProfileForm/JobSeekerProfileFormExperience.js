@@ -122,9 +122,9 @@ const JobSeekerProfileFormExperience = () => {
               </button>
               {/* <--------------------- progress bar ---------------------> */}
               <div className="form-group">
-                <div class={`${styles.progress} progress mb-1`}>
+                <div className={`${styles.progress} progress mb-1`}>
                   <div
-                    class={styles.progress_bar}
+                    className={styles.progress_bar}
                     role="progressbar"
                     aria-label="Basic example"
                     style={{ width: "75%" }}
