@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styles from "./jobSeekerProfile.module.css";
 import RecommendedJobsCard from "../../components/jobSeekerProfile/RecommendedJobsCard";
 import SkillsetsCard from "../../components/jobSeekerProfile/SkillsetsCard";
+import ExperienceCard from "../../components/jobSeekerProfile/ExperienceCard";
+import EducationCard from "../../components/jobSeekerProfile/EducationCard";
 import dummyProfileData from "./job-seeker-profile-dummy";
 import dummyRecommendedJobsData from "./recommendedJobs-dummy";
 import autismIcon from "../../components/jobSeekerProfile/images/autism.png";
@@ -13,7 +15,7 @@ import visualIcon from "../../components/jobSeekerProfile/images/visual.png";
 
 const JobSeekerProfile = () => {
   // Change this profileIsCompleted initial value to false/true to access the NoProfile/CompletedProfile pages
-  const [profileIsCompleted, setProfileIsComplete] = useState(false);
+  const [profileIsCompleted, setProfileIsComplete] = useState(true);
   const [profileData, setProfileData] = useState(dummyProfileData);
   const [recommendedJobsData, setRecommendedJobsData] = useState(
     dummyRecommendedJobsData
@@ -47,6 +49,16 @@ const JobSeekerProfile = () => {
       // Map SkillsetsCard
       const skillsetsCards = profileData.skills.map((element) => (
         <SkillsetsCard skillset={element} key={Math.random()} />
+      ));
+
+      // Map Experience Cards
+      const experienceCards = profileData.experience.map((element) => (
+        <ExperienceCard jobData={element} key={Math.random()} />
+      ));
+
+      // Map Education Cards
+      const educationCards = profileData.education.map((element) => (
+        <EducationCard jobData={element} key={Math.random()} />
       ));
 
       // Map AbilityDifferencesIcons
@@ -182,8 +194,14 @@ const JobSeekerProfile = () => {
                     </li>
                   </div>
                 </div>
-                <div className={styles.resumeExperience}></div>
-                <div className={styles.resumeEducation}></div>
+                <div className={styles.resumeExperience}>
+                  <p className={styles.experienceTitle}>Experience</p>
+                  {experienceCards}
+                </div>
+                <div className={styles.resumeEducation}>
+                  <p className={styles.educationTitle}>Education</p>
+                  {educationCards}
+                </div>
               </div>
             </div>
             <div className={styles.profileRecommendedJobs}>
