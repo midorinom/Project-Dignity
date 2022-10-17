@@ -1,7 +1,12 @@
 import React from "react";
+import JobSeekerProfileFormExperience from "./JobSeekerProfileFormExperience";
 
 const JobSeekerProfileForm = () => {
-  return <div className="centered">Job Seeker Profile Form</div>;
+  return (
+    <>
+      <JobSeekerProfileFormExperience />
+    </>
+  );
 };
 
 export default JobSeekerProfileForm;
