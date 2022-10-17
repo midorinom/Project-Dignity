@@ -15,7 +15,7 @@ import visualIcon from "../../components/jobSeekerProfile/images/visual.png";
 
 const JobSeekerProfile = () => {
   // Change this profileIsCompleted initial value to false/true to access the NoProfile/CompletedProfile pages
-  const [profileIsCompleted, setProfileIsComplete] = useState(true);
+  const [profileIsCompleted, setProfileIsComplete] = useState(false);
   const [profileData, setProfileData] = useState(dummyProfileData);
   const [recommendedJobsData, setRecommendedJobsData] = useState(
     dummyRecommendedJobsData
@@ -53,12 +53,12 @@ const JobSeekerProfile = () => {
 
       // Map Experience Cards
       const experienceCards = profileData.experience.map((element) => (
-        <ExperienceCard jobData={element} key={Math.random()} />
+        <ExperienceCard experience={element} key={Math.random()} />
       ));
 
       // Map Education Cards
       const educationCards = profileData.education.map((element) => (
-        <EducationCard jobData={element} key={Math.random()} />
+        <EducationCard education={element} key={Math.random()} />
       ));
 
       // Map AbilityDifferencesIcons
@@ -186,8 +186,8 @@ const JobSeekerProfile = () => {
                         I am{" "}
                         <b>
                           {profileData.abilityDifferences.travel
-                            ? "able"
-                            : "unable"}
+                            ? "Able"
+                            : "Unable"}
                         </b>{" "}
                         to travel independently.
                       </span>
