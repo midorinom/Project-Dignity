@@ -63,17 +63,19 @@ const dummyProfileData = {
     //   aidsSpec: "",
     travel: true,
   },
-  experience: {
-    title: "Cataloguing Assistant",
-    type: "Clerical",
-    company: "Starbucks",
-    startMonth: "January",
-    startYear: "2019",
-    //if not currently working
-    //   endMonth: "",
-    //   endYear: "",
-    jobDesc: "Catalogue and inventorized over 100 items on a weekly basis",
-  },
+  experience: [
+    {
+      title: "Cataloguing Assistant",
+      type: "Clerical",
+      company: "Starbucks",
+      startMonth: "January",
+      startYear: "2019",
+      //if not currently working
+      //   endMonth: "",
+      //   endYear: "",
+      jobDesc: "Catalogue and inventorized over 100 items on a weekly basis",
+    },
+  ],
   education: [
     {
       school: "Dunman Secondary School",
