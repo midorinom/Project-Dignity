@@ -1,12 +1,16 @@
 import React from "react";
 import styles from "./jobSeekerProfileForm.module.css";
-import physical from "../jobListings/filters/abilityDifference/icons/physical.png";
-import visual from "../jobListings/filters/abilityDifference/icons/visual.png";
-import hearing from "../jobListings/filters/abilityDifference/icons/hearing.png";
-import intellectual from "../jobListings/filters/abilityDifference/icons/intellectual.png";
-import autism from "../jobListings/filters/abilityDifference/icons/autism.png";
+import physical from "../../components/jobListings/filters/abilityDifference/icons/physical.png";
+import visual from "../../components/jobListings/filters/abilityDifference/icons/visual.png";
+import hearing from "../../components/jobListings/filters/abilityDifference/icons/hearing.png";
+import intellectual from "../../components/jobListings/filters/abilityDifference/icons/intellectual.png";
+import autism from "../../components/jobListings/filters/abilityDifference/icons/autism.png";
 
-const JobSeekerProfileFormAbilityDiff = () => {
+const JobSeekerProfileFormAbilityDiff = (props) => {
+  function goToExperience() {
+    props.setCurrentPage("Experience");
+  }
+
   return (
     <section
       className="container-md"
@@ -525,7 +529,10 @@ const JobSeekerProfileFormAbilityDiff = () => {
         </div>
         {/*<----------------------- proceed next btn ----------------------->*/}
         <div className="row justify-content-center m-5">
-          <button className={`${styles.bottom_button} p-3`}>
+          <button
+            onClick={goToExperience}
+            className={`${styles.bottom_button} p-3`}
+          >
             Proceed to Experience Section
           </button>
         </div>
