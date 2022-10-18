@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./jobSeekerProfileForm.module.css";
 import JobSeekerNewEducation from "./JobSeekerNewEducation";
 
@@ -14,6 +15,12 @@ const JobSeekerProfileFormEducation = () => {
       <JobSeekerNewEducation key={addNewEducation.length} />,
     ]);
   };
+
+  const navigate = useNavigate();
+  function goToProfile() {
+    navigate("/profile");
+  }
+
   return (
     <section
       className="container-md"
@@ -70,7 +77,11 @@ const JobSeekerProfileFormEducation = () => {
         </div>
         {/*<------------------------- complete btn ------------------------->*/}
         <div className="row justify-content-center m-5">
-          <button className={`${styles.bottom_button} p-3`} type="submit">
+          <button
+            onClick={goToProfile}
+            className={`${styles.bottom_button} p-3`}
+            type="submit"
+          >
             Complete Profile
           </button>
         </div>

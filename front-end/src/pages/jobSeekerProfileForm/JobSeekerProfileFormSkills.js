@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import JobSeekerNewSkill from "./JobSeekerNewSkill";
 import styles from "./jobSeekerProfileForm.module.css";
 
-const JobSeekerProfileFormSkills = () => {
+const JobSeekerProfileFormSkills = (props) => {
   const [addNewSkill, setAddNewSkill] = useState([
     <JobSeekerNewSkill key={0} />,
   ]);
@@ -14,6 +14,10 @@ const JobSeekerProfileFormSkills = () => {
       <JobSeekerNewSkill key={addNewSkill.length} />,
     ]);
   };
+
+  function goToAbilityDiff() {
+    props.setCurrentPage("Ability Differences");
+  }
 
   return (
     <section className="container-md" id="jobSeekerProfileForm-SkillsSection">
@@ -69,7 +73,10 @@ const JobSeekerProfileFormSkills = () => {
         </div>
         {/*<----------------------- proceed next btn ----------------------->*/}
         <div className="row justify-content-center m-5">
-          <button className={`${styles.bottom_button} p-3`}>
+          <button
+            onClick={goToAbilityDiff}
+            className={`${styles.bottom_button} p-3`}
+          >
             Proceed to Ability Differences Section
           </button>
         </div>
