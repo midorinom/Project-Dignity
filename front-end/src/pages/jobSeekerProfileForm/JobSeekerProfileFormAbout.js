@@ -1,7 +1,11 @@
 import React from "react";
 import styles from "./jobSeekerProfileForm.module.css";
 
-const JobSeekerProfileFormAbout = () => {
+const JobSeekerProfileFormAbout = (props) => {
+  function goToSkills() {
+    props.setCurrentPage("Skills");
+  }
+
   return (
     <section className="container-md" id="jobSeekerProfileForm-AboutSection">
       <form id="jobSeekerProfileForm-About">
@@ -118,7 +122,10 @@ const JobSeekerProfileFormAbout = () => {
         </div>
         {/*<----------------------- proceed next btn ----------------------->*/}
         <div className="row justify-content-center m-5">
-          <button className={`${styles.bottom_button} p-3`}>
+          <button
+            onClick={goToSkills}
+            className={`${styles.bottom_button} p-3`}
+          >
             Proceed to Skills Section
           </button>
         </div>
