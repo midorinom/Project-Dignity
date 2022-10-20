@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./jobSeekerProfileForm.module.css";
+import JobSeekerNewEducation from "./JobSeekerNewEducation";
 
 const JobSeekerProfileFormEducation = () => {
+  const [addNewEducation, setAddNewEducation] = useState([
+    <JobSeekerNewEducation key={0} />,
+  ]);
+
+  const handleAddEducation = (e) => {
+    e.preventDefault();
+    setAddNewEducation([
+      ...addNewEducation,
+      <JobSeekerNewEducation key={addNewEducation.length} />,
+    ]);
+  };
+
+  const navigate = useNavigate();
+  function goToProfile() {
+    navigate("/profile");
+  }
+
   return (
     <section
       className="container-md"
@@ -10,99 +29,15 @@ const JobSeekerProfileFormEducation = () => {
       <form id="jobSeekerProfileForm-Education">
         <div className="row m-5">
           <div className="col-md-8">
-            {/*<---------------------------- school ---------------------------->*/}
-            <div className="form-group mb-4">
-              <label className="form-label" htmlFor="school-name">
-                School
-              </label>
-              <input
-                className="form-control p-3"
-                id="school-name"
-                type="text"
-                placeholder={"e.g Dunman Secondary School"}
-              ></input>
-            </div>
-            {/*<-------------------- alt edu qualification -------------------->*/}
-            {/* TODO: decide if written or drop down is better */}
-            {/* TODO: if drop down create component to loop through a list of options */}
-            {/* <div className="form-group mb-4">
-              <label className="form-label" htmlFor="qualification">
-                Job Type
-              </label>
-              <select className="form-select p-3" id="qualification">
-                <option selected>Select from drop down list</option>
-                <option value="1">Baker</option>
-                <option value="2">Barista</option>
-                <option value="3">Cashier</option>
-                <option value="4">Packer</option>
-                <option value="5">Waiter</option>
-              </select>
-            </div> */}
-            {/*<---------------------- edu qualification ---------------------->*/}
-            <div className="form-group mb-4">
-              <label className="form-label" htmlFor="qualification">
-                Qualification Obtained
-              </label>
-              <input
-                className="form-control p-3"
-                id="qualification"
-                type="text"
-                placeholder="e.g. GCE 'O'Level Certificate"
-              ></input>
-            </div>
-            {/*<------------------------- start date ------------------------->*/}
-            <div className="form-group mb-4">
-              <label className="form-label" htmlFor="start-date-edu">
-                Start Date
-              </label>
-              <input
-                className="form-control p-3"
-                id="start-date-edu"
-                type="date"
-              ></input>
-            </div>
-            {/*<-------------------------- end date -------------------------->*/}
-            <div className="form-group mb-4">
-              <label className="form-label" htmlFor="end-date-edu">
-                End Date (Or Expected)
-              </label>
-              <input
-                className="form-control mb-2 p-3"
-                id="end-date-edu"
-                type="date"
-              ></input>
-              <div class="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="flexCheckDefault-edu"
-                ></input>
-                <label
-                  className="form-check-label text-muted"
-                  htmlFor="flexCheckDefault-edu"
-                >
-                  I am currently studying here
-                </label>
-              </div>
-            </div>
-            {/*<---------------------- edu description ---------------------->*/}
-            <div className="form-group mb-4">
-              <label className="form-label" htmlFor="edu-description">
-                Description (Optional)
-              </label>
-              <textarea
-                className="form-control mb-2 p-3"
-                type="text"
-                id="edu-description"
-                style={{ height: 200 }}
-                placeholder={"Enter here"}
-              ></textarea>
-              <small className="text-muted">200 / 200 characters left</small>
-            </div>
+            {addNewEducation}
             {/*<-------------------- add new education -------------------->*/}
             {/* TODO: on click will show another set of this form below */}
             <div className="form-group mb-4">
-              <button className={styles.circle_btn} id="add-new-edu">
+              <button
+                className={styles.circle_btn}
+                onClick={handleAddEducation}
+                id="add-new-edu"
+              >
                 <i className="bi bi-plus-lg"></i>
               </button>
               <label className="form-label" htmlFor="add-new-edu">
@@ -142,7 +77,11 @@ const JobSeekerProfileFormEducation = () => {
         </div>
         {/*<------------------------- complete btn ------------------------->*/}
         <div className="row justify-content-center m-5">
-          <button className={`${styles.bottom_button} p-3`} type="submit">
+          <button
+            onClick={goToProfile}
+            className={`${styles.bottom_button} p-3`}
+            type="submit"
+          >
             Complete Profile
           </button>
         </div>

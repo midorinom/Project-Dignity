@@ -1,79 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
+import JobSeekerNewSkill from "./JobSeekerNewSkill";
 import styles from "./jobSeekerProfileForm.module.css";
 
-const JobSeekerProfileFormSkills = () => {
+const JobSeekerProfileFormSkills = (props) => {
+  const [addNewSkill, setAddNewSkill] = useState([
+    <JobSeekerNewSkill key={0} />,
+  ]);
+
+  const handleAddSkill = (e) => {
+    e.preventDefault();
+    setAddNewSkill([
+      ...addNewSkill,
+      <JobSeekerNewSkill key={addNewSkill.length} />,
+    ]);
+  };
+
+  function goToAbilityDiff() {
+    props.setCurrentPage("Ability Differences");
+  }
+
   return (
     <section className="container-md" id="jobSeekerProfileForm-SkillsSection">
       <form id="jobSeekerProfileForm-Skills">
         <div className="row m-5">
           <div className="col-md-8">
-            {/*<-------------------------- skill set -------------------------->*/}
-            <div className="form-group mb-4">
-              <label className="form-label" htmlFor="skillset">
-                Skillset
-              </label>
-              <input
-                className="form-control mb-2 p-3"
-                id="skillset"
-                type="text"
-                placeholder={"e.g Digital Marketing"}
-              ></input>
-              <div class="form-check">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="flexCheckDefault-skills"
-                ></input>
-                <label
-                  className="form-check-label text-muted"
-                  htmlFor="flexCheckDefault-skills"
-                >
-                  I have accreditation for this skill
-                </label>
-              </div>
-            </div>
-            {/*<------------------------ certification ------------------------>*/}
-            {/* to show when accreditation checked */}
-            <div className="form-group mb-4">
-              <label className="form-label" htmlFor="cert-name">
-                Name of Supporting Certificate / License (Optional)
-              </label>
-              <input
-                className="form-control p-3"
-                id="cert-name"
-                type="text"
-                placeholder={"e.g Google Certificate for Digital Marketing"}
-              ></input>
-            </div>
-            {/*<-------------------- issuing organisation -------------------->*/}
-            {/* to show when accreditation checked */}
-            <div className="form-group mb-4">
-              <label className="form-label" htmlFor="issuing-org">
-                Issuing Organisation (Optional)
-              </label>
-              <input
-                className="form-control p-3"
-                id="issuing-org"
-                type="text"
-                placeholder="e.g. Google"
-              ></input>
-            </div>
-            {/*<-------------------- issuing date -------------------->*/}
-            {/* to show when accreditation checked */}
-            <div className="form-group mb-4">
-              <label className="form-label" htmlFor="issue-date-cert">
-                Issue Date (Optional)
-              </label>
-              <input
-                className="form-control p-3"
-                id="issue-date-cert"
-                type="date"
-              ></input>
-            </div>
+            {addNewSkill}
             {/*<-------------------- add new skill -------------------->*/}
             {/* TODO: on click will show another set of this form below */}
             <div className="form-group mb-4">
-              <button className={styles.circle_btn} id="add-new-skill">
+              <button
+                className={styles.circle_btn}
+                onClick={handleAddSkill}
+                id="add-new-skill"
+              >
                 <i className="bi bi-plus-lg"></i>
               </button>
               <label className="form-label" htmlFor="add-new-skill">
@@ -114,7 +73,10 @@ const JobSeekerProfileFormSkills = () => {
         </div>
         {/*<----------------------- proceed next btn ----------------------->*/}
         <div className="row justify-content-center m-5">
-          <button className={`${styles.bottom_button} p-3`}>
+          <button
+            onClick={goToAbilityDiff}
+            className={`${styles.bottom_button} p-3`}
+          >
             Proceed to Ability Differences Section
           </button>
         </div>

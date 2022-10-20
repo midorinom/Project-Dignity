@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./jobSeekerProfileForm.module.css";
 import JobSeekerNewExperience from "./JobSeekerNewExperience";
 
-const JobSeekerProfileFormExperience = () => {
+const JobSeekerProfileFormExperience = (props) => {
   const [addNewExperience, setAddNewExperience] = useState([
     <JobSeekerNewExperience key={0} />,
   ]);
@@ -14,6 +14,10 @@ const JobSeekerProfileFormExperience = () => {
       <JobSeekerNewExperience key={addNewExperience.length} />,
     ]);
   };
+
+  function goToEducation() {
+    props.setCurrentPage("Education");
+  }
 
   return (
     <section
@@ -71,7 +75,10 @@ const JobSeekerProfileFormExperience = () => {
         </div>
         {/*<----------------------- proceed next btn ----------------------->*/}
         <div className="row justify-content-center m-5">
-          <button className={`${styles.bottom_button} p-3`}>
+          <button
+            onClick={goToEducation}
+            className={`${styles.bottom_button} p-3`}
+          >
             Proceed to Education Section
           </button>
         </div>
