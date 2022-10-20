@@ -8,6 +8,7 @@
       email: "tanlichoon@gmail.com",
       mobile: "+65 9273 2719",
     },
+    //multiple experieces can be added
     skills: [
       {
         skill: "Digital Marketing",
@@ -33,17 +34,21 @@
       //   aidsSpec: "",
       travel: true,
     },
-    experience: {
-      title: "Cataloguing Assistant",
-      type: "Clerical",
-      company: "Starbucks",
-      startMonth: "January",
-      startYear: "2019",
-      //if not currently working
-      //   endMonth: "",
-      //   endYear: "",
-      jobDesc: "Catalogue and inventorized over 100 items on a weekly basis",
-    },
+    //multiple experieces can be added
+    experience: [
+      {
+        title: "Cataloguing Assistant",
+        type: "Clerical",
+        company: "Starbucks",
+        startMonth: "January",
+        startYear: "2019",
+        //if not currently working
+        //   endMonth: "",
+        //   endYear: "",
+        jobDesc: "Catalogue and inventorized over 100 items on a weekly basis",
+      },
+    ],
+    //multiple experieces can be added
     education: [
       {
         school: "Dunman Secondary School",
