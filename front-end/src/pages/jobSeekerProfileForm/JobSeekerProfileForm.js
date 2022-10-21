@@ -16,13 +16,17 @@ const JobSeekerProfileForm = () => {
   function displayCurrentPage() {
     switch (currentPage) {
       case "About":
-        return <JobSeekerProfileFormAbout setCurrentPage={setCurrentPage}/>;
+        return <JobSeekerProfileFormAbout setCurrentPage={setCurrentPage} />;
       case "Skills":
-        return <JobSeekerProfileFormSkills setCurrentPage={setCurrentPage}/>;
+        return <JobSeekerProfileFormSkills setCurrentPage={setCurrentPage} />;
       case "Ability Differences":
-        return <JobSeekerProfileFormAbilityDiff setCurrentPage={setCurrentPage}/>;
+        return (
+          <JobSeekerProfileFormAbilityDiff setCurrentPage={setCurrentPage} />
+        );
       case "Experience":
-        return <JobSeekerProfileFormExperience setCurrentPage={setCurrentPage}/>;
+        return (
+          <JobSeekerProfileFormExperience setCurrentPage={setCurrentPage} />
+        );
       case "Education":
         return <JobSeekerProfileFormEducation />;
     }
