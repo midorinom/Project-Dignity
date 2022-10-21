@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./jobSeekerProfileForm.module.css";
-import physical from "../../components/jobListings/filters/abilityDifference/icons/physical.png";
-import visual from "../../components/jobListings/filters/abilityDifference/icons/visual.png";
-import hearing from "../../components/jobListings/filters/abilityDifference/icons/hearing.png";
-import intellectual from "../../components/jobListings/filters/abilityDifference/icons/intellectual.png";
-import autism from "../../components/jobListings/filters/abilityDifference/icons/autism.png";
+import physical from "../../jobListings/filters/abilityDifference/icons/physical.png";
+import visual from "../../jobListings/filters/abilityDifference/icons/visual.png";
+import hearing from "../../jobListings/filters/abilityDifference/icons/hearing.png";
+import intellectual from "../../jobListings/filters/abilityDifference/icons/intellectual.png";
+import autism from "../../jobListings/filters/abilityDifference/icons/autism.png";
 
 const JobSeekerProfileFormAbilityDiff = (props) => {
   function goToExperience() {
