@@ -19,10 +19,103 @@ const JobSeekerProfile = () => {
   // Change this profileIsCompleted initial value to false/true to access the NoProfile/CompletedProfile pages
   const [profileIsCompleted, setProfileIsComplete] = useState(true);
   const [profileData, setProfileData] = useState(undefined);
+
   const [recommendedJobsData, setRecommendedJobsData] = useState(
     dummyRecommendedJobsData
   );
   const [mappedComponents, setMappedComponents] = useState({});
+
+  // useEffect to get profile data, only happens onMount
+  useEffect(() => {
+    getProfileData();
+  }, []);
+
+  const getProfileData = async (req, res) => {
+    try {
+      const hardCodedId = "63511803b981f5f286656763";
+
+      const res = await fetch("http://127.0.0.1:5001/api/jobseekers/get", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ id: hardCodedId }),
+      });
+      const fetchedProfileData = await res.json();
+      setProfileData(fetchedProfileData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // useEffect to map the SkillsetsCards, ExperienceCards, EducationCards and abilityDifferencesIcons after profileData has been set
+  useEffect(() => {
+    if (profileData !== "")
+      // to prevent this from running onMount {
+      mapResumeCards();
+  }, [profileData]);
+
+  function mapResumeCards() {
+    // Map SkillsetsCard
+    const skillsetsCards = profileData.skills.map((element) => (
+      <SkillsetsCard skillset={element} key={Math.random()} />
+    ));
+
+    // Map Experience Cards
+    const experienceCards = profileData.experience.map((element) => (
+      <ExperienceCard experience={element} key={Math.random()} />
+    ));
+
+    // Map Education Cards
+    const educationCards = profileData.education.map((element) => (
+      <EducationCard education={element} key={Math.random()} />
+    ));
+
+    // Map AbilityDifferencesIcons
+    const abilityDifferencesIcons = profileData.abilityDifferences.diff.map(
+      (element) => {
+        let iconImage = "";
+
+        switch (element) {
+          case "Autism":
+            iconImage = autismIcon;
+            break;
+          case "Hearing":
+            iconImage = hearingIcon;
+            break;
+          case "Intellectual":
+            iconImage = intellectualIcon;
+            break;
+          case "Physical":
+            iconImage = physicalIcon;
+            break;
+          case "Visual":
+            iconImage = visualIcon;
+            break;
+          default:
+            break;
+        }
+
+        return (
+          <div className={styles.abilityDifferencesIcon} key={Math.random()}>
+            <img
+              src={iconImage}
+              alt={`${element} Ability Difference Icon`}
+              className={styles.abilityDifferencesImage}
+            />
+            <p className={styles.abilityDifferencesName}>{element}</p>
+          </div>
+        );
+      }
+    );
+
+    // Set the mapped components to state
+    setMappedComponents({
+      skillsetsCards: skillsetsCards,
+      experienceCards: experienceCards,
+      educationCards: educationCards,
+      abilityDifferencesIcons,
+      abilityDifferencesIcons,
+    });
+  }
 
   // ====================================
   // onMount useEffect fetch Profile Data
@@ -212,8 +305,7 @@ const JobSeekerProfile = () => {
                       <span className={styles.supportRequiredTypeWords}>
                         Type of Support Required:{" "}
                       </span>
-                      {profileData &&
-                        (profileData.abilityDifferences.support.length === 1
+                      {profileData && (profileData.abilityDifferences.support.length === 1
                           ? profileData.abilityDifferences.support[0]
                           : [...profileData.abilityDifferences.support].join(
                               ", "
@@ -228,6 +320,7 @@ const JobSeekerProfile = () => {
                         My Preferred Mode of Communication:{" "}
                       </span>
                       {profileData &&
+
                         (profileData.abilityDifferences.comm.length === 1
                           ? profileData.abilityDifferences.comm[0]
                           : [...profileData.abilityDifferences.comm].join(
@@ -240,6 +333,7 @@ const JobSeekerProfile = () => {
                         My Aids Used:{" "}
                       </span>
                       {profileData &&
+
                         (profileData.abilityDifferences.aids.length === 1
                           ? profileData.abilityDifferences.aids[0]
                           : [...profileData.abilityDifferences.aids].join(
@@ -252,6 +346,7 @@ const JobSeekerProfile = () => {
                         I am{" "}
                         <b>
                           {profileData &&
+
                             (profileData.abilityDifferences.travel
                               ? "Able"
                               : "Unable")}
