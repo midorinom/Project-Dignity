@@ -21,14 +21,14 @@ const JobSeekerProfile = () => {
   );
   const [mappedComponents, setMappedComponents] = useState({});
 
-  // useEffect to get profile data, only happens onMount
+  // useEffect onMount, to get profile data
   useEffect(() => {
     getProfileData();
   }, []);
 
   const getProfileData = async (req, res) => {
     try {
-      const hardCodedId = "63511803b981f5f286656763";
+      const hardCodedId = "6352b602869782ec9b076cf3";
 
       const res = await fetch("http://127.0.0.1:5001/api/jobseekers/get", {
         method: "POST",
@@ -36,7 +36,7 @@ const JobSeekerProfile = () => {
         body: JSON.stringify({ id: hardCodedId }),
       });
       const fetchedProfileData = await res.json();
-      setProfileData(fetchedProfileData);
+      setProfileData(fetchedProfileData.profile);
     } catch (err) {
       console.log(err);
     }
@@ -108,8 +108,7 @@ const JobSeekerProfile = () => {
       skillsetsCards: skillsetsCards,
       experienceCards: experienceCards,
       educationCards: educationCards,
-      abilityDifferencesIcons,
-      abilityDifferencesIcons,
+      abilityDifferencesIcons: abilityDifferencesIcons,
     });
   }
 

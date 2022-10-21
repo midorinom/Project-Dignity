@@ -3,9 +3,9 @@ import save from "./saved.png";
 import image71 from "./images/image 71.png";
 import image72 from "./images/image 72.png";
 import image73 from "./images/image 73.png";
-// import visual from "../filters/abilityDifference/icons/visual.png";
-// import hearing from "../filters/abilityDifference/icons/hearing.png";
-// import autism from "../filters/abilityDifference/icons/autism.png";
+import visual from "../filters/abilityDifference/icons/visual.png";
+import hearing from "../filters/abilityDifference/icons/hearing.png";
+import autism from "../filters/abilityDifference/icons/autism.png";
 
 const Card = () => {
   return (
@@ -43,9 +43,9 @@ const Card = () => {
         <div className="col-3 border-start mt-3 d-flex flex-column">
           <p className="text-secondary text-center mb-1">Suited For</p>
           <div className="d-flex justify-content-center h-25">
-            {/* <img src={visual} alt="visual icon" className="mx-1" />
+            <img src={visual} alt="visual icon" className="mx-1" />
             <img src={hearing} alt="hearing icon" className="mx-1" />
-            <img src={autism} alt="autism icon" className="mx-1" /> */}
+            <img src={autism} alt="autism icon" className="mx-1" />
           </div>
           <p className="text-secondary text-center mb-0">
             Visual, Hearing Ability Differences, Autism
