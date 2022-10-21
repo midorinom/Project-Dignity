@@ -20,11 +20,12 @@ const JobListings = () => {
   // ===========================
   // useEffect onMount, to get job posts data
   useEffect(() => {
-    if (userContext.userType !== "jobSeeker") {
-      getAllJobPosts();
-    } else {
-      getFilteredJobPosts();
-    }
+    // if (userContext.userType !== "jobSeeker") {
+    //   getAllJobPosts();
+    // } else {
+    //   getFilteredJobPosts();
+    // }
+    getAllJobPosts();
   }, []);
 
   const getAllJobPosts = async () => {
@@ -84,14 +85,7 @@ const JobListings = () => {
           <JobInteractionType />
           <SupportProvided />
         </div>
-        <div className="postings w-75 px-4 mb-4">
-          {/* <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card /> */}
-          {jobCards}
-        </div>
+        <div className="postings w-75 px-4 mb-4">{jobCards}</div>
       </div>
     </div>
   );
