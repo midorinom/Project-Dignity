@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import userContext from "./context/userContext";
+import UserContext from "./context/userContext";
 import NavBar from "./components/navBar/NavBar";
 import Footer from "./components/footer/Footer";
 import EmployerLanding from "./pages/employers/employerLanding/EmployerLanding";
@@ -17,7 +17,7 @@ import JobPostForm from "./pages/employers/jobPostForm/JobPostForm";
 
 function App() {
   // Change this userType initial value to jobSeeker/employer if you need to access those landing/profile/profileForm pages
-  const [userType, setUserType] = useState("jobSeeker");
+  const [userType, setUserType] = useState("none");
 
   // Render the landing page depending on what type of user is logged in
   function displayLandingPage() {
@@ -59,7 +59,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <userContext.Provider value={{ userType }}>
+      <UserContext.Provider value={{ userType }}>
         <Routes>
           <Route path="/" element={landingPage} />
           <Route path="/job-seekers" element={<JobSeekerLanding />} />
@@ -70,7 +70,7 @@ function App() {
           <Route path="/job-post-details" element={<JobPostDetails />} />
           <Route path="/job-post-form" element={<JobPostForm />} />
         </Routes>
-      </userContext.Provider>
+      </UserContext.Provider>
       <Footer />
     </>
   );

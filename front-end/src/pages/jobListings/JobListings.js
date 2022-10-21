@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import UserContext from "../../context/userContext";
 import AbilityDifference from "./filters/abilityDifference/AbilityDifference";
 import Card from "./jobCards/Card.js";
 import JobEnvironment from "./filters/JobEnvironment";
@@ -7,15 +8,63 @@ import SupportProvided from "./filters/SupportProvided";
 import Search from "../../components/Search";
 
 const JobListings = () => {
+  //==========
+  // Variables
+  // =========
+  const userContext = useContext(UserContext);
+  const [jobPosts, setJobPosts] = useState(undefined);
+  const [jobCards, setJobCards] = useState(undefined);
+
+  // ===========================
+  // useEffect for Initial Fetch
+  // ===========================
   // useEffect onMount, to get job posts data
   useEffect(() => {
-    getJobPosts();
+    if (userContext.userType !== "jobSeeker") {
+      getAllJobPosts();
+    } else {
+      getFilteredJobPosts();
+    }
   }, []);
 
-  const getJobPosts = async () => {
+  const getAllJobPosts = async () => {
+    try {
+      const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+      });
+      const fetchedJobPosts = await res.json();
+      setJobPosts(fetchedJobPosts);
+      console.log(fetchedJobPosts);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //  ============================== TO BE DONE =============================== //
+  const getFilteredJobPosts = async () => {
     return;
   };
 
+  // ==================================================
+  // useEffect to map Cards after jobPosts has been set
+  // ==================================================
+  useEffect(() => {
+    if (jobPosts !== undefined) {
+      mapCards();
+    }
+  }, [jobPosts]);
+
+  function mapCards() {
+    const mappedJobCards = jobPosts.map((element) => {
+      return <Card jobPost={element} key={Math.random()} />;
+    });
+    setJobCards(mappedJobCards);
+  }
+
+  // ======
+  // Return
+  // ======
   return (
     <div className="job-listings">
       <Search />
@@ -36,11 +85,12 @@ const JobListings = () => {
           <SupportProvided />
         </div>
         <div className="postings w-75 px-4 mb-4">
+          {/* <Card />
           <Card />
           <Card />
           <Card />
-          <Card />
-          <Card />
+          <Card /> */}
+          {jobCards}
         </div>
       </div>
     </div>
