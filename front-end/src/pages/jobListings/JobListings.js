@@ -1,10 +1,10 @@
 import React from "react";
 // import AbilityDifference from "../../components/jobListings/filters/abilityDifference/AbilityDifference";
-import Card from "../../components/jobListings/jobCards/Card";
-import JobEnvironment from "../../components/jobListings/filters/JobEnvironment";
-import JobInteractionType from "../../components/jobListings/filters/JobInteractionType";
-import SupportProvided from "../../components/jobListings/filters/SupportProvided";
-import Search from "../../components/jobListings/Search";
+import Card from "./jobCards/Card.js";
+import JobEnvironment from "./filters/JobEnvironment";
+import JobInteractionType from "./filters/JobInteractionType";
+import SupportProvided from "./filters/SupportProvided";
+import Search from "../../components/Search";
 
 const JobListings = () => {
   return (
