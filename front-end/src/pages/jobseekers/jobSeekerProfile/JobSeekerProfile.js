@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./jobSeekerProfile.module.css";
-import RecommendedJobsCard from "../../components/jobSeekerProfile/RecommendedJobsCard";
-import SkillsetsCard from "../../components/jobSeekerProfile/SkillsetsCard";
-import ExperienceCard from "../../components/jobSeekerProfile/ExperienceCard";
-import EducationCard from "../../components/jobSeekerProfile/EducationCard";
+import RecommendedJobsCard from "./resume/RecommendedJobsCard";
+import SkillsetsCard from "./resume/SkillsetsCard";
+import ExperienceCard from "./resume/ExperienceCard";
+import EducationCard from "./resume/EducationCard";
 import dummyProfileData from "./job-seeker-profile-dummy";
 import dummyRecommendedJobsData from "./recommendedJobs-dummy";
-import autismIcon from "../../components/jobSeekerProfile/images/autism.png";
-import hearingIcon from "../../components/jobSeekerProfile/images/hearing.png";
-import intellectualIcon from "../../components/jobSeekerProfile/images/intellectual.png";
-import physicalIcon from "../../components/jobSeekerProfile/images/physical.png";
-import visualIcon from "../../components/jobSeekerProfile/images/visual.png";
+import autismIcon from "./resume/images/autism.png";
+import hearingIcon from "./resume/images/hearing.png";
+import intellectualIcon from "./resume/images/intellectual.png";
+import physicalIcon from "./resume/images/physical.png";
+import visualIcon from "./resume/images/visual.png";
 
 const JobSeekerProfile = () => {
   // Change this profileIsCompleted initial value to false/true to access the NoProfile/CompletedProfile pages
-  const [profileIsCompleted, setProfileIsComplete] = useState(false);
+  const [profileIsCompleted, setProfileIsComplete] = useState(true);
   const [profileData, setProfileData] = useState(dummyProfileData);
   const [recommendedJobsData, setRecommendedJobsData] = useState(
     dummyRecommendedJobsData
