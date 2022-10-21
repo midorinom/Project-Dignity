@@ -1,5 +1,5 @@
-import React from "react";
-// import AbilityDifference from "../../components/jobListings/filters/abilityDifference/AbilityDifference";
+import React, { useEffect } from "react";
+import AbilityDifference from "./filters/abilityDifference/AbilityDifference";
 import Card from "./jobCards/Card.js";
 import JobEnvironment from "./filters/JobEnvironment";
 import JobInteractionType from "./filters/JobInteractionType";
@@ -7,6 +7,15 @@ import SupportProvided from "./filters/SupportProvided";
 import Search from "../../components/Search";
 
 const JobListings = () => {
+  // useEffect onMount, to get job posts data
+  useEffect(() => {
+    getJobPosts();
+  }, []);
+
+  const getJobPosts = async () => {
+    return;
+  };
+
   return (
     <div className="job-listings">
       <Search />
@@ -21,7 +30,7 @@ const JobListings = () => {
       </div>
       <div className="results d-flex">
         <div className="filters w-25 px-4 mb-4">
-          {/* <AbilityDifference /> */}
+          <AbilityDifference />
           <JobEnvironment />
           <JobInteractionType />
           <SupportProvided />

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import userContext from "./context/userContext";
 import NavBar from "./components/navBar/NavBar";
 import Footer from "./components/footer/Footer";
 import EmployerLanding from "./pages/employers/employerLanding/EmployerLanding";
@@ -58,16 +59,18 @@ function App() {
   return (
     <>
       <NavBar />
-      <Routes>
-        <Route path="/" element={landingPage} />
-        <Route path="/job-seekers" element={<JobSeekerLanding />} />
-        <Route path="/employers" element={<EmployerLanding />} />
-        <Route path="/job-listings" element={<JobListings />} />
-        <Route path="/profile" element={profilePage} />
-        <Route path="/profile-form" element={profileFormPage} />
-        <Route path="/job-post-details" element={<JobPostDetails />} />
-        <Route path="/job-post-form" element={<JobPostForm />} />
-      </Routes>
+      <userContext.Provider value={{ userType }}>
+        <Routes>
+          <Route path="/" element={landingPage} />
+          <Route path="/job-seekers" element={<JobSeekerLanding />} />
+          <Route path="/employers" element={<EmployerLanding />} />
+          <Route path="/job-listings" element={<JobListings />} />
+          <Route path="/profile" element={profilePage} />
+          <Route path="/profile-form" element={profileFormPage} />
+          <Route path="/job-post-details" element={<JobPostDetails />} />
+          <Route path="/job-post-form" element={<JobPostForm />} />
+        </Routes>
+      </userContext.Provider>
       <Footer />
     </>
   );
