@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import styles from "./jobSeekerProfileForm.module.css";
 import physical from "../../jobListings/filters/abilityDifference/icons/physical.png";
 import visual from "../../jobListings/filters/abilityDifference/icons/visual.png";
@@ -11,17 +12,35 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
     props.setCurrentPage("Experience");
   }
 
+  // adding react-hook-forms functionality
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    props.setAbilityDifferencesSchema(data);
+    console.log(data);
+    console.log("aids: ", data.aids);
+  };
+
+  const onError = (errors) => console.log(errors);
+
   return (
     <section
       className="container-md"
       id="jobSeekerProfileForm-ExperienceSection"
     >
-      <form id="jobSeekerProfileForm-Experience">
+      <form
+        onSubmit={handleSubmit(onSubmit, onError)}
+        id="jobSeekerProfileForm-Experience"
+      >
         <div className="row m-5">
           <div className="col-md-8">
             {/*<------------------- nature of ability diff ------------------->*/}
             <div className="form-group mb-4">
-              <label className="form-label" htmlFor="job-title">
+              <label className="form-label" htmlFor="ability-diff">
                 Nature of Ability Differences
               </label>
               <small> (you may select more than one option)</small>
@@ -30,8 +49,15 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="physical"
                   id="ability-diff-physical"
-                  autocomplete="off"
+                  {...register("diff", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
+                  // aria-invalid={errors.diff_phy ? "true" : "false"}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -48,8 +74,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="visual"
                   id="ability-diff-visual"
-                  autocomplete="off"
+                  {...register("diff", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -66,8 +98,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="hearing"
                   id="ability-diff-hearing"
-                  autocomplete="off"
+                  {...register("diff", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -84,8 +122,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="intellectual"
                   id="ability-diff-intellectual"
-                  autocomplete="off"
+                  {...register("diff", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -106,8 +150,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="autism"
                   id="ability-diff-autism"
-                  autocomplete="off"
+                  {...register("diff", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -120,6 +170,9 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   </div>
                 </label>
               </div>
+              {errors.diff && (
+                <p className="mt-2 text-danger">{errors.diff.message}</p>
+              )}
             </div>
             {/*<------------------------ diagnosis ------------------------>*/}
             <div className="form-group mb-4">
@@ -131,6 +184,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 id="diagnosis"
                 type="text"
                 placeholder="e.g. Parkinson's Disease"
+                {...register("diagnosis")}
               ></input>
             </div>
             {/*<--------------- description of ability diff --------------->*/}
@@ -146,8 +200,18 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 placeholder={
                   "e.g. I have Stage 2 Parkinson's Disease, and experience stiffness, tremors, and trembling on both sides of my body as my main symptoms. I have slight difficulty in speech."
                 }
+                {...register("diffDesc", {
+                  required: {
+                    value: true,
+                    message: "please provide short description",
+                  },
+                  maxLength: 200,
+                })}
               ></textarea>
               <small className="text-muted">200 / 200 characters left</small>
+              {errors.diffDesc && (
+                <p className="mt-2 text-danger">{errors.diffDesc.message}</p>
+              )}
             </div>
             {/*<------------------- type of support ------------------->*/}
             <div className="form-group mb-4">
@@ -157,8 +221,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="training"
                   id="training"
-                  autocomplete="off"
+                  {...register("support", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -172,8 +242,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="shadow_by_coach"
                   id="coach"
-                  autocomplete="off"
+                  {...register("support", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -187,8 +263,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="workplace_redesign"
                   id="workplace"
-                  autocomplete="off"
+                  {...register("support", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -202,8 +284,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="assistive_tech"
                   id="assist-tech"
-                  autocomplete="off"
+                  {...register("support", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -217,8 +305,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="social_integration"
                   id="integration"
-                  autocomplete="off"
+                  {...register("support", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -232,8 +326,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="trial"
                   id="trial"
-                  autocomplete="off"
+                  {...register("support", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -243,6 +343,9 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   Trial Period
                 </label>
               </div>
+              {errors.support && (
+                <p className="mt-2 text-danger">{errors.support.message}</p>
+              )}
             </div>
             {/*<--------------------- support required --------------------->*/}
             <div className="form-group mb-4">
@@ -257,8 +360,18 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 placeholder={
                   "If you required any other support that has not been mentioned above, you may also add them here."
                 }
+                {...register("supportDesc", {
+                  required: {
+                    value: true,
+                    message: "please provide short description",
+                  },
+                  maxLength: 300,
+                })}
               ></textarea>
               <small className="text-muted">300 / 300 characters left</small>
+              {errors.supportDesc && (
+                <p className="mt-2 text-danger">{errors.supportDesc.message}</p>
+              )}
             </div>
             {/*<------------------ mode of communication ------------------>*/}
             <div className="form-group mb-4">
@@ -271,8 +384,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="verbal"
                   id="mode-verbal"
-                  autocomplete="off"
+                  {...register("comm", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -286,8 +405,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="written"
                   id="mode-written"
-                  autocomplete="off"
+                  {...register("comm", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -301,8 +426,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="signing"
                   id="mode-signing"
-                  autocomplete="off"
+                  {...register("comm", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -316,8 +447,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="lip_reading"
                   id="mode-lip-reading"
-                  autocomplete="off"
+                  {...register("comm", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -331,8 +468,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="others"
                   id="mode-others"
-                  autocomplete="off"
+                  {...register("comm", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -355,8 +498,12 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   id="mode-others-text"
                   type="text"
                   style={{ width: 460 }}
+                  {...register("commSpec")}
                 ></input>
               </div>
+              {errors.comm && (
+                <p className="mt-2 text-danger">{errors.comm.message}</p>
+              )}
             </div>
             {/*<-------------------------- aids -------------------------->*/}
             <div className="form-group mb-4">
@@ -367,8 +514,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="mobility"
                   id="aid-mobility"
-                  autocomplete="off"
+                  {...register("aids", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -382,8 +535,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="hearing"
                   id="aid-hearing"
-                  autocomplete="off"
+                  {...register("aids", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -397,8 +556,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="visual"
                   id="aid-visual"
-                  autocomplete="off"
+                  {...register("aids", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -412,8 +577,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="speech"
                   id="aid-speech"
-                  autocomplete="off"
+                  {...register("aids", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -427,8 +598,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value="others"
                   id="aid-others"
-                  autocomplete="off"
+                  {...register("aids", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -451,10 +628,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   id="aid-others-text"
                   type="text"
                   style={{ width: 460 }}
+                  {...register("aidsSpec")}
                 ></input>
               </div>
+              {errors.aids && (
+                <p className="mt-2 text-danger">{errors.aids.message}</p>
+              )}
             </div>
-            {/*<-------------------------- aids -------------------------->*/}
+            {/*<------------------------- travel ------------------------->*/}
             <div className="form-group mb-4">
               <label className="form-label">
                 Ability to Travel Independently?
@@ -468,8 +649,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value={true}
                   id="independent-travel-yes"
-                  autocomplete="off"
+                  {...register("travel", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -483,8 +670,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
+                  value={false}
                   id="independent-travel-no"
-                  autocomplete="off"
+                  {...register("travel", {
+                    required: {
+                      value: true,
+                      message: "please select at least one option",
+                    },
+                  })}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -495,13 +688,19 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 </label>
               </div>
             </div>
+            {errors.travel && (
+              <p className="mt-2 text-danger">{errors.travel.message}</p>
+            )}
           </div>
           {/* <------------------------ empty col -------------------------> */}
           <div className="col-md-1"></div>
           {/* <------------------------ side panel ------------------------> */}
           <div className="col-md-3">
             <div className=" sidePanel row mt-5">
-              <button className={`${styles.side_buttons} mt-3 mb-4 p-3`}>
+              <button
+                type="submit"
+                className={`${styles.side_buttons} mt-3 mb-4 p-3`}
+              >
                 Save Changes
               </button>
               <button className={`${styles.side_buttons} mb-4 p-3`}>
@@ -530,6 +729,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
         {/*<----------------------- proceed next btn ----------------------->*/}
         <div className="row justify-content-center m-5">
           <button
+            type="submit"
             onClick={goToExperience}
             className={`${styles.bottom_button} p-3`}
           >
