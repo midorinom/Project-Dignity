@@ -3,7 +3,7 @@ import styles from "./experienceCard.module.css";
 
 const ExperienceCard = (props) => {
   function determineEndDate() {
-    if (props.experience.endMonth === "" && props.experience.endYear === "") {
+    if (props.experience.endMonth === null && props.experience.endYear === null) {
       return "Current";
     } else {
       return `${props.experience.endMonth} ${props.experience.endYear}`;
