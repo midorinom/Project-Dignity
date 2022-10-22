@@ -14,7 +14,7 @@ const JobSeekerNewSkill = () => {
           type="text"
           placeholder={"e.g Digital Marketing"}
         ></input>
-        <div class="form-check">
+        <div className="form-check">
           <input
             className="form-check-input"
             type="checkbox"
