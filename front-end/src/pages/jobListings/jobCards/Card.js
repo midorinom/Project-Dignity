@@ -82,7 +82,7 @@ const Card = (props) => {
             />
           </div>
         </div>
-        <div className="col-3 border-start mt-3 d-flex flex-column">
+        <div className="col-3 border-start d-flex flex-column justify-content-center gap-2">
           <p className="text-secondary text-center mb-1">Suited For</p>
           <div className="d-flex justify-content-center h-25">
             {abilityDifferencesIcons}
