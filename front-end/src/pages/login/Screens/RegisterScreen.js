@@ -30,7 +30,7 @@ const RegisterScreen = () => {
             checked
           />
           <label
-            className="btn btn-outline-secondary btn-sm rounded"
+            className="btn btn-outline-secondary btn-sm rounded mx-1"
             for="jobseeker"
           >
             Jobseeker
@@ -43,7 +43,7 @@ const RegisterScreen = () => {
             autocomplete="off"
           />
           <label
-            className="btn btn-outline-secondary btn-sm rounded"
+            className="btn btn-outline-secondary btn-sm rounded mx-1"
             for="employer"
           >
             Employer
