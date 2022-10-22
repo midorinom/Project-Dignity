@@ -32,9 +32,13 @@ const LoginScreen = () => {
     if (jResponse.message) {
       alert(`Invalid username/password: ${jResponse.message}`);
     } else {
+      //user data received is set to user state, pending lift location after further discussion, might be good to useContext
       setUser({ ...jResponse });
-      console.log(user);
-      alert(jResponse);
+      if (jResponse.type === "jobSeeker") {
+        window.location.href = "http://localhost:3000/job-seekers";
+      } else {
+        window.location.href = "http://localhost:3000/employers";
+      }
     }
     return jResponse;
   }
