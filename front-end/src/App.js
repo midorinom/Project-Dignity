@@ -86,6 +86,7 @@ function App() {
       <UserContext.Provider value={{ userType }}>
         <Routes>
           <Route path="/" element={landingPage} />
+          <Route path="/login" element={<Login />} />
           <Route path="/job-seekers" element={<JobSeekerLanding />} />
           <Route path="/employers" element={<EmployerLanding />} />
           <Route
