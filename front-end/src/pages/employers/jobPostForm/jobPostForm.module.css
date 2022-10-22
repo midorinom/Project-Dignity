@@ -68,3 +68,25 @@ color: #0085FF;
 .bar{
     width:600px;
 }
+
+.circle_btn {
+    height: 35px;
+    width: 35px;
+    margin-left: 325px;
+    margin-top:10px;
+    background-color: transparent;
+    border: solid 1px #011036;
+    border-radius: 50%;
+  }
+  
+  .circle_btn:hover {
+    border: solid 3px #011036;
+  }
+  
+  .label{
+    margin-left:270px;
+  }
+
+  .input{
+    height:100px;
+  }

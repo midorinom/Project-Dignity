@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./jobPostForm.module.css";
 
 const JobAbout = () => {
   return (
@@ -6,25 +7,25 @@ const JobAbout = () => {
       {/* =====================================================
         FORM ABOUT JOB
         ========================================================= */}
+      <div className="row m-5 text-start">
+      <div className="col-md-6">
       <section classname="container-md" id="AboutEmployer">
-        <form id="AboutEmployer">
-          <div className="row m-5 text-start">
-            <div className="col-md-8">
+        <form id="About Job">
               {/*================================== Job Title and Job Type ================================== */}
-              <div className="form-group mb-4">
-                <label className="form-label" htmlFor="name">
+              <label className="form-label ms-3" htmlFor="name">
                   Job Title
                 </label>
+                <label className={`${styles.label} form label`} htmlFor="name">
+                  Job Type
+                </label>
+              <div className={`form-group mb-4 ${styles.range}`}>
                 <input
                   type="text"
                   class="form-control mb-4"
                   id="name"
                   placeholder="e.g Assistant Chef"
                 />
-                <label className="form-label" htmlFor="name">
-                  Job Type
-                </label>
-                <select type="text" class="form-select" id="JobType">
+                <select type="text" class={`form-group mb-4 form-select ms-5 ${styles.range}`} id="JobType">
                   <option class="default" selected>
                     Select from the drop down list
                   </option>
@@ -94,7 +95,7 @@ const JobAbout = () => {
                   id="task1"
                   placeholder="Task 1"
                 />
-                <button type="button" class="btn btn-outline-secondary mt-3">
+                <button type="button" class={`${styles.circle_btn}`}>
                   +
                 </button>
               </div>
@@ -183,38 +184,47 @@ const JobAbout = () => {
               {/* ================================================================================================== */}
               <button type="button" class="btn btn-dark mt-3">
                 Proceed to 'Accessibility Consideration Section'{" "}
-              </button>
-            </div>
-          </div>
-          <div className="col-md-1"></div>
+              </button>   
         </form>
-      </section>
-      <section>
-        <div class="d-grid gap-2 d-ld-block">
-          <button type="button" class="btn btn-outline-warning btn-lg ">
-            Save as Draft
-          </button>
-          <button type="button" class="btn btn-outline-warning btn-lg">
-            Previous Job Post
-          </button>
-          <button type="button" class="btn btn-outline-warning btn-lg">
-            Upload Job post
-          </button>
-        </div>
-        <div class="progress mt-4">
-          <div
-            class="progress-bar"
-            role="progressbar"
-            Style="width: 75%"
-            aria-valuenow="75"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          ></div>
-        </div>
-        <small className="text-muted" htmlFor="progress-bar">
-          75% complete
-        </small>
-      </section>
+        </section>
+        </div>  
+     
+      <div className="col-md-2"></div>
+      <div className="col-md-4">
+            <div className={`${styles.sideButtonsContainer}`}>
+              <button
+                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+              >
+                Save as Draft
+              </button>
+              <button
+                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+              >
+                Previous Job Post
+              </button>
+              <button
+                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+              >
+                Upload Job post
+              </button>
+              <div class="progress mt-4">
+                <div
+                  class="progress-bar"
+                  role="progressbar"
+                  Style="width: 75%"
+                  aria-valuenow="75"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+              <div className={`${styles.progressBar} progress_bar`}>
+                <small className="text-muted" htmlFor="progress-bar">
+                  75% complete
+                </small>
+              </div>
+          </div>
+      </div>
+      </div>
     </>
   );
 };
