@@ -13,39 +13,53 @@ const AbilityDifference = () => {
       <button
         className="btn btn-outline-secondary btn-sm m-1 d-flex align-items-center"
         type="button"
-        data-toggle="button"
-        aria-pressed="false"
-        autoComplete="off"
+        data-bs-toggle="button"
       >
         <div className="w-25">
           <img src={physical} alt="physical icon" className="w-50"></img>
         </div>
         <p className="w-50 d-flex justify-content-center m-0">Physical</p>
       </button>
-      <div className="btn btn-outline-secondary btn-sm m-1 d-flex align-items-center">
+      <button
+        className="btn btn-outline-secondary btn-sm m-1 d-flex align-items-center"
+        type="button"
+        data-bs-toggle="button"
+      >
         <div className="w-25">
           <img src={visual} alt="physical icon" className="w-50"></img>
         </div>
         <p className="w-50 d-flex justify-content-center m-0">Visual</p>
-      </div>
-      <div className="btn btn-outline-secondary btn-sm m-1 d-flex align-items-center">
+      </button>
+      <button
+        className="btn btn-outline-secondary btn-sm m-1 d-flex align-items-center"
+        type="button"
+        data-bs-toggle="button"
+      >
         <div className="w-25">
           <img src={hearing} alt="physical icon" className="w-50"></img>
         </div>
         <p className="w-50 d-flex justify-content-center m-0">Hearing</p>
-      </div>
-      <div className="btn btn-outline-secondary btn-sm m-1 d-flex align-items-center">
+      </button>
+      <button
+        className="btn btn-outline-secondary btn-sm m-1 d-flex align-items-center"
+        type="button"
+        data-bs-toggle="button"
+      >
         <div className="w-25">
           <img src={intellectual} alt="physical icon" className="w-50"></img>
         </div>
         <p className="w-50 d-flex justify-content-center m-0">Intellectual</p>
-      </div>
-      <div className="btn btn-outline-secondary btn-sm m-1 d-flex align-items-center">
+      </button>
+      <button
+        className="btn btn-outline-secondary btn-sm m-1 d-flex align-items-center"
+        type="button"
+        data-bs-toggle="button"
+      >
         <div className="w-25">
           <img src={autism} alt="physical icon" className="w-50"></img>
         </div>
         <p className="w-50 d-flex justify-content-center m-0">Autism</p>
-      </div>
+      </button>
     </div>
   );
 };

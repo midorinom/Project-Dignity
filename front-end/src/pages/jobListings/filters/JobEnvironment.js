@@ -13,7 +13,7 @@ const JobEnvironment = () => {
           type="range"
           className="form-range w-50"
           min="0"
-          max="5"
+          max="4"
           step="1"
           id="noise"
         ></input>
@@ -28,7 +28,7 @@ const JobEnvironment = () => {
           type="range"
           className="form-range w-50"
           min="0"
-          max="5"
+          max="4"
           step="1"
           id="light"
         ></input>
