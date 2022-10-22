@@ -69,15 +69,15 @@ const JobSeekerProfileFormSkills = (props) => {
                       {...register(`skillSet.${index}.skill`, {
                         required: true,
                       })}
-                      // aria-invalid={
-                      //   errors.skillSet[index].skill ? "true" : "false"
-                      // }
+                      aria-invalid={
+                        errors.skillSet?.[index]?.skill ? "true" : "false"
+                      }
                     ></input>
-                    {/* {errors?.skillSet[index].skill?.type === "required" && (
+                    {errors?.skillSet?.[index]?.skill?.type === "required" && (
                       <p className="mt-2 text-danger">
                         Skillset is required, please enter a least one skill
                       </p>
-                    )} */}
+                    )}
                     <div className="form-check">
                       <input
                         className="form-check-input"
