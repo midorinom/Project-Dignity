@@ -7,7 +7,7 @@ import JobInteractionType from "./filters/JobInteractionType";
 import SupportProvided from "./filters/SupportProvided";
 import Search from "../../components/Search";
 
-const JobListings = () => {
+const JobListings = (props) => {
   //==========
   // Variables
   // =========
@@ -18,18 +18,35 @@ const JobListings = () => {
   // ===========================
   // useEffect for Initial Fetch
   // ===========================
-  // useEffect onMount, to get job posts data
+  // useEffect onMount gets the initial job posts data.
   useEffect(() => {
     // if (userContext.userType !== "jobSeeker") {
     //   getAllJobPosts();
     // } else {
     //   getFilteredJobPosts();
     // }
-    getAllJobPosts();
+    // If the user navigated to this page from a search
+    if (props.isSearch) {
+      props.setIsSearch(false);
+      getSearchedJobPosts(props.searchInput);
+    } else {
+      // If the user navigated to this page normally, not from a search
+      getAllJobPosts();
+    }
+
+    // Cleanup function resets the searchInput when the user leaves the JobListings page
+    return () => {
+      props.setSearchInput("");
+    };
   }, []);
 
+  // =============
+  // Fetch Functions
+  // ===============
   const getAllJobPosts = async () => {
     try {
+      props.setIsSearch(false);
+
       const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -42,8 +59,33 @@ const JobListings = () => {
   };
 
   //  ============================== TO BE DONE =============================== //
-  const getFilteredJobPosts = async () => {
-    return;
+  const getFilteredJobPosts = async (filters) => {
+    try {
+      const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
+        method: "POST",
+        body: JSON.stringify(filters),
+        headers: { "content-type": "application/json" },
+      });
+      const fetchedJobPosts = await res.json();
+      setJobPosts(fetchedJobPosts);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // getSearched
+  const getSearchedJobPosts = async (search) => {
+    try {
+      const res = await fetch("http://127.0.0.1:5001/api/jobposts/search", {
+        method: "POST",
+        body: JSON.stringify({ search: search }),
+        headers: { "content-type": "application/json" },
+      });
+      const fetchedJobPosts = await res.json();
+      setJobPosts(fetchedJobPosts);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // ==================================================
@@ -67,7 +109,13 @@ const JobListings = () => {
   // ======
   return (
     <div className="job-listings">
-      <Search />
+      <Search
+        setSearchInput={props.setSearchInput}
+        setIsSearch={props.setIsSearch}
+        searchInput={props.searchInput}
+        isJobListings={true}
+        setJobPosts={setJobPosts}
+      />
       <p className="px-4 text-muted font-weight-light font-italic">
         Main Page &gt; What would you like to do today? &gt; Job Listing
       </p>
