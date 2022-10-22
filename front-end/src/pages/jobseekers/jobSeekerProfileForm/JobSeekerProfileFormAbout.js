@@ -9,6 +9,7 @@ const JobSeekerProfileFormAbout = (props) => {
     props.setCurrentPage("Skills");
   }
 
+  // adding react-hook-forms functionality
   const {
     register,
     handleSubmit,
@@ -16,6 +17,7 @@ const JobSeekerProfileFormAbout = (props) => {
   } = useForm();
 
   const onSubmit = (data) => {
+    props.setAboutSchema(data);
     console.log(data);
     console.log(data.mobile);
   };
