@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./jobSeekerProfileForm.module.css";
 import physical from "../../jobListings/filters/abilityDifference/icons/physical.png";
@@ -8,6 +8,9 @@ import intellectual from "../../jobListings/filters/abilityDifference/icons/inte
 import autism from "../../jobListings/filters/abilityDifference/icons/autism.png";
 
 const JobSeekerProfileFormAbilityDiff = (props) => {
+  const [characterCount, setCharacterCount] = useState(0);
+  const [supportDescCharacterCount, setSupportDescCharacterCount] = useState(0);
+
   function goToExperience() {
     props.setCurrentPage("Experience");
   }
@@ -57,7 +60,6 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                       message: "please select at least one option",
                     },
                   })}
-                  // aria-invalid={errors.diff_phy ? "true" : "false"}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -206,9 +208,12 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                     message: "please provide short description",
                   },
                   maxLength: 200,
+                  onChange: (e) => setCharacterCount(e.target.value.length),
                 })}
               ></textarea>
-              <small className="text-muted">200 / 200 characters left</small>
+              <small className="text-muted">{`${
+                200 - characterCount
+              } / 200 characters left`}</small>
               {errors.diffDesc && (
                 <p className="mt-2 text-danger">{errors.diffDesc.message}</p>
               )}
@@ -366,9 +371,13 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                     message: "please provide short description",
                   },
                   maxLength: 300,
+                  onChange: (e) =>
+                    setSupportDescCharacterCount(e.target.value.length),
                 })}
               ></textarea>
-              <small className="text-muted">300 / 300 characters left</small>
+              <small className="text-muted">{`${
+                300 - supportDescCharacterCount
+              } / 300 characters left`}</small>
               {errors.supportDesc && (
                 <p className="mt-2 text-danger">{errors.supportDesc.message}</p>
               )}
@@ -729,7 +738,6 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
         {/*<----------------------- proceed next btn ----------------------->*/}
         <div className="row justify-content-center m-5">
           <button
-            type="submit"
             onClick={goToExperience}
             className={`${styles.bottom_button} p-3`}
           >
