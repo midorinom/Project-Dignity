@@ -38,7 +38,7 @@ const Card = (props) => {
           src={iconImage}
           alt={iconImage}
           className="mx-1"
-          key={Math.random}
+          key={Math.random()}
         />
       );
     }
