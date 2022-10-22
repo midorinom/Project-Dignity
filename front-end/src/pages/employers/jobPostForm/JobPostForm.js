@@ -3,7 +3,7 @@ import JobAbout from "./JobAbout";
 import EmployerAccessibility from "./EmployerAccessibility";
 
 const JobPost = () => {
-  const [currentPage, setCurrentPage] = useState("About");
+  const [currentPage, setCurrentPage] = useState("About The Job");
   // Render the current page
   function manageCurrentPage(e) {
     setCurrentPage(e.target.innerText);
