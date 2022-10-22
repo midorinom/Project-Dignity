@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import UserContext from "./context/userContext";
 import NavBar from "./components/navBar/NavBar";
 import Footer from "./components/footer/Footer";
 import EmployerLanding from "./pages/employers/employerLanding/EmployerLanding";
@@ -15,16 +16,41 @@ import JobPostDetails from "./pages/jobListings/jobPostDetails/jobPostDetails";
 import JobPostForm from "./pages/employers/jobPostForm/JobPostForm";
 
 function App() {
+  // =========
+  // Variables
+  // =========
   // Change this userType initial value to jobSeeker/employer if you need to access those landing/profile/profileForm pages
-  const [userType, setUserType] = useState("employer");
+// <<<<<<< HEAD
+// =======
+  const [userType, setUserType] = useState("jobSeeker");
+  const [searchInput, setSearchInput] = useState("");
+  const [isSearch, setIsSearch] = useState(false);
+// >>>>>>> bd5805545e6778494e1906c2b4de9ab561bcee74
 
+  // ===================
+  // Conditional Renders
+  //====================
   // Render the landing page depending on what type of user is logged in
   function displayLandingPage() {
     switch (userType) {
       case "jobSeeker":
-        return <JobSeekerLanding userType={userType} />;
+        return (
+          <JobSeekerLanding
+            userType={userType}
+            setSearchInput={setSearchInput}
+            setIsSearch={setIsSearch}
+            searchInput={searchInput}
+          />
+        );
       case "employer":
-        return <EmployerLanding userType={userType} />;
+        return (
+          <EmployerLanding
+            userType={userType}
+            setSearchInput={setSearchInput}
+            setIsSearch={setIsSearch}
+            searchInput={searchInput}
+          />
+        );
       default:
         return <UniversalLanding />;
     }
@@ -52,22 +78,37 @@ function App() {
       return <EmployerProfileForm />;
     }
   }
-
   const profileFormPage = displayProfileFormPage();
 
+  // ======
+  // Return
+  // ======
   return (
     <>
       <NavBar />
-      <Routes>
-        <Route path="/" element={landingPage} />
-        <Route path="/job-seekers" element={<JobSeekerLanding />} />
-        <Route path="/employers" element={<EmployerLanding />} />
-        <Route path="/job-listings" element={<JobListings />} />
-        <Route path="/profile" element={profilePage} />
-        <Route path="/profile-form" element={profileFormPage} />
-        <Route path="/job-post-details" element={<JobPostDetails />} />
-        <Route path="/job-post-form" element={<JobPostForm />} />
-      </Routes>
+      <UserContext.Provider value={{ userType }}>
+        <Routes>
+          <Route path="/" element={landingPage} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/job-seekers" element={<JobSeekerLanding />} />
+          <Route path="/employers" element={<EmployerLanding />} />
+          <Route
+            path="/job-listings"
+            element={
+              <JobListings
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
+                isSearch={isSearch}
+                setIsSearch={setIsSearch}
+              />
+            }
+          />
+          <Route path="/profile" element={profilePage} />
+          <Route path="/profile-form" element={profileFormPage} />
+          <Route path="/job-post-details" element={<JobPostDetails />} />
+          <Route path="/job-post-form" element={<JobPostForm />} />
+        </Routes>
+      </UserContext.Provider>
       <Footer />
     </>
   );
