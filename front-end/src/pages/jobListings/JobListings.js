@@ -25,11 +25,12 @@ const JobListings = (props) => {
     // } else {
     //   getFilteredJobPosts();
     // }
-    // check if the user navigated to this page from a search
+    // If the user navigated to this page from a search
     if (props.isSearch) {
       props.setIsSearch(false);
       getSearchedJobPosts(props.searchInput);
     } else {
+      // If the user navigated to this page normally, not from a search
       getAllJobPosts();
     }
 
@@ -39,6 +40,9 @@ const JobListings = (props) => {
     };
   }, []);
 
+  // =============
+  // Fetch Functions
+  // ===============
   const getAllJobPosts = async () => {
     try {
       props.setIsSearch(false);

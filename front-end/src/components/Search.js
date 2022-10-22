@@ -9,29 +9,32 @@ const Search = (props) => {
   // Event Functions
   function handleSubmit(e) {
     e.preventDefault();
-
     props.setSearchInput(inputRef.current.value);
-    props.setIsSearch(true);
-    navigate("/job-listings");
 
-    // getSearched
-    // const getSearchedJobPosts = async () => {
-    //   try {
-    //     const res = await fetch("http://127.0.0.1:5001/api/jobposts/search", {
-    //       method: "POST",
-    //       body: JSON.stringify({ search: inputRef.current.value }),
-    //       headers: { "content-type": "application/json" },
-    //     });
-    //     const fetchedJobPosts = await res.json();
-    //     props.setJobPosts(fetchedJobPosts);
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // };
-    // getSearchedJobPosts();
+    // If the search came from outside JobListings page
+    if (!props.isJobListings) {
+      props.setIsSearch(true);
+      navigate("/job-listings");
+    } else {
+      // If the search came from within the JobListings page
+      const getSearchedJobPosts = async () => {
+        try {
+          const res = await fetch("http://127.0.0.1:5001/api/jobposts/search", {
+            method: "POST",
+            body: JSON.stringify({ search: inputRef.current.value }),
+            headers: { "content-type": "application/json" },
+          });
+          const fetchedJobPosts = await res.json();
+          props.setJobPosts(fetchedJobPosts);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+      getSearchedJobPosts();
+    }
   }
 
-  // Only availble in Job Listings page
+  // Only availble in Job Listings page. Resets the input field and re-fetches with getAll
   function resetSearch(e) {
     props.setSearchInput("");
 
@@ -50,7 +53,7 @@ const Search = (props) => {
     getAllJobPosts();
   }
 
-  // Make Input stay through renders
+  // Make the Input text stay through renders
   useEffect(() => {
     inputRef.current.value = props.searchInput;
   });
