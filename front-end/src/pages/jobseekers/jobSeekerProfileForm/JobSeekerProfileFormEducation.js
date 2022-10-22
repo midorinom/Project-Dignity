@@ -1,45 +1,221 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm, useFieldArray } from "react-hook-form";
 import styles from "./jobSeekerProfileForm.module.css";
-import JobSeekerNewEducation from "./JobSeekerNewEducation";
 
-const JobSeekerProfileFormEducation = () => {
-  const [addNewEducation, setAddNewEducation] = useState([
-    <JobSeekerNewEducation key={0} />,
-  ]);
-
-  const handleAddEducation = (e) => {
-    e.preventDefault();
-    setAddNewEducation([
-      ...addNewEducation,
-      <JobSeekerNewEducation key={addNewEducation.length} />,
-    ]);
-  };
+const JobSeekerProfileFormEducation = (props) => {
+  const [characterCount, setCharacterCount] = useState(0);
 
   const navigate = useNavigate();
   function goToProfile() {
     navigate("/profile");
   }
 
+  // adding react-hook-forms functionality
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      educationSet: [
+        {
+          school: "",
+          cert: "",
+          startDate: "",
+          endDate: "",
+          grade: "",
+          desc: "",
+        },
+      ],
+    },
+  });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "educationSet", // an array of objects
+  });
+
+  const onSubmit = (data) => {
+    props.setEducationSchema(data);
+    console.log("data: ", data);
+    console.log(data.educationSet[0].school);
+  };
+
+  const onError = (errors) => console.log(errors);
+
   return (
     <section
       className="container-md"
       id="jobSeekerProfileForm-EducationSection"
     >
-      <form id="jobSeekerProfileForm-Education">
+      <form
+        onSubmit={handleSubmit(onSubmit, onError)}
+        id="jobSeekerProfileForm-Education"
+      >
         <div className="row m-5">
           <div className="col-md-8">
-            {addNewEducation}
-            {/*<-------------------- add new education -------------------->*/}
-            {/* TODO: on click will show another set of this form below */}
+            {/* -------------------- add new education object -------------------- */}
+            {fields.map((item, index) => {
+              return (
+                <div key={item.id}>
+                  {/*<---------------------------- school ---------------------------->*/}
+                  <div className="form-group mb-4">
+                    <label className="form-label" htmlFor="school-name">
+                      School
+                    </label>
+                    <input
+                      className="form-control p-3"
+                      id="school-name"
+                      name={`educationSet.${index}.school`}
+                      type="text"
+                      placeholder={"e.g Dunman Secondary School"}
+                      {...register(`educationSet.${index}.school`, {
+                        required: {
+                          value: true,
+                          message: "Name of school is required",
+                        },
+                      })}
+                    ></input>
+                    {errors?.educationSet?.[index]?.school && (
+                      <p className="mt-2 text-danger">
+                        {errors.educationSet[index].school.message}
+                      </p>
+                    )}
+                  </div>
+                  {/*<---------------------- edu qualification ---------------------->*/}
+                  <div className="form-group mb-4">
+                    <label className="form-label" htmlFor="qualification">
+                      Qualification Obtained
+                    </label>
+                    <input
+                      className="form-control p-3"
+                      id="qualification"
+                      name={`educationSet.${index}.cert`}
+                      type="text"
+                      placeholder="e.g. GCE 'O'Level Certificate"
+                      {...register(`educationSet.${index}.cert`, {
+                        required: {
+                          value: true,
+                          message: "Please enter your qualification",
+                        },
+                      })}
+                    ></input>
+                    {errors?.educationSet?.[index]?.cert && (
+                      <p className="mt-2 text-danger">
+                        {errors.educationSet[index].cert.message}
+                      </p>
+                    )}
+                  </div>
+                  {/*<------------------------- start date ------------------------->*/}
+                  <div className="form-group mb-4">
+                    <label className="form-label" htmlFor="start-date-edu">
+                      Start Date
+                    </label>
+                    <input
+                      className="form-control p-3"
+                      id="start-date-edu"
+                      name={`educationSet.${index}.startDate`}
+                      type="date"
+                      {...register(`educationSet.${index}.startDate`)}
+                    ></input>
+                  </div>
+                  {/*<-------------------------- end date -------------------------->*/}
+                  <div className="form-group mb-4">
+                    <label className="form-label" htmlFor="end-date-edu">
+                      End Date (Or Expected)
+                    </label>
+                    <input
+                      className="form-control mb-2 p-3"
+                      id="end-date-edu"
+                      name={`educationSet.${index}.endDate`}
+                      type="date"
+                      {...register(`educationSet.${index}.endDate`, {
+                        required: {
+                          value: true,
+                          message:
+                            "Please enter your graduation date or expected graduation date",
+                        },
+                      })}
+                    ></input>
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id="flexCheckDefault-edu"
+                      ></input>
+                      <label
+                        className="form-check-label text-muted"
+                        htmlFor="flexCheckDefault-edu"
+                      >
+                        I am currently studying here
+                      </label>
+                    </div>
+                    {errors?.educationSet?.[index]?.endDate && (
+                      <p className="mt-2 text-danger">
+                        {errors.educationSet[index].endDate.message}
+                      </p>
+                    )}
+                  </div>
+                  {/*<---------------------- edu qualification ---------------------->*/}
+                  <div className="form-group mb-4">
+                    <label className="form-label" htmlFor="grade">
+                      Grade (Optional)
+                    </label>
+                    <input
+                      className="form-control p-3"
+                      id="qualification"
+                      name={`educationSet.${index}.grade`}
+                      type="text"
+                      placeholder="e.g. A"
+                      {...register(`educationSet.${index}.grade`)}
+                    ></input>
+                  </div>
+                  {/*<---------------------- edu description ---------------------->*/}
+                  <div className="form-group mb-4">
+                    <label className="form-label" htmlFor="edu-description">
+                      Description (Optional)
+                    </label>
+                    <textarea
+                      className="form-control mb-2 p-3"
+                      type="text"
+                      id="edu-description"
+                      name={`educationSet.${index}.desc`}
+                      style={{ height: 200 }}
+                      placeholder={"Enter here"}
+                      {...register(`educationSet.${index}.desc`, {
+                        maxLength: 200,
+                        onChange: (e) =>
+                          setCharacterCount(e.target.value.length),
+                      })}
+                    ></textarea>
+                    <small className="text-muted">{`${
+                      200 - characterCount
+                    } / 200 characters left`}</small>
+                  </div>
+                  {/*<-------------------- delete skill button -------------------->*/}
+                  <div className="form-group align-content-end mb-4">
+                    <button
+                      type="button"
+                      className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-dash-lg mt-3`}
+                      onClick={() => remove(index)}
+                    ></button>
+                    <label className="form-label" htmlFor="add-new-skill">
+                      Delete skill
+                    </label>
+                  </div>
+                  <hr></hr>
+                </div>
+              );
+            })}
+            {/*<-------------------- add new education button -------------------->*/}
             <div className="form-group mb-4">
               <button
-                className={styles.circle_btn}
-                onClick={handleAddEducation}
+                className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-plus-lg mt-3`}
+                onClick={() => append()}
                 id="add-new-edu"
-              >
-                <i className="bi bi-plus-lg"></i>
-              </button>
+              ></button>
               <label className="form-label" htmlFor="add-new-edu">
                 Add Another Education Qualification
               </label>
