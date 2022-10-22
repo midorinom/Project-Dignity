@@ -7,6 +7,13 @@ import JobSeekerProfileFormEducation from "./JobSeekerProfileFormEducation";
 
 const JobSeekerProfileForm = () => {
   const [currentPage, setCurrentPage] = useState("About");
+  // const [profile, setProfile] = useState()
+  const [aboutSchema, setAboutSchema] = useState();
+  const [skillsSchema, setSkillsSchema] = useState();
+  const [abilityDifferencesSchema, setAbilityDifferencesSchema] = useState();
+  const [experienceSchema, setExperienceSchema] = useState();
+  const [educationSchema, setEducationSchema] = useState();
+
   // Render the current page
   function manageCurrentPage(e) {
     setCurrentPage(e.target.innerText);
@@ -16,22 +23,48 @@ const JobSeekerProfileForm = () => {
   function displayCurrentPage() {
     switch (currentPage) {
       case "About":
-        return <JobSeekerProfileFormAbout setCurrentPage={setCurrentPage} />;
+        return (
+          <JobSeekerProfileFormAbout
+            setCurrentPage={setCurrentPage}
+            setAboutSchema={setAboutSchema}
+          />
+        );
       case "Skills":
-        return <JobSeekerProfileFormSkills setCurrentPage={setCurrentPage} />;
+        return (
+          <JobSeekerProfileFormSkills
+            setCurrentPage={setCurrentPage}
+            setSkillsSchema={setSkillsSchema}
+          />
+        );
       case "Ability Differences":
         return (
-          <JobSeekerProfileFormAbilityDiff setCurrentPage={setCurrentPage} />
+          <JobSeekerProfileFormAbilityDiff
+            setCurrentPage={setCurrentPage}
+            setAbilityDifferencesSchema={setAbilityDifferencesSchema}
+          />
         );
       case "Experience":
         return (
-          <JobSeekerProfileFormExperience setCurrentPage={setCurrentPage} />
+          <JobSeekerProfileFormExperience
+            setCurrentPage={setCurrentPage}
+            setExperienceSchema={setExperienceSchema}
+          />
         );
       case "Education":
-        return <JobSeekerProfileFormEducation />;
+        return (
+          <JobSeekerProfileFormEducation
+            setEducationSchema={setEducationSchema}
+          />
+        );
     }
   }
   const page = displayCurrentPage();
+
+  console.log(aboutSchema);
+  console.log(skillsSchema);
+  console.log(abilityDifferencesSchema);
+  console.log(experienceSchema);
+  console.log(educationSchema);
 
   return (
     <>
