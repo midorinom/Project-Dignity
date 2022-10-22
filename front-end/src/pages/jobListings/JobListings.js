@@ -12,7 +12,7 @@ const JobListings = (props) => {
   // Variables
   // =========
   const userContext = useContext(UserContext);
-  const [jobPosts, setJobPosts] = useState(undefined);
+  const [jobPosts, setJobPosts] = useState([]);
   const [jobCards, setJobCards] = useState(undefined);
 
   // ===========================
@@ -120,11 +120,13 @@ const JobListings = (props) => {
         Main Page &gt; What would you like to do today? &gt; Job Listing
       </p>
       <h1 className="text-left w-50 mx-4 mt-4">Dignity Career</h1>
-      <div className="d-flex justify-content-end mx-4">
-        <p className="text-center text-light bg-dark w-25 my-0">
-          Recommended For You
-        </p>
-      </div>
+      {userContext.userType === "jobSeeker" && jobPosts.length > 0 && (
+        <div className="d-flex justify-content-end mx-4">
+          <p className="text-center text-light bg-dark w-25 my-0">
+            Recommended For You
+          </p>
+        </div>
+      )}
       <div className="results d-flex">
         <div className="filters w-25 px-4 mb-4">
           <AbilityDifference />
