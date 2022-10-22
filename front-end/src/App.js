@@ -20,12 +20,10 @@ function App() {
   // Variables
   // =========
   // Change this userType initial value to jobSeeker/employer if you need to access those landing/profile/profileForm pages
-// <<<<<<< HEAD
-// =======
+
   const [userType, setUserType] = useState("jobSeeker");
   const [searchInput, setSearchInput] = useState("");
   const [isSearch, setIsSearch] = useState(false);
-// >>>>>>> bd5805545e6778494e1906c2b4de9ab561bcee74
 
   // ===================
   // Conditional Renders
