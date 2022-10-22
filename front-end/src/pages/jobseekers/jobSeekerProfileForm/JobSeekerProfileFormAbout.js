@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import styles from "./jobSeekerProfileForm.module.css";
 
 const JobSeekerProfileFormAbout = (props) => {
+  const [characterCount, setCharacterCount] = useState(0);
+
   function goToSkills() {
     props.setCurrentPage("Skills");
   }
 
+  // adding react-hook-forms functionality
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    props.setAboutSchema(data);
+    console.log(data);
+    console.log(data.mobile);
+  };
+
+  const onError = (errors) => console.log(errors);
+
   return (
     <section className="container-md" id="jobSeekerProfileForm-AboutSection">
-      <form id="jobSeekerProfileForm-About">
+      <form
+        onSubmit={handleSubmit(onSubmit, onError)}
+        id="jobSeekerProfileForm-About"
+      >
         <div className="row m-5">
           <div className="col-md-8">
             {/*<----------------------------- name ----------------------------->*/}
@@ -25,9 +46,13 @@ const JobSeekerProfileFormAbout = (props) => {
                   id="name"
                   type="text"
                   placeholder={"e.g Tan Li Choon"}
-                  required
+                  {...register("name", { required: true })}
+                  aria-invalid={errors.name ? "true" : "false"}
                 ></input>
               </div>
+              {errors?.name?.type === "required" && (
+                <p className="mt-2 text-danger">Full name is required</p>
+              )}
             </div>
             {/*<------------------------- aspiration ------------------------->*/}
             <div className="form-group mb-4">
@@ -39,21 +64,39 @@ const JobSeekerProfileFormAbout = (props) => {
                 id="aspiration"
                 type="text"
                 placeholder={"e.g Librarian"}
+                {...register("aspiration", { required: true })}
+                aria-invalid={errors.aspiration ? "true" : "false"}
               ></input>
+              {errors?.aspiration?.type === "required" && (
+                <p className="mt-2 text-danger">Aspiration is required</p>
+              )}
             </div>
             {/*<----------------------- brand statement ----------------------->*/}
             <div className="form-group mb-4">
-              <label className="form-label" htmlFor="personal-brand">
+              <label className="form-label" htmlFor="brand">
                 Personal Brand Statement
               </label>
               <textarea
                 className="form-control mb-2 p-3"
                 type="text"
-                id="personal-brand"
+                id="brand"
                 style={{ height: 200 }}
                 placeholder={"Enter here"}
+                {...register("brand", {
+                  required: true,
+                  maxLength: 200,
+                  onChange: (e) => setCharacterCount(e.target.value.length),
+                })}
+                aria-invalid={errors.brand ? "true" : "false"}
               ></textarea>
-              <small className="text-muted">200 / 200 characters left</small>
+              <small className="text-muted">{`${
+                200 - characterCount
+              } / 200 characters left`}</small>
+              {errors?.brand?.type === "required" && (
+                <p className="mt-2 text-danger">
+                  Personal brand statement is required
+                </p>
+              )}
             </div>
             {/*<--------------------------- email --------------------------->*/}
             <div className="form-group mb-4">
@@ -69,12 +112,20 @@ const JobSeekerProfileFormAbout = (props) => {
                   id="email"
                   type="email"
                   placeholder="e.g. tanlichoon@gmail.com"
+                  {...register("email", {
+                    required: true,
+                    pattern: /^\S+@\S+$/i,
+                  })}
+                  aria-invalid={errors.email ? "true" : "false"}
                 ></input>
               </div>
+              {errors?.email?.type === "required" && (
+                <p className="mt-2 text-danger">Email is required</p>
+              )}
             </div>
             {/*<--------------------------- phone --------------------------->*/}
             <div className="form-group mb-4">
-              <label className="form-label" htmlFor="contact-num">
+              <label className="form-label" htmlFor="mobile">
                 Contact Number
               </label>
               <div className="input-group">
@@ -83,11 +134,16 @@ const JobSeekerProfileFormAbout = (props) => {
                 </span>
                 <input
                   className="form-control p-3"
-                  id="contact-num"
+                  id="mobile"
                   type="text"
-                  placeholder="e.g. +65 9273 2719"
+                  placeholder="e.g. 92732719"
+                  {...register("mobile", { required: true, maxLength: 8 })}
+                  aria-invalid={errors.mobile ? "true" : "false"}
                 ></input>
               </div>
+              {errors?.mobile?.type === "required" && (
+                <p className="mt-2 text-danger">Contact number is required</p>
+              )}
             </div>
           </div>
           {/*<-------------------------- empty col -------------------------->*/}
@@ -95,7 +151,10 @@ const JobSeekerProfileFormAbout = (props) => {
           {/* <------------------------ side panel ------------------------> */}
           <div className="col-md-3">
             <div className=" sidePanel row mt-5">
-              <button className={`${styles.side_buttons} mt-3 mb-4 p-3`}>
+              <button
+                type="submit"
+                className={`${styles.side_buttons} mt-3 mb-4 p-3`}
+              >
                 Save Changes
               </button>
               <button className={`${styles.side_buttons} mb-4 p-3`}>
