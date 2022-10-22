@@ -230,7 +230,6 @@ const JobSeekerProfileFormExperience = (props) => {
             <div className="form-group mb-4">
               <button
                 className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-plus-lg mt-3`}
-                // onClick={handleAddExperience}
                 onClick={() => append()}
                 id="add-new-skill"
               ></button>
