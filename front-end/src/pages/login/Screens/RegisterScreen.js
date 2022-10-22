@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const RegisterScreen = () => {
+const RegisterScreen = (props) => {
   const [registerUser, setRegisterUser] = useState({});
 
   const handleUsername = (e) => {
@@ -32,6 +32,7 @@ const RegisterScreen = () => {
       },
       body: JSON.stringify(data),
     });
+    props.setScreen("Successful");
     return response.json();
   }
 
@@ -55,9 +56,9 @@ const RegisterScreen = () => {
         />
       </div>
 
-      <div className="row dflex justify-content-center">
+      <div className="row d-flex justify-content-center">
         <div
-          className="col-4 p-0 m-0 btn-group"
+          className="col-4 p-0 m-0 btn-group d-flex justify-content-center"
           role="group"
           aria-label="jobseeker/employer role select"
         >
@@ -66,12 +67,12 @@ const RegisterScreen = () => {
             className="btn-check"
             name="options-outlined"
             id="jobSeeker"
-            autocomplete="off"
+            autoComplete="off"
             onClick={handleUserType}
           />
           <label
             className="btn btn-outline-secondary btn-sm rounded mx-1"
-            for="jobSeeker"
+            htmlFor="jobSeeker"
           >
             Jobseeker
           </label>
@@ -80,12 +81,12 @@ const RegisterScreen = () => {
             className="btn-check"
             name="options-outlined"
             id="employer"
-            autocomplete="off"
+            autoComplete="off"
             onClick={handleUserType}
           />
           <label
             className="btn btn-outline-secondary btn-sm rounded mx-1"
-            for="employer"
+            htmlFor="employer"
           >
             Employer
           </label>
