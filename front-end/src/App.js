@@ -16,16 +16,38 @@ import JobPostDetails from "./pages/jobListings/jobPostDetails/jobPostDetails";
 import JobPostForm from "./pages/employers/jobPostForm/JobPostForm";
 
 function App() {
+  // =========
+  // Variables
+  // =========
   // Change this userType initial value to jobSeeker/employer if you need to access those landing/profile/profileForm pages
   const [userType, setUserType] = useState("jobSeeker");
+  const [searchInput, setSearchInput] = useState("");
+  const [isSearch, setIsSearch] = useState(false);
 
+  // ===================
+  // Conditional Renders
+  //====================
   // Render the landing page depending on what type of user is logged in
   function displayLandingPage() {
     switch (userType) {
       case "jobSeeker":
-        return <JobSeekerLanding userType={userType} />;
+        return (
+          <JobSeekerLanding
+            userType={userType}
+            setSearchInput={setSearchInput}
+            setIsSearch={setIsSearch}
+            searchInput={searchInput}
+          />
+        );
       case "employer":
-        return <EmployerLanding userType={userType} />;
+        return (
+          <EmployerLanding
+            userType={userType}
+            setSearchInput={setSearchInput}
+            setIsSearch={setIsSearch}
+            searchInput={searchInput}
+          />
+        );
       default:
         return <UniversalLanding />;
     }
@@ -53,9 +75,11 @@ function App() {
       return <EmployerProfileForm />;
     }
   }
-
   const profileFormPage = displayProfileFormPage();
 
+  // ======
+  // Return
+  // ======
   return (
     <>
       <NavBar />
@@ -64,7 +88,17 @@ function App() {
           <Route path="/" element={landingPage} />
           <Route path="/job-seekers" element={<JobSeekerLanding />} />
           <Route path="/employers" element={<EmployerLanding />} />
-          <Route path="/job-listings" element={<JobListings />} />
+          <Route
+            path="/job-listings"
+            element={
+              <JobListings
+                searchInput={searchInput}
+                setSearchInput={setSearchInput}
+                isSearch={isSearch}
+                setIsSearch={setIsSearch}
+              />
+            }
+          />
           <Route path="/profile" element={profilePage} />
           <Route path="/profile-form" element={profileFormPage} />
           <Route path="/job-post-details" element={<JobPostDetails />} />
