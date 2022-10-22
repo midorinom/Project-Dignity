@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./employerProfile.module.css";
+import {Link} from 'react-router-dom'
 const EmployerProfile = () => {
   return (
     <>
@@ -58,9 +59,11 @@ const EmployerProfile = () => {
           {/* Side View */}
       
           <div className="col-md-3 mt-4">
+          <Link to='/job-post-form'>
           <button className={`${styles.bottom_button} p-3`}>
             Upload A Job Post
           </button>
+          </Link>
               {/*  Location and Accessibility Box*/}
             <div className={`${styles.box} container-md`}>
               <h6 className={`${styles.subheading} md-lg-6`}>Location</h6>
