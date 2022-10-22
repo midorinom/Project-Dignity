@@ -4,6 +4,7 @@ import JobSeekerProfileFormSkills from "./JobSeekerProfileFormSkills";
 import JobSeekerProfileFormAbilityDiff from "./JobSeekerProfileFormAbilityDiff";
 import JobSeekerProfileFormExperience from "./JobSeekerProfileFormExperience";
 import JobSeekerProfileFormEducation from "./JobSeekerProfileFormEducation";
+import EmployerProfileForm from "../../employers/employerProfileForm/EmployerProfileForm";
 
 const JobSeekerProfileForm = () => {
   const [currentPage, setCurrentPage] = useState("About");
