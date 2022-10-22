@@ -1,20 +1,9 @@
 import React, { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import styles from "./jobSeekerProfileForm.module.css";
-import JobSeekerNewExperience from "./JobSeekerNewExperience";
 
 const JobSeekerProfileFormExperience = (props) => {
-  // const [addNewExperience, setAddNewExperience] = useState([
-  //   <JobSeekerNewExperience key={0} />,
-  // ]);
-
-  // const handleAddExperience = (e) => {
-  //   e.preventDefault();
-  //   setAddNewExperience([
-  //     ...addNewExperience,
-  //     <JobSeekerNewExperience key={addNewExperience.length} />,
-  //   ]);
-  // };
+  const [characterCount, setCharacterCount] = useState(0);
 
   function goToEducation() {
     props.setCurrentPage("Education");
@@ -66,7 +55,6 @@ const JobSeekerProfileFormExperience = (props) => {
         <div className="row m-5">
           <div className="col-md-8">
             {/* -------------------- add new experience object -------------------- */}
-            {/* {addNewExperience} */}
             {fields.map((item, index) => {
               return (
                 <div key={item.id}>
@@ -82,14 +70,17 @@ const JobSeekerProfileFormExperience = (props) => {
                       type="text"
                       placeholder={"e.g Cataloguing Assistant"}
                       {...register(`experienceSet.${index}.title`, {
-                        required: true,
+                        required: {
+                          value: true,
+                          message: "Job title is required",
+                        },
                       })}
                     ></input>
-                    {/* {errors.experienceSet[index].title && (
+                    {errors?.experienceSet?.[index]?.title && (
                       <p className="mt-2 text-danger">
                         {errors.experienceSet[index].title.message}
                       </p>
-                    )} */}
+                    )}
                   </div>
                   {/*<-------------------------- job type -------------------------->*/}
                   <div className="form-group mb-4">
@@ -101,7 +92,11 @@ const JobSeekerProfileFormExperience = (props) => {
                       id="job-type"
                       name={`experienceSet.${index}.type`}
                       {...register(`experienceSet.${index}.type`, {
-                        required: true,
+                        required: {
+                          value: true,
+                          message:
+                            "Job type is required, please select one option",
+                        },
                       })}
                     >
                       <option value="">Select from drop down list</option>
@@ -111,6 +106,11 @@ const JobSeekerProfileFormExperience = (props) => {
                       <option value="Packer">Packer</option>
                       <option value="Waiter">Waiter</option>
                     </select>
+                    {errors?.experienceSet?.[index]?.type && (
+                      <p className="mt-2 text-danger">
+                        {errors.experienceSet[index].type.message}
+                      </p>
+                    )}
                   </div>
                   {/*<------------------------ company name ------------------------>*/}
                   <div className="form-group mb-4">
@@ -124,9 +124,17 @@ const JobSeekerProfileFormExperience = (props) => {
                       type="text"
                       placeholder="e.g. Starbucks"
                       {...register(`experienceSet.${index}.company`, {
-                        required: true,
+                        required: {
+                          value: true,
+                          message: "Company name is required",
+                        },
                       })}
                     ></input>
+                    {errors?.experienceSet?.[index]?.company && (
+                      <p className="mt-2 text-danger">
+                        {errors.experienceSet[index].company.message}
+                      </p>
+                    )}
                   </div>
                   {/*<------------------------- start date ------------------------->*/}
                   <div className="form-group mb-4">
@@ -139,9 +147,17 @@ const JobSeekerProfileFormExperience = (props) => {
                       name={`experienceSet.${index}.startDate`}
                       type="date"
                       {...register(`experienceSet.${index}.startDate`, {
-                        required: true,
+                        required: {
+                          value: true,
+                          message: "Start date is required",
+                        },
                       })}
                     ></input>
+                    {errors?.experienceSet?.[index]?.startDate && (
+                      <p className="mt-2 text-danger">
+                        {errors.experienceSet[index].startDate.message}
+                      </p>
+                    )}
                   </div>
                   {/*<-------------------------- end date -------------------------->*/}
                   <div className="form-group mb-4">
@@ -182,12 +198,18 @@ const JobSeekerProfileFormExperience = (props) => {
                       style={{ height: 200 }}
                       placeholder={"Enter here"}
                       {...register(`experienceSet.${index}.jobDesc`, {
-                        required: true,
+                        required: {
+                          value: true,
+                          message: "Please provide a short description",
+                        },
+                        maxLength: 200,
+                        onChange: (e) =>
+                          setCharacterCount(e.target.value.length),
                       })}
                     ></textarea>
-                    <small className="text-muted">
-                      200 / 200 characters left
-                    </small>
+                    <small className="text-muted">{`${
+                      200 - characterCount
+                    } / 200 characters left`}</small>
                   </div>
                   {/*<-------------------- delete skill button -------------------->*/}
                   <div className="form-group align-content-end mb-4">
