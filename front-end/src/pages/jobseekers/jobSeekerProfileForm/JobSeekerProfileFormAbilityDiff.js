@@ -226,7 +226,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="training"
+                  value="structured"
                   id="training"
                   {...register("support", {
                     required: {
@@ -247,7 +247,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="shadow_by_coach"
+                  value="shadowing"
                   id="coach"
                   {...register("support", {
                     required: {
@@ -268,7 +268,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="workplace_redesign"
+                  value="redesign"
                   id="workplace"
                   {...register("support", {
                     required: {
@@ -289,7 +289,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="assistive_tech"
+                  value="assistive"
                   id="assist-tech"
                   {...register("support", {
                     required: {
@@ -310,7 +310,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="social_integration"
+                  value="social"
                   id="integration"
                   {...register("support", {
                     required: {
