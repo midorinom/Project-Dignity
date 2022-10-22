@@ -1,6 +1,5 @@
 import React from "react";
 import { useForm, useFieldArray } from "react-hook-form";
-// import JobSeekerNewSkill from "./JobSeekerNewSkill";
 import styles from "./jobSeekerProfileForm.module.css";
 
 const JobSeekerProfileFormSkills = (props) => {
@@ -9,22 +8,6 @@ const JobSeekerProfileFormSkills = (props) => {
   function goToAbilityDiff() {
     props.setCurrentPage("Ability Differences");
   }
-
-  // // adding a new skills block when add more skills button is clicked
-  // const [addNewSkill, setAddNewSkill] = useState([
-  //   <JobSeekerNewSkill key={0} />,
-  // ]);
-
-  // const handleAddSkill = (e) => {
-  //   e.preventDefault();
-  //   setAddNewSkill([
-  //     ...addNewSkill,
-  //     <JobSeekerNewSkill
-  //       key={addNewSkill.length}
-  //       setSkillsSchema={props.setSkillsSchema}
-  //     />,
-  //   ]);
-  // };
 
   // adding react-hook-forms functionality
   const {
@@ -39,8 +22,9 @@ const JobSeekerProfileFormSkills = (props) => {
           skill: "",
           cert: "",
           issuer: "",
-          issueMonth: "",
-          issueYear: "",
+          issueDate: "",
+          // issueMonth: "",
+          // issueYear: "",
         },
       ],
     },
@@ -48,13 +32,13 @@ const JobSeekerProfileFormSkills = (props) => {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "skillSet",
+    name: "skillSet", // an array of objects
   });
 
   const onSubmit = (data) => {
     props.setSkillsSchema(data);
     console.log("data: ", data);
-    console.log(data.skill);
+    console.log(data.skillSet[0].skill);
   };
 
   const onError = (errors) => console.log(errors);
@@ -67,12 +51,11 @@ const JobSeekerProfileFormSkills = (props) => {
       >
         <div className="row m-5">
           <div className="col-md-8">
-            {/* {addNewSkill} */}
-            {/*<-------------------- add new skill -------------------->*/}
+            {/*<-------------------- add new skillset object -------------------->*/}
             {fields.map((item, index) => {
               return (
                 <div key={item.id}>
-                  {/*<-------------------------- skill set -------------------------->*/}
+                  {/*<----------------------------- skill ----------------------------->*/}
                   <div className="form-group mb-4">
                     <label className="form-label" htmlFor="skillset">
                       Skillset
@@ -90,7 +73,7 @@ const JobSeekerProfileFormSkills = (props) => {
                       //   errors.skillSet[index].skill ? "true" : "false"
                       // }
                     ></input>
-                    {/* {`errors?.skillSet.${index}.skill?`.type === "required" && (
+                    {/* {errors?.skillSet[index].skill?.type === "required" && (
                       <p className="mt-2 text-danger">
                         Skillset is required, please enter a least one skill
                       </p>
@@ -102,31 +85,82 @@ const JobSeekerProfileFormSkills = (props) => {
                         id="flexCheckDefault-skills"
                       ></input>
                       <label
-                        className="form-check-label text-muted"
+                        className="form-check-label text-muted mb-4"
                         htmlFor="flexCheckDefault-skills"
                       >
                         I have accreditation for this skill
                       </label>
                     </div>
-                    <button
-                      type="button"
-                      className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-dash mt-3`}
-                      onClick={() => remove(index)}
-                    ></button>
+                    {/*<------------------------ certification ------------------------>*/}
+                    {/* to show when accreditation checked */}
+                    <div className="form-group mb-4">
+                      <label className="form-label" htmlFor="cert-name">
+                        Name of Supporting Certificate / License (Optional)
+                      </label>
+                      <input
+                        className="form-control p-3"
+                        id="cert-name"
+                        name={`skillSet.${index}.cert`}
+                        type="text"
+                        placeholder={
+                          "e.g Google Certificate for Digital Marketing"
+                        }
+                        {...register(`skillSet.${index}.cert`)}
+                      ></input>
+                    </div>
+                    {/*<-------------------- issuing organisation -------------------->*/}
+                    {/* to show when accreditation checked */}
+                    <div className="form-group mb-4">
+                      <label className="form-label" htmlFor="issuing-org">
+                        Issuing Organisation (Optional)
+                      </label>
+                      <input
+                        className="form-control p-3"
+                        id="issuing-org"
+                        name={`skillSet.${index}.issuer`}
+                        type="text"
+                        placeholder="e.g. Google"
+                        {...register(`skillSet.${index}.issuer`)}
+                      ></input>
+                    </div>
+                    {/*<------------------------ issuing date ------------------------>*/}
+                    {/* to show when accreditation checked */}
+                    <div className="form-group mb-4">
+                      <label className="form-label" htmlFor="issue-date-cert">
+                        Issue Date (Optional)
+                      </label>
+                      <input
+                        className="form-control p-3"
+                        id="issue-date-cert"
+                        name={`skillSet.${index}.issueDate`}
+                        type="date"
+                        {...register(`skillSet.${index}.issueDate`)}
+                      ></input>
+                    </div>
+                    {/*<-------------------- delete skill button -------------------->*/}
+                    <div className="form-group align-content-end mb-4">
+                      <button
+                        type="button"
+                        className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-dash-lg mt-3`}
+                        onClick={() => remove(index)}
+                      ></button>
+                      <label className="form-label" htmlFor="add-new-skill">
+                        Delete skill
+                      </label>
+                    </div>
                   </div>
+                  <hr></hr>
                 </div>
               );
             })}
-            {/*<----/------------ add new skill button -----/----------->*/}
-            <div className="form-group mt-5 mb-4">
+            {/*<------------------- add new skill button ------------------->*/}
+            <div className="form-group mb-4">
               <button
-                className={styles.circle_btn}
+                className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-plus-lg mt-3`}
                 // onClick={handleAddSkill}
                 onClick={() => append()}
                 id="add-new-skill"
-              >
-                <i className="bi bi-plus-lg"></i>
-              </button>
+              ></button>
               <label className="form-label" htmlFor="add-new-skill">
                 Add new skill
               </label>
