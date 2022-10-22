@@ -1,10 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 
 const RegisterScreen = () => {
+  const [registerUser, setRegisterUser] = useState({});
+
+  const handleUsername = (e) => {
+    setRegisterUser({ ...registerUser, username: e.target.value });
+  };
+  const handlePassword = (e) => {
+    setRegisterUser({ ...registerUser, password: e.target.value });
+  };
+  const handleUserType = (e) => {
+    setRegisterUser({ ...registerUser, type: e.target.id });
+  };
+
+  const handleRegister = (e) => {
+    if (registerUser.username && registerUser.password && registerUser.type) {
+      return putAccount();
+    } else {
+      alert("Missing username / password / user type input");
+    }
+  };
+
+  async function putAccount(
+    url = "http://127.0.0.1:5001/api/users/create",
+    data = registerUser
+  ) {
+    const response = await fetch(url, {
+      method: "PUT",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return response.json();
+  }
+
   return (
     <div>
       <div className="form-outline m-4 row">
-        <input type="text" className="form-control" placeholder="Username" />
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Username"
+          onChange={handleUsername}
+        />
       </div>
 
       <div className="form-outline m-4 row">
@@ -12,6 +51,7 @@ const RegisterScreen = () => {
           type="password"
           className="form-control"
           placeholder="Password"
+          onChange={handlePassword}
         />
       </div>
 
@@ -25,13 +65,13 @@ const RegisterScreen = () => {
             type="radio"
             className="btn-check"
             name="options-outlined"
-            id="jobseeker"
+            id="jobSeeker"
             autocomplete="off"
-            checked
+            onClick={handleUserType}
           />
           <label
             className="btn btn-outline-secondary btn-sm rounded mx-1"
-            for="jobseeker"
+            for="jobSeeker"
           >
             Jobseeker
           </label>
@@ -41,6 +81,7 @@ const RegisterScreen = () => {
             name="options-outlined"
             id="employer"
             autocomplete="off"
+            onClick={handleUserType}
           />
           <label
             className="btn btn-outline-secondary btn-sm rounded mx-1"
@@ -53,7 +94,9 @@ const RegisterScreen = () => {
       </div>
 
       <div className="row dflex justify-content-center m-4">
-        <button className="btn btn-warning w-25">Register</button>
+        <button className="btn btn-warning w-25" onClick={handleRegister}>
+          Register
+        </button>
       </div>
     </div>
   );
