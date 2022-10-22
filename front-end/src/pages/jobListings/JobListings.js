@@ -36,7 +36,6 @@ const JobListings = () => {
       });
       const fetchedJobPosts = await res.json();
       setJobPosts(fetchedJobPosts);
-      console.log(fetchedJobPosts);
     } catch (err) {
       console.log(err);
     }
@@ -58,7 +57,7 @@ const JobListings = () => {
 
   function mapCards() {
     const mappedJobCards = jobPosts.map((element) => {
-      return <Card jobPost={element} key={Math.random()} />;
+      return <Card jobPost={element.jobPost} key={Math.random()} />;
     });
     setJobCards(mappedJobCards);
   }
