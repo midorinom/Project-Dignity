@@ -3,7 +3,7 @@ import styles from "./experienceCard.module.css";
 
 const EducationCard = (props) => {
   function determineEndDate() {
-    if (props.education.endMonth === "" && props.education.endYear === "") {
+    if (props.education.endMonth === null && props.education.endYear === null) {
       return "Current";
     } else {
       return `${props.education.endMonth} ${props.education.endYear}`;
