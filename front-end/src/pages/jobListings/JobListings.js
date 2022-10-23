@@ -17,7 +17,6 @@ const JobListings = (props) => {
   const [jobPosts, setJobPosts] = useState([]);
   const [jobCards, setJobCards] = useState(undefined);
   const [filter, setFilter] = useState({
-    search: "",
     abilityDiff: [],
     environment: {
       minNoise: 0,
