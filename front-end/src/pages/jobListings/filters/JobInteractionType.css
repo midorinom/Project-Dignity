@@ -1,0 +1,11 @@
+.jobInteractionButton:hover {
+  background-color: orange !important;
+  color: rgb(108, 117, 125) !important;
+  border-color: transparent !important;
+}
+
+.btn-check:checked + .btn {
+  background-color: #fb8500 !important;
+  color: rgb(108, 117, 125) !important;
+  border-color: transparent !important;
+}

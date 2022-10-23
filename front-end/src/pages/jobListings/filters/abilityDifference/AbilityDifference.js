@@ -4,7 +4,7 @@ import visual from "./icons/visual.png";
 import hearing from "./icons/hearing.png";
 import intellectual from "./icons/intellectual.png";
 import autism from "./icons/autism.png";
-import "./icons/AbilityDifferences.css";
+import "./AbilityDifferences.css";
 
 const AbilityDifference = (props) => {
   const [abilityDiffFilters, setAbilityDiffFilters] = useState([]);

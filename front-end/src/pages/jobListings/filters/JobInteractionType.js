@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./JobInteractionType.css";
 
 const JobInteractionType = (props) => {
   const [interactionFilter, setInteractionFilter] = useState(undefined);
@@ -7,6 +8,7 @@ const JobInteractionType = (props) => {
   function handleClick(e) {
     // must store e.currentTarget.value in a variable first
     const clickedInteraction = e.currentTarget.value;
+    const target = e.currentTarget;
 
     // If the interaction was clicked already
     if (interactionFilter === clickedInteraction) {
@@ -34,24 +36,36 @@ const JobInteractionType = (props) => {
   return (
     <div className="mt-3 d-flex flex-column w-100 bg-light align-center">
       <h5 className="mx-1 mb-1 mt-2 text-muted">Job Interaction Type</h5>
-      <button
-        className="btn btn-outline-secondary btn-sm m-1 d-flex justify-content-center align-items-center"
-        type="button"
-        data-bs-toggle="button"
+      <input
+        type="radio"
+        class="btn-check"
+        name="jobInteractions"
+        id="btn-check-outlined1"
+        autocomplete="off"
         onClick={handleClick}
         value={true}
+      />
+      <label
+        class="btn btn-outline-secondary m-1 d-flex justify-content-center align-items-center"
+        for="btn-check-outlined1"
       >
-        <p className="d-flex justify-content-center m-0">Customer Facing</p>
-      </button>
-      <button
-        className="btn btn-outline-secondary btn-sm m-1 d-flex justify-content-center align-items-center"
-        type="button"
-        data-bs-toggle="button"
+        Customer Facing
+      </label>
+      <input
+        type="radio"
+        class="btn-check"
+        name="jobInteractions"
+        id="btn-check-outlined2"
+        autocomplete="off"
         onClick={handleClick}
         value={false}
+      />
+      <label
+        class="btn btn-outline-secondary m-1 d-flex justify-content-center align-items-center"
+        for="btn-check-outlined2"
       >
-        <p className="d-flex justify-content-center m-0">Non-Customer Facing</p>
-      </button>
+        Non-Customer Facing
+      </label>
     </div>
   );
 };
