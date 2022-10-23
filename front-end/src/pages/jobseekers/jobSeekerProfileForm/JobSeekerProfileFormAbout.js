@@ -1,16 +1,25 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import styles from "./jobSeekerProfileForm.module.css";
 
 const JobSeekerProfileFormAbout = (props) => {
   const [characterCount, setCharacterCount] = useState(0);
 
+  // when proceed next button is clicked
   function goToSkills() {
     if (!props.sectionSaved) {
       alert("Please save before proceeding to the next section");
     } else {
       props.setCurrentPage("Skills");
     }
+  }
+
+  // when cancel button is clicked
+  const navigate = useNavigate();
+  function goToJobSeekerLanding() {
+    navigate("/job-seekers");
+    alert("Your data are not saved");
   }
 
   // adding react-hook-forms functionality
@@ -164,7 +173,10 @@ const JobSeekerProfileFormAbout = (props) => {
               >
                 Save Changes
               </button>
-              <button className={`${styles.side_buttons} mb-4 p-3`}>
+              <button
+                className={`${styles.side_buttons} mb-4 p-3`}
+                onClick={goToJobSeekerLanding}
+              >
                 Cancel
               </button>
               {/* <--------------------- progress bar ---------------------> */}
