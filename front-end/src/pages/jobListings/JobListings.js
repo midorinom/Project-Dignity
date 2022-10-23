@@ -14,7 +14,7 @@ const JobListings = (props) => {
   const userContext = useContext(UserContext);
   const [jobPosts, setJobPosts] = useState([]);
   const [jobCards, setJobCards] = useState(undefined);
-  const [filter, setFilter] = useState({});
+  const [filter, setFilter] = useState([]);
 
   // ===========================
   // useEffect for Initial Fetch
@@ -94,21 +94,26 @@ const JobListings = (props) => {
   // useEffect to fetch Filtered Jobs whenever filters are set
   // =========================================================
   useEffect(() => {
-    if (jobPosts !== undefined) {
+    console.log("filter", filter);
+    if (jobPosts.length > 0) {
       getFilteredJobPosts(filter);
     }
   }, [filter]);
 
   const getFilteredJobPosts = async (filters) => {
     try {
+      let body = {};
+
+      if (filters.length > 0) {
+        body = JSON.stringify({ $and: filters });
+      }
+
       const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
         method: "POST",
-        body: JSON.stringify(filters),
+        body: body,
         headers: { "content-type": "application/json" },
       });
       const fetchedJobPosts = await res.json();
-      console.log(filter);
-      console.log("filter fetch data", fetchedJobPosts);
       setJobPosts(fetchedJobPosts);
     } catch (err) {
       console.log(err);
