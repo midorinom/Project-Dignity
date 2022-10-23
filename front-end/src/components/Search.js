@@ -27,7 +27,6 @@ const Search = (props) => {
     props.setSearchInput("");
     props.getAllJobPosts(props.setJobPosts);
     props.setFilter({
-      search: "",
       abilityDiff: [],
       environment: {
         minNoise: 0,
