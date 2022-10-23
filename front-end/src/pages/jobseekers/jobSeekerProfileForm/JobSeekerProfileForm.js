@@ -5,7 +5,7 @@ import JobSeekerProfileFormSkills from "./JobSeekerProfileFormSkills";
 import JobSeekerProfileFormAbilityDiff from "./JobSeekerProfileFormAbilityDiff";
 import JobSeekerProfileFormExperience from "./JobSeekerProfileFormExperience";
 import JobSeekerProfileFormEducation from "./JobSeekerProfileFormEducation";
-import EmployerProfileForm from "../../employers/employerProfileForm/EmployerProfileForm";
+import styles from "./jobSeekerProfileForm.module.css";
 
 const JobSeekerProfileForm = () => {
   const [currentPage, setCurrentPage] = useState("About");
@@ -70,70 +70,45 @@ const JobSeekerProfileForm = () => {
 
   return (
     <>
-      <header>
-        {/* Banner */}
-        <div className="container-md">
-          <div className="row" id={styles.banner}>
-            <div className="d-flex justify-content-md-center m-0 p-0">
-              <div className="col-md-2 m-3">
-                <embed />
-              </div>
-              <div className="col-md-8 p-4">
-                <h1 className=" mt-4 mb-3">{`This is my name`}</h1>
-                <p style={{ fontSize: "1.3em" }}>{`This is my aspiration`}</p>
-                <p>{`This is my personal brand statement`}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Form section buttons */}
-        <div
-          className="row w-100 m-0"
-          style={{
-            height: 58,
-            boxShadow: "1px 2px 3px 4px rgba(20, 20, 20, 0.2)",
-          }}
-        >
-          <div className="d-flex justify-content-md-center">
-            <div
-              className={`${styles.sectionButtons} p-3`}
-              type="button"
-              onClick={manageCurrentPage}
-            >
-              About
-            </div>
-            <div
-              className={`${styles.sectionButtons} p-3`}
-              type="button"
-              onClick={manageCurrentPage}
-            >
-              Skills
-            </div>
-            <div
-              className={`${styles.sectionButtons} p-3`}
-              type="button"
-              onClick={manageCurrentPage}
-            >
-              Ability Differences
-            </div>
-            <div
-              className={`${styles.sectionButtons} p-3`}
-              type="button"
-              onClick={manageCurrentPage}
-            >
-              Experience
-            </div>
-            <div
-              className={`${styles.sectionButtons} p-3`}
-              type="button"
-              onClick={manageCurrentPage}
-            >
-              Education
-            </div>
-          </div>
-        </div>
-      </header>
-      <main className="mt-5">{page}</main>
+      <ul class={`nav justify-content-center ${styles.navBar}`}>
+        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
+          <a class="nav-link active" aria-current="page" href="#">
+            About
+          </a>
+        </li>
+        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
+          <a class={`nav-link active ${styles.li}`} href="#">
+            Skills
+          </a>
+        </li>
+        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
+          <a class="nav-link active" aria-current="page" href="#">
+            {" "}
+            Ability Differences{" "}
+          </a>
+        </li>
+        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
+          <a class="nav-link active" aria-current="page" href="#">
+            {" "}
+            Experience{" "}
+          </a>
+        </li>
+        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
+          <a class="nav-link active" aria-current="page" href="#">
+            {" "}
+            Education
+          </a>
+        </li>
+      </ul>
+      <div className="centered">Banner with Profile Photo</div>
+      {/* <div className="centered">
+        <div onClick={manageCurrentPage}>About</div>
+        <div onClick={manageCurrentPage}>Skills</div>
+        <div onClick={manageCurrentPage}>Ability Differences</div>
+        <div onClick={manageCurrentPage}>Experience</div>
+        <div onClick={manageCurrentPage}>Education</div>
+      </div> */}
+      {page}
     </>
   );
 };
