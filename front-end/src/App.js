@@ -23,20 +23,25 @@ function App() {
 // <<<<<<< HEAD
 // =======
   const [userType, setUserType] = useState("employer");
+// =======
+
+  const [userDetails, setUserDetails] = useState("jobSeeker");
+// >>>>>>> 03a256ad0a9a79695cd76080291f36b0ef281022
   const [searchInput, setSearchInput] = useState("");
   const [isSearch, setIsSearch] = useState(false);
-// >>>>>>> bd5805545e6778494e1906c2b4de9ab561bcee74
+  const [selectedJobPost, setSelectedJobPost] = useState({});
+  console.log(selectedJobPost);
 
   // ===================
   // Conditional Renders
   //====================
   // Render the landing page depending on what type of user is logged in
   function displayLandingPage() {
-    switch (userType) {
+    switch (userDetails.type) {
       case "jobSeeker":
         return (
           <JobSeekerLanding
-            userType={userType}
+            userType={userDetails.type}
             setSearchInput={setSearchInput}
             setIsSearch={setIsSearch}
             searchInput={searchInput}
@@ -45,7 +50,7 @@ function App() {
       case "employer":
         return (
           <EmployerLanding
-            userType={userType}
+            userType={userDetails.type}
             setSearchInput={setSearchInput}
             setIsSearch={setIsSearch}
             searchInput={searchInput}
@@ -59,7 +64,7 @@ function App() {
 
   // Render the profile page depending on what type of user is logged in
   function displayProfilePage() {
-    switch (userType) {
+    switch (userDetails.type) {
       case "jobSeeker":
         return <JobSeekerProfile />;
       case "employer":
@@ -72,9 +77,9 @@ function App() {
 
   // Render the profile form page depending on what type of user is logged in
   function displayProfileFormPage() {
-    if (userType === "jobSeeker") {
+    if (userDetails.type === "jobSeeker") {
       return <JobSeekerProfileForm />;
-    } else if (userType === "employer") {
+    } else if (userDetails.type === "employer") {
       return <EmployerProfileForm />;
     }
   }
@@ -86,7 +91,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <UserContext.Provider value={{ userType }}>
+      <UserContext.Provider value={{ userDetails, setUserDetails }}>
         <Routes>
           <Route path="/" element={landingPage} />
           <Route path="/login" element={<Login />} />
@@ -100,12 +105,16 @@ function App() {
                 setSearchInput={setSearchInput}
                 isSearch={isSearch}
                 setIsSearch={setIsSearch}
+                setSelectedJobPost={setSelectedJobPost}
               />
             }
           />
           <Route path="/profile" element={profilePage} />
           <Route path="/profile-form" element={profileFormPage} />
-          <Route path="/job-post-details" element={<JobPostDetails />} />
+          <Route
+            path="/job-post-details"
+            element={<JobPostDetails selectedJobPost={selectedJobPost} />}
+          />
           <Route path="/job-post-form" element={<JobPostForm />} />
         </Routes>
       </UserContext.Provider>

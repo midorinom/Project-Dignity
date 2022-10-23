@@ -4,9 +4,8 @@
   border-color: transparent !important;
 }
 
-/* .btn:active,
-.btn:target {
+.btn.active {
   background-color: #fb8500 !important;
   color: rgb(108, 117, 125) !important;
-  border-color: transparent;
-} */
+  border-color: transparent !important;
+}
