@@ -150,7 +150,7 @@ const JobSeekerProfileFormAbout = (props) => {
           <div className="col-md-1"></div>
           {/* <------------------------ side panel ------------------------> */}
           <div className="col-md-3">
-            <div className=" sidePanel row mt-5">
+            <div className=" sidePanel sticky-top row mt-5">
               <button
                 type="submit"
                 className={`${styles.side_buttons} mt-3 mb-4 p-3`}
