@@ -100,4 +100,5 @@ color: #0085FF;
   .li :active{
     color: #FFFFFF;
     background-color: #011036;
+    transition: 0.5s;
   }
