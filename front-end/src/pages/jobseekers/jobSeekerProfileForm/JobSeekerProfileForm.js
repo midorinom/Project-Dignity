@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./jobSeekerProfileFormHeader.module.css";
 import JobSeekerProfileFormAbout from "./JobSeekerProfileFormAbout";
 import JobSeekerProfileFormSkills from "./JobSeekerProfileFormSkills";
@@ -13,7 +13,14 @@ const JobSeekerProfileForm = () => {
   const [abilityDifferencesSchema, setAbilityDifferencesSchema] = useState();
   const [experienceSchema, setExperienceSchema] = useState();
   const [educationSchema, setEducationSchema] = useState();
-  // const [profile, setProfile] = useState()
+  const [toSaveProfile, setToSaveProfile] = useState(false);
+  const [profile, setProfile] = useState({
+    about: "",
+    skills: "",
+    abilityDifferences: "",
+    experience: "",
+    education: "",
+  });
 
   // Render the current page
   function manageCurrentPage(e) {
@@ -55,17 +62,42 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormEducation
             setEducationSchema={setEducationSchema}
+            setToSaveProfile={setToSaveProfile}
           />
         );
     }
   }
   const page = displayCurrentPage();
 
-  console.log(aboutSchema);
-  console.log(skillsSchema);
-  console.log(abilityDifferencesSchema);
-  console.log(experienceSchema);
-  console.log(educationSchema);
+  // console.log(aboutSchema);
+  // console.log(skillsSchema);
+  // console.log(abilityDifferencesSchema);
+  // console.log(experienceSchema);
+  // console.log(educationSchema);
+
+  useEffect(() => {
+    const saveProfile = () => {
+      if (
+        aboutSchema &&
+        skillsSchema &&
+        abilityDifferencesSchema &&
+        experienceSchema &&
+        educationSchema &&
+        toSaveProfile
+      ) {
+        setProfile({
+          about: aboutSchema,
+          skills: skillsSchema,
+          abilityDifferences: abilityDifferencesSchema,
+          experience: experienceSchema,
+          education: educationSchema,
+        });
+      }
+    };
+    saveProfile();
+  }, [toSaveProfile]);
+
+  console.log(profile);
 
   return (
     <>
