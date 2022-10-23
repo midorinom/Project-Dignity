@@ -33,15 +33,17 @@ const AbilityDifference = (props) => {
     if (firstRenderDone) {
       if (abilityDiffFilters.length > 0) {
         props.setFilter((prevState) => {
-          return {
+          return [
             ...prevState,
-            "jobPost.accessibility.abilityDiff": {
-              $all: abilityDiffFilters,
+            {
+              "jobPost.accessibility.abilityDiff": {
+                $all: abilityDiffFilters,
+              },
             },
-          };
+          ];
         });
       } else {
-        props.setFilter({});
+        props.setFilter([]);
       }
     }
   }, [abilityDiffFilters]);
