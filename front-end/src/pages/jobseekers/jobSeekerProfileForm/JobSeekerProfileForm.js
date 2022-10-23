@@ -4,7 +4,7 @@ import JobSeekerProfileFormSkills from "./JobSeekerProfileFormSkills";
 import JobSeekerProfileFormAbilityDiff from "./JobSeekerProfileFormAbilityDiff";
 import JobSeekerProfileFormExperience from "./JobSeekerProfileFormExperience";
 import JobSeekerProfileFormEducation from "./JobSeekerProfileFormEducation";
-import EmployerProfileForm from "../../employers/employerProfileForm/EmployerProfileForm";
+import styles from "./jobSeekerProfileForm.module.css";
 
 const JobSeekerProfileForm = () => {
   const [currentPage, setCurrentPage] = useState("About");
@@ -69,14 +69,31 @@ const JobSeekerProfileForm = () => {
 
   return (
     <>
+     <ul class={`nav justify-content-center ${styles.navBar}`}>
+        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
+          <a class="nav-link active" aria-current="page" href="#">About</a>
+        </li>
+        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
+          <a class={`nav-link active ${styles.li}`} href="#">Skills</a>
+        </li>
+        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
+          <a class="nav-link active" aria-current="page" href="#"> Ability Differences </a>
+        </li>
+        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
+          <a class="nav-link active" aria-current="page" href="#"> Experience </a>
+        </li>
+        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
+          <a class="nav-link active" aria-current="page" href="#"> Education</a>
+        </li>
+      </ul>
       <div className="centered">Banner with Profile Photo</div>
-      <div className="centered">
+      {/* <div className="centered">
         <div onClick={manageCurrentPage}>About</div>
         <div onClick={manageCurrentPage}>Skills</div>
         <div onClick={manageCurrentPage}>Ability Differences</div>
         <div onClick={manageCurrentPage}>Experience</div>
         <div onClick={manageCurrentPage}>Education</div>
-      </div>
+      </div> */}
       {page}
     </>
   );
