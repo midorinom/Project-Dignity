@@ -1,7 +1,10 @@
 import React from "react";
 import styles from "./jobPostForm.module.css";
 
-const JobAbout = () => {
+const JobAbout = (props) => {
+  function goToAccessibility() {
+    props.setCurrentPage("Accessibilty Considerations");
+  }
   return (
     <>
       {/* =====================================================
@@ -183,7 +186,7 @@ const JobAbout = () => {
                 <p>200/200 characters left</p>
               </div>
               {/* ================================================================================================== */}
-              <button type="button" class="btn btn-dark mt-3">
+              <button type="button" class="btn btn-dark mt-3" onClick={goToAccessibility}>
                 Proceed to 'Accessibility Consideration Section'{" "}
               </button>   
         </form>
