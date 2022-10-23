@@ -32,18 +32,13 @@ const JobListings = (props) => {
   // ===========================
   // useEffect onMount gets the initial job posts data.
   useEffect(() => {
-    // if (userContext.userType !== "jobSeeker") {
-    //   getAllJobPosts();
-    // } else {
-    //   getFilteredJobPosts();
-    // }
     // If the user navigated to this page from a search
     if (props.isSearch) {
       props.setIsSearch(false);
-      getSearchedJobPosts(props.searchInput);
+      getFilteredJobPosts(props.searchInput);
     } else {
       // If the user navigated to this page normally, not from a search
-      getAllJobPosts();
+      getAllJobPosts(setJobPosts);
     }
     // Cleanup function resets the searchInput when the user leaves the JobListings page
     return () => {
@@ -54,10 +49,8 @@ const JobListings = (props) => {
   // ===============
   // Fetch Functions
   // ===============
-  const getAllJobPosts = async () => {
+  const getAllJobPosts = async (setJobPosts) => {
     try {
-      props.setIsSearch(false);
-
       const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -69,12 +62,11 @@ const JobListings = (props) => {
     }
   };
 
-  // getSearched
-  const getSearchedJobPosts = async (search) => {
+  const getFilteredJobPosts = async (searchInput) => {
     try {
-      const res = await fetch("http://127.0.0.1:5001/api/jobposts/search", {
+      const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
         method: "POST",
-        body: JSON.stringify({ search: search }),
+        body: JSON.stringify({ search: searchInput, ...filter }),
         headers: { "content-type": "application/json" },
       });
       const fetchedJobPosts = await res.json();
@@ -83,6 +75,15 @@ const JobListings = (props) => {
       console.log(err);
     }
   };
+
+  // =========================================================
+  // useEffect to fetch Filtered Jobs whenever filters are set
+  // =========================================================
+  useEffect(() => {
+    if (firstRenderDone) {
+      getFilteredJobPosts(props.searchInput);
+    }
+  }, [filter]);
 
   // ==================================================
   // useEffect to map Cards after jobPosts has been set
@@ -109,30 +110,6 @@ const JobListings = (props) => {
     setJobCards(mappedJobCards);
   }
 
-  // =========================================================
-  // useEffect to fetch Filtered Jobs whenever filters are set
-  // =========================================================
-  useEffect(() => {
-    if (firstRenderDone) {
-      getFilteredJobPosts();
-    }
-  }, [filter]);
-
-  const getFilteredJobPosts = async () => {
-    try {
-      console.log(filter);
-      const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
-        method: "POST",
-        body: JSON.stringify(filter),
-        headers: { "content-type": "application/json" },
-      });
-      const fetchedJobPosts = await res.json();
-      setJobPosts(fetchedJobPosts);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   // ======
   // Return
   // ======
@@ -144,11 +121,14 @@ const JobListings = (props) => {
         searchInput={props.searchInput}
         isJobListings={true}
         setJobPosts={setJobPosts}
+        setFilter={setFilter}
+        getAllJobPosts={getAllJobPosts}
+        getFilteredJobPosts={getFilteredJobPosts}
       />
       <p className="px-4 text-muted font-weight-light font-italic">
         Main Page &gt; What would you like to do today? &gt; Job Listing
       </p>
-      <h1 className="text-left w-50 mx-4 mt-4">Dignity Career</h1>
+      <h1 className="text-left w-50 mx-4 mt-4">Dignity Careers</h1>
       {userContext.userType === "jobSeeker" && jobPosts.length > 0 && (
         <div className="d-flex justify-content-end mx-4">
           <p className="text-center text-light bg-dark w-25 my-0">
