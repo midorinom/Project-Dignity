@@ -8,7 +8,11 @@ const JobSeekerProfileFormEducation = (props) => {
 
   const navigate = useNavigate();
   function goToProfile() {
-    navigate("/profile");
+    if (!props.sectionSaved) {
+      alert("Please save before proceeding to the next section");
+    } else {
+      navigate("/profile");
+    }
   }
 
   // adding react-hook-forms functionality
@@ -228,7 +232,10 @@ const JobSeekerProfileFormEducation = (props) => {
             <div className=" sidePanel sticky-top row mt-5">
               <button
                 className={`${styles.side_buttons} mt-3 mb-4 p-3`}
-                onClick={() => props.setToSaveProfile(true)}
+                onClick={() => {
+                  props.setToSaveProfile(true);
+                  props.setSectionSaved(true);
+                }}
               >
                 Save Changes
               </button>

@@ -6,7 +6,11 @@ const JobSeekerProfileFormAbout = (props) => {
   const [characterCount, setCharacterCount] = useState(0);
 
   function goToSkills() {
-    props.setCurrentPage("Skills");
+    if (!props.sectionSaved) {
+      alert("Please save before proceeding to the next section");
+    } else {
+      props.setCurrentPage("Skills");
+    }
   }
 
   // adding react-hook-forms functionality
@@ -154,6 +158,9 @@ const JobSeekerProfileFormAbout = (props) => {
               <button
                 type="submit"
                 className={`${styles.side_buttons} mt-3 mb-4 p-3`}
+                onClick={() => {
+                  props.setSectionSaved(true);
+                }}
               >
                 Save Changes
               </button>
