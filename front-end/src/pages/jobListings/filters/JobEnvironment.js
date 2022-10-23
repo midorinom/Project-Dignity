@@ -16,7 +16,8 @@ const JobEnvironment = () => {
           min="0"
           max="4"
           step="1"
-          id="noise"
+          id="noiseMin"
+          defaultValue="0"
         ></input>
         <p className="w-25 text-center">Loud</p>
       </div>
@@ -29,7 +30,8 @@ const JobEnvironment = () => {
           min="0"
           max="4"
           step="1"
-          id="noise"
+          id="noiseMax"
+          defaultValue="4"
         ></input>
         <p className="w-25 text-center">Loud</p>
       </div>
@@ -45,7 +47,8 @@ const JobEnvironment = () => {
           min="0"
           max="4"
           step="1"
-          id="light"
+          id="lightMin"
+          defaultValue="0"
         ></input>
         <p className="w-25 text-center">Bright, Flashing</p>
       </div>
@@ -58,7 +61,8 @@ const JobEnvironment = () => {
           min="0"
           max="4"
           step="1"
-          id="light"
+          id="lightMax"
+          defaultValue="4"
         ></input>
         <p className="w-25 text-center">Bright, Flashing</p>
       </div>
