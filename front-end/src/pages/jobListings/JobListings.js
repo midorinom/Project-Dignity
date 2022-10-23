@@ -17,10 +17,10 @@ const JobListings = (props) => {
   const [filter, setFilter] = useState({
     abilityDiff: [],
     environment: {
-      noiseMin: 0,
-      noiseMax: 4,
-      lightMin: 0,
-      lightMax: 4,
+      minNoise: 0,
+      maxNoise: 4,
+      minLight: 0,
+      maxLight: 4,
     },
     customerFacing: undefined,
     support: [],
