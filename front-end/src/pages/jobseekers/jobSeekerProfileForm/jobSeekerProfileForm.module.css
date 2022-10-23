@@ -73,4 +73,5 @@ small {
 .li :active{
   color: #FFFFFF;
   background-color: #011036;
+  transition: 0.5s;
 }
