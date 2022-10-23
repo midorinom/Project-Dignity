@@ -12,6 +12,7 @@ const JobListings = (props) => {
   // Variables
   // =========
   const userContext = useContext(UserContext);
+  const [firstRenderDone, setFirstRenderDone] = useState(false);
   const [jobPosts, setJobPosts] = useState([]);
   const [jobCards, setJobCards] = useState(undefined);
   const [filter, setFilter] = useState({
@@ -44,7 +45,6 @@ const JobListings = (props) => {
       // If the user navigated to this page normally, not from a search
       getAllJobPosts();
     }
-
     // Cleanup function resets the searchInput when the user leaves the JobListings page
     return () => {
       props.setSearchInput("");
@@ -91,6 +91,9 @@ const JobListings = (props) => {
     if (jobPosts !== undefined) {
       mapCards();
     }
+    if (!firstRenderDone) {
+      setFirstRenderDone(true);
+    }
   }, [jobPosts]);
 
   function mapCards() {
@@ -110,7 +113,7 @@ const JobListings = (props) => {
   // useEffect to fetch Filtered Jobs whenever filters are set
   // =========================================================
   useEffect(() => {
-    if (jobPosts.length > 0) {
+    if (firstRenderDone) {
       getFilteredJobPosts();
     }
   }, [filter]);
