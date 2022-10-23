@@ -17,12 +17,13 @@ const Search = (props) => {
       navigate("/job-listings");
     } else {
       // If the search came from within the JobListings page
-     props.getFilteredJobPosts(inputRef.current.value)
+      props.getFilteredJobPosts(inputRef.current.value);
     }
   }
 
   // Only available in Job Listings page. Resets the input field and re-fetches with getAll
   function resetSearch(e) {
+    window.location.reload();
     props.setSearchInput("");
     props.getAllJobPosts(props.setJobPosts);
     props.setFilter({
