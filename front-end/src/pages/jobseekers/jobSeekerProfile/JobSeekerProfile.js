@@ -32,7 +32,7 @@ const JobSeekerProfile = () => {
     getProfileData();
   }, []);
 
-  const getProfileData = async (req, res) => {
+  const getProfileData = async () => {
     try {
       const hardCodedId = "6352b602869782ec9b076cf3";
 
@@ -42,7 +42,7 @@ const JobSeekerProfile = () => {
         body: JSON.stringify({ id: hardCodedId }),
       });
       const fetchedProfileData = await res.json();
-      setProfileData(fetchedProfileData.profile);
+      setProfileData(fetchedProfileData);
     } catch (err) {
       console.log(err);
     }

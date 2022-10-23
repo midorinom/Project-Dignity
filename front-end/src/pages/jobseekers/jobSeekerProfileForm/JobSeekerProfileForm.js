@@ -69,21 +69,34 @@ const JobSeekerProfileForm = () => {
 
   return (
     <>
-     <ul class={`nav justify-content-center ${styles.navBar}`}>
+      <ul class={`nav justify-content-center ${styles.navBar}`}>
         <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
-          <a class="nav-link active" aria-current="page" href="#">About</a>
+          <a class="nav-link active" aria-current="page" href="#">
+            About
+          </a>
         </li>
         <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
-          <a class={`nav-link active ${styles.li}`} href="#">Skills</a>
+          <a class={`nav-link active ${styles.li}`} href="#">
+            Skills
+          </a>
         </li>
         <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
-          <a class="nav-link active" aria-current="page" href="#"> Ability Differences </a>
+          <a class="nav-link active" aria-current="page" href="#">
+            {" "}
+            Ability Differences{" "}
+          </a>
         </li>
         <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
-          <a class="nav-link active" aria-current="page" href="#"> Experience </a>
+          <a class="nav-link active" aria-current="page" href="#">
+            {" "}
+            Experience{" "}
+          </a>
         </li>
         <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
-          <a class="nav-link active" aria-current="page" href="#"> Education</a>
+          <a class="nav-link active" aria-current="page" href="#">
+            {" "}
+            Education
+          </a>
         </li>
       </ul>
       <div className="centered">Banner with Profile Photo</div>
