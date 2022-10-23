@@ -1,1 +1,92 @@
+.bottom_button {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  background-color: #011036;
+  border-radius: 5px;
+  color: white;
+  margin-left: 430px;
+  font-weight: 600;
+  width: 314px;
+  height: 60px;
+}
 
+.sideButtonsContainer {
+    width:400px;
+    padding:20px;
+    margin:40px 90px 40px 0px;
+}
+
+.sideButtons{
+    /* width:200px;
+    padding:12px 16px;
+    margin:10px; */
+    background-color: transparent;
+    border: 2px solid #fb8500;
+    opacity: 0.7;
+    border-radius: 5px;
+    margin-left: 12px;
+    width: 276px;
+    font-weight: 600;
+}
+.sideButtons:hover {
+    background-color: #fb8500;
+    color: white;
+    transition: 0.5s;
+  }
+
+  .progressBar{
+    margin: 30px;
+  }
+.form{
+margin: 40px;
+}
+
+.link{
+text-decoration: underline;
+color: #0085FF;
+}
+
+.bold{
+    font-weight: bold;
+    color:#5A5959 
+}
+
+.orange{
+    font-weight: bold;
+    color:#FB8500;
+}
+
+.range{
+    display: flex;
+    padding:10px;
+}
+
+.bar{
+    width:600px;
+}
+
+.circle_btn {
+    height: 35px;
+    width: 35px;
+    margin-left: 325px;
+    margin-top:10px;
+    background-color: transparent;
+    border: solid 1px #011036;
+    border-radius: 50%;
+  }
+  
+  .circle_btn:hover {
+    border: solid 3px #011036;
+  }
+  
+  .label{
+    margin-left:270px;
+  }
+
+  .input{
+    height:100px;
+  }
