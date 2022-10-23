@@ -6,6 +6,7 @@ import styles from "./jobSeekerProfileForm.module.css";
 const JobSeekerProfileFormEducation = (props) => {
   const [characterCount, setCharacterCount] = useState(0);
 
+  // when complete profile button is clicked
   const navigate = useNavigate();
   function goToProfile() {
     if (!props.sectionSaved) {
@@ -13,6 +14,12 @@ const JobSeekerProfileFormEducation = (props) => {
     } else {
       navigate("/profile");
     }
+  }
+
+  // when cancel button is clicked
+  function goToJobSeekerLanding() {
+    navigate("/job-seekers");
+    alert("Your data are not saved");
   }
 
   // adding react-hook-forms functionality
@@ -239,7 +246,10 @@ const JobSeekerProfileFormEducation = (props) => {
               >
                 Save Changes
               </button>
-              <button className={`${styles.side_buttons} mb-4 p-3`}>
+              <button
+                className={`${styles.side_buttons} mb-4 p-3`}
+                onClick={goToJobSeekerLanding}
+              >
                 Cancel
               </button>
               {/* <--------------------- progress bar ---------------------> */}
