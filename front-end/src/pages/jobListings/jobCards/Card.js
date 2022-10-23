@@ -10,39 +10,41 @@ import intellectualIcon from "../filters/abilityDifference/icons/intellectual.pn
 import physicalIcon from "../filters/abilityDifference/icons/physical.png";
 
 const Card = (props) => {
+  // Sort AbilityDifferences in Alphabetical Order
+  const abilityDiff = props.jobPost.accessibility.abilityDiff;
+  abilityDiff.sort();
+
   // Map AbilityDifferencesIcons
-  const abilityDifferencesIcons = props.jobPost.accessibility.abilityDiff.map(
-    (element) => {
-      let iconImage = "";
+  const abilityDifferencesIcons = abilityDiff.map((element) => {
+    let iconImage = "";
 
-      switch (element) {
-        case "Autism":
-          iconImage = autismIcon;
-          break;
-        case "Hearing":
-          iconImage = hearingIcon;
-          break;
-        case "Intellectual":
-          iconImage = intellectualIcon;
-          break;
-        case "Physical":
-          iconImage = physicalIcon;
-          break;
-        case "Visual":
-          iconImage = visualIcon;
-          break;
-      }
-
-      return (
-        <img
-          src={iconImage}
-          alt={iconImage}
-          className="mx-1"
-          key={Math.random()}
-        />
-      );
+    switch (element) {
+      case "Autism":
+        iconImage = autismIcon;
+        break;
+      case "Hearing":
+        iconImage = hearingIcon;
+        break;
+      case "Intellectual":
+        iconImage = intellectualIcon;
+        break;
+      case "Physical":
+        iconImage = physicalIcon;
+        break;
+      case "Visual":
+        iconImage = visualIcon;
+        break;
     }
-  );
+
+    return (
+      <img
+        src={iconImage}
+        alt={iconImage}
+        className="mx-1"
+        key={Math.random()}
+      />
+    );
+  });
 
   return (
     <div className="container mb-3 mx-0 px-0">
@@ -82,7 +84,7 @@ const Card = (props) => {
             />
           </div>
         </div>
-        <div className="col-3 border-start mt-3 d-flex flex-column">
+        <div className="col-3 border-start d-flex flex-column justify-content-center gap-2">
           <p className="text-secondary text-center mb-1">Suited For</p>
           <div className="d-flex justify-content-center h-25">
             {abilityDifferencesIcons}

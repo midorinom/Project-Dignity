@@ -14,6 +14,7 @@ const JobListings = (props) => {
   const userContext = useContext(UserContext);
   const [jobPosts, setJobPosts] = useState([]);
   const [jobCards, setJobCards] = useState(undefined);
+  const [filter, setFilter] = useState([]);
 
   // ===========================
   // useEffect for Initial Fetch
@@ -40,7 +41,7 @@ const JobListings = (props) => {
     };
   }, []);
 
-  // =============
+  // ===============
   // Fetch Functions
   // ===============
   const getAllJobPosts = async () => {
@@ -49,21 +50,6 @@ const JobListings = (props) => {
 
       const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
         method: "POST",
-        headers: { "content-type": "application/json" },
-      });
-      const fetchedJobPosts = await res.json();
-      setJobPosts(fetchedJobPosts);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  //  ============================== TO BE DONE =============================== //
-  const getFilteredJobPosts = async (filters) => {
-    try {
-      const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
-        method: "POST",
-        body: JSON.stringify(filters),
         headers: { "content-type": "application/json" },
       });
       const fetchedJobPosts = await res.json();
@@ -104,6 +90,36 @@ const JobListings = (props) => {
     setJobCards(mappedJobCards);
   }
 
+  // =========================================================
+  // useEffect to fetch Filtered Jobs whenever filters are set
+  // =========================================================
+  useEffect(() => {
+    console.log("filter", filter);
+    if (jobPosts.length > 0) {
+      getFilteredJobPosts(filter);
+    }
+  }, [filter]);
+
+  const getFilteredJobPosts = async (filters) => {
+    try {
+      let body = {};
+
+      if (filters.length > 0) {
+        body = JSON.stringify({ $and: filters });
+      }
+
+      const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
+        method: "POST",
+        body: body,
+        headers: { "content-type": "application/json" },
+      });
+      const fetchedJobPosts = await res.json();
+      setJobPosts(fetchedJobPosts);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   // ======
   // Return
   // ======
@@ -129,10 +145,10 @@ const JobListings = (props) => {
       )}
       <div className="results d-flex">
         <div className="filters w-25 px-4 mb-4">
-          <AbilityDifference />
-          <JobEnvironment />
-          <JobInteractionType />
-          <SupportProvided />
+          <AbilityDifference setFilter={setFilter} />
+          <JobEnvironment setFilter={setFilter} />
+          <JobInteractionType setFilter={setFilter} />
+          <SupportProvided setFilter={setFilter} />
         </div>
         <div className="postings w-75 px-4 mb-4">{jobCards}</div>
       </div>
