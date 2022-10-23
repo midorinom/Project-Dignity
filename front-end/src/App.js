@@ -24,6 +24,7 @@ function App() {
   const [userType, setUserType] = useState("jobSeeker");
   const [searchInput, setSearchInput] = useState("");
   const [isSearch, setIsSearch] = useState(false);
+  const [selectedJobPost, setSelectedJobPost] = useState({});
 
   // ===================
   // Conditional Renders
@@ -98,6 +99,7 @@ function App() {
                 setSearchInput={setSearchInput}
                 isSearch={isSearch}
                 setIsSearch={setIsSearch}
+                setSelectedJobPost={setSelectedJobPost}
               />
             }
           />

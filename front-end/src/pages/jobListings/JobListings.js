@@ -85,7 +85,13 @@ const JobListings = (props) => {
 
   function mapCards() {
     const mappedJobCards = jobPosts.map((element) => {
-      return <Card jobPost={element.jobPost} key={Math.random()} />;
+      return (
+        <Card
+          jobPost={element.jobPost}
+          key={Math.random()}
+          setSelectedJobPost={props.setSelectedJobPost}
+        />
+      );
     });
     setJobCards(mappedJobCards);
   }
