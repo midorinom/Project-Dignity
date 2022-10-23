@@ -17,19 +17,12 @@ const JobInteractionType = (props) => {
     }
   }
 
-  // useEffect tp lift state up to parent component after abilityDiffFilters is set
+  // useEffect to lift state up to parent component after interactionFilter is set
   useEffect(() => {
     if (firstRenderDone) {
-      if (interactionFilter !== undefined) {
-        props.setFilter((prevState) => {
-          return [
-            ...prevState,
-            { "jobPost.about.customerFacing": interactionFilter },
-          ];
-        });
-      } else {
-        props.setFilter([]);
-      }
+      props.setFilter((prevState) => {
+        return { ...prevState, customerFacing: interactionFilter };
+      });
     }
   }, [interactionFilter]);
 
