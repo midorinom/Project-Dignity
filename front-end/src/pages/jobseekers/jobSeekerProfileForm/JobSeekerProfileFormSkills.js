@@ -36,8 +36,8 @@ const JobSeekerProfileFormSkills = (props) => {
   });
 
   const onSubmit = (data) => {
-    props.setSkillsSchema(data);
-    console.log("data: ", data);
+    props.setSkillsSchema(data.skillSet);
+    console.log("data: ", data.skillSet);
     console.log(data.skillSet[0].skill);
   };
 

@@ -38,8 +38,8 @@ const JobSeekerProfileFormEducation = (props) => {
   });
 
   const onSubmit = (data) => {
-    props.setEducationSchema(data);
-    console.log("data: ", data);
+    props.setEducationSchema(data.educationSet);
+    console.log("data: ", data.educationSet);
     console.log(data.educationSet[0].school);
   };
 
@@ -226,7 +226,10 @@ const JobSeekerProfileFormEducation = (props) => {
           {/* <------------------------ side panel ------------------------> */}
           <div className="col-md-3">
             <div className=" sidePanel row mt-5">
-              <button className={`${styles.side_buttons} mt-3 mb-4 p-3`}>
+              <button
+                className={`${styles.side_buttons} mt-3 mb-4 p-3`}
+                onClick={() => props.setToSaveProfile(true)}
+              >
                 Save Changes
               </button>
               <button className={`${styles.side_buttons} mb-4 p-3`}>

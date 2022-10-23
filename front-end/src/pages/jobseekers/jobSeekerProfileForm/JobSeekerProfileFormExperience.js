@@ -36,8 +36,8 @@ const JobSeekerProfileFormExperience = (props) => {
   });
 
   const onSubmit = (data) => {
-    props.setExperienceSchema(data);
-    console.log("data: ", data);
+    props.setExperienceSchema(data.experienceSet);
+    console.log("data: ", data.experienceSet);
     console.log(data.experienceSet[0].title);
   };
 
