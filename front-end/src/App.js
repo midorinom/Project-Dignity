@@ -20,11 +20,17 @@ function App() {
   // Variables
   // =========
   // Change this userType initial value to jobSeeker/employer if you need to access those landing/profile/profileForm pages
+// <<<<<<< HEAD
+// =======
+  const [userType, setUserType] = useState("employer");
+// =======
 
   const [userDetails, setUserDetails] = useState("jobSeeker");
+// >>>>>>> 03a256ad0a9a79695cd76080291f36b0ef281022
   const [searchInput, setSearchInput] = useState("");
   const [isSearch, setIsSearch] = useState(false);
   const [selectedJobPost, setSelectedJobPost] = useState({});
+  console.log(selectedJobPost);
 
   // ===================
   // Conditional Renders
@@ -105,7 +111,10 @@ function App() {
           />
           <Route path="/profile" element={profilePage} />
           <Route path="/profile-form" element={profileFormPage} />
-          <Route path="/job-post-details" element={<JobPostDetails />} />
+          <Route
+            path="/job-post-details"
+            element={<JobPostDetails selectedJobPost={selectedJobPost} />}
+          />
           <Route path="/job-post-form" element={<JobPostForm />} />
         </Routes>
       </UserContext.Provider>
