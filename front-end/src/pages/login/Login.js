@@ -21,7 +21,7 @@ const Login = () => {
               className="link-primary"
               onClick={handleScreenChange}
               id="Register"
-              href="#"
+              href="#login"
             >
               Register
             </a>
@@ -35,7 +35,7 @@ const Login = () => {
               className="link-primary"
               onClick={handleScreenChange}
               id="Login"
-              href="#"
+              href="#registration"
             >
               Login
             </a>
@@ -49,7 +49,7 @@ const Login = () => {
               className="link-primary"
               onClick={handleScreenChange}
               id="Login"
-              href="#"
+              href="#registration-success"
             >
               Login
             </a>
