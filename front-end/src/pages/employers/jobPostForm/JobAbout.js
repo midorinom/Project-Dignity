@@ -29,9 +29,10 @@ const JobAbout = () => {
                   <option class="default" selected>
                     Select from the drop down list
                   </option>
-                  <option class="quiet">Quiet</option>
-                  <option class="medium">Medium</option>
-                  <option class="noisy">Noisy</option>
+                  <option class="Full-Time">Full-Time</option>
+                  <option class="Part-Time">Part-Time</option>
+                  <option class="Internship">Internship</option>
+                  <option class="Mentorship">Mentorship</option>
                 </select>
               </div>
               {/* ================================================================================================== */}
