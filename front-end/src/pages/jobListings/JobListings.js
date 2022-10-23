@@ -13,9 +13,11 @@ const JobListings = (props) => {
   // =========
   const userContext = useContext(UserContext);
   const [firstRenderDone, setFirstRenderDone] = useState(false);
+  const [profile, setProfile] = useState({});
   const [jobPosts, setJobPosts] = useState([]);
   const [jobCards, setJobCards] = useState(undefined);
   const [filter, setFilter] = useState({
+    search: "",
     abilityDiff: [],
     environment: {
       minNoise: 0,
@@ -27,28 +29,48 @@ const JobListings = (props) => {
     support: [],
   });
 
-  // ===========================
-  // useEffect for Initial Fetch
-  // ===========================
-  // useEffect onMount gets the initial job posts data.
+  // =================
+  // onMount useEffect
+  // =================
   useEffect(() => {
-    // If the user navigated to this page from a search
-    if (props.isSearch) {
-      props.setIsSearch(false);
-      getFilteredJobPosts(props.searchInput);
+    // First check if the user is a job seeker. If so, fetch the user's profile data.
+    if (userContext.userType === "jobSeeker") {
+      getProfile();
     } else {
-      // If the user navigated to this page normally, not from a search
-      getAllJobPosts(setJobPosts);
+      // If the user navigated to this page from a search
+      if (props.isSearch) {
+        props.setIsSearch(false);
+        getFilteredJobPosts(props.searchInput);
+      } else {
+        // If the user navigated to this page normally, not from a search
+        getAllJobPosts(setJobPosts);
+      }
+      // Cleanup function resets the searchInput when the user leaves the JobListings page
+      return () => {
+        props.setSearchInput("");
+      };
     }
-    // Cleanup function resets the searchInput when the user leaves the JobListings page
-    return () => {
-      props.setSearchInput("");
-    };
   }, []);
 
   // ===============
   // Fetch Functions
   // ===============
+  const getProfile = async (req, res) => {
+    try {
+      const hardCodedId = "6352b602869782ec9b076cf3";
+
+      const res = await fetch("http://127.0.0.1:5001/api/jobseekers/get", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ id: hardCodedId }),
+      });
+      const fetchedProfileData = await res.json();
+      setProfile(fetchedProfileData.profile);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const getAllJobPosts = async (setJobPosts) => {
     try {
       const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
