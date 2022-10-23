@@ -8,6 +8,7 @@ import hearingIcon from "../filters/abilityDifference/icons/hearing.png";
 import autismIcon from "../filters/abilityDifference/icons/autism.png";
 import intellectualIcon from "../filters/abilityDifference/icons/intellectual.png";
 import physicalIcon from "../filters/abilityDifference/icons/physical.png";
+import { Link } from "react-router-dom";
 
 const Card = (props) => {
   // Sort AbilityDifferences in Alphabetical Order
@@ -15,9 +16,8 @@ const Card = (props) => {
   abilityDiff.sort();
 
   // Map AbilityDifferencesIcons
-  const abilityDifferencesIcons = abilityDiff.map((element) => {
+  const abilityDifferencesIcons = abilityDiff.map((element, id) => {
     let iconImage = "";
-
     switch (element) {
       case "Autism":
         iconImage = autismIcon;
@@ -35,25 +35,21 @@ const Card = (props) => {
         iconImage = visualIcon;
         break;
     }
-
-    return (
-      <img
-        src={iconImage}
-        alt={iconImage}
-        className="mx-1"
-        key={Math.random()}
-      />
-    );
+    return <img src={iconImage} alt={iconImage} className="mx-1" key={id} />;
   });
 
+  const handleJobDetails = async () => {
+    await props.setSelectedJobPost(props.jobPost);
+  };
+
   return (
-    <div className="container mb-3 mx-0 px-0">
+    <div className="container mb-3 mx-0 px-0" onClick={handleJobDetails}>
       <div className="row w-100 bg-light mx-0">
         <div className="col-1 d-flex flex-column align-items-center mt-3">
           <img src={save} alt="save icon" className="w-50" />
           <p className="text-secondary text-center">Save</p>
         </div>
-        <div className="col-4 mt-3">
+        <Link to="/job-post-details" className="col-4 mt-3">
           <p className="text-secondary">
             Job Title: {props.jobPost.about.title}
           </p>
@@ -63,8 +59,8 @@ const Card = (props) => {
           <p className="text-secondary mb-0">
             Job Type: {props.jobPost.about.type}
           </p>
-        </div>
-        <div className="col-4 mt-3 d-flex flex-column">
+        </Link>
+        <Link to="/job-post-details" className="col-4 mt-3 d-flex flex-column">
           <p className="text-secondary mb-1">Images of Workplace :</p>
           <div className="d-flex">
             <img
@@ -83,8 +79,11 @@ const Card = (props) => {
               className="w-25 h-75 mx-1"
             />
           </div>
-        </div>
-        <div className="col-3 border-start d-flex flex-column justify-content-center gap-2">
+        </Link>
+        <Link
+          to="/job-post-details"
+          className="col-3 border-start d-flex flex-column justify-content-center gap-2"
+        >
           <p className="text-secondary text-center mb-1">Suited For</p>
           <div className="d-flex justify-content-center h-25">
             {abilityDifferencesIcons}
@@ -92,7 +91,7 @@ const Card = (props) => {
           <p className="text-secondary text-center mb-0">
             {[...props.jobPost.accessibility.abilityDiff].join(", ")}
           </p>
-        </div>
+        </Link>
       </div>
     </div>
   );
