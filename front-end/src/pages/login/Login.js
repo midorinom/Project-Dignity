@@ -3,7 +3,7 @@ import LoginScreen from "./Screens/LoginScreen";
 import RegisterScreen from "./Screens/RegisterScreen";
 import SuccessfulRegistration from "./Screens/SuccessfulRegistration";
 
-const Login = () => {
+const Login = (props) => {
   const [screen, setScreen] = useState("Login");
   const handleScreenChange = (e) => {
     setScreen(e.target.id);

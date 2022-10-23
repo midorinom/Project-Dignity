@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import UserContext from "../../../context/userContext";
 
-const LoginScreen = () => {
+const LoginScreen = (props) => {
   const [user, setUser] = useState({});
+  const userCtx = useContext(UserContext);
 
   const handleUsername = (e) => {
     setUser({ ...user, username: e.target.value });
@@ -17,6 +19,9 @@ const LoginScreen = () => {
       alert("Missing username/password input");
     }
   };
+  const lifting = (obj) => {
+    props.lifting(obj);
+  };
   async function postLogin(
     url = "http://127.0.0.1:5001/api/users/login",
     data = user
@@ -29,16 +34,16 @@ const LoginScreen = () => {
       body: JSON.stringify(data),
     });
     const jResponse = await response.json();
-    if (jResponse.message) {
+    if (jResponse.message || !jResponse) {
       alert(`Invalid username/password: ${jResponse.message}`);
     } else {
       //user data received is set to user state, pending lift location after further discussion, might be good to useContext
-      setUser({ ...jResponse });
-      if (jResponse.type === "jobSeeker") {
-        window.location.href = "http://localhost:3000/job-seekers";
-      } else {
-        window.location.href = "http://localhost:3000/employers";
-      }
+      userCtx.setUserDetails({ ...jResponse });
+      //   if (jResponse.type === "jobSeeker") {
+      //     window.location.href = "http://localhost:3000/job-seekers";
+      //   } else {
+      //     window.location.href = "http://localhost:3000/employers";
+      //   }
     }
     return jResponse;
   }
