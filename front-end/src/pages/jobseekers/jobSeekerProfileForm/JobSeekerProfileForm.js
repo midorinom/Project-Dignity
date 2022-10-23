@@ -13,6 +13,7 @@ const JobSeekerProfileForm = () => {
   const [abilityDifferencesSchema, setAbilityDifferencesSchema] = useState();
   const [experienceSchema, setExperienceSchema] = useState();
   const [educationSchema, setEducationSchema] = useState();
+  const [sectionSaved, setSectionSaved] = useState(false);
   const [toSaveProfile, setToSaveProfile] = useState(false);
   const [profile, setProfile] = useState({
     about: "",
@@ -34,6 +35,8 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormAbout
             setCurrentPage={setCurrentPage}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
             setAboutSchema={setAboutSchema}
           />
         );
@@ -41,6 +44,8 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormSkills
             setCurrentPage={setCurrentPage}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
             setSkillsSchema={setSkillsSchema}
           />
         );
@@ -48,6 +53,8 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormAbilityDiff
             setCurrentPage={setCurrentPage}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
             setAbilityDifferencesSchema={setAbilityDifferencesSchema}
           />
         );
@@ -55,6 +62,8 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormExperience
             setCurrentPage={setCurrentPage}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
             setExperienceSchema={setExperienceSchema}
           />
         );
@@ -62,6 +71,8 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormEducation
             setEducationSchema={setEducationSchema}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
             setToSaveProfile={setToSaveProfile}
           />
         );

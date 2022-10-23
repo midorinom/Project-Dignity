@@ -174,6 +174,9 @@ const JobSeekerProfileFormSkills = (props) => {
               <button
                 type="submit"
                 className={`${styles.side_buttons} mt-3 mb-4 p-3`}
+                onClick={() => {
+                  props.setSectionSaved(true);
+                }}
               >
                 Save Changes
               </button>
