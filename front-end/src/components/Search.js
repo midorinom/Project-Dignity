@@ -25,7 +25,7 @@ const Search = (props) => {
   function resetSearch(e) {
     window.location.reload();
     props.setSearchInput("");
-    props.getAllJobPosts(props.setJobPosts);
+    props.getAllJobPosts(props.setJobPosts, "");
     props.setFilter({
       abilityDiff: [],
       environment: {
