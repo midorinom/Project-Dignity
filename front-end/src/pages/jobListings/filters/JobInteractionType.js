@@ -8,7 +8,7 @@ const JobInteractionType = (props) => {
     // must store e.currentTarget.value in a variable first
     const clickedInteraction = e.currentTarget.value;
 
-    // If the intereaction was clicked already
+    // If the interaction was clicked already
     if (interactionFilter === clickedInteraction) {
       setInteractionFilter(undefined);
     } else {
