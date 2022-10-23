@@ -28,23 +28,12 @@ const AbilityDifference = (props) => {
     }
   }
 
-  // useEffect tp lift state up to parent component after abilityDiffFilters is set
+  // useEffect to lift state up to parent component after abilityDiffFilters is set
   useEffect(() => {
     if (firstRenderDone) {
-      if (abilityDiffFilters.length > 0) {
-        props.setFilter((prevState) => {
-          return [
-            ...prevState,
-            {
-              "jobPost.accessibility.abilityDiff": {
-                $all: abilityDiffFilters,
-              },
-            },
-          ];
-        });
-      } else {
-        props.setFilter([]);
-      }
+      props.setFilter((prevState) => {
+        return { ...prevState, abilityDiff: abilityDiffFilters };
+      });
     }
   }, [abilityDiffFilters]);
 
