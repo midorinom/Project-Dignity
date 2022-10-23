@@ -13,6 +13,7 @@ const JobSeekerProfileForm = () => {
   const [abilityDifferencesSchema, setAbilityDifferencesSchema] = useState();
   const [experienceSchema, setExperienceSchema] = useState();
   const [educationSchema, setEducationSchema] = useState();
+  const [sectionSaved, setSectionSaved] = useState(false);
   const [toSaveProfile, setToSaveProfile] = useState(false);
   const [profile, setProfile] = useState({
     about: "",
@@ -34,6 +35,8 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormAbout
             setCurrentPage={setCurrentPage}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
             setAboutSchema={setAboutSchema}
           />
         );
@@ -41,6 +44,8 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormSkills
             setCurrentPage={setCurrentPage}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
             setSkillsSchema={setSkillsSchema}
           />
         );
@@ -48,6 +53,8 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormAbilityDiff
             setCurrentPage={setCurrentPage}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
             setAbilityDifferencesSchema={setAbilityDifferencesSchema}
           />
         );
@@ -55,6 +62,8 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormExperience
             setCurrentPage={setCurrentPage}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
             setExperienceSchema={setExperienceSchema}
           />
         );
@@ -62,6 +71,8 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormEducation
             setEducationSchema={setEducationSchema}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
             setToSaveProfile={setToSaveProfile}
           />
         );
@@ -110,9 +121,19 @@ const JobSeekerProfileForm = () => {
                 <embed />
               </div>
               <div className="col-md-8 p-4">
-                <h1 className=" mt-4 mb-3">{`This is my name`}</h1>
-                <p style={{ fontSize: "1.3em" }}>{`This is my aspiration`}</p>
-                <p>{`This is my personal brand statement`}</p>
+                <h1 className=" mt-4 mb-3">
+                  {aboutSchema?.name ? aboutSchema.name : `This is my name`}
+                </h1>
+                <p style={{ fontSize: "1.3em" }}>
+                  {aboutSchema?.aspiration
+                    ? aboutSchema.aspiration
+                    : `This is my aspiration`}
+                </p>
+                <p>
+                  {aboutSchema?.brand
+                    ? aboutSchema.brand
+                    : `This is my personal brand statement`}
+                </p>
               </div>
             </div>
           </div>
