@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./jobSeekerProfileForm.module.css";
 import physical from "../../jobListings/filters/abilityDifference/icons/physical.png";
@@ -8,6 +8,9 @@ import intellectual from "../../jobListings/filters/abilityDifference/icons/inte
 import autism from "../../jobListings/filters/abilityDifference/icons/autism.png";
 
 const JobSeekerProfileFormAbilityDiff = (props) => {
+  const [characterCount, setCharacterCount] = useState(0);
+  const [supportDescCharacterCount, setSupportDescCharacterCount] = useState(0);
+
   function goToExperience() {
     props.setCurrentPage("Experience");
   }
@@ -54,10 +57,9 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("diff", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
-                  // aria-invalid={errors.diff_phy ? "true" : "false"}
                 ></input>
                 <label
                   className="custom-control-label btn p-3"
@@ -79,7 +81,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("diff", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -103,7 +105,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("diff", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -127,7 +129,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("diff", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -155,7 +157,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("diff", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -203,12 +205,15 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 {...register("diffDesc", {
                   required: {
                     value: true,
-                    message: "please provide short description",
+                    message: "Please provide short description",
                   },
                   maxLength: 200,
+                  onChange: (e) => setCharacterCount(e.target.value.length),
                 })}
               ></textarea>
-              <small className="text-muted">200 / 200 characters left</small>
+              <small className="text-muted">{`${
+                200 - characterCount
+              } / 200 characters left`}</small>
               {errors.diffDesc && (
                 <p className="mt-2 text-danger">{errors.diffDesc.message}</p>
               )}
@@ -221,12 +226,12 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="training"
+                  value="structured"
                   id="training"
                   {...register("support", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -242,12 +247,12 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="shadow_by_coach"
+                  value="shadowing"
                   id="coach"
                   {...register("support", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -263,12 +268,12 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="workplace_redesign"
+                  value="redesign"
                   id="workplace"
                   {...register("support", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -284,12 +289,12 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="assistive_tech"
+                  value="assistive"
                   id="assist-tech"
                   {...register("support", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -305,12 +310,12 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="social_integration"
+                  value="social"
                   id="integration"
                   {...register("support", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -331,7 +336,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("support", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -363,12 +368,16 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 {...register("supportDesc", {
                   required: {
                     value: true,
-                    message: "please provide short description",
+                    message: "Please provide short description",
                   },
                   maxLength: 300,
+                  onChange: (e) =>
+                    setSupportDescCharacterCount(e.target.value.length),
                 })}
               ></textarea>
-              <small className="text-muted">300 / 300 characters left</small>
+              <small className="text-muted">{`${
+                300 - supportDescCharacterCount
+              } / 300 characters left`}</small>
               {errors.supportDesc && (
                 <p className="mt-2 text-danger">{errors.supportDesc.message}</p>
               )}
@@ -389,7 +398,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("comm", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -410,7 +419,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("comm", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -431,7 +440,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("comm", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -452,7 +461,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("comm", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -473,7 +482,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("comm", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -519,7 +528,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("aids", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -540,7 +549,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("aids", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -561,7 +570,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("aids", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -582,7 +591,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("aids", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -603,7 +612,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("aids", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -654,7 +663,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("travel", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -675,7 +684,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   {...register("travel", {
                     required: {
                       value: true,
-                      message: "please select at least one option",
+                      message: "Please select at least one option",
                     },
                   })}
                 ></input>
@@ -729,7 +738,6 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
         {/*<----------------------- proceed next btn ----------------------->*/}
         <div className="row justify-content-center m-5">
           <button
-            type="submit"
             onClick={goToExperience}
             className={`${styles.bottom_button} p-3`}
           >
