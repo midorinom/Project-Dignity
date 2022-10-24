@@ -128,7 +128,7 @@ const JobSeekerProfileFormEducation = (props) => {
                       className="form-control p-3"
                       id="start-date-edu"
                       name={`educationSet.${index}.startDate`}
-                      type="date"
+                      type="month"
                       {...register(`educationSet.${index}.startDate`)}
                     ></input>
                   </div>
@@ -141,7 +141,7 @@ const JobSeekerProfileFormEducation = (props) => {
                       className="form-control mb-2 p-3"
                       id="end-date-edu"
                       name={`educationSet.${index}.endDate`}
-                      type="date"
+                      type="month"
                       {...register(`educationSet.${index}.endDate`, {
                         required: {
                           value: true,
