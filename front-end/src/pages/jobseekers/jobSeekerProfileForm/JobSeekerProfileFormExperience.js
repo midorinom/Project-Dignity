@@ -158,7 +158,7 @@ const JobSeekerProfileFormExperience = (props) => {
                       className="form-control p-3"
                       id="start-date-job"
                       name={`experienceSet.${index}.startDate`}
-                      type="date"
+                      type="month"
                       {...register(`experienceSet.${index}.startDate`, {
                         required: {
                           value: true,
@@ -181,7 +181,7 @@ const JobSeekerProfileFormExperience = (props) => {
                       className="form-control mb-2 p-3"
                       id="end-date-job"
                       name={`experienceSet.${index}.endDate`}
-                      type="date"
+                      type="month"
                       {...register(`experienceSet.${index}.endDate`)}
                     ></input>
                     <div className="form-check">

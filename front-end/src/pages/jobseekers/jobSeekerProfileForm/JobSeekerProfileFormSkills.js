@@ -32,8 +32,6 @@ const JobSeekerProfileFormSkills = (props) => {
           cert: "",
           issuer: "",
           issueDate: "",
-          // issueMonth: "",
-          // issueYear: "",
         },
       ],
     },
@@ -142,7 +140,7 @@ const JobSeekerProfileFormSkills = (props) => {
                         className="form-control p-3"
                         id="issue-date-cert"
                         name={`skillSet.${index}.issueDate`}
-                        type="date"
+                        type="month"
                         {...register(`skillSet.${index}.issueDate`)}
                       ></input>
                     </div>
@@ -166,7 +164,6 @@ const JobSeekerProfileFormSkills = (props) => {
             <div className="form-group mb-4">
               <button
                 className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-plus-lg mt-3`}
-                // onClick={handleAddSkill}
                 onClick={() => append()}
                 id="add-new-skill"
               ></button>
