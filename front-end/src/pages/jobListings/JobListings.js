@@ -27,36 +27,106 @@ const JobListings = (props) => {
     customerFacing: undefined,
     support: [],
   });
+  const [initialFilter, setInitialFilter] = useState({});
 
   // =================
   // onMount useEffect
   // =================
   useEffect(() => {
     // First check if the user is a job seeker. If so, fetch the user's profile data.
-    if (userContext.userType === "jobSeeker") {
+    if (userContext.userDetails.type === "jobSeeker") {
       getProfile();
     } else {
+      // Get initial filter
+      const randomFilter = generateRandomFilter();
       // If the user navigated to this page from a search
       if (props.isSearch) {
         props.setIsSearch(false);
-        getFilteredJobPosts(props.searchInput);
+        getFilteredJobPosts(props.searchInput, randomFilter);
       } else {
-        // If the user navigated to this page normally, not from a search
-        getAllJobPosts(setJobPosts);
+        getAllJobPosts(randomFilter);
       }
-      // Cleanup function resets the searchInput when the user leaves the JobListings page
-      return () => {
-        props.setSearchInput("");
-      };
     }
+    // Cleanup function to reset searchInput when the user leaves the JobListings page
+    return () => {
+      props.setSearchInput("");
+    };
   }, []);
+
+  // ===========================================================
+  // useEffect to fetch Filtered Jobs after Profile has been set
+  // ===========================================================
+  useEffect(() => {
+    if (Object.keys(profile).length > 0) {
+      // If the user navigated to this page from a search
+      if (props.isSearch) {
+        props.setIsSearch(false);
+      }
+      const randomFilter = generateRandomFilter();
+      getFilteredJobPosts(props.searchInput, randomFilter);
+    }
+  }, [profile]);
+
+  // ==============
+  // Initial Filter
+  // ==============
+  function generateRandomFilter() {
+    let randomFilter = {};
+
+    // Is Job Seeker
+    if (userContext.userDetails.type === "jobSeeker") {
+      // Coin flip for whether to filter by Ability Diff or Support
+      if (Math.round(Math.random()) === 0) {
+        randomFilter.abilityDiff =
+          profile.abilityDifferences.diff[
+            Math.floor(Math.random() * profile.abilityDifferences.diff.length)
+          ];
+      } else {
+        randomFilter.support =
+          profile.abilityDifferences.support[
+            Math.floor(
+              Math.random() * profile.abilityDifferences.support.length
+            )
+          ];
+      }
+    }
+    // Not Job Seeker
+    else {
+      const abilityDiffArray = [
+        "Autism",
+        "Hearing",
+        "Intellectual",
+        "Physical",
+        "Visual",
+      ];
+      const supportArray = [
+        "Assistive",
+        "Redesign",
+        "Shadowing",
+        "Social",
+        "Structured",
+        "Trial",
+      ];
+
+      // Coin flip for whether to filter by Ability Diff or Support
+      if (Math.round(Math.random()) === 0) {
+        randomFilter.abilityDiff =
+          abilityDiffArray[Math.floor(Math.random() * 5)];
+      } else {
+        randomFilter.support = supportArray[Math.floor(Math.random() * 6)];
+      }
+    }
+    // Set to State and return
+    setInitialFilter(randomFilter);
+    return randomFilter;
+  }
 
   // ===============
   // Fetch Functions
   // ===============
-  const getProfile = async (req, res) => {
+  const getProfile = async () => {
     try {
-      const hardCodedId = "6352b602869782ec9b076cf3";
+      const hardCodedId = "6352c2e976505ddb8d255633";
 
       const res = await fetch("http://127.0.0.1:5001/api/jobseekers/get", {
         method: "POST",
@@ -64,33 +134,50 @@ const JobListings = (props) => {
         body: JSON.stringify({ id: hardCodedId }),
       });
       const fetchedProfileData = await res.json();
-      setProfile(fetchedProfileData.profile);
+      setProfile(fetchedProfileData);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const getAllJobPosts = async (setJobPosts) => {
+  const getAllJobPosts = async (randomFilter) => {
     try {
       const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
         method: "POST",
+        body: JSON.stringify({
+          search: props.searchInput,
+          ...filter,
+          initialFilter: randomFilter,
+        }),
         headers: { "content-type": "application/json" },
       });
       const fetchedJobPosts = await res.json();
+      console.log("fetchedJobPostsGetAll", fetchedJobPosts);
       setJobPosts(fetchedJobPosts);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const getFilteredJobPosts = async (searchInput) => {
+  const getFilteredJobPosts = async (searchInput, randomFilter) => {
     try {
+      // If the user is a job seeker, pass the profile data into the body
+      let fetchBody = {
+        search: searchInput,
+        ...filter,
+        initialFilter: randomFilter,
+      };
+      if (userContext.userDetails.type === "jobSeeker") {
+        fetchBody.profile = profile;
+      }
+
       const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
         method: "POST",
-        body: JSON.stringify({ search: searchInput, ...filter }),
+        body: JSON.stringify(fetchBody),
         headers: { "content-type": "application/json" },
       });
       const fetchedJobPosts = await res.json();
+      console.log("fetchedJobPostsFiltered", fetchedJobPosts);
       setJobPosts(fetchedJobPosts);
     } catch (err) {
       console.log(err);
@@ -102,7 +189,7 @@ const JobListings = (props) => {
   // =========================================================
   useEffect(() => {
     if (firstRenderDone) {
-      getFilteredJobPosts(props.searchInput);
+      getFilteredJobPosts(props.searchInput, initialFilter);
     }
   }, [filter]);
 
@@ -141,10 +228,10 @@ const JobListings = (props) => {
         setIsSearch={props.setIsSearch}
         searchInput={props.searchInput}
         isJobListings={true}
-        setJobPosts={setJobPosts}
         setFilter={setFilter}
         getAllJobPosts={getAllJobPosts}
         getFilteredJobPosts={getFilteredJobPosts}
+        initialFilter={initialFilter}
       />
       <p className="px-4 text-muted font-weight-light font-italic">
         Main Page &gt; What would you like to do today? &gt; Job Listing
