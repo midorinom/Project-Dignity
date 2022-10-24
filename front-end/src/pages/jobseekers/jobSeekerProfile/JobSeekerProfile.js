@@ -36,7 +36,7 @@ const JobSeekerProfile = () => {
 
   const getProfileData = async () => {
     try {
-      const hardCodedId = "6352c2e976505ddb8d255633";
+      const hardCodedId = "6352b602869782ec9b076cf3";
 
       const res = await fetch("http://127.0.0.1:5001/api/jobseekers/get", {
         method: "POST",
@@ -152,6 +152,39 @@ const JobSeekerProfile = () => {
         <RecommendedJobsCard jobData={element} key={Math.random()} />
       ));
 
+      // Convert Support short forms in database to long forms
+      let supportFirstIndex = "";
+      let supportList = "";
+
+      if (profileData) {
+        supportFirstIndex = supportConvertToFull(
+          profileData.abilityDifferences.support[0]
+        );
+        const fullFormSupportArray = profileData.abilityDifferences.support.map(
+          (element) => {
+            return supportConvertToFull(element);
+          }
+        );
+        supportList = fullFormSupportArray.join(", ");
+      }
+
+      function supportConvertToFull(supportShortForm) {
+        switch (supportShortForm) {
+          case "Structured":
+            return "Training through Structured Programmes";
+          case "Shadowing":
+            return "Shadowing by a Dedicated Job Coach";
+          case "Redesign":
+            return "Workplace Redesigned";
+          case "Assistive":
+            return "Assistive Technology (AT)";
+          case "Social":
+            return "Social Integration";
+          case "Trial":
+            return "Trial Period";
+        }
+      }
+
       // The CompletedProfile Page
       return (
         <div className={styles.completedProfileJobSeeker}>
@@ -217,10 +250,8 @@ const JobSeekerProfile = () => {
                       </span>
                       {profileData &&
                         (profileData.abilityDifferences.support.length === 1
-                          ? profileData.abilityDifferences.support[0]
-                          : [...profileData.abilityDifferences.support].join(
-                              ", "
-                            ))}
+                          ? supportFirstIndex
+                          : supportList)}
                     </li>
                     <br />
                     {profileData && profileData.abilityDifferences.supportDesc}
