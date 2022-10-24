@@ -12,7 +12,9 @@ const JobSeekerProfileFormEducation = (props) => {
     if (!props.sectionSaved) {
       alert("Please save before proceeding to the next section");
     } else {
-      navigate("/profile");
+      console.log(`here`);
+      props.setToSaveProfile(true);
+      // navigate("/profile");
     }
   }
 
@@ -240,7 +242,7 @@ const JobSeekerProfileFormEducation = (props) => {
               <button
                 className={`${styles.side_buttons} mt-3 mb-4 p-3`}
                 onClick={() => {
-                  props.setToSaveProfile(true);
+                  // props.setToSaveProfile(true);
                   props.setSectionSaved(true);
                 }}
               >
