@@ -33,8 +33,6 @@ const JobListings = (props) => {
   // onMount useEffect
   // =================
   useEffect(() => {
-    console.log("filter", filter);
-    console.log("profile", profile);
     // First check if the user is a job seeker. If so, fetch the user's profile data.
     if (userContext.userDetails.type === "jobSeeker") {
       getProfile();
@@ -128,7 +126,7 @@ const JobListings = (props) => {
   // ===============
   const getProfile = async () => {
     try {
-      const hardCodedId = "6352b602869782ec9b076cf3";
+      const hardCodedId = "6352c2e976505ddb8d255633";
 
       const res = await fetch("http://127.0.0.1:5001/api/jobseekers/get", {
         method: "POST",
@@ -154,6 +152,7 @@ const JobListings = (props) => {
         headers: { "content-type": "application/json" },
       });
       const fetchedJobPosts = await res.json();
+      console.log("fetchedJobPostsGetAll", fetchedJobPosts);
       setJobPosts(fetchedJobPosts);
     } catch (err) {
       console.log(err);
@@ -178,6 +177,7 @@ const JobListings = (props) => {
         headers: { "content-type": "application/json" },
       });
       const fetchedJobPosts = await res.json();
+      console.log("fetchedJobPostsFiltered", fetchedJobPosts);
       setJobPosts(fetchedJobPosts);
     } catch (err) {
       console.log(err);
