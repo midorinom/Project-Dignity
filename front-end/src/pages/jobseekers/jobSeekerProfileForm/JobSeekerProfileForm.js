@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import styles from "./jobSeekerProfileFormHeader.module.css";
 import JobSeekerProfileFormAbout from "./JobSeekerProfileFormAbout";
 import JobSeekerProfileFormSkills from "./JobSeekerProfileFormSkills";
 import JobSeekerProfileFormAbilityDiff from "./JobSeekerProfileFormAbilityDiff";
 import JobSeekerProfileFormExperience from "./JobSeekerProfileFormExperience";
 import JobSeekerProfileFormEducation from "./JobSeekerProfileFormEducation";
-import styles from "./jobSeekerProfileForm.module.css";
 
 const JobSeekerProfileForm = () => {
   const [currentPage, setCurrentPage] = useState("About");
-  // const [profile, setProfile] = useState()
   const [aboutSchema, setAboutSchema] = useState();
   const [skillsSchema, setSkillsSchema] = useState();
   const [abilityDifferencesSchema, setAbilityDifferencesSchema] = useState();
   const [experienceSchema, setExperienceSchema] = useState();
   const [educationSchema, setEducationSchema] = useState();
+  const [sectionSaved, setSectionSaved] = useState(false);
+  const [toSaveProfile, setToSaveProfile] = useState(false);
+  const [profile, setProfile] = useState({
+    about: "",
+    skills: "",
+    abilityDifferences: "",
+    experience: "",
+    education: "",
+  });
 
   // Render the current page
   function manageCurrentPage(e) {
@@ -27,6 +35,8 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormAbout
             setCurrentPage={setCurrentPage}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
             setAboutSchema={setAboutSchema}
           />
         );
@@ -34,6 +44,8 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormSkills
             setCurrentPage={setCurrentPage}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
             setSkillsSchema={setSkillsSchema}
           />
         );
@@ -41,6 +53,8 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormAbilityDiff
             setCurrentPage={setCurrentPage}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
             setAbilityDifferencesSchema={setAbilityDifferencesSchema}
           />
         );
@@ -48,6 +62,8 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormExperience
             setCurrentPage={setCurrentPage}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
             setExperienceSchema={setExperienceSchema}
           />
         );
@@ -55,59 +71,142 @@ const JobSeekerProfileForm = () => {
         return (
           <JobSeekerProfileFormEducation
             setEducationSchema={setEducationSchema}
+            sectionSaved={sectionSaved}
+            setSectionSaved={setSectionSaved}
+            setToSaveProfile={setToSaveProfile}
           />
         );
     }
   }
   const page = displayCurrentPage();
 
-  console.log(aboutSchema);
-  console.log(skillsSchema);
-  console.log(abilityDifferencesSchema);
-  console.log(experienceSchema);
-  console.log(educationSchema);
+  // console.log(aboutSchema);
+  // console.log(skillsSchema);
+  // console.log(abilityDifferencesSchema);
+  // console.log(experienceSchema);
+  // console.log(educationSchema);
+
+  useEffect(() => {
+    const saveProfile = () => {
+      if (
+        aboutSchema &&
+        skillsSchema &&
+        abilityDifferencesSchema &&
+        experienceSchema &&
+        educationSchema &&
+        toSaveProfile
+      ) {
+        setProfile({
+          about: aboutSchema,
+          skills: skillsSchema,
+          abilityDifferences: abilityDifferencesSchema,
+          experience: experienceSchema,
+          education: educationSchema,
+        });
+      }
+    };
+    saveProfile();
+  }, [toSaveProfile]);
+
+  console.log(profile);
 
   return (
     <>
-      <ul class={`nav justify-content-center ${styles.navBar}`}>
-        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
-          <a class="nav-link active" aria-current="page" href="#">
-            About
-          </a>
-        </li>
-        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
-          <a class={`nav-link active ${styles.li}`} href="#">
-            Skills
-          </a>
-        </li>
-        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
-          <a class="nav-link active" aria-current="page" href="#">
-            {" "}
-            Ability Differences{" "}
-          </a>
-        </li>
-        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
-          <a class="nav-link active" aria-current="page" href="#">
-            {" "}
-            Experience{" "}
-          </a>
-        </li>
-        <li class={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
-          <a class="nav-link active" aria-current="page" href="#">
-            {" "}
-            Education
-          </a>
-        </li>
-      </ul>
-      <div className="centered">Banner with Profile Photo</div>
-      {/* <div className="centered">
-        <div onClick={manageCurrentPage}>About</div>
-        <div onClick={manageCurrentPage}>Skills</div>
-        <div onClick={manageCurrentPage}>Ability Differences</div>
-        <div onClick={manageCurrentPage}>Experience</div>
-        <div onClick={manageCurrentPage}>Education</div>
-      </div> */}
-      {page}
+      <header>
+        {/* Banner */}
+        <div className="container-md">
+          <div className="row" id={styles.banner}>
+            <div className="d-flex justify-content-md-center m-0 p-0">
+              <div className="col-md-2 m-3">
+                <embed />
+              </div>
+              <div className="col-md-8 p-4">
+                <h1 className=" mt-4 mb-3">
+                  {aboutSchema?.name ? aboutSchema.name : `This is my name`}
+                </h1>
+                <p style={{ fontSize: "1.3em" }}>
+                  {aboutSchema?.aspiration
+                    ? aboutSchema.aspiration
+                    : `This is my aspiration`}
+                </p>
+                <p>
+                  {aboutSchema?.brand
+                    ? aboutSchema.brand
+                    : `This is my personal brand statement`}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Form section buttons */}
+        <div
+          className="row w-100 m-0"
+          style={{
+            height: 58,
+            boxShadow: "4px 2px 4px 2px rgba(20, 20, 20, 0.2)",
+          }}
+        >
+          <div className="d-flex justify-content-md-center">
+            <div
+              className={`${styles.sectionButtons} p-3`}
+              type="button"
+              style={{
+                backgroundColor: currentPage === "About" ? "#011036" : "",
+                color: currentPage === "About" ? "white" : "",
+              }}
+              onClick={manageCurrentPage}
+            >
+              About
+            </div>
+            <div
+              className={`${styles.sectionButtons} p-3`}
+              type="button"
+              style={{
+                backgroundColor: currentPage === "Skills" ? "#011036" : "",
+                color: currentPage === "Skills" ? "white" : "",
+              }}
+              onClick={manageCurrentPage}
+            >
+              Skills
+            </div>
+            <div
+              className={`${styles.sectionButtons} p-3`}
+              type="button"
+              style={{
+                backgroundColor:
+                  currentPage === "Ability Differences" ? "#011036" : "",
+                color: currentPage === "Ability Differences" ? "white" : "",
+              }}
+              onClick={manageCurrentPage}
+            >
+              Ability Differences
+            </div>
+            <div
+              className={`${styles.sectionButtons} p-3`}
+              type="button"
+              style={{
+                backgroundColor: currentPage === "Experience" ? "#011036" : "",
+                color: currentPage === "Experience" ? "white" : "",
+              }}
+              onClick={manageCurrentPage}
+            >
+              Experience
+            </div>
+            <div
+              className={`${styles.sectionButtons} p-3`}
+              type="button"
+              style={{
+                backgroundColor: currentPage === "Education" ? "#011036" : "",
+                color: currentPage === "Education" ? "white" : "",
+              }}
+              onClick={manageCurrentPage}
+            >
+              Education
+            </div>
+          </div>
+        </div>
+      </header>
+      <main className="mt-4">{page}</main>
     </>
   );
 };

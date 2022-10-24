@@ -1,12 +1,21 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm, useFieldArray } from "react-hook-form";
 import styles from "./jobSeekerProfileForm.module.css";
 
 const JobSeekerProfileFormSkills = (props) => {
   // console.log(props);
 
+  // when proceed next button is clicked
   function goToAbilityDiff() {
     props.setCurrentPage("Ability Differences");
+  }
+
+  // when cancel button is clicked
+  const navigate = useNavigate();
+  function goToJobSeekerLanding() {
+    navigate("/job-seekers");
+    alert("Your data are not saved");
   }
 
   // adding react-hook-forms functionality
@@ -36,8 +45,8 @@ const JobSeekerProfileFormSkills = (props) => {
   });
 
   const onSubmit = (data) => {
-    props.setSkillsSchema(data);
-    console.log("data: ", data);
+    props.setSkillsSchema(data.skillSet);
+    console.log("data: ", data.skillSet);
     console.log(data.skillSet[0].skill);
   };
 
@@ -170,14 +179,20 @@ const JobSeekerProfileFormSkills = (props) => {
           <div className="col-md-1"></div>
           {/* <------------------------ side panel ------------------------> */}
           <div className="col-md-3">
-            <div className=" sidePanel row mt-5">
+            <div className=" sidePanel sticky-top row mt-5">
               <button
                 type="submit"
                 className={`${styles.side_buttons} mt-3 mb-4 p-3`}
+                onClick={() => {
+                  props.setSectionSaved(true);
+                }}
               >
                 Save Changes
               </button>
-              <button className={`${styles.side_buttons} mb-4 p-3`}>
+              <button
+                className={`${styles.side_buttons} mb-4 p-3`}
+                onClick={goToJobSeekerLanding}
+              >
                 Cancel
               </button>
               {/* <--------------------- progress bar ---------------------> */}
