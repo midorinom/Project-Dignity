@@ -26,7 +26,6 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const [isSearch, setIsSearch] = useState(false);
   const [selectedJobPost, setSelectedJobPost] = useState({});
-  console.log(selectedJobPost);
 
   // ===================
   // Conditional Renders
@@ -112,7 +111,7 @@ function App() {
             element={<JobPostDetails selectedJobPost={selectedJobPost} />}
           />
           <Route
-            path="/job-post-details/successful-application"
+            path="/successful-application"
             element={<SuccessfulApplication />}
           />
           <Route path="/job-post-form" element={<JobPostForm />} />

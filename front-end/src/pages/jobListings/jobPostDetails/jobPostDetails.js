@@ -8,6 +8,7 @@ import hearingIcon from "../filters/abilityDifference/icons/hearing.png";
 import autismIcon from "../filters/abilityDifference/icons/autism.png";
 import intellectualIcon from "../filters/abilityDifference/icons/intellectual.png";
 import physicalIcon from "../filters/abilityDifference/icons/physical.png";
+import { Link } from "react-router-dom";
 
 const JobPostDetails = (props) => {
   const about = props.selectedJobPost.about;
@@ -137,8 +138,12 @@ const JobPostDetails = (props) => {
             </div>
           </div>
         </div>
+
+        {/* accessibility column */}
         <div className="col-4">
-          <button className="btn btn-dark w-100">Apply Now</button>
+          <Link to="/successful-application" className="btn btn-dark w-100">
+            Apply Now
+          </Link>
           <div className="border border-warning border-2 my-4">
             <h5 className="text-center my-3">Suitable For</h5>
             {abilityDifferencesIcons}
