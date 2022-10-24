@@ -65,7 +65,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="physical"
+                  value="Physical"
                   id="ability-diff-physical"
                   {...register("diff", {
                     required: {
@@ -89,7 +89,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="visual"
+                  value="Visual"
                   id="ability-diff-visual"
                   {...register("diff", {
                     required: {
@@ -113,7 +113,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="hearing"
+                  value="Hearing"
                   id="ability-diff-hearing"
                   {...register("diff", {
                     required: {
@@ -137,7 +137,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="intellectual"
+                  value="Intellectual"
                   id="ability-diff-intellectual"
                   {...register("diff", {
                     required: {
@@ -165,7 +165,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="autism"
+                  value="Autism"
                   id="ability-diff-autism"
                   {...register("diff", {
                     required: {
@@ -239,7 +239,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="structured"
+                  value="Structured"
                   id="training"
                   {...register("support", {
                     required: {
@@ -260,7 +260,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="shadowing"
+                  value="Shadowing"
                   id="coach"
                   {...register("support", {
                     required: {
@@ -281,7 +281,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="redesign"
+                  value="Redesign"
                   id="workplace"
                   {...register("support", {
                     required: {
@@ -302,7 +302,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="assistive"
+                  value="Assistive"
                   id="assist-tech"
                   {...register("support", {
                     required: {
@@ -323,7 +323,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="social"
+                  value="Social"
                   id="integration"
                   {...register("support", {
                     required: {
@@ -344,7 +344,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="trial"
+                  value="Trial"
                   id="trial"
                   {...register("support", {
                     required: {
@@ -406,7 +406,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="verbal"
+                  value="Verbal"
                   id="mode-verbal"
                   {...register("comm", {
                     required: {
@@ -427,7 +427,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="written"
+                  value="Written"
                   id="mode-written"
                   {...register("comm", {
                     required: {
@@ -448,7 +448,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="signing"
+                  value="Signing"
                   id="mode-signing"
                   {...register("comm", {
                     required: {
@@ -469,7 +469,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="lip_reading"
+                  value="Lip_reading"
                   id="mode-lip-reading"
                   {...register("comm", {
                     required: {
@@ -490,7 +490,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="others"
+                  value="Others"
                   id="mode-others"
                   {...register("comm", {
                     required: {
@@ -536,7 +536,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="mobility"
+                  value="Mobility"
                   id="aid-mobility"
                   {...register("aids", {
                     required: {
@@ -557,7 +557,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="hearing"
+                  value="Hearing"
                   id="aid-hearing"
                   {...register("aids", {
                     required: {
@@ -578,7 +578,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="visual"
+                  value="Visual"
                   id="aid-visual"
                   {...register("aids", {
                     required: {
@@ -599,7 +599,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="speech"
+                  value="Speech"
                   id="aid-speech"
                   {...register("aids", {
                     required: {
@@ -620,7 +620,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value="others"
+                  value="Others"
                   id="aid-others"
                   {...register("aids", {
                     required: {
@@ -664,10 +664,10 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
               </label>
               <small>
                 {" "}
-                (please select <u>one</u> option)
+                (select yes if you are able to travel independently)
               </small>
               <br />
-              <div className="form-check-inline form-switch">
+              <div className="form-check form-switch p-0">
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
@@ -687,27 +687,6 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   Yes
                 </label>
               </div>
-              {/* <div className="form-check-inline">
-                <input
-                  className="custom-control-input btn-check"
-                  type="checkbox"
-                  value={false}
-                  id="independent-travel-no"
-                  {...register("travel", {
-                    required: {
-                      value: false,
-                      message: "Please select at least one option",
-                    },
-                  })}
-                ></input>
-                <label
-                  className="custom-control-label btn p-3"
-                  htmlFor="independent-travel-no"
-                  style={{ width: 120 }}
-                >
-                  No
-                </label>
-              </div> */}
             </div>
             {errors.travel && (
               <p className="mt-2 text-danger">{errors.travel.message}</p>
