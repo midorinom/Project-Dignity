@@ -1,0 +1,20 @@
+header {
+  background-color: #fec501;
+}
+
+#banner {
+  height: 280px;
+}
+
+.sectionButtons {
+  width: 200px;
+  min-height: fit-content;
+  text-align: center;
+  font-size: large;
+  font-weight: 700;
+}
+
+.sectionButtons:hover {
+  color: white;
+  background-color: #0110362f;
+}
