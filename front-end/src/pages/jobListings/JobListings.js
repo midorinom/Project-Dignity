@@ -46,11 +46,11 @@ const JobListings = (props) => {
       } else {
         getAllJobPosts(randomFilter);
       }
-      // Cleanup function to reset searchInput when the user leaves the JobListings page
-      return () => {
-        props.setSearchInput("");
-      };
     }
+    // Cleanup function to reset searchInput when the user leaves the JobListings page
+    return () => {
+      props.setSearchInput("");
+    };
   }, []);
 
   // ===========================================================
