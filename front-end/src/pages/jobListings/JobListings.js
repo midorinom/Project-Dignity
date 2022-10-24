@@ -126,12 +126,10 @@ const JobListings = (props) => {
   // ===============
   const getProfile = async () => {
     try {
-      const hardCodedId = "6352c2e976505ddb8d255633";
-
       const res = await fetch("http://127.0.0.1:5001/api/jobseekers/get", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ id: hardCodedId }),
+        body: JSON.stringify({ id: userContext.userDetails.id }),
       });
       const fetchedProfileData = await res.json();
       setProfile(fetchedProfileData);
