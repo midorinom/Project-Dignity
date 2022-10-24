@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import JobAbout from "./JobAbout";
 import EmployerAccessibility from "./EmployerAccessibility";
 import styles from "./jobPostForm.module.css";
 const JobPost = () => {
   const [currentPage, setCurrentPage] = useState("About The Job");
   const [aboutJobSchema, setAboutJobSchema]=useState()
-  const [accessibilityConsiderations, setaccessibilityConsiderations]=useState()
-  
+  const [accessibilityConsiderationsSchema, setaccessibilityConsiderationsSchema]=useState()
+  const [sectionSaved, setSectionSaved] = useState(false);
+  const [toSaveProfile, setToSaveProfile] = useState(false);
+  const [profile, setProfile] = useState({
+    employerId: "",
+    jobPost: {
+      about: "",
+      accessibility: "",
+    },
+  })
+  const navigate = useNavigate();
+
   // Render the current page
   function manageCurrentPage(e) {
     setCurrentPage(e.target.innerText);
@@ -16,12 +27,62 @@ const JobPost = () => {
   function displayCurrentPage() {
     switch (currentPage) {
       case "About The Job":
-        return <JobAbout setCurrentPage={setCurrentPage} setAboutJobSchema={setAboutJobSchema}/>;
+        return <JobAbout setCurrentPage={setCurrentPage} setAboutJobSchema={setAboutJobSchema} setSectionSaved={setSectionSaved} sectionSaved={sectionSaved}
+
+        />;
       case "Accessibilty Considerations":
-        return <EmployerAccessibility setCurrentPage={setCurrentPage} setaccessibilityConsiderations={setaccessibilityConsiderations}/>;
+        return <EmployerAccessibility setCurrentPage={setCurrentPage} setaccessibilityConsiderations={setaccessibilityConsiderationsSchema} setSectionSaved={setSectionSaved} sectionSaved={sectionSaved}
+        />;
     }
   }
   const page = displayCurrentPage();
+
+  useEffect(()=>{
+    if (
+      aboutJobSchema &&
+      accessibilityConsiderationsSchema &&
+      toSaveProfile
+    ) {
+      setProfile({
+        about: aboutJobSchema,
+        accessibility: accessibilityConsiderationsSchema,
+      });
+      
+      const createJobPost = async (req, res) => {
+        try {
+          const hardCodedId = "6352b602869782ec9b076cf3";
+
+          const res = await fetch(
+            "http://127.0.0.1:5001/api/jobposts/create",
+            {
+              method: "PUT",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify(
+                {
+                  employerId: hardCodedId,
+                  jobPost: 
+                  { 
+                   about: aboutJobSchema,
+                   accessibility: accessibilityConsiderationsSchema
+                  }
+                 }
+              ),
+            }
+          );
+          const createdJobPost = await res.json();
+
+          console.log(createdJobPost);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      createJobPost();
+      navigate("/profile");
+    } else {
+      alert(`Missing fields`);
+    }
+  }, [toSaveProfile]);
 
   return (
     <>

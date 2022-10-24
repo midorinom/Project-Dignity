@@ -1,13 +1,23 @@
-import React from "react";
+import React,{useState} from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./jobPostForm.module.css";
 import {useForm} from 'react-hook-form'
 const JobAbout = (props) => {
+const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0);
 
 // proceeds to accessibility considerstions when next is clicked
   function goToAccessibility() {
+    if (!props.sectionSaved) {
+      alert("Please save before proceeding to the next section");
+    } else {
     props.setCurrentPage("Accessibilty Considerations");
   }
+}
 
+  const navigate = useNavigate();
+  function goToEmployerLanding() {
+    navigate("/employers");
+  }
 //react-hook-forms functionality
   const{
     register,
@@ -164,7 +174,7 @@ const JobAbout = (props) => {
               <p className="mt-2 text-danger">{errors.desc?.message}</p>
               {/* ================================================================================================== */}
               {/*============================================Job Tasks ============================================ */}
-              <div className="form-group mb-4">
+              <div className="form-group mb-2">
                 <label className="form-label" htmlFor="Job Tasks">
                   Job Tasks
                 </label>
@@ -193,7 +203,7 @@ const JobAbout = (props) => {
                 </label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control mb-2"
                   id="minimum"
                   placeholder="Minimum"
                   {...register('minSalary',{
@@ -206,7 +216,7 @@ const JobAbout = (props) => {
                 <p>to</p>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control mt-2"
                   id="maximum"
                   placeholder="Maximum"
                   {...register('maxSalary',{
@@ -302,17 +312,20 @@ const JobAbout = (props) => {
                   rows="3"
                   placeholder="
                     Some question to consider: 
-                    - What transport might an employee have to take to reach the workplace? 
-                    - Is there sufficient space for the use of mobility devices such as wheelchairs?
-                    "
+                    - What transport might an employee have to take to reach the workplace?
+                    - Is there sufficient space for the use of mobility devices such as wheelchairs?"
                     {...register('accessibility',{
                       required:{
                         value: true,
                         message: 'Please include a brief description'
-                      }
+                      },
+                      maxLength: 200,
+                      onChange: (e) => setAccessibilityCharacterCount(e.target.value.length),    
                     })}
                 ></textarea>
-                <p>200/200 characters left</p>
+              <small className="text-muted">{`${
+                200 - accessibilityCharacterCount
+              } / 200 characters left`}</small>
                 <p className="mt-2 text-danger">{errors.accessibility?.message}</p>
               </div>
               {/* ================================================================================================== */}
@@ -320,8 +333,8 @@ const JobAbout = (props) => {
                 Proceed to 'Accessibility Consideration Section'{" "}
               </button>  
               </div>
-      <div className="col-md-2"></div>
-      <div className="col-md-4">
+              <div className="col-md-2"></div>
+              <div className="col-md-4">
             <div className={`${styles.sideButtonsContainer}`}>
               <button
                 className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
@@ -330,12 +343,15 @@ const JobAbout = (props) => {
               </button>
               <button
                 className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                onClick={() => {
+                  goToEmployerLanding()
+                  props.setSectionSaved(true);
+                }}
               >
                 Previous Job Post
               </button>
               <button
-                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
-              >
+                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}>
                 Upload Job post
               </button>
               <div className="progress mt-4">
