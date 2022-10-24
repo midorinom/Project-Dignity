@@ -17,7 +17,7 @@ const JobSeekerProfile = () => {
   // Variables
   // =========
   // Change this profileIsCompleted initial value to false/true to access the NoProfile/CompletedProfile pages
-  const [profileIsCompleted, setProfileIsComplete] = useState(false);
+  const [profileIsCompleted, setProfileIsComplete] = useState(true);
   const [profileData, setProfileData] = useState(undefined);
 
   const [recommendedJobsData, setRecommendedJobsData] = useState(
@@ -29,7 +29,9 @@ const JobSeekerProfile = () => {
   // onMount useEffect fetch Profile Data
   // ====================================
   useEffect(() => {
-    getProfileData();
+    if (profileIsCompleted) {
+      getProfileData();
+    }
   }, []);
 
   const getProfileData = async (req, res) => {

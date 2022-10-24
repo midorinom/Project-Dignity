@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./jobSeekerProfileFormHeader.module.css";
 import JobSeekerProfileFormAbout from "./JobSeekerProfileFormAbout";
 import JobSeekerProfileFormSkills from "./JobSeekerProfileFormSkills";
@@ -22,6 +23,8 @@ const JobSeekerProfileForm = () => {
     experience: "",
     education: "",
   });
+
+  const navigate = useNavigate();
 
   // Render the current page
   function manageCurrentPage(e) {
@@ -82,30 +85,63 @@ const JobSeekerProfileForm = () => {
 
   // console.log(aboutSchema);
   // console.log(skillsSchema);
-  // console.log(abilityDifferencesSchema);
+  console.log(abilityDifferencesSchema);
   // console.log(experienceSchema);
   // console.log(educationSchema);
 
   useEffect(() => {
-    const saveProfile = () => {
-      if (
-        aboutSchema &&
-        skillsSchema &&
-        abilityDifferencesSchema &&
-        experienceSchema &&
-        educationSchema &&
-        toSaveProfile
-      ) {
-        setProfile({
-          about: aboutSchema,
-          skills: skillsSchema,
-          abilityDifferences: abilityDifferencesSchema,
-          experience: experienceSchema,
-          education: educationSchema,
-        });
-      }
-    };
-    saveProfile();
+    if (
+      aboutSchema &&
+      skillsSchema &&
+      abilityDifferencesSchema &&
+      experienceSchema &&
+      educationSchema &&
+      toSaveProfile
+    ) {
+      setProfile({
+        about: aboutSchema,
+        skills: skillsSchema,
+        abilityDifferences: abilityDifferencesSchema,
+        experience: experienceSchema,
+        education: educationSchema,
+      });
+
+      console.log({ Test: aboutSchema });
+      const updateProfileData = async (req, res) => {
+        try {
+          const hardCodedId = "6352b602869782ec9b076cf3";
+
+          const res = await fetch(
+            "http://127.0.0.1:5001/api/jobseekers/update",
+            {
+              method: "PATCH",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({
+                id: hardCodedId,
+                profile: {
+                  about: aboutSchema,
+                  skills: skillsSchema,
+                  abilityDifferences: abilityDifferencesSchema,
+                  experience: experienceSchema,
+                  education: educationSchema,
+                },
+              }),
+            }
+          );
+          const fetchedProfileData = await res.json();
+
+          console.log(fetchedProfileData);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+      updateProfileData();
+
+      navigate("/profile");
+    } else {
+      alert(`Missing fields`);
+    }
   }, [toSaveProfile]);
 
   console.log(profile);
