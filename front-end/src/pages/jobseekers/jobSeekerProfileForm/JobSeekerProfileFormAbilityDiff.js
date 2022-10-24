@@ -667,15 +667,14 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 (please select <u>one</u> option)
               </small>
               <br />
-              <div className="form-check-inline">
+              <div className="form-check-inline form-switch">
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
-                  value={true}
                   id="independent-travel-yes"
                   {...register("travel", {
                     required: {
-                      value: true,
+                      value: false,
                       message: "Please select at least one option",
                     },
                   })}
@@ -688,7 +687,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   Yes
                 </label>
               </div>
-              <div className="form-check-inline">
+              {/* <div className="form-check-inline">
                 <input
                   className="custom-control-input btn-check"
                   type="checkbox"
@@ -696,7 +695,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                   id="independent-travel-no"
                   {...register("travel", {
                     required: {
-                      value: true,
+                      value: false,
                       message: "Please select at least one option",
                     },
                   })}
@@ -708,7 +707,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
                 >
                   No
                 </label>
-              </div>
+              </div> */}
             </div>
             {errors.travel && (
               <p className="mt-2 text-danger">{errors.travel.message}</p>
