@@ -85,7 +85,7 @@ const JobPostDetails = (props) => {
       </div>
       <div className="row">
         {/* about column */}
-        <div className="col-8">
+        <div className="col-9">
           <div>
             <h1 className="display-6 m-0">{about.company}</h1>
             <button className="btn btn-outline-primary btn-sm">
@@ -140,7 +140,7 @@ const JobPostDetails = (props) => {
         </div>
 
         {/* accessibility column */}
-        <div className="col-4">
+        <div className="col-3">
           <Link to="/successful-application" className="btn btn-dark w-100">
             Apply Now
           </Link>
@@ -156,11 +156,11 @@ const JobPostDetails = (props) => {
 
           <div className="border border-warning border-2 my-4 w-100">
             <h5 className="text-center my-3">Job Environment</h5>
-            <div className="d-flex mx-4 flex-column align-items-center">
+            <div className="d-flex mx-1 flex-column align-items-center">
               <label htmlFor="noise" className="form-label mx-1 mb-1">
                 Noise Level
               </label>
-              <div className="d-flex mx-2 mb-4 align-items-center">
+              <div className="d-flex mx-2 mb-4 align-items-center w-100">
                 <p className="w-25 text-center m-0">Quiet</p>
                 <input
                   type="range"
@@ -178,7 +178,7 @@ const JobPostDetails = (props) => {
               <label htmlFor="light" className="form-label mx-1 mb-1">
                 Light Intensity
               </label>
-              <div className="d-flex mx-2 align-items-center">
+              <div className="d-flex mx-2 align-items-center w-100">
                 <p className="w-25 text-center m-0">Dim</p>
                 <input
                   type="range"
@@ -190,7 +190,9 @@ const JobPostDetails = (props) => {
                   value={access.environment.light}
                   disabled
                 ></input>
-                <p className="w-25 text-center m-0">Bright, flashing</p>
+                <p className="w-25 text-center m-0 d-flex justify-content-center">
+                  Bright, flashing
+                </p>
               </div>
             </div>
           </div>
