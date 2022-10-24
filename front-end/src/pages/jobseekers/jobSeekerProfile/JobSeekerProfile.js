@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../../../context/userContext";
 import styles from "./jobSeekerProfile.module.css";
 import RecommendedJobsCard from "./resume/RecommendedJobsCard";
 import SkillsetsCard from "./resume/SkillsetsCard";
@@ -19,11 +20,11 @@ const JobSeekerProfile = () => {
   // Change this profileIsCompleted initial value to false/true to access the NoProfile/CompletedProfile pages
   const [profileIsCompleted, setProfileIsComplete] = useState(true);
   const [profileData, setProfileData] = useState(undefined);
-
   const [recommendedJobsData, setRecommendedJobsData] = useState(
     dummyRecommendedJobsData
   );
   const [mappedComponents, setMappedComponents] = useState({});
+  const userCtx = useContext(UserContext);
 
   // ====================================
   // onMount useEffect fetch Profile Data
@@ -36,12 +37,10 @@ const JobSeekerProfile = () => {
 
   const getProfileData = async () => {
     try {
-      const hardCodedId = "6352b602869782ec9b076cf3";
-
       const res = await fetch("http://127.0.0.1:5001/api/jobseekers/get", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ id: hardCodedId }),
+        body: JSON.stringify({ id: userCtx.userDetails.id }),
       });
       const fetchedProfileData = await res.json();
       setProfileData(fetchedProfileData);
