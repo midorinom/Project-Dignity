@@ -13,6 +13,7 @@ const JobPostDetails = (props) => {
   const about = props.selectedJobPost.about;
   const access = props.selectedJobPost.accessibility;
 
+  //==============================
   // Map AbilityDifferencesIcons
   const abilityDifferencesIcons = access.abilityDiff.map((element, id) => {
     let iconImage = "";
@@ -40,19 +41,36 @@ const JobPostDetails = (props) => {
         break;
     }
     return (
-      <div className="row d-flex mx-2">
-        <img
-          src={iconImage}
-          alt={iconImage}
-          className="m-0 p-2 w-25"
-          key={"image" + id}
-        />
+      <div className="row d-flex m-2">
+        <div className="m-0 p-0 w-25 d-flex align-items-center justify-cotent-center">
+          <img
+            src={iconImage}
+            alt={iconImage}
+            className="m-0 p-2 w-75"
+            key={"image" + id}
+          />
+        </div>
         <p key={"desc" + id} className="m-0 p-2 w-75 d-flex align-items-center">
           {iconDesc}
         </p>
       </div>
     );
   });
+  //==============================
+
+  //==============================
+  // Map Support
+  const supportProvided = access.support.map((item, id) => {
+    return (
+      <div>
+        <h6 className="text-center mx-1">{item}</h6>
+        <p className="text-center mx-1">
+          {access.supportElab[item.toLowerCase()]}
+        </p>
+      </div>
+    );
+  });
+  //==============================
 
   return (
     <div className="container">
@@ -73,18 +91,18 @@ const JobPostDetails = (props) => {
               Read about the company
             </button>
           </div>
-          <div className="my-5">
+          <div className="my-4">
             <h5 className="m-0">Job Description</h5>
             <p className="m-0">{about.desc}</p>
           </div>
-          <div className="my-5">
+          <div className="my-4">
             <h5 className="m-0">Job Interaction Type</h5>
             <p className="m-0">
               This is a {about.customerFacing ? "customer" : "non-customer"}{" "}
               facing role.
             </p>
           </div>
-          <div className="my-5">
+          <div className="my-4">
             <h5 className="m-0">Job Tasks</h5>
             <ul className="list-unstyled">
               {about.tasks.map((task, id) => {
@@ -92,7 +110,7 @@ const JobPostDetails = (props) => {
               })}
             </ul>
           </div>
-          <div className="my-5">
+          <div className="my-4">
             <h5 className="m-0">Key Skillsets and Qualities</h5>
             <ul className="list-unstyled">
               {about.skills.map((task, id) => {
@@ -100,14 +118,14 @@ const JobPostDetails = (props) => {
               })}
             </ul>
           </div>
-          <div className="my-5">
+          <div className="my-4">
             <h5 className="m-0">Expected Salary</h5>
             <p className="m-0">{`S$${about.minSalary} to S$${about.maxSalary}`}</p>
           </div>
-          <div className="my-5">
+          <div className="my-4">
             <h5 className="m-0">Job Location and Accessibility</h5>
             {/* Meeting query: location needs to be pulled from useContext or jobpostschema needs to change */}
-            <p className="m-0">{about.locationSame}</p>
+            <p className="m-0">{`${about.block}, ${about.unit}, Singapore ${about.postalCode}`}</p>
             <p className="m-0">{about.accessibility}</p>
           </div>
           <div className="my-3">
@@ -120,21 +138,24 @@ const JobPostDetails = (props) => {
           </div>
         </div>
         <div className="col-4">
-          <button className="btn btn-dark w-100 mb-4">Apply Now</button>
+          <button className="btn btn-dark w-100">Apply Now</button>
           <div className="border border-warning border-2 my-4">
             <h5 className="text-center my-3">Suitable For</h5>
             {abilityDifferencesIcons}
           </div>
-          <div className="border border-warning border-2 my-4">
+
+          <div className="border border-warning border-2 my-4 d-flex flex-column align-items-center">
             <h5 className="text-center my-3">Support Commitment</h5>
+            {supportProvided}
           </div>
-          <div className="border border-warning border-2 my-4">
+
+          <div className="border border-warning border-2 my-4 w-100">
             <h5 className="text-center my-3">Job Environment</h5>
-            <div className="d-flex flex-column align-items-center">
-              <label htmlFor="noise" className="form-label mx-1">
+            <div className="d-flex mx-4 flex-column align-items-center">
+              <label htmlFor="noise" className="form-label mx-1 mb-1">
                 Noise Level
               </label>
-              <div className="d-flex mx-4 mb-4">
+              <div className="d-flex mx-2 mb-4 align-items-center">
                 <p className="w-25 text-center m-0">Quiet</p>
                 <input
                   type="range"
@@ -148,10 +169,11 @@ const JobPostDetails = (props) => {
                 ></input>
                 <p className="w-25 text-center m-0">Loud</p>
               </div>
-              <label htmlFor="light" className="form-label mx-1">
-                Noise Level
+
+              <label htmlFor="light" className="form-label mx-1 mb-1">
+                Light Intensity
               </label>
-              <div className="d-flex mx-4 align-items-center">
+              <div className="d-flex mx-2 align-items-center">
                 <p className="w-25 text-center m-0">Dim</p>
                 <input
                   type="range"

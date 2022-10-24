@@ -14,6 +14,7 @@ import EmployerProfile from "./pages/employers/employerProfile/EmployerProfile";
 import EmployerProfileForm from "./pages/employers/employerProfileForm/EmployerProfileForm";
 import JobPostDetails from "./pages/jobListings/jobPostDetails/jobPostDetails";
 import JobPostForm from "./pages/employers/jobPostForm/JobPostForm";
+import SuccessfulApplication from "./pages/jobListings/jobPostDetails/SuccessfulApplication";
 
 function App() {
   // =========
@@ -109,6 +110,10 @@ function App() {
           <Route
             path="/job-post-details"
             element={<JobPostDetails selectedJobPost={selectedJobPost} />}
+          />
+          <Route
+            path="/job-post-details/successful-application"
+            element={<SuccessfulApplication />}
           />
           <Route path="/job-post-form" element={<JobPostForm />} />
         </Routes>
