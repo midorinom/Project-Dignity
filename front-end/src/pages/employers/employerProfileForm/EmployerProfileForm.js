@@ -3,11 +3,7 @@ import { useForm } from "react-hook-form";
 import styles from "./employerProfileForm.module.css";
 const EmployerProfileForm = (props) => {
   const [characterCount, setCharacterCount] = useState(0);
-
-  function goToSkills() {
-    props.setCurrentPage("Skills");
-  }
-
+ 
   // adding react-hook-forms functionality
   // const {
   //   register,
@@ -16,7 +12,7 @@ const EmployerProfileForm = (props) => {
   // } = useForm();
 
   // const onSubmit = (data) => {
-  //   props.setAboutSchema(data);
+  //   props.setAboutJobSchema(data);
   //   console.log(data);
   //   console.log(data.mobile);
   // };
@@ -28,7 +24,7 @@ const EmployerProfileForm = (props) => {
       <form id="jobSeekerProfileForm-About">
         <div className="row m-5">
           <div className="col-md-8">
-            {/*<----------------------------- name ----------------------------->*/}
+            {/*<-----------------------------Company name ----------------------------->*/}
             <div className="form-group mb-4">
               <label className="form-label" htmlFor="name">
                 Company Name
@@ -45,7 +41,7 @@ const EmployerProfileForm = (props) => {
                 ></input>
               </div>
             </div>
-            {/*<------------------------- aspiration ------------------------->*/}
+            {/*<-------------------------Who We Are ------------------------->*/}
             <div className="form-group mb-4">
               <label className="form-label" htmlFor="brand">
                 Who We Are
@@ -55,13 +51,13 @@ const EmployerProfileForm = (props) => {
                 type="text"
                 id="brand"
                 style={{ height: 200 }}
-                placeholder={"Brief introudction about your company"}
+                placeholder={"Brief introduction about your company"}
               ></textarea>
               <small className="text-muted">{`${
                 200 - characterCount
               } / 200 characters left`}</small>
             </div>
-      {/*<----------------------- brand statement ----------------------->*/}
+      {/*<-----------------------       What We Do ----------------------->*/}
             <div className="form-group mb-4">
               <label className="form-label" htmlFor="brand">
                 What We Do
@@ -77,7 +73,7 @@ const EmployerProfileForm = (props) => {
                 200 - characterCount
               } / 200 characters left`}</small>             
             </div>
-            {/*<--------------------------- phone --------------------------->*/}
+            {/*<---------------------------Experience Working with Differently-abled Persons--------------------------->*/}
             <div className="form-group mb-4">
               <label className="form-label" htmlFor="brand">
               Experience Working with Differently-abled Persons
@@ -130,7 +126,6 @@ const EmployerProfileForm = (props) => {
         {/*<----------------------- proceed next btn ----------------------->*/}
         <div className="row justify-content-center m-5">
           <button
-            onClick={goToSkills}
             className={`${styles.bottom_button} p-3`}
           >
             Upload Profile
