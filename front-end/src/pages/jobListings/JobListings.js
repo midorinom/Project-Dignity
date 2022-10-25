@@ -39,7 +39,7 @@ const JobListings = (props) => {
   });
   const [supportFilters, setSupportFilters] = useState([]);
   const [startPage, setStartPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(30);
+  const [totalPages, setTotalPages] = useState(13);
   const [currentPage, setCurrentPage] = useState(1);
 
   // =================
@@ -230,15 +230,15 @@ const JobListings = (props) => {
 
   function handlePageSkip(e) {
     const target = e.currentTarget.value;
-    console.log("targettype", typeof target);
     if (target < 6) {
       setCurrentPage(parseInt(target));
     } else {
-      setCurrentPage(1);
       if (startPage + 9 <= totalPages) {
+        setCurrentPage(1);
         setStartPage((prevState) => (prevState += 9));
       } else {
-        setStartPage(totalPages);
+        setStartPage(totalPages - 4);
+        setCurrentPage(5);
       }
     }
   }
@@ -360,7 +360,7 @@ const JobListings = (props) => {
                 {startPage + 4}
               </button>
             )}
-            {startPage + 5 <= totalPages && (
+            {totalPages > 5 && (
               <button
                 className={`${styles.pageNumber} btn btn-outline-primary`}
               >
