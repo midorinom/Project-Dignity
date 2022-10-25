@@ -8,7 +8,6 @@ const JobInteractionType = (props) => {
   function handleClick(e) {
     // must store e.currentTarget.value in a variable first
     const clickedInteraction = e.currentTarget.value;
-    const target = e.currentTarget;
 
     // If the interaction was clicked already
     if (interactionFilter === clickedInteraction) {
@@ -38,31 +37,31 @@ const JobInteractionType = (props) => {
       <h5 className="mx-1 mb-1 mt-2 text-muted">Job Interaction Type</h5>
       <input
         type="radio"
-        class="btn-check"
+        className="btn-check"
         name="jobInteractions"
         id="btn-check-outlined1"
-        autocomplete="off"
+        autoComplete="off"
         onClick={handleClick}
         value={true}
       />
       <label
-        class="btn btn-outline-secondary m-1 d-flex justify-content-center align-items-center"
-        for="btn-check-outlined1"
+        className="btn btn-outline-secondary m-1 d-flex justify-content-center align-items-center"
+        htmlFor="btn-check-outlined1"
       >
         Customer Facing
       </label>
       <input
         type="radio"
-        class="btn-check"
+        className="btn-check"
         name="jobInteractions"
         id="btn-check-outlined2"
-        autocomplete="off"
+        autoComplete="off"
         onClick={handleClick}
         value={false}
       />
       <label
-        class="btn btn-outline-secondary m-1 d-flex justify-content-center align-items-center"
-        for="btn-check-outlined2"
+        className="btn btn-outline-secondary m-1 d-flex justify-content-center align-items-center"
+        htmlFor="btn-check-outlined2"
       >
         Non-Customer Facing
       </label>

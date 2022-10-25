@@ -2,14 +2,39 @@ import React from "react";
 import styles from "./experienceCard.module.css";
 
 const EducationCard = (props) => {
+  const monthsArray = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const startYear = props.education.startDate.slice(0, 4);
+  const startMonth = Number(props.education.startDate.slice(5));
+  const startDate = `${monthsArray[startMonth - 1]} ${startYear}`;
+
+  const endDate = determineEndDate();
+
   function determineEndDate() {
-    if (props.education.endMonth === null && props.education.endYear === null) {
+    if (!props.education.endDate) {
       return "Current";
     } else {
-      return `${props.education.endMonth} ${props.education.endYear}`;
+      let date = "";
+      const year = props.education.endDate.slice(0, 4);
+      const month = Number(props.education.endDate.slice(5));
+
+      date = `${monthsArray[month - 1]} ${year}`;
+      return date;
     }
   }
-  const endDate = determineEndDate();
 
   return (
     <div className={styles.experienceCard}>
@@ -19,7 +44,7 @@ const EducationCard = (props) => {
         </span>
         <p>{props.education.cert}</p>
         <p>
-          {props.education.startMonth} {props.education.startYear} - {endDate}
+          {startDate} - {endDate}
         </p>
       </div>
       <li>{props.education.desc}</li>
