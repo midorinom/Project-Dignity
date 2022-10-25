@@ -1,19 +1,46 @@
-import React from "react";
+import React,{useState} from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./jobPostForm.module.css";
-
+import {useForm} from 'react-hook-form'
 const JobAbout = (props) => {
+const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0);
+
+// proceeds to accessibility considerstions when next is clicked
   function goToAccessibility() {
+    if (!props.sectionSaved) {
+      alert("Please save before proceeding to the next section");
+    } else {
     props.setCurrentPage("Accessibilty Considerations");
   }
+}
+
+  const navigate = useNavigate();
+  function goToEmployerLanding() {
+    navigate("/employers");
+  }
+//react-hook-forms functionality
+  const{
+    register,
+    handleSubmit,
+    formState:{errors}
+  }= useForm()
+
+  const onSubmit=(data)=>{
+    props.setAboutJobSchema(data)
+    console.log(data)
+  }
+
+  const onError=(errors)=> console.log(errors)
+
   return (
     <>
       {/* =====================================================
         FORM ABOUT JOB
         ========================================================= */}
+  <section classname="container-md" id="AboutEmployer">
+    <form id="About Job" onSubmit={handleSubmit(onError, onSubmit)}>
       <div className="row m-5 text-start">
-      <div className="col-md-6">
-      <section classname="container-md" id="AboutEmployer">
-        <form id="About Job">
+        <div className="col-md-6">
               {/*================================== Job Title and Job Type ================================== */}
               <label className="form-label ms-3" htmlFor="name">
                   Job Title
@@ -24,19 +51,35 @@ const JobAbout = (props) => {
               <div className={`form-group mb-4 ${styles.range}`}>
                 <input
                   type="text"
-                  class="form-control mb-4"
+                  className="form-control mb-4"
                   id="name"
                   placeholder="e.g Assistant Chef"
+                  {...register('title',{
+                    required:{
+                      value: true,
+                      message: 'Please include job title'
+                    }
+                  })}
                 />
-                <select type="text" class={`form-group mb-4 form-select ms-5 ${styles.range}`} id="JobType">
-                  <option class="default" selected>
+                <select type="text" className={`form-group mb-4 form-select ms-5 ${styles.range}`} id="JobType" 
+                {...register('type',{
+                    required:{
+                      value: true,
+                      message: 'Please select one option'
+                    }
+                  })}>
+                  <option className="default" selected>
                     Select from the drop down list
                   </option>
-                  <option class="Full-Time">Full-Time</option>
-                  <option class="Part-Time">Part-Time</option>
-                  <option class="Internship">Internship</option>
-                  <option class="Mentorship">Mentorship</option>
+                  <option value="Full-Time">Full-Time</option>
+                  <option value="Part-Time">Part-Time</option>
+                  <option value="Internship">Internship</option>
+                  <option value="Mentorship">Mentorship</option>
                 </select>
+              </div>
+              <div>
+                <p className="mt-2 text-danger">{errors.title?.message}</p>
+                <p className="mt-2 text-danger">{errors.type?.message}</p>
               </div>
               {/* ================================================================================================== */}
               {/*======================================Interaction Type ================================== */}
@@ -47,11 +90,18 @@ const JobAbout = (props) => {
               </div>
               <div className="form-check mb-4">
                 <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="flexCheckDefault"
+                  className="flexRadioDefault"
+                  type="radio"
+                  value={true}
+                  id="flexRadioDefault1"
+                  {...register("customerFacing", {
+                    required: {
+                      value: true,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
+
                 <label className="form-check-label" htmlfor="flexCheckDefault">
                   Customer Facing Jobs that involve interacting with customers
                   directly.
@@ -61,10 +111,16 @@ const JobAbout = (props) => {
               </div>
               <div className="form-check mb-4">
                 <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id="flexCheckDefault"
+                  className="flexRadioDefault"
+                  type="radio"
+                  value={false}
+                  id="flexRadioDefault"
+                  {...register("customerFacing", {
+                    required: {
+                      value: true,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
                 <label className="form-check-label" htmlfor="flexCheckDefault">
                   Non-Customer Facing Jobs that do not involve interacting with
@@ -73,36 +129,51 @@ const JobAbout = (props) => {
                   Example: Cooks, Administrators, Analysts
                 </label>
               </div>
+              <p className="mt-2 text-danger">{errors.customerFacing?.message}</p>
 
               {/* ================================================================================================== */}
               {/*======================================Job Description ============================================ */}
               <div className="form-group mb-4">
-                <label for="JobDescription" class="JobDescription">
+                <label for="JobDescription" className="JobDescription">
                   Job Description
                 </label>
                 <textarea
-                  class="form-control"
+                  className="form-control"
                   id="exampleFormControlTextarea1"
                   rows="3"
                   placeholder="Tip: Keep it simple!"
+                  {...register('desc',{
+                    required:{
+                      value: true,
+                      message: 'Please include a brief description'
+                    }
+                  })}
                 ></textarea>
               </div>
+              <p className="mt-2 text-danger">{errors.desc?.message}</p>
               {/* ================================================================================================== */}
               {/*============================================Job Tasks ============================================ */}
-              <div className="form-group mb-4">
+              <div className="form-group mb-2">
                 <label className="form-label" htmlFor="Job Tasks">
                   Job Tasks
                 </label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control"
                   id="task1"
                   placeholder="Task 1"
+                  {...register('tasks',{
+                    required:{
+                      value: true,
+                      message: 'Please include at least one task'
+                    }
+                  })}
                 />
-                <button type="button" class={`${styles.circle_btn}`}>
+                <button type="button" className={`${styles.circle_btn}`}>
                   +
                 </button>
               </div>
+              <p className="mt-2 text-danger">{errors.tasks?.message}</p>
               {/* ================================================================================================== */}
               {/*============================================Expected Salary ============================================ */}
               <div className="form-group mb-4">
@@ -111,26 +182,45 @@ const JobAbout = (props) => {
                 </label>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control mb-2"
                   id="minimum"
                   placeholder="Minimum"
+                  {...register('minSalary',{
+                    required:{
+                      value: true,
+                      message: 'Please include minimum salary'
+                    }
+                  })}
                 />
                 <p>to</p>
                 <input
                   type="text"
-                  class="form-control"
+                  className="form-control mt-2"
                   id="maximum"
                   placeholder="Maximum"
+                  {...register('maxSalary',{
+                    required:{
+                      value: true,
+                      message: 'Please include maximum salary'
+                    }
+                  })}
                 />
               </div>
+              <p className="mt-2 text-danger">{errors.minSalary?.message}</p>
+              <p className="mt-2 text-danger">{errors.maxSalary?.message}</p>
               {/* ================================================================================================== */}
               {/*==================================================Address ============================================ */}
               <div className="form-check mb-4">
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value={true}
                   id="flexCheckDefault"
+                  {...register('locationSame',{
+                    required:{
+                      value: false
+                    }
+                  })}
                 />
                 <label className="form-check-label" htmlfor="flexCheckDefault">
                   Location of job is same as office address
@@ -142,59 +232,88 @@ const JobAbout = (props) => {
                 </label>
                 <input
                   type="text"
-                  class="form-control"
-                  id="postal code"
+                  className="form-control"
+                  id="postalCode"
                   placeholder="E.g 730712"
+                  {...register('postalCode',{
+                    required:{
+                      value: true,
+                      message: 'Please include postal code'
+                    }
+                  })}
                 />
               </div>
+              <p className="mt-2 text-danger">{errors.postalCode?.message}</p>
               <div className="form-check mb-4">
                 <label className="form-label" htmlFor="Block/StreetNumber">
-                  Block/StreetNumber
+                  Block/Street Number
                 </label>
                 <input
                   type="text"
-                  class="form-control"
-                  id="postal code"
-                  placeholder="E.g 730712"
+                  className="form-control"
+                  id="block/streetNumber"
+                  placeholder="E.g Blk 712"
+                  {...register('block',{
+                    required:{
+                      value: true,
+                      message: 'Please include Block/Street Number '
+                    }
+                  })}
                 />
               </div>
+              <p className="mt-2 text-danger">{errors.block?.message}</p>
               <div className="form-check mb-4">
                 <label className="form-label" htmlFor="Unit Number">
                   Unit Number, <span>if applicable</span>
                 </label>
-              </div>
+              
               <input
                 type="text"
-                class="form-control"
-                id="postal code"
-                placeholder="E.g 730712"
+                className="form-control"
+                id="unitNumber"
+                placeholder="E.g 10-234"
+                {...register('unit',{
+                  required:{
+                    value: true,
+                    message: 'Please include Unit Number '
+                  }
+                })}
               />
+              </div>
+              <p className="mt-2 text-danger">{errors.unit?.message}</p>
               <div className="form-check mb-4">
                 <label for="Accessibility" class="Accessibility">
                   Accessibility of Job Location
                 </label>
                 <textarea
-                  class="form-control mb-4"
+                  className="form-control mb-4"
                   id="exampleFormControlTextarea1"
                   rows="3"
                   placeholder="
                     Some question to consider: 
-                    - What transport might an employee have to take to reach the workplace? 
-                    - Is there sufficient space for the use of mobility devices such as wheelchairs?
-                    "
+                    - What transport might an employee have to take to reach the workplace?
+                    - Is there sufficient space for the use of mobility devices such as wheelchairs?"
+                    {...register('accessibility',{
+                      required:{
+                        value: true,
+                        message: 'Please include a brief description'
+                      },
+                      maxLength: 200,
+                      onChange: (e) => setAccessibilityCharacterCount(e.target.value.length),    
+                    })}
                 ></textarea>
-                <p>200/200 characters left</p>
+              <small className="text-muted">{`${
+                200 - accessibilityCharacterCount
+              } / 200 characters left`}</small>
+                <p className="mt-2 text-danger">{errors.accessibility?.message}</p>
               </div>
               {/* ================================================================================================== */}
               <button type="button" class="btn btn-dark mt-3" onClick={goToAccessibility}>
                 Proceed to 'Accessibility Consideration Section'{" "}
-              </button>   
-        </form>
-        </section>
-        </div>  
-     
-      <div className="col-md-2"></div>
-      <div className="col-md-4">
+              </button>  
+              </div>
+              <div className="col-md-2"></div>
+              <div className="col-md-4">
             <div className={`${styles.sideButtonsContainer}`}>
               <button
                 className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
@@ -203,17 +322,20 @@ const JobAbout = (props) => {
               </button>
               <button
                 className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                onClick={() => {
+                  goToEmployerLanding()
+                  props.setSectionSaved(true);
+                }}
               >
                 Previous Job Post
               </button>
               <button
-                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
-              >
+                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}>
                 Upload Job post
               </button>
-              <div class="progress mt-4">
+              <div className="progress mt-4">
                 <div
-                  class="progress-bar"
+                  className="progress-bar"
                   role="progressbar"
                   Style="width: 75%"
                   aria-valuenow="75"
@@ -226,9 +348,11 @@ const JobAbout = (props) => {
                   75% complete
                 </small>
               </div>
+              </div>
           </div>
-      </div>
-      </div>
+          </div>
+          </form>
+          </section>
     </>
   );
 };
