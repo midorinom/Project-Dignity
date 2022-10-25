@@ -1,6 +1,0 @@
-.footer {
-  min-height: 25%; /* 25% of body height which is the viewport height */
-  width: 100%;
-  background-color: #fec501;
-  flex-shrink: 0;
-}
