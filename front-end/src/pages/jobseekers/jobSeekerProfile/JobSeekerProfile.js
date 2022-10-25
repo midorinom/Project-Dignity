@@ -33,13 +33,6 @@ const JobSeekerProfile = (props) => {
   // ====================================
   useEffect(() => {
     getProfileData();
-
-    // check if logged in user already has a profile to render the appropriate view
-    if (props.profileData) {
-      props.setProfileIsCompleted(true);
-    } else {
-      props.setProfileIsCompleted(false);
-    }
   }, []);
 
   const getProfileData = async () => {
@@ -57,6 +50,15 @@ const JobSeekerProfile = (props) => {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    // check if logged in user already has a profile to render the appropriate view
+    if (props.profileData !== undefined) {
+      props.setProfileIsCompleted(true);
+    } else {
+      props.setProfileIsCompleted(false);
+    }
+  }, [props.profileData]);
 
   // ================================================================
   // useEffect to map the Resume Cards after profileData has been set
