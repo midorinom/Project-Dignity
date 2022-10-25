@@ -1,13 +1,21 @@
 .pageNumber {
   border-radius: 0;
   border-left: none;
+  border-color: grey;
 }
 
 .prevBtn {
   border-radius: 0.6em 0 0 0.6em;
+  border-color: grey;
 }
 
 .nextBtn {
   border-radius: 0 0.6em 0.6em 0;
   border-left: none;
+  border-color: grey;
+}
+
+.currentPage {
+  background-color: #011036;
+  color: white;
 }

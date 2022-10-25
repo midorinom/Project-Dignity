@@ -38,6 +38,9 @@ const JobListings = (props) => {
     maxLight: 4,
   });
   const [supportFilters, setSupportFilters] = useState([]);
+  const [startPage, setStartPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(30);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // =================
   // onMount useEffect
@@ -51,7 +54,7 @@ const JobListings = (props) => {
       const randomFilter = generateRandomFilter();
       getJobPosts(props.searchInput, randomFilter);
     }
-    // Cleanup function to reset searchInput when the user leaves the JobListings page
+    // Cleanup function for when the user leaves the JobListings page. Reset searchInput and currentPage
     return () => {
       props.setSearchInput("");
     };
@@ -198,6 +201,49 @@ const JobListings = (props) => {
   }
 
   // ======
+  // Events
+  // ======
+  function handlePrev() {
+    if (currentPage === 1) {
+      if (startPage < 6) {
+        setCurrentPage(startPage - 1);
+        setStartPage(1);
+      } else {
+        setCurrentPage(5);
+        setStartPage((prevState) => (prevState -= 5));
+      }
+    } else {
+      setCurrentPage((prevState) => (prevState -= 1));
+    }
+  }
+
+  function handleNext() {
+    if (currentPage === 5) {
+      setCurrentPage(1);
+      setStartPage((prevState) => (prevState += 5));
+    } else {
+      if (startPage + currentPage - 1 < totalPages) {
+        setCurrentPage((prevState) => (prevState += 1));
+      }
+    }
+  }
+
+  function handlePageSkip(e) {
+    const target = e.currentTarget.value;
+    console.log("targettype", typeof target);
+    if (target < 6) {
+      setCurrentPage(parseInt(target));
+    } else {
+      setCurrentPage(1);
+      if (startPage + 9 <= totalPages) {
+        setStartPage((prevState) => (prevState += 9));
+      } else {
+        setStartPage(totalPages);
+      }
+    }
+  }
+
+  // ======
   // Return
   // ======
   return (
@@ -248,34 +294,98 @@ const JobListings = (props) => {
             setSupportFilters={setSupportFilters}
           />
         </div>
-        <div className="postings w-75 px-4 mb-4">
+        <div className="postings flex-column w-75 px-4 mb-4">
           {jobCards}
-          <div className="d-flex w-50 align-self-start">
-            <button className={`${styles.prevBtn} btn btn-outline-primary`}>
+          <div className="w-100 mt-4">
+            <button
+              className={`${styles.prevBtn} ${
+                startPage === 1 && currentPage === 1
+                  ? "btn-outline-secondary disabled"
+                  : "btn-outline-primary"
+              } btn`}
+              onClick={handlePrev}
+            >
               {"< Previous"}
             </button>
-            <button className={`${styles.pageNumber} btn btn-outline-primary`}>
-              {"1"}
+            <button
+              className={`${styles.pageNumber} ${
+                currentPage === 1 && styles.currentPage
+              } btn btn-outline-primary`}
+              value="1"
+              onClick={handlePageSkip}
+            >
+              {startPage}
             </button>
-            <button className={`${styles.pageNumber} btn btn-outline-primary`}>
-              {"2"}
-            </button>
-            <button className={`${styles.pageNumber} btn btn-outline-primary`}>
-              {"3"}
-            </button>
-            <button className={`${styles.pageNumber} btn btn-outline-primary`}>
-              {"4"}
-            </button>
-            <button className={`${styles.pageNumber} btn btn-outline-primary`}>
-              {"5"}
-            </button>
-            <button className={`${styles.pageNumber} btn btn-outline-primary`}>
-              {"..."}
-            </button>
-            <button className={`${styles.pageNumber} btn btn-outline-primary`}>
-              {"10"}
-            </button>
-            <button className={`${styles.nextBtn} btn btn-outline-primary`}>
+            {startPage + 1 <= totalPages && (
+              <button
+                className={`${styles.pageNumber} ${
+                  currentPage === 2 && styles.currentPage
+                } btn btn-outline-primary`}
+                value="2"
+                onClick={handlePageSkip}
+              >
+                {startPage + 1}
+              </button>
+            )}
+            {startPage + 2 <= totalPages && (
+              <button
+                className={`${styles.pageNumber} ${
+                  currentPage === 3 && styles.currentPage
+                } btn btn-outline-primary`}
+                value="3"
+                onClick={handlePageSkip}
+              >
+                {startPage + 2}
+              </button>
+            )}
+            {startPage + 3 <= totalPages && (
+              <button
+                className={`${styles.pageNumber} ${
+                  currentPage === 4 && styles.currentPage
+                } btn btn-outline-primary`}
+                value="4"
+                onClick={handlePageSkip}
+              >
+                {startPage + 3}
+              </button>
+            )}
+            {startPage + 4 <= totalPages && (
+              <button
+                className={`${styles.pageNumber} ${
+                  currentPage === 5 && styles.currentPage
+                } btn btn-outline-primary`}
+                value="5"
+                onClick={handlePageSkip}
+              >
+                {startPage + 4}
+              </button>
+            )}
+            {startPage + 5 <= totalPages && (
+              <button
+                className={`${styles.pageNumber} btn btn-outline-primary`}
+              >
+                {"..."}
+              </button>
+            )}
+            {startPage + 5 <= totalPages && (
+              <button
+                className={`${styles.pageNumber} ${
+                  currentPage === 6 && styles.currentPage
+                } btn btn-outline-primary`}
+                value="6"
+                onClick={handlePageSkip}
+              >
+                {startPage + 9 > totalPages ? totalPages : startPage + 9}
+              </button>
+            )}
+            <button
+              className={`${styles.nextBtn} ${
+                startPage + currentPage - 1 === totalPages
+                  ? "btn-outline-secondary disabled"
+                  : "btn-outline-primary"
+              } btn`}
+              onClick={handleNext}
+            >
               {"Next >"}
             </button>
           </div>
