@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import styles from "./jobSeekerProfileForm.module.css";
 
 const JobSeekerProfileFormAbout = (props) => {
   const [characterCount, setCharacterCount] = useState(0);
+
+  console.log(`section saved state: `, props.sectionSaved);
 
   // when proceed next button is clicked
   function goToSkills() {
@@ -22,10 +24,20 @@ const JobSeekerProfileFormAbout = (props) => {
     alert("Your data are not saved");
   }
 
+  useEffect(() => {
+    if (props.profileData !== undefined) {
+      const fields = ["name", "aspiration", "brand", "email", "mobile"];
+      fields.forEach((field) =>
+        setValue(field, props.profileData.about[field])
+      );
+    }
+  });
+
   // adding react-hook-forms functionality
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
