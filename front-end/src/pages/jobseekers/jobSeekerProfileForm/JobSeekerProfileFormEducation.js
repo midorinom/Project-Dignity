@@ -14,8 +14,8 @@ const JobSeekerProfileFormEducation = (props) => {
     } else {
       console.log(`here`);
       props.setToSaveProfile(true);
-      // navigate("/profile");
     }
+    // navigate("/profile");
   }
 
   // when cancel button is clicked
