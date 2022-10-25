@@ -8,7 +8,6 @@ const JobSeekerLanding = (props) => {
     <>
       <Search
         setSearchInput={props.setSearchInput}
-        setIsSearch={props.setIsSearch}
         searchInput={props.searchInput}
       />
       <div className="centered">Job Seeker Landing Page</div>;

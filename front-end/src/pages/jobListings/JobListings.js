@@ -49,13 +49,7 @@ const JobListings = (props) => {
     } else {
       // Get initial filter
       const randomFilter = generateRandomFilter();
-      // If the user navigated to this page from a search
-      if (props.isSearch) {
-        props.setIsSearch(false);
-        getFilteredJobPosts(props.searchInput, randomFilter);
-      } else {
-        getAllJobPosts(randomFilter);
-      }
+      getJobPosts(props.searchInput, randomFilter);
     }
     // Cleanup function to reset searchInput when the user leaves the JobListings page
     return () => {
@@ -68,12 +62,8 @@ const JobListings = (props) => {
   // ===========================================================
   useEffect(() => {
     if (Object.keys(profile).length > 0) {
-      // If the user navigated to this page from a search
-      if (props.isSearch) {
-        props.setIsSearch(false);
-      }
       const randomFilter = generateRandomFilter();
-      getFilteredJobPosts(props.searchInput, randomFilter);
+      getJobPosts(props.searchInput, randomFilter);
     }
   }, [profile]);
 
@@ -148,26 +138,7 @@ const JobListings = (props) => {
     }
   };
 
-  const getAllJobPosts = async (randomFilter) => {
-    try {
-      const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
-        method: "POST",
-        body: JSON.stringify({
-          search: props.searchInput,
-          ...filter,
-          initialFilter: randomFilter,
-        }),
-        headers: { "content-type": "application/json" },
-      });
-      const fetchedJobPosts = await res.json();
-      console.log("fetchedJobPostsGetAll", fetchedJobPosts);
-      setJobPosts(fetchedJobPosts);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const getFilteredJobPosts = async (searchInput, randomFilter) => {
+  const getJobPosts = async (searchInput, randomFilter) => {
     try {
       // If the user is a job seeker, pass the profile data into the body
       let fetchBody = {
@@ -197,7 +168,7 @@ const JobListings = (props) => {
   // =========================================================
   useEffect(() => {
     if (firstRenderDone) {
-      getFilteredJobPosts(props.searchInput, initialFilter);
+      getJobPosts(props.searchInput, initialFilter);
     }
   }, [filter]);
 
@@ -233,12 +204,10 @@ const JobListings = (props) => {
     <div className="job-listings">
       <Search
         setSearchInput={props.setSearchInput}
-        setIsSearch={props.setIsSearch}
         searchInput={props.searchInput}
         isJobListings={true}
         setFilter={setFilter}
-        getAllJobPosts={getAllJobPosts}
-        getFilteredJobPosts={getFilteredJobPosts}
+        getJobPosts={getJobPosts}
         initialFilter={initialFilter}
         setAbilityDiffFilters={setAbilityDiffFilters}
         setInteractionFilter={setInteractionFilter}
