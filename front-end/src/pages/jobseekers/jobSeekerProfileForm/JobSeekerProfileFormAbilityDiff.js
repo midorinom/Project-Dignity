@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import styles from "./jobSeekerProfileForm.module.css";
@@ -28,10 +28,31 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
     alert("Your data are not saved");
   }
 
+  useEffect(() => {
+    if (props.profileData !== undefined) {
+      const fields = [
+        "diff",
+        "diagnosis",
+        "diffDesc",
+        "support",
+        "supportDesc",
+        "comm",
+        "commSpec",
+        "aids",
+        "aidsSpec",
+        "travel",
+      ];
+      fields.forEach((field) =>
+        setValue(field, props.profileData.abilityDifferences[field])
+      );
+    }
+  });
+
   // adding react-hook-forms functionality
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
