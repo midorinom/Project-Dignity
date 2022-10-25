@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 
 const EmployerAccessibility = (props) => {
 
+  console.log(props.aboutJobSchema)
   //react-hook-forms functionality
   const {
     register,
@@ -26,7 +27,7 @@ const EmployerAccessibility = (props) => {
       environment: data.environmentSet,
     }
     props.setAccessibilityConsiderationsSchema(newSchema);
-    // console.log(newSchema)
+    console.log(newSchema)
   };
   const onError = (errors) => {
     console.log(errors);
@@ -99,7 +100,9 @@ const EmployerAccessibility = (props) => {
                   ability differences.
                 </a>
               </div>
-              {/* nature of ability diff */}
+
+        {/*================================== Nature Of Ability Diff  ================================== */}
+
               <div className="form-group mb-4">
                 <label className="form-label" htmlFor="job-title">
                   Nature of Ability Differences
@@ -587,14 +590,14 @@ const EmployerAccessibility = (props) => {
               </div>
               {/* ================================================================================================== */}
               <button type="button" className={`${styles.bottom_button}`}>
-                Upload Job Post{" "}
+                Cancel{" "}
               </button>
             </div>
             <div className="col-md-1"></div>
             {/*================================== Side Panel ====================================================== */}
             <div className="col-md-4">
               <div className={`${styles.sideButtonsContainer}`}>
-                <button
+                <button type='submit'
                   className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
                 >
                   Save as Draft
@@ -605,7 +608,7 @@ const EmployerAccessibility = (props) => {
                   Previous Job Post
                 </button>
                 <button
-                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`} onClick={props.createJobPost}
                 >
                   Upload Job post
                 </button>

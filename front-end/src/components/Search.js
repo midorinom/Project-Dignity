@@ -1,10 +1,12 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../context/userContext";
 
 const Search = (props) => {
   // Variables
   const inputRef = useRef();
   const navigate = useNavigate();
+  const userCtx = useContext(UserContext);
 
   // Event Functions
   function handleSubmit(e) {
@@ -13,20 +15,25 @@ const Search = (props) => {
 
     // If the search came from outside JobListings page
     if (!props.isJobListings) {
-      props.setIsSearch(true);
       navigate("/job-listings");
     } else {
       // If the search came from within the JobListings page
-      props.getFilteredJobPosts(inputRef.current.value, props.initialFilter);
+      props.getJobPosts(inputRef.current.value, props.initialFilter);
     }
   }
 
-  // Only available in Job Listings page. Resets the input field and re-fetches with getAll
+  // Only available in Job Listings page. Resets the input field and re-fetches
   function resetSearch() {
-    // window.location.reload();
-    props.setResetPressed(true);
+    props.setAbilityDiffFilters([]);
+    props.setEnvironmentFilters({
+      minNoise: 0,
+      maxNoise: 4,
+      minLight: 0,
+      maxLight: 4,
+    });
+    props.setInteractionFilter(undefined);
+    props.setSupportFilters([]);
     props.setSearchInput("");
-    props.getAllJobPosts(props.initialFilter);
     props.setFilter({
       abilityDiff: [],
       environment: {
@@ -38,6 +45,8 @@ const Search = (props) => {
       customerFacing: undefined,
       support: [],
     });
+
+    props.getJobPosts(inputRef.current.value, props.initialFilter);
   }
 
   // Make the Input text stay through renders

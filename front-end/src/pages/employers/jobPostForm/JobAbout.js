@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./jobPostForm.module.css";
 import {useForm} from 'react-hook-form'
+
 const JobAbout = (props) => {
 const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0);
 
@@ -10,14 +11,13 @@ const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0
     if (!props.sectionSaved) {
       alert("Please save before proceeding to the next section");
     } else {
+      console.log("aboutjobschema before going next page", props.aboutJobSchema)
     props.setCurrentPage("Accessibilty Considerations");
   }
 }
 
   const navigate = useNavigate();
-  function goToEmployerLanding() {
-    navigate("/employers");
-  }
+
 //react-hook-forms functionality
   const{
     register,
@@ -38,7 +38,7 @@ const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0
         FORM ABOUT JOB
         ========================================================= */}
   <section classname="container-md" id="AboutEmployer">
-    <form id="About Job" onSubmit={handleSubmit(onError, onSubmit)}>
+    <form id="About Job" onSubmit={handleSubmit(onSubmit, onError)}>
       <div className="row m-5 text-start">
         <div className="col-md-6">
               {/*================================== Job Title and Job Type ================================== */}
@@ -290,9 +290,7 @@ const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0
                   id="exampleFormControlTextarea1"
                   rows="3"
                   placeholder="
-                    Some question to consider: 
-                    - What transport might an employee have to take to reach the workplace?
-                    - Is there sufficient space for the use of mobility devices such as wheelchairs?"
+                    Some question to consider:&#10;- What transport might an employee have to take to reach the workplace? &#10;- Is there sufficient space for the use of mobility devices such as wheelchairs?"
                     {...register('accessibility',{
                       required:{
                         value: true,
@@ -316,16 +314,13 @@ const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0
               <div className="col-md-4">
             <div className={`${styles.sideButtonsContainer}`}>
               <button
-                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`} onClick={props.setSectionSaved}
               >
                 Save as Draft
               </button>
               <button
                 className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
-                onClick={() => {
-                  goToEmployerLanding()
-                  props.setSectionSaved(true);
-                }}
+              
               >
                 Previous Job Post
               </button>
