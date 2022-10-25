@@ -1,48 +1,28 @@
 import React, { useState, useEffect } from "react";
 
 const JobEnvironment = (props) => {
-  const [environmentFilters, setEnvironmentFilters] = useState({
-    minNoise: 0,
-    maxNoise: 4,
-    minLight: 0,
-    maxLight: 4,
-  });
   const [firstRenderDone, setFirstRenderDone] = useState(false);
 
   function handleClick(e) {
     // must store e.currentTarget.value in a variable first
     const clickedEnvironment = e.currentTarget;
 
-    setEnvironmentFilters((prevState) => {
+    props.setEnvironmentFilters((prevState) => {
       return {
         ...prevState,
         [clickedEnvironment.id]: clickedEnvironment.value,
       };
     });
-
-    //   // If the abilityDiff that was clicked already exists in the abilityDiffFilters array, filter it out.
-    //   if (environmentFilters.some((element) => element === clickedEnvironment)) {
-    //     const newArray = abilityDiffFilters.filter(
-    //       (element) => element !== clickedAbilityDiff
-    //     );
-    //     setAbilityDiffFilters(newArray);
-    //   } else {
-    //     // Otherwise, push it into the abilityDiffFilters array
-    //     setAbilityDiffFilters((prevState) => {
-    //       return [...prevState, clickedAbilityDiff];
-    //     });
-    //   }
-    // }
   }
 
   // useEffect to lift state up to parent component after environmentFilters is set
   useEffect(() => {
     if (firstRenderDone) {
       props.setFilter((prevState) => {
-        return { ...prevState, environment: environmentFilters };
+        return { ...prevState, environment: props.environmentFilters };
       });
     }
-  }, [environmentFilters]);
+  }, [props.environmentFilters]);
 
   // onMount
   useEffect(() => {
@@ -65,8 +45,8 @@ const JobEnvironment = (props) => {
           max="4"
           step="1"
           id="minNoise"
-          defaultValue="0"
-          onClick={handleClick}
+          value={props.environmentFilters.minNoise}
+          onChange={handleClick}
         ></input>
         <p className="w-25 text-center">Loud</p>
       </div>
@@ -80,8 +60,8 @@ const JobEnvironment = (props) => {
           max="4"
           step="1"
           id="maxNoise"
-          defaultValue="4"
-          onClick={handleClick}
+          value={props.environmentFilters.maxNoise}
+          onChange={handleClick}
         ></input>
         <p className="w-25 text-center">Loud</p>
       </div>
@@ -98,8 +78,8 @@ const JobEnvironment = (props) => {
           max="4"
           step="1"
           id="minLight"
-          defaultValue="0"
-          onClick={handleClick}
+          value={props.environmentFilters.minLight}
+          onChange={handleClick}
         ></input>
         <p className="w-25 text-center">Bright, Flashing</p>
       </div>
@@ -113,8 +93,8 @@ const JobEnvironment = (props) => {
           max="4"
           step="1"
           id="maxLight"
-          defaultValue="4"
-          onClick={handleClick}
+          value={props.environmentFilters.maxLight}
+          onChange={handleClick}
         ></input>
         <p className="w-25 text-center">Bright, Flashing</p>
       </div>
