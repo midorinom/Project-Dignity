@@ -207,7 +207,7 @@ const JobListings = (props) => {
     const mappedJobCards = jobPosts.map((element) => {
       return (
         <Card
-          jobPost={element.jobPost}
+          job={element}
           key={Math.random()}
           setSelectedJobPost={props.setSelectedJobPost}
         />

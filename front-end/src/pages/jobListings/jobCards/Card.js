@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const Card = (props) => {
   // Sort AbilityDifferences in Alphabetical Order
-  const abilityDiff = props.jobPost.accessibility.abilityDiff;
+  const abilityDiff = props.job.jobPost.accessibility.abilityDiff;
   abilityDiff.sort();
 
   // Map AbilityDifferencesIcons
@@ -39,7 +39,7 @@ const Card = (props) => {
   });
 
   const handleJobDetails = async () => {
-    await props.setSelectedJobPost(props.jobPost);
+    await props.setSelectedJobPost(props.job);
   };
 
   return (
@@ -51,13 +51,13 @@ const Card = (props) => {
         </div>
         <Link to="/job-post-details" className="col-4 mt-3">
           <p className="text-secondary">
-            Job Title: {props.jobPost.about.title}
+            Job Title: {props.job.jobPost.about.title}
           </p>
           <p className="text-secondary">
-            Company: {props.jobPost.about.company}
+            Company: {props.job.jobPost.about.company}
           </p>
           <p className="text-secondary mb-0">
-            Job Type: {props.jobPost.about.type}
+            Job Type: {props.job.jobPost.about.type}
           </p>
         </Link>
         <Link to="/job-post-details" className="col-4 mt-3 d-flex flex-column">
@@ -89,7 +89,7 @@ const Card = (props) => {
             {abilityDifferencesIcons}
           </div>
           <p className="text-secondary text-center mb-0">
-            {[...props.jobPost.accessibility.abilityDiff].join(", ")}
+            {[...props.job.jobPost.accessibility.abilityDiff].join(", ")}
           </p>
         </Link>
       </div>
