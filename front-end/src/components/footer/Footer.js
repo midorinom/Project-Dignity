@@ -2,11 +2,10 @@ import React, { useContext } from "react";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import UserContext from "../../context/userContext";
-import styles from "./footer.module.css";
+// import UserContext from "../../context/userContext";
 
 const Footer = () => {
-  const userCtx = useContext(UserContext);
+  // const userCtx = useContext(UserContext);
   return (
     <div className="container-fluid bg-warning px-5 pt-4">
       <div className="row">
