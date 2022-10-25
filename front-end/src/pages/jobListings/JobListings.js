@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import styles from "./jobListings.module.css";
 import UserContext from "../../context/userContext";
 import AbilityDifference from "./filters/abilityDifference/AbilityDifference";
 import Card from "./jobCards/Card.js";
@@ -278,7 +279,38 @@ const JobListings = (props) => {
             setSupportFilters={setSupportFilters}
           />
         </div>
-        <div className="postings w-75 px-4 mb-4">{jobCards}</div>
+        <div className="postings w-75 px-4 mb-4">
+          {jobCards}
+          <div className="d-flex w-50 align-self-start">
+            <button className={`${styles.prevBtn} btn btn-outline-primary`}>
+              {"< Previous"}
+            </button>
+            <button className={`${styles.pageNumber} btn btn-outline-primary`}>
+              {"1"}
+            </button>
+            <button className={`${styles.pageNumber} btn btn-outline-primary`}>
+              {"2"}
+            </button>
+            <button className={`${styles.pageNumber} btn btn-outline-primary`}>
+              {"3"}
+            </button>
+            <button className={`${styles.pageNumber} btn btn-outline-primary`}>
+              {"4"}
+            </button>
+            <button className={`${styles.pageNumber} btn btn-outline-primary`}>
+              {"5"}
+            </button>
+            <button className={`${styles.pageNumber} btn btn-outline-primary`}>
+              {"..."}
+            </button>
+            <button className={`${styles.pageNumber} btn btn-outline-primary`}>
+              {"10"}
+            </button>
+            <button className={`${styles.nextBtn} btn btn-outline-primary`}>
+              {"Next >"}
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
