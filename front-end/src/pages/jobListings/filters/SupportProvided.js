@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 const SupportProvided = (props) => {
-  const [supportFilters, setSupportFilters] = useState([]);
   const [firstRenderDone, setFirstRenderDone] = useState(false);
 
   function handleClick(e) {
@@ -9,14 +8,14 @@ const SupportProvided = (props) => {
     const clickedSupport = e.currentTarget.value;
 
     // If the Support that was clicked already exists in the supportFilters array, filter it out.
-    if (supportFilters.some((element) => element === clickedSupport)) {
-      const newArray = supportFilters.filter(
+    if (props.supportFilters.some((element) => element === clickedSupport)) {
+      const newArray = props.supportFilters.filter(
         (element) => element !== clickedSupport
       );
-      setSupportFilters(newArray);
+      props.setSupportFilters(newArray);
     } else {
       // Otherwise, push it into the supportFilters array
-      setSupportFilters((prevState) => {
+      props.setSupportFilters((prevState) => {
         return [...prevState, clickedSupport];
       });
     }
@@ -26,10 +25,10 @@ const SupportProvided = (props) => {
   useEffect(() => {
     if (firstRenderDone) {
       props.setFilter((prevState) => {
-        return { ...prevState, support: supportFilters };
+        return { ...prevState, support: props.supportFilters };
       });
     }
-  }, [supportFilters]);
+  }, [props.supportFilters]);
 
   // onMount
   useEffect(() => {
@@ -40,54 +39,66 @@ const SupportProvided = (props) => {
     <div className="mt-3 d-flex flex-column w-100 bg-light align-center">
       <h5 className="mx-1 mb-1 mt-2 text-muted">Support Provided</h5>
       <button
-        className="btn btn-outline-secondary btn-sm m-1 d-flex justify-content-center align-items-center"
+        className={`btn btn-outline-secondary btn-sm m-1 d-flex justify-content-center align-items-center ${
+          props.supportFilters.some((element) => element === "Structured") &&
+          "active"
+        }`}
         type="button"
-        data-bs-toggle="button"
         onClick={handleClick}
         value={"Structured"}
       >
         <p className="d-flex justify-content-center m-0">Training Programmes</p>
       </button>
       <button
-        className="btn btn-outline-secondary btn-sm m-1 d-flex justify-content-center align-items-center"
+        className={`btn btn-outline-secondary btn-sm m-1 d-flex justify-content-center align-items-center ${
+          props.supportFilters.some((element) => element === "Shadowing") &&
+          "active"
+        }`}
         type="button"
-        data-bs-toggle="button"
         onClick={handleClick}
         value={"Shadowing"}
       >
         <p className="d-flex justify-content-center m-0">Job Shadowing</p>
       </button>
       <button
-        className="btn btn-outline-secondary btn-sm m-1 d-flex justify-content-center align-items-center"
+        className={`btn btn-outline-secondary btn-sm m-1 d-flex justify-content-center align-items-center ${
+          props.supportFilters.some((element) => element === "Trial") &&
+          "active"
+        }`}
         type="button"
-        data-bs-toggle="button"
         onClick={handleClick}
         value={"Trial"}
       >
         <p className="d-flex justify-content-center m-0">Trial Period</p>
       </button>
       <button
-        className="btn btn-outline-secondary btn-sm m-1 d-flex justify-content-center align-items-center"
+        className={`btn btn-outline-secondary btn-sm m-1 d-flex justify-content-center align-items-center ${
+          props.supportFilters.some((element) => element === "Redesign") &&
+          "active"
+        }`}
         type="button"
-        data-bs-toggle="button"
         onClick={handleClick}
         value={"Redesign"}
       >
         <p className="d-flex justify-content-center m-0">Workplace Redesign</p>
       </button>
       <button
-        className="btn btn-outline-secondary btn-sm m-1 d-flex justify-content-center align-items-center"
+        className={`btn btn-outline-secondary btn-sm m-1 d-flex justify-content-center align-items-center ${
+          props.supportFilters.some((element) => element === "Social") &&
+          "active"
+        }`}
         type="button"
-        data-bs-toggle="button"
         onClick={handleClick}
         value={"Social"}
       >
         <p className="d-flex justify-content-center m-0">Social Integration</p>
       </button>
       <button
-        className="btn btn-outline-secondary btn-sm m-1 d-flex justify-content-center align-items-center"
+        className={`btn btn-outline-secondary btn-sm m-1 d-flex justify-content-center align-items-center ${
+          props.supportFilters.some((element) => element === "Assistive") &&
+          "active"
+        }`}
         type="button"
-        data-bs-toggle="button"
         onClick={handleClick}
         value={"Assistive"}
       >
