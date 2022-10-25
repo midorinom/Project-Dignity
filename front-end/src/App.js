@@ -90,8 +90,28 @@ function App() {
         <Routes>
           <Route path="/" element={landingPage} />
           <Route path="/login" element={<Login />} />
-          <Route path="/job-seekers" element={<JobSeekerLanding />} />
-          <Route path="/employers" element={<EmployerLanding />} />
+          <Route
+            path="/job-seekers"
+            element={
+              <JobSeekerLanding
+                userType={userDetails.type}
+                setSearchInput={setSearchInput}
+                setIsSearch={setIsSearch}
+                searchInput={searchInput}
+              />
+            }
+          />
+          <Route
+            path="/employers"
+            element={
+              <EmployerLanding
+                userType={userDetails.type}
+                setSearchInput={setSearchInput}
+                setIsSearch={setIsSearch}
+                searchInput={searchInput}
+              />
+            }
+          />
           <Route
             path="/job-listings"
             element={
