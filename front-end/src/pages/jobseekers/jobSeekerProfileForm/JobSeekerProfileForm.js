@@ -7,24 +7,29 @@ import JobSeekerProfileFormAbilityDiff from "./JobSeekerProfileFormAbilityDiff";
 import JobSeekerProfileFormExperience from "./JobSeekerProfileFormExperience";
 import JobSeekerProfileFormEducation from "./JobSeekerProfileFormEducation";
 
-const JobSeekerProfileForm = () => {
+const JobSeekerProfileForm = (props) => {
+  console.log(props);
+
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState("About");
+  // setting data from various section into state
   const [aboutSchema, setAboutSchema] = useState();
   const [skillsSchema, setSkillsSchema] = useState();
   const [abilityDifferencesSchema, setAbilityDifferencesSchema] = useState();
   const [experienceSchema, setExperienceSchema] = useState();
   const [educationSchema, setEducationSchema] = useState();
+  // for proceed next button
   const [sectionSaved, setSectionSaved] = useState(false);
+  // for complete profile button at last form section
   const [toSaveProfile, setToSaveProfile] = useState(false);
-  const [profile, setProfile] = useState({
+  // setting various section state into state to be send to db
+  const [newProfile, setNewProfile] = useState({
     about: "",
     skills: "",
     abilityDifferences: "",
     experience: "",
     education: "",
   });
-
-  const navigate = useNavigate();
 
   // Render the current page
   function manageCurrentPage(e) {
@@ -41,6 +46,7 @@ const JobSeekerProfileForm = () => {
             sectionSaved={sectionSaved}
             setSectionSaved={setSectionSaved}
             setAboutSchema={setAboutSchema}
+            profileData={props.profileData}
           />
         );
       case "Skills":
@@ -50,6 +56,7 @@ const JobSeekerProfileForm = () => {
             sectionSaved={sectionSaved}
             setSectionSaved={setSectionSaved}
             setSkillsSchema={setSkillsSchema}
+            profileData={props.profileData}
           />
         );
       case "Ability Differences":
@@ -59,6 +66,7 @@ const JobSeekerProfileForm = () => {
             sectionSaved={sectionSaved}
             setSectionSaved={setSectionSaved}
             setAbilityDifferencesSchema={setAbilityDifferencesSchema}
+            profileData={props.profileData}
           />
         );
       case "Experience":
@@ -68,6 +76,7 @@ const JobSeekerProfileForm = () => {
             sectionSaved={sectionSaved}
             setSectionSaved={setSectionSaved}
             setExperienceSchema={setExperienceSchema}
+            profileData={props.profileData}
           />
         );
       case "Education":
@@ -77,6 +86,7 @@ const JobSeekerProfileForm = () => {
             sectionSaved={sectionSaved}
             setSectionSaved={setSectionSaved}
             setToSaveProfile={setToSaveProfile}
+            profileData={props.profileData}
           />
         );
     }
@@ -85,12 +95,17 @@ const JobSeekerProfileForm = () => {
 
   // console.log(aboutSchema);
   // console.log(skillsSchema);
-  console.log(abilityDifferencesSchema);
+  // console.log(abilityDifferencesSchema);
   // console.log(experienceSchema);
   // console.log(educationSchema);
 
+  console.log(`profile is completed (before):`, props.profileIsComplete);
+  console.log(`to save profile (before)`, toSaveProfile);
+
   useEffect(() => {
+    // setProfile will only happen if profileIsComplete=false, toSaveProfile=true and all schemas have values
     if (
+      !props.profileIsComplete &&
       aboutSchema &&
       skillsSchema &&
       abilityDifferencesSchema &&
@@ -98,7 +113,7 @@ const JobSeekerProfileForm = () => {
       educationSchema &&
       toSaveProfile
     ) {
-      setProfile({
+      setNewProfile({
         about: aboutSchema,
         skills: skillsSchema,
         abilityDifferences: abilityDifferencesSchema,
@@ -138,13 +153,21 @@ const JobSeekerProfileForm = () => {
 
       updateProfileData();
 
+      props.setProfileIsComplete(true);
+
       navigate("/profile");
-    } else {
-      alert(`Missing fields`);
+      // } else {
+      //   alert(`Incomplete profile`);
     }
   }, [toSaveProfile]);
 
-  console.log(profile);
+  // created
+  console.log(`newly created:`, newProfile);
+  // status
+  console.log(`profile is completed (after):`, props.profileIsComplete);
+  console.log(`to save profile (after)`, toSaveProfile);
+  // returned profile from api
+  console.log(`returned profile from api: `, props.profileData);
 
   return (
     <>
