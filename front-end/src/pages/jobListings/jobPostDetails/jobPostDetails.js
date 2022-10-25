@@ -94,7 +94,7 @@ const JobPostDetails = (props) => {
 
   //==============================
   //Save applied
-  const handleClick = (e) => {
+  const handleClick = () => {
     let data = [];
     if (userCtx.userDetails.appliedJobs !== undefined) {
       data = [...userCtx.userDetails.appliedJobs];
