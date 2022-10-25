@@ -22,8 +22,9 @@ const Search = (props) => {
   }
 
   // Only available in Job Listings page. Resets the input field and re-fetches with getAll
-  function resetSearch(e) {
-    window.location.reload();
+  function resetSearch() {
+    // window.location.reload();
+    props.setResetPressed(true);
     props.setSearchInput("");
     props.getAllJobPosts(props.initialFilter);
     props.setFilter({
