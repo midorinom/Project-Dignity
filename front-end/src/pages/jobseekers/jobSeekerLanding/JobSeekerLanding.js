@@ -5,6 +5,7 @@ import Search from "../../../components/Search";
 import jsLandingIcon1 from "./taskIcons/jsLanding1.png";
 import jsLandingIcon2 from "./taskIcons/jsLanding2.png";
 import jsLandingIcon3 from "./taskIcons/jsLanding3.png";
+import { Link } from "react-router-dom";
 
 const JobSeekerLanding = (props) => {
   const userCtx = useContext(UserContext);
@@ -42,7 +43,10 @@ const JobSeekerLanding = (props) => {
         <div className="my-5">
           <h1 className="display-5">What would you like to do today</h1>
           <div className="row">
-            <div className="col-4 d-flex justify-content-center flex-column align-item-center">
+            <Link
+              to="/job-listings"
+              className="col-4 d-flex justify-content-center flex-column align-item-center"
+            >
               <img
                 src={jsLandingIcon1}
                 alt="task icon to job list"
@@ -51,7 +55,7 @@ const JobSeekerLanding = (props) => {
               <p className="text-center d-flex align-items-center justify-content-center my-0 p-4 w-100 mr-1 bg-warning">
                 I would like to look for a job
               </p>
-            </div>
+            </Link>
             <div className="col-4 d-flex justify-content-center flex-column align-item-center">
               <img src={jsLandingIcon2} alt="task icon to job list" />
               <p className="text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 bg-warning">
