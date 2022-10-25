@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm, useFieldArray } from "react-hook-form";
 import styles from "./jobSeekerProfileForm.module.css";
@@ -18,10 +18,25 @@ const JobSeekerProfileFormSkills = (props) => {
     alert("Your data are not saved");
   }
 
+  useEffect(() => {
+    if (props.profileData !== undefined) {
+      for (let i = 0; i < props.profileData.skills.length; i++) {
+        setValue(`skillSet.${i}.skill`, props.profileData.skills[i].skill);
+        setValue(`skillSet.${i}.cert`, props.profileData.skills[i].cert);
+        setValue(`skillSet.${i}.issuer`, props.profileData.skills[i].issuer);
+        setValue(
+          `skillSet.${i}.issueDate`,
+          props.profileData.skills[i].issueDate
+        );
+      }
+    }
+  });
+
   // adding react-hook-forms functionality
   const {
     register,
     handleSubmit,
+    setValue,
     control,
     formState: { errors },
   } = useForm({
