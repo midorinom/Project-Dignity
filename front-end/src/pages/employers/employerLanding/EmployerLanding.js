@@ -40,7 +40,7 @@ const EmployerLanding = (props) => {
         <div className="my-5">
           <h1 className="display-5">Frequently Asked Questions</h1>
           <div className="row">
-            <div className="col-4 d-flex justify-content-center flex-column align-item-center">
+            <div className="col-4 d-flex justify-content-center flex-column align-item-center h-100">
               <img
                 src={eLand1}
                 alt="task icon to job list"
@@ -50,13 +50,13 @@ const EmployerLanding = (props) => {
                 How can I support differently-abled employees?
               </p>
             </div>
-            <div className="col-4 d-flex justify-content-center flex-column align-item-center">
+            <div className="col-4 d-flex justify-content-center flex-column align-item-center h-100">
               <img src={eLand2} alt="task icon to job list" />
               <p className="text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 bg-warning">
                 What schemes and grants am I eligible for?
               </p>
             </div>
-            <div className="col-4 d-flex justify-content-center flex-column align-item-center">
+            <div className="col-4 d-flex justify-content-center flex-column align-item-center h-100">
               <img src={eLand3} alt="task icon to job list" />
               <p className="text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 ml-1 bg-warning">
                 What are some of the best inclusive hiring practices?

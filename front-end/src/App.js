@@ -20,10 +20,7 @@ function App() {
   // =========
   // Variables
   // =========
-  // Change this userType initial value to jobSeeker/employer if you need to access those landing/profile/profileForm pages
-
-  const [userDetails, setUserDetails] = useState({ type: "" });
-
+  const [userDetails, setUserDetails] = useState({});
   const [searchInput, setSearchInput] = useState("");
   const [selectedJobPost, setSelectedJobPost] = useState({});
 
