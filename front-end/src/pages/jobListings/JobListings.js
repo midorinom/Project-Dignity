@@ -161,7 +161,11 @@ const JobListings = (props) => {
         headers: { "content-type": "application/json" },
       });
       const fetchedJobPosts = await res.json();
+
       console.log("fetchedJobPostsFiltered", fetchedJobPosts);
+      setCurrentPage(1);
+      setStartPage(1);
+      setTotalPages(Math.ceil(fetchedJobPosts.length / 6));
       setJobPosts(fetchedJobPosts);
     } catch (err) {
       console.log(err);
@@ -180,7 +184,7 @@ const JobListings = (props) => {
   // ======================
   // useEffect to map Cards
   // ======================
-  // Initial map, after jobPosts has been set
+  // The initial mapping whenever jobPosts is set
   useEffect(() => {
     if (jobPosts !== undefined) {
       mapCards();
@@ -189,6 +193,13 @@ const JobListings = (props) => {
       setFirstRenderDone(true);
     }
   }, [jobPosts]);
+
+  // Subsequent maps, whenever currentPage or startPage changes
+  useEffect(() => {
+    if (jobPosts !== undefined) {
+      mapCards();
+    }
+  }, [currentPage, startPage]);
 
   function mapCards() {
     const jobsOnCurrentPage = jobPosts.slice(
@@ -206,13 +217,6 @@ const JobListings = (props) => {
     });
     setJobCards(mappedJobCards);
   }
-
-  // Subsequent maps, whenever currentPage or startPage changes
-  useEffect(() => {
-    if (jobPosts !== undefined) {
-      mapCards();
-    }
-  }, [currentPage, startPage]);
 
   // ====================
   // Pages Event Handlers
