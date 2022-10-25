@@ -24,7 +24,6 @@ function App() {
 
   const [userDetails, setUserDetails] = useState({ type: "" });
   const [searchInput, setSearchInput] = useState("");
-  const [isSearch, setIsSearch] = useState(false);
   const [selectedJobPost, setSelectedJobPost] = useState({});
 
   // ===================
@@ -38,7 +37,6 @@ function App() {
           <JobSeekerLanding
             userType={userDetails.type}
             setSearchInput={setSearchInput}
-            setIsSearch={setIsSearch}
             searchInput={searchInput}
           />
         );
@@ -47,7 +45,6 @@ function App() {
           <EmployerLanding
             userType={userDetails.type}
             setSearchInput={setSearchInput}
-            setIsSearch={setIsSearch}
             searchInput={searchInput}
           />
         );
@@ -96,7 +93,6 @@ function App() {
               <JobSeekerLanding
                 userType={userDetails.type}
                 setSearchInput={setSearchInput}
-                setIsSearch={setIsSearch}
                 searchInput={searchInput}
               />
             }
@@ -107,7 +103,6 @@ function App() {
               <EmployerLanding
                 userType={userDetails.type}
                 setSearchInput={setSearchInput}
-                setIsSearch={setIsSearch}
                 searchInput={searchInput}
               />
             }
@@ -118,8 +113,6 @@ function App() {
               <JobListings
                 searchInput={searchInput}
                 setSearchInput={setSearchInput}
-                isSearch={isSearch}
-                setIsSearch={setIsSearch}
                 setSelectedJobPost={setSelectedJobPost}
               />
             }

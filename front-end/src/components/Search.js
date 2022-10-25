@@ -15,11 +15,10 @@ const Search = (props) => {
 
     // If the search came from outside JobListings page
     if (!props.isJobListings) {
-      props.setIsSearch(true);
       navigate("/job-listings");
     } else {
       // If the search came from within the JobListings page
-      props.getFilteredJobPosts(inputRef.current.value, props.initialFilter);
+      props.getJobPosts(inputRef.current.value, props.initialFilter);
     }
   }
 
@@ -47,11 +46,7 @@ const Search = (props) => {
       support: [],
     });
 
-    if (userCtx.type === "jobSeeker") {
-      props.getFilteredJobPosts(inputRef.current.value, props.initialFilter);
-    } else {
-      props.getAllJobPosts(props.initialFilter);
-    }
+    props.getJobPosts(inputRef.current.value, props.initialFilter);
   }
 
   // Make the Input text stay through renders
