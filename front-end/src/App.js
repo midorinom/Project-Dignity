@@ -22,7 +22,7 @@ function App() {
   // =========
   // Change this userType initial value to jobSeeker/employer if you need to access those landing/profile/profileForm pages
 
-  const [userDetails, setUserDetails] = useState({ type: "employer" });
+  const [userDetails, setUserDetails] = useState({ type: "" });
 
   const [searchInput, setSearchInput] = useState("");
   const [isSearch, setIsSearch] = useState(false);
@@ -30,7 +30,7 @@ function App() {
 
   // Managing the states for jobSeekerProfile and jobSeekerProfileForm
   // Change this profileIsCompleted initial value to false/true to access the NoProfile/CompletedProfile pages
-  const [profileIsCompleted, setProfileIsComplete] = useState(false);
+  const [profileIsCompleted, setProfileIsCompleted] = useState(false);
   const [profileData, setProfileData] = useState(undefined); // profile returned from api fetch
 
   // ===================
@@ -70,7 +70,7 @@ function App() {
         return (
           <JobSeekerProfile
             profileIsCompleted={profileIsCompleted}
-            setProfileIsComplete={setProfileIsComplete}
+            setProfileIsCompleted={setProfileIsCompleted}
             profileData={profileData}
             setProfileData={setProfileData}
           />
@@ -89,7 +89,7 @@ function App() {
       return (
         <JobSeekerProfileForm
           profileIsCompleted={profileIsCompleted}
-          setProfileIsComplete={setProfileIsComplete}
+          setProfileIsCompleted={setProfileIsCompleted}
           profileData={profileData}
         />
       );

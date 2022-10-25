@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../../../context/userContext";
 import styles from "./jobSeekerProfileFormHeader.module.css";
 import JobSeekerProfileFormAbout from "./JobSeekerProfileFormAbout";
 import JobSeekerProfileFormSkills from "./JobSeekerProfileFormSkills";
@@ -9,8 +10,9 @@ import JobSeekerProfileFormEducation from "./JobSeekerProfileFormEducation";
 
 const JobSeekerProfileForm = (props) => {
   console.log(props);
-
   const navigate = useNavigate();
+  const userCtx = useContext(UserContext);
+
   const [currentPage, setCurrentPage] = useState("About");
   // setting data from various section into state
   const [aboutSchema, setAboutSchema] = useState();
@@ -22,7 +24,7 @@ const JobSeekerProfileForm = (props) => {
   const [sectionSaved, setSectionSaved] = useState(false);
   // for complete profile button at last form section
   const [toSaveProfile, setToSaveProfile] = useState(false);
-  // setting various section state into state to be send to db
+  // setting various section states into state to be send to db
   const [newProfile, setNewProfile] = useState({
     about: "",
     skills: "",
@@ -99,13 +101,12 @@ const JobSeekerProfileForm = (props) => {
   // console.log(experienceSchema);
   // console.log(educationSchema);
 
-  console.log(`profile is completed (before):`, props.profileIsComplete);
+  console.log(`profile is completed (before):`, props.profileIsCompleted);
   console.log(`to save profile (before)`, toSaveProfile);
 
   useEffect(() => {
     // setProfile will only happen if profileIsComplete=false, toSaveProfile=true and all schemas have values
     if (
-      !props.profileIsComplete &&
       aboutSchema &&
       skillsSchema &&
       abilityDifferencesSchema &&
@@ -124,7 +125,7 @@ const JobSeekerProfileForm = (props) => {
       console.log({ Test: aboutSchema });
       const updateProfileData = async (req, res) => {
         try {
-          const hardCodedId = "6352b602869782ec9b076cf3";
+          // const hardCodedId = "6352b602869782ec9b076cf3";
 
           const res = await fetch(
             "http://127.0.0.1:5001/api/jobseekers/update",
@@ -132,7 +133,7 @@ const JobSeekerProfileForm = (props) => {
               method: "PATCH",
               headers: { "content-type": "application/json" },
               body: JSON.stringify({
-                id: hardCodedId,
+                id: userCtx.userDetails.id,
                 profile: {
                   about: aboutSchema,
                   skills: skillsSchema,
@@ -153,7 +154,7 @@ const JobSeekerProfileForm = (props) => {
 
       updateProfileData();
 
-      props.setProfileIsComplete(true);
+      props.setProfileIsCompleted(true);
 
       navigate("/profile");
       // } else {
@@ -164,7 +165,7 @@ const JobSeekerProfileForm = (props) => {
   // created
   console.log(`newly created:`, newProfile);
   // status
-  console.log(`profile is completed (after):`, props.profileIsComplete);
+  console.log(`profile is completed (after):`, props.profileIsCompleted);
   console.log(`to save profile (after)`, toSaveProfile);
   // returned profile from api
   console.log(`returned profile from api: `, props.profileData);

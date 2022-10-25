@@ -14,6 +14,7 @@ import physicalIcon from "./resume/images/physical.png";
 import visualIcon from "./resume/images/visual.png";
 
 const JobSeekerProfile = (props) => {
+  console.log(props);
   // =========
   // Variables
   // =========
@@ -31,13 +32,14 @@ const JobSeekerProfile = (props) => {
   // onMount useEffect fetch Profile Data
   // ====================================
   useEffect(() => {
-    props.setProfileIsComplete(userCtx.userDetails.profileCompleted);
+    // props.setProfileIsCompleted(userCtx.userDetails.profileCompleted);
     if (props.profileIsCompleted) {
       getProfileData();
     }
   }, []);
 
   const getProfileData = async () => {
+    console.log("get profile start");
     try {
       const res = await fetch("http://127.0.0.1:5001/api/jobseekers/get", {
         method: "POST",
@@ -46,6 +48,7 @@ const JobSeekerProfile = (props) => {
       });
       const fetchedProfileData = await res.json();
       props.setProfileData(fetchedProfileData);
+      console.log(`get profile end`);
     } catch (err) {
       console.log(err);
     }
