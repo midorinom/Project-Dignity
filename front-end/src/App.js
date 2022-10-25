@@ -22,12 +22,16 @@ function App() {
   // =========
   // Change this userType initial value to jobSeeker/employer if you need to access those landing/profile/profileForm pages
 
-
   const [userDetails, setUserDetails] = useState({ type: "employer" });
 
   const [searchInput, setSearchInput] = useState("");
   const [isSearch, setIsSearch] = useState(false);
   const [selectedJobPost, setSelectedJobPost] = useState({});
+
+  // Managing the states for jobSeekerProfile and jobSeekerProfileForm
+  // Change this profileIsCompleted initial value to false/true to access the NoProfile/CompletedProfile pages
+  const [profileIsCompleted, setProfileIsComplete] = useState(false);
+  const [profileData, setProfileData] = useState(undefined); // profile returned from api fetch
 
   // ===================
   // Conditional Renders
@@ -63,7 +67,14 @@ function App() {
   function displayProfilePage() {
     switch (userDetails.type) {
       case "jobSeeker":
-        return <JobSeekerProfile />;
+        return (
+          <JobSeekerProfile
+            profileIsCompleted={profileIsCompleted}
+            setProfileIsComplete={setProfileIsComplete}
+            profileData={profileData}
+            setProfileData={setProfileData}
+          />
+        );
       case "employer":
         return <EmployerProfile />;
       default:
@@ -75,7 +86,13 @@ function App() {
   // Render the profile form page depending on what type of user is logged in
   function displayProfileFormPage() {
     if (userDetails.type === "jobSeeker") {
-      return <JobSeekerProfileForm />;
+      return (
+        <JobSeekerProfileForm
+          profileIsCompleted={profileIsCompleted}
+          setProfileIsComplete={setProfileIsComplete}
+          profileData={profileData}
+        />
+      );
     } else if (userDetails.type === "employer") {
       return <EmployerProfileForm />;
     }
