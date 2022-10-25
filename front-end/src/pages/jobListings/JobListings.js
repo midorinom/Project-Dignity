@@ -258,9 +258,14 @@ const JobListings = (props) => {
 
   function pageInputSubmit(e) {
     e.preventDefault();
-    setPageInput(false);
-    setStartPage(parseInt(pageInputRef.current.value));
-    setCurrentPage(1);
+    if (
+      pageInputRef.current.value > 0 &&
+      pageInputRef.current.value <= totalPages
+    ) {
+      setPageInput(false);
+      setStartPage(parseInt(pageInputRef.current.value));
+      setCurrentPage(1);
+    }
   }
 
   // ======
