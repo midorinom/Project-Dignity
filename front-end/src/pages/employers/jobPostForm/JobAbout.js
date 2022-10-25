@@ -23,28 +23,7 @@ const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0
     register,
     handleSubmit,
     formState:{errors}
-  }= useForm({
-    defaultValues:{
-      aboutJobSet:[
-        {
-          company:"",
-          title: "",
-          type: "",
-          customerFacing: "",
-          desc: "",
-          tasks: [],
-          skills: [],
-          minSalary: "",
-          maxSalary: "",
-          locationSame: "",
-          postalCode: "",
-          block: "",
-          unit: "",
-          accessibility: "",
-        }
-      ]
-    }
-  })
+  }= useForm()
 
   const onSubmit=(data)=>{
     props.setAboutJobSchema(data)

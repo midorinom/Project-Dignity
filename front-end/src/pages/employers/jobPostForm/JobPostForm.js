@@ -6,7 +6,7 @@ import styles from "./jobPostForm.module.css";
 const JobPost = () => {
   const [currentPage, setCurrentPage] = useState("About The Job");
   const [aboutJobSchema, setAboutJobSchema]=useState()
-  const [accessibilityConsiderationsSchema, setaccessibilityConsiderationsSchema]=useState()
+  const [accessibilityConsiderationsSchema, setAccessibilityConsiderationsSchema]=useState()
   const [sectionSaved, setSectionSaved] = useState(false);
   const [toSaveProfile, setToSaveProfile] = useState(false);
   const [profile, setProfile] = useState({
@@ -31,58 +31,58 @@ const JobPost = () => {
 
         />;
       case "Accessibilty Considerations":
-        return <EmployerAccessibility setCurrentPage={setCurrentPage} setaccessibilityConsiderations={setaccessibilityConsiderationsSchema} setSectionSaved={setSectionSaved} sectionSaved={sectionSaved}
+        return <EmployerAccessibility setCurrentPage={setCurrentPage} setAccessibilityConsiderationsSchema={setAccessibilityConsiderationsSchema} setSectionSaved={setSectionSaved} sectionSaved={sectionSaved}
         />;
     }
   }
   const page = displayCurrentPage();
 
-  useEffect(()=>{
-    if (
-      aboutJobSchema &&
-      accessibilityConsiderationsSchema &&
-      toSaveProfile
-    ) {
-      setProfile({
-        about: aboutJobSchema,
-        accessibility: accessibilityConsiderationsSchema,
-      });
+  // useEffect(()=>{
+  //   if (
+  //     aboutJobSchema &&
+  //     accessibilityConsiderationsSchema &&
+  //     toSaveProfile
+  //   ) {
+  //     setProfile({
+  //       about: aboutJobSchema,
+  //       accessibility: accessibilityConsiderationsSchema,
+  //     });
       
-      const createJobPost = async (req, res) => {
-        try {
-          const hardCodedId = "6352b602869782ec9b076cf3";
+  //     const createJobPost = async (req, res) => {
+  //       try {
+  //         const hardCodedId = "6352b602869782ec9b076cf3";
 
-          const res = await fetch(
-            "http://127.0.0.1:5001/api/jobposts/create",
-            {
-              method: "PUT",
-              headers: { "content-type": "application/json" },
-              body: JSON.stringify(
-                {
-                  employerId: hardCodedId,
-                  jobPost: 
-                  { 
-                   about: aboutJobSchema,
-                   accessibility: accessibilityConsiderationsSchema
-                  }
-                 }
-              ),
-            }
-          );
-          const createdJobPost = await res.json();
+  //         const res = await fetch(
+  //           "http://127.0.0.1:5001/api/employers/update",
+  //           {
+  //             method: "PATCH",
+  //             headers: { "content-type": "application/json" },
+  //             body: JSON.stringify(
+  //               {
+  //                 employerId: hardCodedId,
+  //                 jobPost: 
+  //                 { 
+  //                  about: aboutJobSchema,
+  //                  accessibility: accessibilityConsiderationsSchema
+  //                 }
+  //                }
+  //             ),
+  //           }
+  //         );
+  //         const createdJobPost = await res.json();
 
-          console.log(createdJobPost);
-        } catch (err) {
-          console.log(err);
-        }
-      };
+  //         console.log(createdJobPost);
+  //       } catch (err) {
+  //         console.log(err);
+  //       }
+  //     };
 
-      createJobPost();
-      navigate("/profile");
-    } else {
-      alert(`Missing fields`);
-    }
-  }, [toSaveProfile]);
+  //     createJobPost();
+  //     navigate("/profile");
+  //   } else {
+  //     alert(`Missing fields`);
+  //   }
+  // }, [toSaveProfile]);
 
   return (
     <>
