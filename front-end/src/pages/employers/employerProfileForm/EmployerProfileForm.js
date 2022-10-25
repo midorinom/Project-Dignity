@@ -8,6 +8,7 @@ const EmployerProfileForm = (props) => {
   const [whoWeAreCharacterCount, setWhoWeAreCharacterCount]= useState(0)
   const [whatWeDoCharacterCount, setwhatWeDoCharacterCount]= useState(0)
   const [workingWithDiffCharacterCount, setworkingWithDiffCharacterCount]= useState(0)
+  const [accessibilityCharacterCount, setAccessibilityCharacterCount]= useState(0)
   const [sectionSaved, setSectionSaved]= useState()
   const [profileCompleted, setProfileCompleted]=useState()
   // adding react-hook-forms functionality
@@ -121,6 +122,10 @@ const EmployerProfileForm = (props) => {
                 style={{ height: 200 }}
                 placeholder={"Brief introduction about your company"}
                 {...register("whoWeAre", {
+                  required: {
+                    value: true,
+                    message: "Brief introduction about your company is required",
+                  },
                   maxLength: 200,
                   onChange: (e) =>
                     setWhoWeAreCharacterCount(e.target.value.length),
@@ -144,6 +149,10 @@ const EmployerProfileForm = (props) => {
                 style={{ height: 200 }}
                 placeholder={"Brief description about what your company does"}
                 {...register("whatWeDo", {
+                  required: {
+                    value: true,
+                    message: "Brief introduction about what your company does is required",
+                  },
                   maxLength: 200,
                   onChange: (e) =>
                     setwhatWeDoCharacterCount(e.target.value.length),
@@ -166,9 +175,13 @@ const EmployerProfileForm = (props) => {
                 style={{ height: 200 }}
                 placeholder={"Brief description of your company's experience working with differently abled persons"}
                 {...register("experience", {
+                  required: {
+                    value: true,
+                    message: "Brief description of your company's experience working with differently abled persons is required",
+                  },
                   maxLength: 200,
                   onChange: (e) =>
-                    setWhoWeAreCharacterCount(e.target.value.length),
+                  setworkingWithDiffCharacterCount(e.target.value.length),
                 })}
               ></textarea>
               <small className="text-muted">{`${
@@ -176,6 +189,108 @@ const EmployerProfileForm = (props) => {
               } / 200 characters left`}</small>    
              <p className="mt-2 text-danger">{errors.experience?.message}</p> 
             </div>
+                        {/*<---------------------------Location--------------------------->*/}
+              <div className="form-group mb-4">
+              <label className="form-label" htmlFor="location">
+                Location
+              </label>
+              <div className="input-group">
+                <span className="input-group-text">
+                  <i className="bi bi-geo-alt-fill"></i>
+                </span>
+                <input
+                  className="form-control p-3"
+                  id="location"
+                  type="text"
+                  placeholder={"e.g Blk 573 Jurong West #10-222 560722"}
+                  {...register("location", {
+                    required: {
+                      value: true,
+                      message: "Location of company is required",
+                    },
+                  })}
+                ></input>
+              </div>
+              <p className="mt-2 text-danger">{errors.location?.message}</p>
+            </div>
+  
+
+                        {/*<---------------------------Acessibility--------------------------->*/}
+              <div className="form-group mb-4">
+              <label className="form-label" htmlFor="accessibility">
+              Accessibility
+              </label>
+              <textarea
+                className="form-control mb-2 p-3"
+                type="text"
+                id="accessibility"
+                style={{ height: 200 }}
+                placeholder={"Brief description of the accessibility of your company's location"}
+                {...register("accessibility", {
+                  required: {
+                    value: true,
+                    message: "Brief description of the accessibility of your company's location is required",
+                  },
+                  maxLength: 200,
+                  onChange: (e) =>
+                    setAccessibilityCharacterCount(e.target.value.length),
+                })}
+              ></textarea>
+              <small className="text-muted">{`${
+                200 - accessibilityCharacterCount
+              } / 200 characters left`}</small>    
+             <p className="mt-2 text-danger">{errors.accessibility?.message}</p> 
+            </div>
+                  {/*<---------------------------Contact--------------------------->*/}
+                  <div className="form-group mb-4">
+              <label className="form-label" htmlFor="contact">
+                Contact
+              </label>
+              <div className="input-group">
+                <span className="input-group-text">
+                  <i className="bi bi-telephone-fill"></i>
+                </span>
+                <input
+                  className="form-control p-3"
+                  id="contact"
+                  type="text"
+                  placeholder={"e.g 81268900"}
+                  {...register("contact", {
+                    required: {
+                      value: true,
+                      message: "Name of company is required",
+                    },
+                  })}
+                ></input>
+              </div>
+              <p className="mt-2 text-danger">{errors.contact?.message}</p>
+            </div>
+  
+             {/*<---------------------------Email--------------------------->*/}
+             <div className="form-group mb-4">
+              <label className="form-label" htmlFor="email">
+                Email
+              </label>
+              <div className="input-group">
+                <span className="input-group-text">
+                  <i className="bi bi-envelope"></i>
+                </span>
+                <input
+                  className="form-control p-3"
+                  id="email"
+                  type="text"
+                  placeholder={"e.g LeCielBakery@gmail.com"}
+                  {...register("email", {
+                    required: {
+                      value: true,
+                      message: "email of company is required",
+                    },
+                  })}
+                ></input>
+              </div>
+              <p className="mt-2 text-danger">{errors.email?.message}</p>
+            </div>
+
             </div>
           {/*<-------------------------- empty col -------------------------->*/}
           <div className="col-md-1"></div>
