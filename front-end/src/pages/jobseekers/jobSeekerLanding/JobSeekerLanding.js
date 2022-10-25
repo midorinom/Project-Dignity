@@ -13,7 +13,6 @@ const JobSeekerLanding = (props) => {
     <div className="p-5">
       <Search
         setSearchInput={props.setSearchInput}
-        setIsSearch={props.setIsSearch}
         searchInput={props.searchInput}
       />
       <div className="m-4">

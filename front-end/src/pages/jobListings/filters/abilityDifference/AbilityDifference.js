@@ -7,7 +7,6 @@ import autism from "./icons/autism.png";
 import "./AbilityDifferences.css";
 
 const AbilityDifference = (props) => {
-  const [abilityDiffFilters, setAbilityDiffFilters] = useState([]);
   const [firstRenderDone, setFirstRenderDone] = useState(false);
 
   function handleClick(e) {
@@ -15,14 +14,16 @@ const AbilityDifference = (props) => {
     const clickedAbilityDiff = e.currentTarget.value;
 
     // If the abilityDiff that was clicked already exists in the abilityDiffFilters array, filter it out.
-    if (abilityDiffFilters.some((element) => element === clickedAbilityDiff)) {
-      const newArray = abilityDiffFilters.filter(
+    if (
+      props.abilityDiffFilters.some((element) => element === clickedAbilityDiff)
+    ) {
+      const newArray = props.abilityDiffFilters.filter(
         (element) => element !== clickedAbilityDiff
       );
-      setAbilityDiffFilters(newArray);
+      props.setAbilityDiffFilters(newArray);
     } else {
       // Otherwise, push it into the abilityDiffFilters array
-      setAbilityDiffFilters((prevState) => {
+      props.setAbilityDiffFilters((prevState) => {
         return [...prevState, clickedAbilityDiff];
       });
     }
@@ -32,10 +33,10 @@ const AbilityDifference = (props) => {
   useEffect(() => {
     if (firstRenderDone) {
       props.setFilter((prevState) => {
-        return { ...prevState, abilityDiff: abilityDiffFilters };
+        return { ...prevState, abilityDiff: props.abilityDiffFilters };
       });
     }
-  }, [abilityDiffFilters]);
+  }, [props.abilityDiffFilters]);
 
   // onMount
   useEffect(() => {
@@ -47,7 +48,8 @@ const AbilityDifference = (props) => {
       <h5 className="mx-1 mb-1 mt-2 text-muted">Ability Difference</h5>
       <button
         className={`btn btn-outline-secondary btn-sm m-1 d-flex align-items-center ${
-          abilityDiffFilters.some((element) => element === "Autism") && "active"
+          props.abilityDiffFilters.some((element) => element === "Autism") &&
+          "active"
         }`}
         type="button"
         onClick={handleClick}
@@ -59,9 +61,11 @@ const AbilityDifference = (props) => {
         <p className="w-50 d-flex justify-content-center m-0">Autism</p>
       </button>
       <button
-        className="btn btn-outline-secondary btn-sm m-1 d-flex align-items-center"
+        className={`btn btn-outline-secondary btn-sm m-1 d-flex align-items-center ${
+          props.abilityDiffFilters.some((element) => element === "Hearing") &&
+          "active"
+        }`}
         type="button"
-        data-bs-toggle="button"
         onClick={handleClick}
         value="Hearing"
       >
@@ -71,9 +75,12 @@ const AbilityDifference = (props) => {
         <p className="w-50 d-flex justify-content-center m-0">Hearing</p>
       </button>
       <button
-        className="btn btn-outline-secondary btn-sm m-1 d-flex align-items-center"
+        className={`btn btn-outline-secondary btn-sm m-1 d-flex align-items-center ${
+          props.abilityDiffFilters.some(
+            (element) => element === "Intellectual"
+          ) && "active"
+        }`}
         type="button"
-        data-bs-toggle="button"
         onClick={handleClick}
         value="Intellectual"
       >
@@ -83,9 +90,11 @@ const AbilityDifference = (props) => {
         <p className="w-50 d-flex justify-content-center m-0">Intellectual</p>
       </button>
       <button
-        className="btn btn-outline-secondary btn-sm m-1 d-flex align-items-center"
+        className={`btn btn-outline-secondary btn-sm m-1 d-flex align-items-center ${
+          props.abilityDiffFilters.some((element) => element === "Physical") &&
+          "active"
+        }`}
         type="button"
-        data-bs-toggle="button"
         onClick={handleClick}
         value="Physical"
       >
@@ -95,9 +104,11 @@ const AbilityDifference = (props) => {
         <p className="w-50 d-flex justify-content-center m-0">Physical</p>
       </button>
       <button
-        className="btn btn-outline-secondary btn-sm m-1 d-flex align-items-center"
+        className={`btn btn-outline-secondary btn-sm m-1 d-flex align-items-center ${
+          props.abilityDiffFilters.some((element) => element === "Visual") &&
+          "active"
+        }`}
         type="button"
-        data-bs-toggle="button"
         onClick={handleClick}
         value="Visual"
       >
