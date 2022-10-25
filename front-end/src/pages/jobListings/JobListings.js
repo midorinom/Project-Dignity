@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import styles from "./jobListings.module.css";
 import UserContext from "../../context/userContext";
 import AbilityDifference from "./filters/abilityDifference/AbilityDifference";
@@ -41,6 +41,8 @@ const JobListings = (props) => {
   const [startPage, setStartPage] = useState(1);
   const [totalPages, setTotalPages] = useState(13);
   const [currentPage, setCurrentPage] = useState(1);
+  const [pageInput, setPageInput] = useState(false);
+  const pageInputRef = useRef();
 
   // =================
   // onMount useEffect
@@ -200,10 +202,11 @@ const JobListings = (props) => {
     setJobCards(mappedJobCards);
   }
 
-  // ======
-  // Events
-  // ======
+  // ====================
+  // Pages Event Handlers
+  // ====================
   function handlePrev() {
+    setPageInput(false);
     if (currentPage === 1) {
       if (startPage < 6) {
         setCurrentPage(startPage - 1);
@@ -218,6 +221,7 @@ const JobListings = (props) => {
   }
 
   function handleNext() {
+    setPageInput(false);
     if (currentPage === 5) {
       setCurrentPage(1);
       setStartPage((prevState) => (prevState += 5));
@@ -229,6 +233,7 @@ const JobListings = (props) => {
   }
 
   function handlePageSkip(e) {
+    setPageInput(false);
     const target = e.currentTarget.value;
     if (target < 6) {
       setCurrentPage(parseInt(target));
@@ -241,6 +246,21 @@ const JobListings = (props) => {
         setCurrentPage(5);
       }
     }
+  }
+
+  function togglePageInput() {
+    if (pageInput) {
+      setPageInput(false);
+    } else {
+      setPageInput(true);
+    }
+  }
+
+  function pageInputSubmit(e) {
+    e.preventDefault();
+    setPageInput(false);
+    setStartPage(parseInt(pageInputRef.current.value));
+    setCurrentPage(1);
   }
 
   // ======
@@ -360,12 +380,25 @@ const JobListings = (props) => {
                 {startPage + 4}
               </button>
             )}
-            {totalPages > 5 && (
+            {totalPages > 5 && !pageInput && (
               <button
                 className={`${styles.pageNumber} btn btn-outline-primary`}
+                onClick={togglePageInput}
               >
-                {"..."}
+                ...
               </button>
+            )}
+            {pageInput && (
+              <form onSubmit={pageInputSubmit}>
+                <input
+                  className={styles.pageInput}
+                  ref={pageInputRef}
+                  type="number"
+                  defaultValue={1}
+                  min={1}
+                  max={totalPages}
+                ></input>
+              </form>
             )}
             {startPage + 5 <= totalPages && (
               <button
