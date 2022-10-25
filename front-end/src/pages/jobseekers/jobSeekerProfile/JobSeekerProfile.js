@@ -31,8 +31,8 @@ const JobSeekerProfile = (props) => {
   // onMount useEffect fetch Profile Data
   // ====================================
   useEffect(() => {
-    setProfileIsComplete(userCtx.userDetails.profileCompleted);
-    if (profileIsCompleted) {
+    props.setProfileIsComplete(userCtx.userDetails.profileCompleted);
+    if (props.profileIsCompleted) {
       getProfileData();
     }
   }, []);
