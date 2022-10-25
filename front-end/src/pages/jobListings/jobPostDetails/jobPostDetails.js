@@ -61,10 +61,27 @@ const JobPostDetails = (props) => {
 
   //==============================
   // Map Support
+  function supportConvertToFull(supportShortForm) {
+    switch (supportShortForm) {
+      case "Structured":
+        return "Training through Structured Programmes";
+      case "Shadowing":
+        return "Shadowing by a Dedicated Job Coach";
+      case "Redesign":
+        return "Workplace Redesigned";
+      case "Assistive":
+        return "Assistive Technology (AT)";
+      case "Social":
+        return "Social Integration";
+      case "Trial":
+        return "Trial Period";
+    }
+  }
+
   const supportProvided = access.support.map((item, id) => {
     return (
-      <div>
-        <h6 className="text-center mx-1">{item}</h6>
+      <div className="mb-1">
+        <h6 className="text-center mx-1">{supportConvertToFull(item)}</h6>
         <p className="text-center mx-1">
           {access.supportElab[item.toLowerCase()]}
         </p>
