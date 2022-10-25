@@ -32,9 +32,13 @@ const JobSeekerProfile = (props) => {
   // onMount useEffect fetch Profile Data
   // ====================================
   useEffect(() => {
-    // props.setProfileIsCompleted(userCtx.userDetails.profileCompleted);
-    if (props.profileIsCompleted) {
-      getProfileData();
+    getProfileData();
+
+    // check if logged in user already has a profile to render the appropriate view
+    if (props.profileData) {
+      props.setProfileIsCompleted(true);
+    } else {
+      props.setProfileIsCompleted(false);
     }
   }, []);
 
