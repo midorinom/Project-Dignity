@@ -1,89 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import UserContext from "../../../context/userContext";
 import { useForm } from "react-hook-form";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import styles from "./employerProfileForm.module.css";
 const EmployerProfileForm = (props) => {
-  const [characterCount, setCharacterCount] = useState(0);
-  const [employerProfile, setEmployerProfile]=useState();
-  const [whoWeAreCharacterCount, setWhoWeAreCharacterCount]= useState(0)
-  const [whatWeDoCharacterCount, setwhatWeDoCharacterCount]= useState(0)
-  const [workingWithDiffCharacterCount, setworkingWithDiffCharacterCount]= useState(0)
-  const [accessibilityCharacterCount, setAccessibilityCharacterCount]= useState(0)
-  const [sectionSaved, setSectionSaved]= useState()
-  const [profileCompleted, setProfileCompleted]=useState()
+  const [employerProfile, setEmployerProfile] = useState();
+  const [whoWeAreCharacterCount, setWhoWeAreCharacterCount] = useState(0);
+  const [whatWeDoCharacterCount, setwhatWeDoCharacterCount] = useState(0);
+  const [workingWithDiffCharacterCount, setworkingWithDiffCharacterCount] =
+    useState(0);
+  const [accessibilityCharacterCount, setAccessibilityCharacterCount] =
+    useState(0);
+  const [sectionSaved, setSectionSaved] = useState();
+
+  const userCtx = useContext(UserContext);
+
   // adding react-hook-forms functionality
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    defaultValues:{
-      aboutJobSet:[
-        {  
-          company: "",
-          whoWeAre: "",
-          whatWeDo: "",
-          experience: "",
-          location: "",
-          accessibility: "",
-          contact: "",
-          email: "",
-        }
-      ]
-    }
-  });
+  } = useForm();
 
   const onSubmit = (data) => {
     setEmployerProfile(data);
+
     console.log(data);
   };
 
   const onError = (errors) => console.log(errors);
 
   const navigate = useNavigate();
-  function goToProfile() {
-    if (!props.sectionSaved) {
-      alert("Please save before proceeding to the next section");
+  
+  const createEmployerprofile = async (req, res) => {
+    if (employerProfile) {
+      try {
+        const res = await fetch("http://127.0.0.1:5001/api/employers/update", {
+          method: "PATCH",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            id: userCtx.userDetails.id,
+            profile: employerProfile,
+          }),
+        });
+        const createdEmployerProfile = await res.json();
+        console.log(createdEmployerProfile);
+      } catch (err) {
+        console.log(err);
+      }
     } else {
       navigate("/profile");
     }
-  }
+  };
 
-//   const createJobPost = async (req, res) => {
-//     try {
-//       const hardCodedId = "6352b602869782ec9b076cf3";
-
-//       const res = await fetch(
-//         "http://127.0.0.1:5001/api/jobposts/create",
-//         {
-//           method: "PUT",
-//           headers: { "content-type": "application/json" },
-//           body: JSON.stringify(
-//             {
-//               employerId: hardCodedId,
-//               jobPost: 
-//               { 
-//                about: aboutJobSchema,
-//                accessibility: accessibilityConsiderationsSchema
-//               }
-//              }
-//           ),
-//         }
-//       );
-//       const createdJobPost = await res.json();
-
-//       console.log(createdJobPost);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-
-//   createJobPost();
-//   navigate("/profile");
-// } , [sectionSaved]);
   return (
     <section className="container-md" id="jobSeekerProfileForm-AboutSection">
-      <form id="jobSeekerProfileForm-About"  onSubmit={handleSubmit(onSubmit, onError)}>
+      <form
+        id="jobSeekerProfileForm-About"
+        onSubmit={handleSubmit(onSubmit, onError)}
+      >
         <div className="row m-5">
           <div className="col-md-8">
             {/*<-----------------------------Company name ----------------------------->*/}
@@ -124,7 +99,8 @@ const EmployerProfileForm = (props) => {
                 {...register("whoWeAre", {
                   required: {
                     value: true,
-                    message: "Brief introduction about your company is required",
+                    message:
+                      "Brief introduction about your company is required",
                   },
                   maxLength: 200,
                   onChange: (e) =>
@@ -134,10 +110,9 @@ const EmployerProfileForm = (props) => {
               <small className="text-muted">{`${
                 200 - whoWeAreCharacterCount
               } / 200 characters left`}</small>
-            <p className="mt-2 text-danger">{errors.whoWeAre?.message}</p>
-
+              <p className="mt-2 text-danger">{errors.whoWeAre?.message}</p>
             </div>
-      {/*<-----------------------       What We Do ----------------------->*/}
+            {/*<-----------------------       What We Do ----------------------->*/}
             <div className="form-group mb-4">
               <label className="form-label" htmlFor="brand">
                 What We Do
@@ -151,7 +126,8 @@ const EmployerProfileForm = (props) => {
                 {...register("whatWeDo", {
                   required: {
                     value: true,
-                    message: "Brief introduction about what your company does is required",
+                    message:
+                      "Brief introduction about what your company does is required",
                   },
                   maxLength: 200,
                   onChange: (e) =>
@@ -166,31 +142,34 @@ const EmployerProfileForm = (props) => {
             {/*<---------------------------Experience Working with Differently-abled Persons--------------------------->*/}
             <div className="form-group mb-4">
               <label className="form-label" htmlFor="brand">
-              Experience Working with Differently-abled Persons
+                Experience Working with Differently-abled Persons
               </label>
               <textarea
                 className="form-control mb-2 p-3"
                 type="text"
                 id="brand"
                 style={{ height: 200 }}
-                placeholder={"Brief description of your company's experience working with differently abled persons"}
+                placeholder={
+                  "Brief description of your company's experience working with differently abled persons"
+                }
                 {...register("experience", {
                   required: {
                     value: true,
-                    message: "Brief description of your company's experience working with differently abled persons is required",
+                    message:
+                      "Brief description of your company's experience working with differently abled persons is required",
                   },
                   maxLength: 200,
                   onChange: (e) =>
-                  setworkingWithDiffCharacterCount(e.target.value.length),
+                    setworkingWithDiffCharacterCount(e.target.value.length),
                 })}
               ></textarea>
               <small className="text-muted">{`${
                 200 - workingWithDiffCharacterCount
-              } / 200 characters left`}</small>    
-             <p className="mt-2 text-danger">{errors.experience?.message}</p> 
+              } / 200 characters left`}</small>
+              <p className="mt-2 text-danger">{errors.experience?.message}</p>
             </div>
-                        {/*<---------------------------Location--------------------------->*/}
-              <div className="form-group mb-4">
+            {/*<---------------------------Location--------------------------->*/}
+            <div className="form-group mb-4">
               <label className="form-label" htmlFor="location">
                 Location
               </label>
@@ -213,23 +192,25 @@ const EmployerProfileForm = (props) => {
               </div>
               <p className="mt-2 text-danger">{errors.location?.message}</p>
             </div>
-  
 
-                        {/*<---------------------------Acessibility--------------------------->*/}
-              <div className="form-group mb-4">
+            {/*<---------------------------Acessibility--------------------------->*/}
+            <div className="form-group mb-4">
               <label className="form-label" htmlFor="accessibility">
-              Accessibility
+                Accessibility
               </label>
               <textarea
                 className="form-control mb-2 p-3"
                 type="text"
                 id="accessibility"
                 style={{ height: 200 }}
-                placeholder={"Brief description of the accessibility of your company's location"}
+                placeholder={
+                  "Brief description of the accessibility of your company's location"
+                }
                 {...register("accessibility", {
                   required: {
                     value: true,
-                    message: "Brief description of the accessibility of your company's location is required",
+                    message:
+                      "Brief description of the accessibility of your company's location is required",
                   },
                   maxLength: 200,
                   onChange: (e) =>
@@ -238,11 +219,13 @@ const EmployerProfileForm = (props) => {
               ></textarea>
               <small className="text-muted">{`${
                 200 - accessibilityCharacterCount
-              } / 200 characters left`}</small>    
-             <p className="mt-2 text-danger">{errors.accessibility?.message}</p> 
+              } / 200 characters left`}</small>
+              <p className="mt-2 text-danger">
+                {errors.accessibility?.message}
+              </p>
             </div>
-                  {/*<---------------------------Contact--------------------------->*/}
-                  <div className="form-group mb-4">
+            {/*<---------------------------Contact--------------------------->*/}
+            <div className="form-group mb-4">
               <label className="form-label" htmlFor="contact">
                 Contact
               </label>
@@ -265,9 +248,9 @@ const EmployerProfileForm = (props) => {
               </div>
               <p className="mt-2 text-danger">{errors.contact?.message}</p>
             </div>
-  
-             {/*<---------------------------Email--------------------------->*/}
-             <div className="form-group mb-4">
+
+            {/*<---------------------------Email--------------------------->*/}
+            <div className="form-group mb-4">
               <label className="form-label" htmlFor="email">
                 Email
               </label>
@@ -290,8 +273,7 @@ const EmployerProfileForm = (props) => {
               </div>
               <p className="mt-2 text-danger">{errors.email?.message}</p>
             </div>
-
-            </div>
+          </div>
           {/*<-------------------------- empty col -------------------------->*/}
           <div className="col-md-1"></div>
           {/* <------------------------ side panel ------------------------> */}
@@ -327,17 +309,17 @@ const EmployerProfileForm = (props) => {
               </div>
             </div>
           </div>
-        
-        {/*<----------------------- proceed next btn ----------------------->*/}
-        <div className="row justify-content-center m-5">
-          <button
-            type='submit'
-            className={`${styles.bottom_button} p-3`}
-            onClick={goToProfile}
-          >
-            Upload Profile
-          </button>
-        </div>
+
+          {/*<----------------------- proceed next btn ----------------------->*/}
+          <div className="row justify-content-center m-5">
+            <button
+              type="submit"
+              className={`${styles.bottom_button} p-3`}
+              onClick={createEmployerprofile}
+            >
+              Upload Profile
+            </button>
+          </div>
         </div>
       </form>
     </section>
