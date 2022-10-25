@@ -8,14 +8,11 @@ import autism from "../../jobListings/filters/abilityDifference/icons/autism.png
 import { useForm } from "react-hook-form";
 
 const EmployerAccessibility = (props) => {
-
-  console.log(props.aboutJobSchema)
+  
   //react-hook-forms functionality
   const {
     register,
-    control,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm();
 

@@ -7,30 +7,17 @@ import styles from "./jobPostForm.module.css";
 const JobPost = () => {
   const [currentPage, setCurrentPage] = useState("About The Job");
   const [aboutJobSchema, setAboutJobSchema] = useState({});
-  const [
-    accessibilityConsiderationsSchema,
-    setAccessibilityConsiderationsSchema,
-  ] = useState();
+  const [accessibilityConsiderationsSchema,setAccessibilityConsiderationsSchema] = useState();
   const [sectionSaved, setSectionSaved] = useState(false);
-  const [toSaveProfile, setToSaveProfile] = useState(false);
-  const [profile, setProfile] = useState({
-    employerId: "",
-    jobPost: {
-      about: "",
-      accessibility: "",
-    },
-  });
+
   const navigate = useNavigate();
 
   const userCtx = useContext(UserContext);
 
   //Create Job Poat
   const createJobPost = async (req, res) => {
-    console.log(aboutJobSchema);
-    console.log(accessibilityConsiderationsSchema);
     if (aboutJobSchema && accessibilityConsiderationsSchema) {
       try {
-        console.log("here");
         const res = await fetch("http://127.0.0.1:5001/api/jobposts/create", {
           method: "PUT",
           headers: { "content-type": "application/json" },
