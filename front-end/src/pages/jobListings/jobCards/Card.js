@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import save from "./saved.png";
 import image71 from "./images/image 71.png";
 import image72 from "./images/image 72.png";
@@ -9,10 +9,12 @@ import autismIcon from "../filters/abilityDifference/icons/autism.png";
 import intellectualIcon from "../filters/abilityDifference/icons/intellectual.png";
 import physicalIcon from "../filters/abilityDifference/icons/physical.png";
 import { Link } from "react-router-dom";
+import UserContext from "../../../context/userContext";
+import BookmarkAddedOutlinedIcon from "@mui/icons-material/BookmarkAddedOutlined";
 
 const Card = (props) => {
   // Sort AbilityDifferences in Alphabetical Order
-  const abilityDiff = props.jobPost.accessibility.abilityDiff;
+  const abilityDiff = props.job.jobPost.accessibility.abilityDiff;
   abilityDiff.sort();
 
   // Map AbilityDifferencesIcons
@@ -39,25 +41,89 @@ const Card = (props) => {
   });
 
   const handleJobDetails = async () => {
-    await props.setSelectedJobPost(props.jobPost);
+    await props.setSelectedJobPost(props.job);
   };
 
+  //==============================
+  //Save applied
+  const userCtx = useContext(UserContext);
+  const [click, setClick] = useState(false);
+
+  const handleRevert = () => {
+    setClick(false);
+  };
+
+  const handleClick = () => {
+    let data = [];
+    if (userCtx.userDetails.savedJobs !== undefined) {
+      data = [...userCtx.userDetails.savedJobs];
+    }
+    setClick(true);
+    saved("http://127.0.0.1:5001/api/jobseekers/update", data);
+  };
+
+  async function saved(url, data) {
+    let now = new Date().toString();
+    let nowRev = now.slice(4, 8) + now.slice(11, 15);
+    let newSave = { id: props.job._id, date: nowRev };
+
+    data.push(newSave);
+    console.log(data);
+    userCtx.setUserDetails({ ...userCtx.userDetails, savedJobs: data });
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: userCtx.userDetails.id,
+        savedJobs: data,
+      }),
+    });
+    return response.json();
+  }
+  //==============================
+
   return (
-    <div className="container mb-3 mx-0 px-0" onClick={handleJobDetails}>
+    <div className="container mb-3 mx-0 px-0">
       <div className="row w-100 bg-light mx-0">
-        <div className="col-1 d-flex flex-column align-items-center mt-3">
-          <img src={save} alt="save icon" className="w-50" />
-          <p className="text-secondary text-center">Save</p>
+        <div
+          className="col-1 d-flex flex-column align-items-center mt-3"
+          onClick={handleJobDetails}
+        >
+          {!click && (
+            <>
+              <img
+                src={save}
+                alt="save icon"
+                className="w-50"
+                onClick={handleClick}
+              />
+              <p className="text-secondary text-center" onClick={handleClick}>
+                Save
+              </p>
+            </>
+          )}
+          {click && (
+            <>
+              <div style={{ transform: "scale(1.5)" }} onClick={handleRevert}>
+                <BookmarkAddedOutlinedIcon />
+              </div>
+              <p className="text-secondary text-center" onClick={handleRevert}>
+                Saved
+              </p>
+            </>
+          )}
         </div>
         <Link to="/job-post-details" className="col-4 mt-3">
           <p className="text-secondary">
-            Job Title: {props.jobPost.about.title}
+            Job Title: {props.job.jobPost.about.title}
           </p>
           <p className="text-secondary">
-            Company: {props.jobPost.about.company}
+            Company: {props.job.jobPost.about.company}
           </p>
           <p className="text-secondary mb-0">
-            Job Type: {props.jobPost.about.type}
+            Job Type: {props.job.jobPost.about.type}
           </p>
         </Link>
         <Link to="/job-post-details" className="col-4 mt-3 d-flex flex-column">
@@ -89,7 +155,7 @@ const Card = (props) => {
             {abilityDifferencesIcons}
           </div>
           <p className="text-secondary text-center mb-0">
-            {[...props.jobPost.accessibility.abilityDiff].join(", ")}
+            {[...props.job.jobPost.accessibility.abilityDiff].join(", ")}
           </p>
         </Link>
       </div>
