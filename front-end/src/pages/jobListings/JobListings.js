@@ -177,9 +177,10 @@ const JobListings = (props) => {
     }
   }, [filter]);
 
-  // ==================================================
-  // useEffect to map Cards after jobPosts has been set
-  // ==================================================
+  // ======================
+  // useEffect to map Cards
+  // ======================
+  // Initial map, after jobPosts has been set
   useEffect(() => {
     if (jobPosts !== undefined) {
       mapCards();
@@ -190,7 +191,11 @@ const JobListings = (props) => {
   }, [jobPosts]);
 
   function mapCards() {
-    const mappedJobCards = jobPosts.map((element) => {
+    const jobsOnCurrentPage = jobPosts.slice(
+      (startPage + currentPage - 1) * 6 - 6,
+      (startPage + currentPage - 1) * 6
+    );
+    const mappedJobCards = jobsOnCurrentPage.map((element) => {
       return (
         <Card
           jobPost={element.jobPost}
@@ -201,6 +206,13 @@ const JobListings = (props) => {
     });
     setJobCards(mappedJobCards);
   }
+
+  // Subsequent maps, whenever currentPage or startPage changes
+  useEffect(() => {
+    if (jobPosts !== undefined) {
+      mapCards();
+    }
+  }, [currentPage, startPage]);
 
   // ====================
   // Pages Event Handlers
