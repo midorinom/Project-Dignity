@@ -1,0 +1,13 @@
+.pageNumber {
+  border-radius: 0;
+  border-left: none;
+}
+
+.prevBtn {
+  border-radius: 0.6em 0 0 0.6em;
+}
+
+.nextBtn {
+  border-radius: 0 0.6em 0.6em 0;
+  border-left: none;
+}
