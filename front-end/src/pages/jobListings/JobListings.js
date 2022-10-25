@@ -28,6 +28,15 @@ const JobListings = (props) => {
     support: [],
   });
   const [initialFilter, setInitialFilter] = useState({});
+  const [abilityDiffFilters, setAbilityDiffFilters] = useState([]);
+  const [interactionFilter, setInteractionFilter] = useState(undefined);
+  const [environmentFilters, setEnvironmentFilters] = useState({
+    minNoise: 0,
+    maxNoise: 4,
+    minLight: 0,
+    maxLight: 4,
+  });
+  const [supportFilters, setSupportFilters] = useState([]);
 
   // =================
   // onMount useEffect
@@ -230,6 +239,10 @@ const JobListings = (props) => {
         getAllJobPosts={getAllJobPosts}
         getFilteredJobPosts={getFilteredJobPosts}
         initialFilter={initialFilter}
+        setAbilityDiffFilters={setAbilityDiffFilters}
+        setInteractionFilter={setInteractionFilter}
+        setEnvironmentFilters={setEnvironmentFilters}
+        setSupportFilters={setSupportFilters}
       />
       <p className="px-4 text-muted font-weight-light font-italic">
         Main Page &gt; What would you like to do today? &gt; Job Listing
@@ -244,10 +257,26 @@ const JobListings = (props) => {
       )}
       <div className="results d-flex">
         <div className="filters w-25 px-4 mb-4">
-          <AbilityDifference setFilter={setFilter} />
-          <JobEnvironment setFilter={setFilter} />
-          <JobInteractionType setFilter={setFilter} />
-          <SupportProvided setFilter={setFilter} />
+          <AbilityDifference
+            setFilter={setFilter}
+            abilityDiffFilters={abilityDiffFilters}
+            setAbilityDiffFilters={setAbilityDiffFilters}
+          />
+          <JobEnvironment
+            setFilter={setFilter}
+            environmentFilters={environmentFilters}
+            setEnvironmentFilters={setEnvironmentFilters}
+          />
+          <JobInteractionType
+            setFilter={setFilter}
+            interactionFilter={interactionFilter}
+            setInteractionFilter={setInteractionFilter}
+          />
+          <SupportProvided
+            setFilter={setFilter}
+            supportFilters={supportFilters}
+            setSupportFilters={setSupportFilters}
+          />
         </div>
         <div className="postings w-75 px-4 mb-4">{jobCards}</div>
       </div>
