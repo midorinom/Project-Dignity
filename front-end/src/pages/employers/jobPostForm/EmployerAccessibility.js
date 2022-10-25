@@ -1,17 +1,44 @@
+import React,{useState} from "react";
 import styles from "./jobPostForm.module.css";
 import physical from "../../jobListings/filters/abilityDifference/icons/physical.png";
 import visual from "../../jobListings/filters/abilityDifference/icons/visual.png";
 import hearing from "../../jobListings/filters/abilityDifference/icons/hearing.png";
 import intellectual from "../../jobListings/filters/abilityDifference/icons/intellectual.png";
 import autism from "../../jobListings/filters/abilityDifference/icons/autism.png";
+import { useForm } from "react-hook-form";
 
-const EmployerAccessibility = () => {
+const EmployerAccessibility = (props) => {
+
+  //react-hook-forms functionality
+  const {
+    register,
+    control,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    const newSchema={
+      abilityDiff: data.abilityDiff,
+      support: data.support,
+      supportElab: data.supportELab,
+      environment: data.environmentSet,
+    }
+    props.setAccessibilityConsiderationsSchema(newSchema);
+    // console.log(newSchema)
+  };
+  const onError = (errors) => {
+    console.log(errors);
+  };
+
+
   return (
     <>
       <section classname="container-md" id="Accessibility">
         <div className="row text-start">
-          <div className={`${styles.form} col-md-6`}>
-            <form id="AboutEmployer">
+          <form id="AboutEmployer" onSubmit={handleSubmit(onSubmit, onError)}>
+            <div className={`${styles.form} col-md-6`}>
               {/*================================== Suitable Applicants ================================== */}
               <div className="form-group mb-4">
                 <p>
@@ -72,6 +99,7 @@ const EmployerAccessibility = () => {
                   ability differences.
                 </a>
               </div>
+              {/* nature of ability diff */}
               <div className="form-group mb-4">
                 <label className="form-label" htmlFor="job-title">
                   Nature of Ability Differences
@@ -82,8 +110,14 @@ const EmployerAccessibility = () => {
                   <input
                     className="custom-control-input btn-check"
                     type="checkbox"
+                    value="Physical"
                     id="ability-diff-physical"
-                    autocomplete="off"
+                    {...register("abilityDiff", {
+                      required: {
+                        value: true,
+                        message: "Please select at least one option",
+                      },
+                    })}
                   ></input>
                   <label
                     className="custom-control-label btn p-3"
@@ -105,7 +139,13 @@ const EmployerAccessibility = () => {
                     className="custom-control-input btn-check"
                     type="checkbox"
                     id="ability-diff-visual"
-                    autocomplete="off"
+                    value="Visual"
+                    {...register("abilityDiff", {
+                      required: {
+                        value: true,
+                        message: "Please select at least one option",
+                      },
+                    })}
                   ></input>
                   <label
                     className="custom-control-label btn p-3"
@@ -123,7 +163,13 @@ const EmployerAccessibility = () => {
                     className="custom-control-input btn-check"
                     type="checkbox"
                     id="ability-diff-hearing"
-                    autocomplete="off"
+                    value="Hearing"
+                    {...register("abilityDiff", {
+                      required: {
+                        value: true,
+                        message: "Please select at least one option",
+                      },
+                    })}
                   ></input>
                   <label
                     className="custom-control-label btn p-3"
@@ -141,7 +187,13 @@ const EmployerAccessibility = () => {
                     className="custom-control-input btn-check"
                     type="checkbox"
                     id="ability-diff-intellectual"
-                    autocomplete="off"
+                    value="Intellectual"
+                    {...register("abilityDiff", {
+                      required: {
+                        value: true,
+                        message: "Please select at least one option",
+                      },
+                    })}
                   ></input>
                   <label
                     className="custom-control-label btn p-3"
@@ -163,7 +215,13 @@ const EmployerAccessibility = () => {
                     className="custom-control-input btn-check"
                     type="checkbox"
                     id="ability-diff-autism"
-                    autocomplete="off"
+                    value="Autism"
+                    {...register("abilityDiff", {
+                      required: {
+                        value: true,
+                        message: "Please select at least one option",
+                      },
+                    })}
                   ></input>
                   <label
                     className="custom-control-label btn p-3"
@@ -176,6 +234,9 @@ const EmployerAccessibility = () => {
                     </div>
                   </label>
                 </div>
+                <p className="mt-2 text-danger">
+                  {errors.abilityDiff?.message}
+                </p>
               </div>
               {/* ================================================================================================== */}
 
@@ -191,8 +252,14 @@ const EmployerAccessibility = () => {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Structured"
                   id="flexCheckDefault"
+                  {...register("support", {
+                    required: {
+                      value: true,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
                 <label
                   className="form-check-label mb-4 text-muted"
@@ -207,8 +274,14 @@ const EmployerAccessibility = () => {
                 <input
                   type="text"
                   class="form-control mb-4"
-                  id="structured programmes"
+                  id="Structured"
                   placeholder="Please elaborate on the support you intend to provide"
+                  {...register("supportELab.structured", {
+                    required: {
+                      value: false,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
               </div>
 
@@ -217,8 +290,14 @@ const EmployerAccessibility = () => {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Shadowing"
                   id="flexCheckDefault"
+                  {...register("support", {
+                    required: {
+                      value: true,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
                 <label
                   className="form-check-label mb-4 text-muted"
@@ -233,8 +312,14 @@ const EmployerAccessibility = () => {
                 <input
                   type="text"
                   class="form-control mb-4"
-                  id="training and shadowing"
+                  id="Shadowing"
                   placeholder="Please elaborate on the support you intend to provide"
+                  {...register("supportELab.shadowing", {
+                    required: {
+                      value: false,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
               </div>
               {/* Workplace Redesign */}
@@ -242,8 +327,14 @@ const EmployerAccessibility = () => {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Redesign"
                   id="flexCheckDefault"
+                  {...register("support", {
+                    required: {
+                      value: true,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
                 <label
                   className="form-check-label mb-4 text-muted"
@@ -259,8 +350,14 @@ const EmployerAccessibility = () => {
                 <input
                   type="text"
                   class="form-control mb-4"
-                  id="workplace redesign"
+                  id="Redesign"
                   placeholder="Please elaborate on the support you intend to provide"
+                  {...register("supportELab.redesign", {
+                    required: {
+                      value: false,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
               </div>
               {/* Assistive Technology */}
@@ -268,8 +365,14 @@ const EmployerAccessibility = () => {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Assistive"
                   id="flexCheckDefault"
+                  {...register("support", {
+                    required: {
+                      value: true,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
                 <label
                   className="form-check-label mb-4 text-muted"
@@ -283,8 +386,14 @@ const EmployerAccessibility = () => {
                 <input
                   type="text"
                   class="form-control mb-4"
-                  id="assistive Technology"
+                  id="Assistive"
                   placeholder="Please elaborate on the support you intend to provide"
+                  {...register("supportELab.assistive", {
+                    required: {
+                      value: false,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
               </div>
 
@@ -293,8 +402,14 @@ const EmployerAccessibility = () => {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Social"
                   id="flexCheckDefault"
+                  {...register("support", {
+                    required: {
+                      value: true,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
                 <label
                   className="form-check-label mb-4 text-muted"
@@ -309,8 +424,14 @@ const EmployerAccessibility = () => {
                 <input
                   type="text"
                   class="form-control mb-4"
-                  id="social Integration"
+                  id="Social"
                   placeholder="Please elaborate on the support you intend to provide"
+                  {...register("supportELab.social", {
+                    required: {
+                      value: false,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
               </div>
               {/* Trial Period */}
@@ -318,8 +439,14 @@ const EmployerAccessibility = () => {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value="Trial"
                   id="flexCheckDefault"
+                  {...register("support", {
+                    required: {
+                      value: true,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
                 <label
                   className="form-check-label mb-4 text-muted"
@@ -334,16 +461,28 @@ const EmployerAccessibility = () => {
                 <input
                   type="text"
                   class="form-control mb-4"
-                  id="trial period"
+                  id="Trial"
                   placeholder="Please elaborate on the support you intend to provide"
+                  {...register("supportELab.trial", {
+                    required: {
+                      value: false,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
               </div>
               <div className="form-check mb-4">
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
-                  id="flexCheckDefault"
+                  value="others"
+                  id="others"
+                  {...register("support", {
+                    required: {
+                      value: true,
+                      message: "Please select at least one option",
+                    },
+                  })}
                 />
                 <label
                   className="form-check-label mb-4 text-muted"
@@ -351,7 +490,17 @@ const EmployerAccessibility = () => {
                 >
                   Others, Please Specify
                 </label>
-                <input type="text" class="form-control mb-4" id="others" />
+                <input
+                  type="text"
+                  class="form-control mb-4"
+                  id="others"
+                  {...register("supportELab.others", {
+                    required: {
+                      value: false,
+                      message: "Please select at least one option",
+                    },
+                  })}
+                />
               </div>
               {/* ================================================================================================== */}
               {/*================================== Physical Job Environment ================================== */}
@@ -361,8 +510,24 @@ const EmployerAccessibility = () => {
               </label>
               <div className={`${styles.range}`}>
                 <p className="me-4 text-muted">Quiet</p>
-                <input type="range" class={`form-range ${styles.bar}`}id="noiselevel"></input>
+                <input
+                  type="range"
+                  class={`form-range ${styles.bar}`}
+                  id="noiselevel"
+                  min="0"
+                  max="5"
+                  step="1"
+                  {...register("environmentSet.noise", {
+                    required: {
+                      value: true,
+                      message: "Please indicate the range of noise intensity",
+                    },
+                  })}
+                ></input>
                 <p className="ms-5 text-muted">Loud</p>
+                <p className="mt-2 text-danger">
+                  {errors.environmentSet?.message}
+                </p>
               </div>
               {/* Light Intensity */}
               <label for="lightintensity" class="form-label mt-4">
@@ -370,11 +535,29 @@ const EmployerAccessibility = () => {
               </label>
               <div className={`${styles.range}`}>
                 <p className="me-4 text-muted">Dim</p>
-                <input type="range" class={`form-range ${styles.bar}`}id="lightintensity"></input>
-                <p className="ms-5 text-muted">Bright,<br></br>flashing</p>
+                <input
+                  type="range"
+                  class={`form-range ${styles.bar}`}
+                  id="lightintensity"
+                  min="0"
+                  max="5"
+                  step="1"
+                  {...register("environmentSet.light", {
+                    required: {
+                      value: true,
+                      message: "Please indicate the range of light intensity",
+                    },
+                  })}
+                ></input>
+                <p className="ms-5 text-muted">
+                  Bright,<br></br>flashing
+                </p>
+                <p className="mt-2 text-danger">
+                  {errors.environmentSet?.message}
+                </p>
               </div>
 
-                {/* Upload Image(s) of the Workplace */}
+              {/* Upload Image(s) of the Workplace */}
 
               {/* Other Information About the Physical Job Environment, optional */}
               <div className="form-group mb-4">
@@ -392,50 +575,58 @@ const EmployerAccessibility = () => {
                   id="exampleFormControlTextarea1"
                   rows="3"
                   placeholder="Any other information about the physical job environment that you would like inform job applicants of? "
+                  {...register("environmentSet.otherInfo", {
+                    required: {
+                      value: false,
+                    },
+                  })}
                 ></textarea>
+                <p className="mt-2 text-danger">
+                </p>
+                <p className="mt-2 text-danger">{errors.support?.message}</p>
               </div>
               {/* ================================================================================================== */}
               <button type="button" className={`${styles.bottom_button}`}>
                 Upload Job Post{" "}
               </button>
-            </form>
-          </div>
-          <div className="col-md-1"></div>
-          {/*================================== Side Panel ====================================================== */}
-          <div className="col-md-4">
-            <div className={`${styles.sideButtonsContainer}`}>
-              <button
-                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
-              >
-                Save as Draft
-              </button>
-              <button
-                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
-              >
-                Previous Job Post
-              </button>
-              <button
-                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
-              >
-                Upload Job post
-              </button>
-              <div class="progress mt-4">
-                <div
-                  class="progress-bar"
-                  role="progressbar"
-                  Style="width: 75%"
-                  aria-valuenow="75"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                ></div>
-              </div>
-              <div className={`${styles.progressBar} progress_bar`}>
-                <small className="text-muted" htmlFor="progress-bar">
-                  75% complete
-                </small>
+            </div>
+            <div className="col-md-1"></div>
+            {/*================================== Side Panel ====================================================== */}
+            <div className="col-md-4">
+              <div className={`${styles.sideButtonsContainer}`}>
+                <button
+                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                >
+                  Save as Draft
+                </button>
+                <button
+                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                >
+                  Previous Job Post
+                </button>
+                <button
+                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                >
+                  Upload Job post
+                </button>
+                <div class="progress mt-4">
+                  <div
+                    class="progress-bar"
+                    role="progressbar"
+                    Style="width: 75%"
+                    aria-valuenow="75"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+                <div className={`${styles.progressBar} progress_bar`}>
+                  <small className="text-muted" htmlFor="progress-bar">
+                    75% complete
+                  </small>
+                </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </section>
     </>
