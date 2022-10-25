@@ -46,9 +46,10 @@ const AbilityDifference = (props) => {
     <div className="d-flex flex-column w-100 bg-light align-center">
       <h5 className="mx-1 mb-1 mt-2 text-muted">Ability Difference</h5>
       <button
-        className="btn btn-outline-secondary btn-sm m-1 d-flex align-items-center"
+        className={`btn btn-outline-secondary btn-sm m-1 d-flex align-items-center ${
+          abilityDiffFilters.some((element) => element === "Autism") && "active"
+        }`}
         type="button"
-        data-bs-toggle="button"
         onClick={handleClick}
         value="Autism"
       >
