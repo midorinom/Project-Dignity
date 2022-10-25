@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import image71 from "../jobCards/images/image 71.png";
 import image72 from "../jobCards/images/image 72.png";
@@ -9,10 +9,12 @@ import autismIcon from "../filters/abilityDifference/icons/autism.png";
 import intellectualIcon from "../filters/abilityDifference/icons/intellectual.png";
 import physicalIcon from "../filters/abilityDifference/icons/physical.png";
 import { Link } from "react-router-dom";
+import UserContext from "../../../context/userContext";
 
 const JobPostDetails = (props) => {
-  const about = props.selectedJobPost.about;
-  const access = props.selectedJobPost.accessibility;
+  const about = props.selectedJobPost.jobPost.about;
+  const access = props.selectedJobPost.jobPost.accessibility;
+  const userCtx = useContext(UserContext);
 
   //==============================
   // Map AbilityDifferencesIcons
@@ -90,6 +92,33 @@ const JobPostDetails = (props) => {
   });
   //==============================
 
+  //==============================
+  //Save applied
+  const handleClick = (e) => {
+    let data = [];
+    if (userCtx.userDetails.appliedJobs !== undefined) {
+      data = [...userCtx.userDetails.appliedJobs];
+    }
+    saveApplied("http://127.0.0.1:5001/api/jobseekers/update", data);
+  };
+
+  async function saveApplied(url, data) {
+    data.push(props.selectedJobPost._id);
+    userCtx.setUserDetails({ ...userCtx.userDetails, appliedJobs: data });
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: userCtx.userDetails.id,
+        appliedJobs: data,
+      }),
+    });
+    return response.json();
+  }
+  //==============================
+
   return (
     <div className="container">
       <div className="row d-flex">
@@ -158,7 +187,11 @@ const JobPostDetails = (props) => {
 
         {/* accessibility column */}
         <div className="col-3">
-          <Link to="/successful-application" className="btn btn-dark w-100">
+          <Link
+            to="/successful-application"
+            className="btn btn-dark w-100"
+            onClick={handleClick}
+          >
             Apply Now
           </Link>
           <div className="border border-warning border-2 my-4">
