@@ -218,11 +218,13 @@
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-around;
+  align-items: center;
 }
 
 .abilityDifferencesIcon {
   height: 45%;
   width: 30%;
+  padding: 2%;
   border: thin solid #797676;
   border-radius: 0.5em;
   display: flex;
