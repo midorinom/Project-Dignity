@@ -7,6 +7,7 @@ import JobSeekerProfileFormSkills from "./JobSeekerProfileFormSkills";
 import JobSeekerProfileFormAbilityDiff from "./JobSeekerProfileFormAbilityDiff";
 import JobSeekerProfileFormExperience from "./JobSeekerProfileFormExperience";
 import JobSeekerProfileFormEducation from "./JobSeekerProfileFormEducation";
+import profilePic from "../jobSeekerProfile/profile.png";
 
 const JobSeekerProfileForm = (props) => {
   console.log(props);
@@ -157,8 +158,9 @@ const JobSeekerProfileForm = (props) => {
         };
 
         updateProfileData();
-
+        console.log(`start`);
         props.setProfileIsCompleted(true);
+        console.log(`end`);
 
         navigate("/profile");
         // } else {
@@ -252,23 +254,38 @@ const JobSeekerProfileForm = (props) => {
         <div className="container-md">
           <div className="row" id={styles.banner}>
             <div className="d-flex justify-content-md-center m-0 p-0">
-              <div className="col-md-2 m-3">
-                <embed />
+              {/* <div className="col-md-2 m-3"> */}
+              <div className="col-md-2 d-flex justify-content-center m-3 p-4">
+                <img
+                  src={profilePic}
+                  alt="profile pic"
+                  className="p-3"
+                  style={{ width: "130%" }}
+                />
               </div>
-              <div className="col-md-8 p-4">
-                <h1 className=" mt-4 mb-3">
-                  {aboutSchema?.name ? aboutSchema.name : `This is my name`}
+              {/* </div> */}
+              <div className="col-md-8 p-5">
+                <h1 className=" mt-3 mb-3">
+                  {aboutSchema?.name
+                    ? aboutSchema.name
+                    : props.profileData?.about?.name
+                    ? props.profileData.about.name
+                    : `This is my name`}
                 </h1>
                 <p style={{ fontSize: "1.3em" }}>
                   {aboutSchema?.aspiration
                     ? aboutSchema.aspiration
+                    : props.profileData?.about?.aspiration
+                    ? props.profileData.about.aspiration
                     : `This is my aspiration`}
                 </p>
-                <p>
+                <div className="text-break w-100">
                   {aboutSchema?.brand
                     ? aboutSchema.brand
+                    : props.profileData?.about?.brand
+                    ? props.profileData.about.brand
                     : `This is my personal brand statement`}
-                </p>
+                </div>
               </div>
             </div>
           </div>
