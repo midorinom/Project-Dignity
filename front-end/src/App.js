@@ -31,6 +31,8 @@ function App() {
   const [profileIsCompleted, setProfileIsCompleted] = useState(false);
   const [profileData, setProfileData] = useState(undefined); // profile returned from api fetch
 
+  // State for employer profile
+  const [employerProfileData, setEmployerProfileData]= useState({})
   // ===================
   // Conditional Renders
   //====================
@@ -72,7 +74,7 @@ function App() {
           />
         );
       case "employer":
-        return <EmployerProfile />;
+        return <EmployerProfile employerProfileData={employerProfileData} setEmployerProfileData={setEmployerProfileData}/>;
       default:
         return <Login />;
     }
@@ -90,7 +92,7 @@ function App() {
         />
       );
     } else if (userDetails.type === "employer") {
-      return <EmployerProfileForm />;
+      return <EmployerProfileForm employerProfileData={employerProfileData} setEmployerProfileData={setEmployerProfileData}/>;
     }
   }
   const profileFormPage = displayProfileFormPage();
