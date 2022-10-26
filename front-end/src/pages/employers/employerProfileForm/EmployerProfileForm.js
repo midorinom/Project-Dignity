@@ -48,6 +48,7 @@ const EmployerProfileForm = (props) => {
       } catch (err) {
         console.log(err);
       }
+      navigate("/profile")
     } else {
       navigate("/profile");
     }
