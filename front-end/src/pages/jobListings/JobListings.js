@@ -341,81 +341,81 @@ const JobListings = (props) => {
         </div>
         <div className="postings flex-column w-75 px-4 mb-4">
           {jobCards}
-
-          <div className="w-100 mt-4 d-flex justify-content-end">
-            <button
-              className={`${styles.prevBtn} ${
-                startPage === 1 && currentPage === 1
-                  ? "btn-outline-secondary disabled"
-                  : "btn-outline-primary"
-              } btn`}
-              onClick={handlePrev}
-            >
-              {"< Previous"}
-            </button>
-            <button
-              className={`${styles.pageNumber} ${
-                currentPage === 1 && styles.currentPage
-              } btn btn-outline-primary`}
-              value="1"
-              onClick={handlePageSkip}
-            >
-              {startPage}
-            </button>
-            {startPage + 1 <= totalPages && (
+          {jobPosts.length > 0 && (
+            <div className="w-100 mt-4 d-flex justify-content-end">
+              <button
+                className={`${styles.prevBtn} ${
+                  startPage === 1 && currentPage === 1
+                    ? "btn-outline-secondary disabled"
+                    : "btn-outline-primary"
+                } btn`}
+                onClick={handlePrev}
+              >
+                {"< Previous"}
+              </button>
               <button
                 className={`${styles.pageNumber} ${
-                  currentPage === 2 && styles.currentPage
+                  currentPage === 1 && styles.currentPage
                 } btn btn-outline-primary`}
-                value="2"
+                value="1"
                 onClick={handlePageSkip}
               >
-                {startPage + 1}
+                {startPage}
               </button>
-            )}
-            {startPage + 2 <= totalPages && (
-              <button
-                className={`${styles.pageNumber} ${
-                  currentPage === 3 && styles.currentPage
-                } btn btn-outline-primary`}
-                value="3"
-                onClick={handlePageSkip}
-              >
-                {startPage + 2}
-              </button>
-            )}
-            {startPage + 3 <= totalPages && (
-              <button
-                className={`${styles.pageNumber} ${
-                  currentPage === 4 && styles.currentPage
-                } btn btn-outline-primary`}
-                value="4"
-                onClick={handlePageSkip}
-              >
-                {startPage + 3}
-              </button>
-            )}
-            {startPage + 4 <= totalPages && (
-              <button
-                className={`${styles.pageNumber} ${
-                  currentPage === 5 && styles.currentPage
-                } btn btn-outline-primary`}
-                value="5"
-                onClick={handlePageSkip}
-              >
-                {startPage + 4}
-              </button>
-            )}
-            {totalPages > 5 && (
-              // && !pageInput
-              <button
-                className={`${styles.pageNumber} btn btn-outline-primary`}
-                // onClick={togglePageInput}
-              >
-                ...
-              </button>
-            )}
-            {/* {pageInput && (
+              {startPage + 1 <= totalPages && (
+                <button
+                  className={`${styles.pageNumber} ${
+                    currentPage === 2 && styles.currentPage
+                  } btn btn-outline-primary`}
+                  value="2"
+                  onClick={handlePageSkip}
+                >
+                  {startPage + 1}
+                </button>
+              )}
+              {startPage + 2 <= totalPages && (
+                <button
+                  className={`${styles.pageNumber} ${
+                    currentPage === 3 && styles.currentPage
+                  } btn btn-outline-primary`}
+                  value="3"
+                  onClick={handlePageSkip}
+                >
+                  {startPage + 2}
+                </button>
+              )}
+              {startPage + 3 <= totalPages && (
+                <button
+                  className={`${styles.pageNumber} ${
+                    currentPage === 4 && styles.currentPage
+                  } btn btn-outline-primary`}
+                  value="4"
+                  onClick={handlePageSkip}
+                >
+                  {startPage + 3}
+                </button>
+              )}
+              {startPage + 4 <= totalPages && (
+                <button
+                  className={`${styles.pageNumber} ${
+                    currentPage === 5 && styles.currentPage
+                  } btn btn-outline-primary`}
+                  value="5"
+                  onClick={handlePageSkip}
+                >
+                  {startPage + 4}
+                </button>
+              )}
+              {totalPages > 5 && (
+                // && !pageInput
+                <button
+                  className={`${styles.pageNumber} btn btn-outline-primary`}
+                  // onClick={togglePageInput}
+                >
+                  ...
+                </button>
+              )}
+              {/* {pageInput && (
               <form onSubmit={pageInputSubmit}>
                 <input
                   className="input-group"
@@ -427,28 +427,29 @@ const JobListings = (props) => {
                 ></input>
               </form>
             )} */}
-            {startPage + 5 <= totalPages && (
+              {startPage + 5 <= totalPages && (
+                <button
+                  className={`${styles.pageNumber} ${
+                    currentPage === 6 && styles.currentPage
+                  } btn btn-outline-primary`}
+                  value="6"
+                  onClick={handlePageSkip}
+                >
+                  {startPage + 9 > totalPages ? totalPages : startPage + 9}
+                </button>
+              )}
               <button
-                className={`${styles.pageNumber} ${
-                  currentPage === 6 && styles.currentPage
-                } btn btn-outline-primary`}
-                value="6"
-                onClick={handlePageSkip}
+                className={`${styles.nextBtn} ${
+                  startPage + currentPage - 1 === totalPages
+                    ? "btn-outline-secondary disabled"
+                    : "btn-outline-primary"
+                } btn`}
+                onClick={handleNext}
               >
-                {startPage + 9 > totalPages ? totalPages : startPage + 9}
+                {"Next >"}
               </button>
-            )}
-            <button
-              className={`${styles.nextBtn} ${
-                startPage + currentPage - 1 === totalPages
-                  ? "btn-outline-secondary disabled"
-                  : "btn-outline-primary"
-              } btn`}
-              onClick={handleNext}
-            >
-              {"Next >"}
-            </button>
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
