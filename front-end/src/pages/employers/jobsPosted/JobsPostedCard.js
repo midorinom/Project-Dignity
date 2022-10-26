@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./jobsPosted.module.css";
+import styles from "./JobsPosted.module.css";
 import img1 from "../../jobListings/jobCards/images/image 71.png";
 import img2 from "../../jobListings/jobCards/images/image 72.png";
 import img3 from "../../jobListings/jobCards/images/image 73.png";
