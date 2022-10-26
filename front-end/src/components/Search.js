@@ -66,7 +66,11 @@ const Search = (props) => {
         aria-describedby="Search by Job Title or Competency"
       />
       {props.isJobListings && (
-        <button type="button" onClick={resetSearch}>
+        <button
+          type="button"
+          className="border-0 rounded"
+          onClick={resetSearch}
+        >
           X
         </button>
       )}
