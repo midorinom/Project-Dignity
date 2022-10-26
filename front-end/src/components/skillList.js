@@ -186,4 +186,5 @@ const surveyedSkills = [
   "x-ray machine",
 ];
 
-export default surveyedSkills;
+export default surveyedSkills
+
