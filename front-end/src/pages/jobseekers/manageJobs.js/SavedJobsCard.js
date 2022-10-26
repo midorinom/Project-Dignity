@@ -13,7 +13,7 @@ const AppliedJobsCard = (props) => {
   const handleWithdraw = async () => {
     try {
       const newSavedJobs = userCtx.userDetails.savedJobs.filter(
-        (element) => element !== props.jobPost._id
+        (element) => element.id !== props.jobPost._id
       );
       userCtx.setUserDetails((prevState) => {
         return { ...prevState, savedJobs: newSavedJobs };
@@ -23,7 +23,7 @@ const AppliedJobsCard = (props) => {
         method: "PATCH",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
-          id: props.jobPost._id,
+          id: userCtx.userDetails.id,
           savedJobs: newSavedJobs,
         }),
       });

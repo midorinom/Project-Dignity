@@ -59,7 +59,7 @@ const SavedJobs = (props) => {
 
   return (
     <div>
-      <div>{jobCards ? jobCards : "No Jobs Applied"}</div>
+      <div>{jobCards ? jobCards : "No Jobs Saved"}</div>
     </div>
   );
 };
