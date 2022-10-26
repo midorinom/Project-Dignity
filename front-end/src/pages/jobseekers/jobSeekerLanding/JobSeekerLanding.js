@@ -22,6 +22,10 @@ const JobSeekerLanding = (props) => {
     navigate("/manage-jobs");
   }
 
+  function goToProfile() {
+    navigate("/profile");
+  }
+
   return (
     <div className="p-5">
       <Search
@@ -37,7 +41,7 @@ const JobSeekerLanding = (props) => {
                 onClick={goToApplied}
                 className="col-4 d-flex justify-content-center flex-column align-item-center"
               >
-                <p className="text-center d-flex align-items-center justify-content-center my-0 p-4 w-100 mr-1 bg-dark text-white">
+                <p className="btn text-center d-flex align-items-center justify-content-center my-0 p-4 w-100 mr-1 bg-dark text-white">
                   My Applied Jobs
                 </p>
               </div>
@@ -45,17 +49,17 @@ const JobSeekerLanding = (props) => {
                 onClick={goToSaved}
                 className="col-4 d-flex justify-content-center flex-column align-item-center"
               >
-                <p className="text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 bg-dark text-white">
+                <p className="btn text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 bg-dark text-white">
                   My Saved Jobs
                 </p>
               </div>
-              <div className="col-4 d-flex justify-content-center flex-column align-item-center">
-                <Link
-                  to="/profile"
-                  className="text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 ml-1 bg-dark text-white"
-                >
+              <div
+                onClick={goToProfile}
+                className="col-4 d-flex justify-content-center flex-column align-item-center"
+              >
+                <p className="btn text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 ml-1 bg-dark text-white">
                   My CV
-                </Link>
+                </p>
               </div>
             </div>
           </div>
