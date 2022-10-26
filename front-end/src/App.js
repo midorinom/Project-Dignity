@@ -16,7 +16,7 @@ import JobPostDetails from "./pages/jobListings/jobPostDetails/jobPostDetails";
 import JobPostForm from "./pages/employers/jobPostForm/JobPostForm";
 import SuccessfulApplication from "./pages/jobListings/jobPostDetails/SuccessfulApplication";
 import SavedJobs from "./pages/jobseekers/saved-jobs/SavedJobs";
-import JobsPosted from "./pages/employers/JobsPosted";
+import JobsPosted from "./pages/employers/jobsPosted/JobsPosted";
 
 function App() {
   // =========
@@ -126,7 +126,10 @@ function App() {
               />
             }
           />
-          <Route path="/employers/jobs-posted" element={<JobsPosted />} />
+          <Route
+            path="/employers/jobs-posted"
+            element={<JobsPosted setSelectedJobPost={setSelectedJobPost} />}
+          />
           <Route
             path="/job-listings"
             element={
@@ -149,8 +152,8 @@ function App() {
           />
           <Route path="/job-post-form" element={<JobPostForm />} />
         </Routes>
-        <Footer />
       </UserContext.Provider>
+      <Footer />
     </>
   );
 }
