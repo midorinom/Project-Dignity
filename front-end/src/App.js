@@ -24,6 +24,11 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const [selectedJobPost, setSelectedJobPost] = useState({});
 
+  // Managing the states for jobSeekerProfile and jobSeekerProfileForm
+  // Change this profileIsCompleted initial value to false/true to access the NoProfile/CompletedProfile pages
+  const [profileIsCompleted, setProfileIsCompleted] = useState(false);
+  const [profileData, setProfileData] = useState(undefined); // profile returned from api fetch
+
   // ===================
   // Conditional Renders
   //====================
@@ -56,7 +61,14 @@ function App() {
   function displayProfilePage() {
     switch (userDetails.type) {
       case "jobSeeker":
-        return <JobSeekerProfile />;
+        return (
+          <JobSeekerProfile
+            profileIsCompleted={profileIsCompleted}
+            setProfileIsCompleted={setProfileIsCompleted}
+            profileData={profileData}
+            setProfileData={setProfileData}
+          />
+        );
       case "employer":
         return <EmployerProfile />;
       default:
@@ -68,7 +80,13 @@ function App() {
   // Render the profile form page depending on what type of user is logged in
   function displayProfileFormPage() {
     if (userDetails.type === "jobSeeker") {
-      return <JobSeekerProfileForm />;
+      return (
+        <JobSeekerProfileForm
+          profileIsCompleted={profileIsCompleted}
+          setProfileIsCompleted={setProfileIsCompleted}
+          profileData={profileData}
+        />
+      );
     } else if (userDetails.type === "employer") {
       return <EmployerProfileForm />;
     }
