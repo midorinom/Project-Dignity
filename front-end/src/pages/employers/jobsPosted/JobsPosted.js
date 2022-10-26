@@ -44,7 +44,13 @@ const JobsPosted = () => {
   function mapCards() {
     setJobCards(
       jobsPosted.map((element) => {
-        return <JobsPostedCard jobPost={element.jobPost} />;
+        return (
+          <JobsPostedCard
+            jobPost={element}
+            key={Math.random()}
+            getJobsPosted={getJobsPosted}
+          />
+        );
       })
     );
   }

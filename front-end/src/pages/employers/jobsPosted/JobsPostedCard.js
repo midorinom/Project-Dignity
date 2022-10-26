@@ -5,13 +5,27 @@ import img2 from "../../jobListings/jobCards/images/image 72.png";
 import img3 from "../../jobListings/jobCards/images/image 73.png";
 
 const JobsPostedCard = (props) => {
+  const handleDelete = async () => {
+    try {
+      const res = await fetch("http://127.0.0.1:5001/api/jobposts/delete", {
+        method: "DELETE",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ id: props.jobPost._id }), // set to userCtx.userDetails.id
+      });
+      console.log(await res.json());
+      props.getJobsPosted();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className={`row m-4 p-4 ${styles.jobCard}`}>
       <div className="col-4 m-auto d-flex-column justify-content-center">
         <p>
-          Job Title: <b>{props.jobPost.about.title}</b>
+          Job Title: <b>{props.jobPost.jobPost.about.title}</b>
         </p>
-        <p>Job Type: {props.jobPost.about.type}</p>
+        <p>Job Type: {props.jobPost.jobPost.about.type}</p>
       </div>
       <div className="col-4">
         <p>Images of workplace:</p>
@@ -23,7 +37,9 @@ const JobsPostedCard = (props) => {
       </div>
       <div className="col-4 m-auto d-flex justify-content-around">
         <button className="btn btn-outline-secondary">View</button>
-        <button className="btn btn-outline-secondary">Delete</button>
+        <button onClick={handleDelete} className="btn btn-outline-secondary">
+          Delete
+        </button>
       </div>
     </div>
   );
