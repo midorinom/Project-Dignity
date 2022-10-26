@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-
+import UserContext from "../../../context/userContext";
+import { Link, useNavigate } from "react-router-dom";
 import image71 from "../jobCards/images/image 71.png";
 import image72 from "../jobCards/images/image 72.png";
 import image73 from "../jobCards/images/image 73.png";
@@ -8,13 +9,12 @@ import hearingIcon from "../filters/abilityDifference/icons/hearing.png";
 import autismIcon from "../filters/abilityDifference/icons/autism.png";
 import intellectualIcon from "../filters/abilityDifference/icons/intellectual.png";
 import physicalIcon from "../filters/abilityDifference/icons/physical.png";
-import { Link } from "react-router-dom";
-import UserContext from "../../../context/userContext";
 
 const JobPostDetails = (props) => {
   const about = props.selectedJobPost.jobPost.about;
   const access = props.selectedJobPost.jobPost.accessibility;
   const userCtx = useContext(UserContext);
+  const navigate = useNavigate();
 
   //==============================
   // Map AbilityDifferencesIcons
@@ -44,7 +44,7 @@ const JobPostDetails = (props) => {
         break;
     }
     return (
-      <div className="row d-flex m-2">
+      <div key={Math.random()} className="row d-flex m-2">
         <div className="m-0 p-0 w-25 d-flex align-items-center justify-cotent-center">
           <img
             src={iconImage}
@@ -119,6 +119,13 @@ const JobPostDetails = (props) => {
   }
   //==============================
 
+  // "Read about the company" Button
+  function goToEmployerProfile() {
+    console.log("selectedjobpost.employerid", props.selectedJobPost.employerId);
+    props.setSelectedCompanyProfile(props.selectedJobPost.employerId);
+    navigate("/job-post-details/company-profile");
+  }
+
   return (
     <div className="container">
       <div className="row d-flex">
@@ -135,7 +142,10 @@ const JobPostDetails = (props) => {
           <div>
             <h1 className="display-6 m-0">{about.company}</h1>
             {props.selectedJobPost.employerId !== userCtx.userDetails.id && (
-              <button className="btn btn-outline-primary btn-sm">
+              <button
+                onClick={goToEmployerProfile}
+                className="btn btn-outline-primary btn-sm"
+              >
                 Read about the company
               </button>
             )}
