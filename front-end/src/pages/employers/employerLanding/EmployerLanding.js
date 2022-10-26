@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UserContext from "../../../context/userContext";
 import Search from "../../../components/Search";
 import eLand1 from "./taskIcons/eLand1.png";
@@ -8,6 +8,16 @@ import eLand3 from "./taskIcons/eLand3.png";
 
 const EmployerLanding = (props) => {
   const userCtx = useContext(UserContext);
+  const navigate = useNavigate();
+
+  function goToJobPostForm() {
+    navigate("/job-post-form");
+  }
+
+  function goToJobsPosted() {
+    navigate("/employers/jobs-posted");
+  }
+
   return (
     <div className="p-5">
       <Search
@@ -19,22 +29,22 @@ const EmployerLanding = (props) => {
           <div>
             <h1 className="display-5">Manage My Job Listing</h1>
             <div className="row">
-              <Link
-                to="/job-post-form"
+              <div
+                onClick={goToJobPostForm}
                 className="col-4 d-flex justify-content-center flex-column align-item-center"
               >
-                <p className="text-center d-flex align-items-center justify-content-center my-0 p-4 w-100 mr-1 bg-dark text-white">
+                <p className="btn text-center d-flex align-items-center justify-content-center my-0 p-4 w-100 mr-1 bg-dark text-white">
                   Post A Job
                 </p>
-              </Link>
-              <Link
-                to="/employers/jobs-posted"
+              </div>
+              <div
+                onClick={goToJobsPosted}
                 className="col-4 d-flex justify-content-center flex-column align-item-center"
               >
-                <p className="text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 ml-1 bg-dark text-white">
+                <p className="btn text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 ml-1 bg-dark text-white">
                   My Job Posts
                 </p>
-              </Link>
+              </div>
             </div>
           </div>
         )}
