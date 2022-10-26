@@ -15,6 +15,7 @@ import EmployerProfileForm from "./pages/employers/employerProfileForm/EmployerP
 import JobPostDetails from "./pages/jobListings/jobPostDetails/jobPostDetails";
 import JobPostForm from "./pages/employers/jobPostForm/JobPostForm";
 import SuccessfulApplication from "./pages/jobListings/jobPostDetails/SuccessfulApplication";
+import SavedJobs from "./pages/jobseekers/saved-jobs/SavedJobs";
 
 function App() {
   // =========
@@ -113,6 +114,7 @@ function App() {
               />
             }
           />
+          <Route path="/saved-jobs" element={<SavedJobs />} />
           <Route
             path="/employers"
             element={
