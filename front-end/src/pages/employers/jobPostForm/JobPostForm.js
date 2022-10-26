@@ -18,13 +18,16 @@ const JobPost = () => {
   const createJobPost = async (req, res) => {
     if (aboutJobSchema && accessibilityConsiderationsSchema) {
       try {
+        // const aboutBody = aboutJobSchema;
+        // aboutBody.company = userCtx.userDetails.company;
+
         const res = await fetch("http://127.0.0.1:5001/api/jobposts/create", {
           method: "PUT",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({
             employerId: userCtx.userDetails.id,
             jobPost: {
-              about: aboutJobSchema,
+              about: { ...aboutJobSchema, company: userCtx.userDetails.company},
               accessibility: accessibilityConsiderationsSchema,
             },
           }),
@@ -36,7 +39,7 @@ const JobPost = () => {
         console.log(err);
       }
     } else {
-      alert(`Missing fields`);
+      alert(`Please save fill in required fields and save as draft before submitting`);
     }
   };
 
