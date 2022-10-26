@@ -7,8 +7,10 @@ const EmployerProfileForm = (props) => {
   const [employerProfile, setEmployerProfile] = useState();
   const [whoWeAreCharacterCount, setWhoWeAreCharacterCount] = useState(0);
   const [whatWeDoCharacterCount, setwhatWeDoCharacterCount] = useState(0);
-  const [workingWithDiffCharacterCount, setworkingWithDiffCharacterCount] =useState(0);
-  const [accessibilityCharacterCount, setAccessibilityCharacterCount] =useState(0);
+  const [workingWithDiffCharacterCount, setworkingWithDiffCharacterCount] =
+    useState(0);
+  const [accessibilityCharacterCount, setAccessibilityCharacterCount] =
+    useState(0);
   const [sectionSaved, setSectionSaved] = useState();
 
   const userCtx = useContext(UserContext);
@@ -22,14 +24,13 @@ const EmployerProfileForm = (props) => {
 
   const onSubmit = (data) => {
     setEmployerProfile(data);
-
     console.log(data);
   };
 
   const onError = (errors) => console.log(errors);
 
   const navigate = useNavigate();
-  
+
   //Update employerprofile
   const createEmployerprofile = async (req, res) => {
     if (employerProfile) {
@@ -44,11 +45,15 @@ const EmployerProfileForm = (props) => {
         });
         const createdEmployerProfile = await res.json();
         console.log(createdEmployerProfile);
+        userCtx.setUserDetails((prevState) => {
+          return { ...prevState, profileCompleted: true };
+        });
+        navigate("/profile");
       } catch (err) {
         console.log(err);
       }
     } else {
-      navigate("/profile");
+      alert("Please save your changes");
     }
   };
 
