@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import UserContext from "../../../context/userContext";
 import JobsPostedCard from "./JobsPostedCard";
 
-const JobsPosted = () => {
+const JobsPosted = (props) => {
   const userCtx = useContext(UserContext);
   const [jobsPosted, setJobsPosted] = useState([]);
   const [jobCards, setJobCards] = useState(undefined);
@@ -21,7 +21,7 @@ const JobsPosted = () => {
         {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ employerId: "6351180cb981f5f286656765" }), // set to userCtx.userDetails.id
+          body: JSON.stringify({ employerId: userCtx.userDetails.id }),
         }
       );
       const fetchedJobPosts = await res.json();
@@ -36,9 +36,8 @@ const JobsPosted = () => {
   // ========================================================
   useEffect(() => {
     if (jobsPosted.length > 0) {
-      console.log("jobsPosted has been fetched", jobsPosted);
+      mapCards();
     }
-    mapCards();
   }, [jobsPosted]);
 
   function mapCards() {
@@ -49,6 +48,7 @@ const JobsPosted = () => {
             jobPost={element}
             key={Math.random()}
             getJobsPosted={getJobsPosted}
+            setSelectedJobPost={props.setSelectedJobPost}
           />
         );
       })
@@ -58,7 +58,7 @@ const JobsPosted = () => {
   return (
     <div>
       <h1 className="m-4">My Jobs Posted</h1>
-      <div>{jobCards}</div>
+      <div>{jobCards ? jobCards : "No Jobs Posted"}</div>
     </div>
   );
 };

@@ -126,7 +126,10 @@ function App() {
               />
             }
           />
-          <Route path="/employers/jobs-posted" element={<JobsPosted />} />
+          <Route
+            path="/employers/jobs-posted"
+            element={<JobsPosted setSelectedJobPost={setSelectedJobPost} />}
+          />
           <Route
             path="/job-listings"
             element={
@@ -149,8 +152,8 @@ function App() {
           />
           <Route path="/job-post-form" element={<JobPostForm />} />
         </Routes>
-        <Footer />
       </UserContext.Provider>
+      <Footer />
     </>
   );
 }
