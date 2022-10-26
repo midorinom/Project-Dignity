@@ -205,7 +205,7 @@ const JobSeekerProfile = (props) => {
                 </button>
                 <div className="container d-flex">
                   <div className="d-flex w-25 justify-content-center">
-                    <img src={profilePic} alt="profile pic" className="w-75" />
+                    <img src={profilePic} alt="profile pic" className="w-50" />
                   </div>
                   <div className="d-flex flex-column justify-content-center w-75">
                     <h1 className="display-6">
