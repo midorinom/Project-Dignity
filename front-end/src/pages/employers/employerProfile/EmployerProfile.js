@@ -57,7 +57,7 @@ const EmployerProfile = (props) => {
                   className={`${styles.companyName} md-12 d-flex justify-content-between `}
                 >
                   {props.employerProfileData?.company}
-                  <button>
+                  <button className={styles.editProfileButton}>
                     <Link to="/profile-form">Edit Profile</Link>
                   </button>
                 </div>
