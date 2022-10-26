@@ -19,16 +19,14 @@ const EmployerLanding = (props) => {
           <div>
             <h1 className="display-5">Manage My Job Listing</h1>
             <div className="row">
-              <div className="col-4 d-flex justify-content-center flex-column align-item-center">
+              <Link
+                to="/job-post-form"
+                className="col-4 d-flex justify-content-center flex-column align-item-center"
+              >
                 <p className="text-center d-flex align-items-center justify-content-center my-0 p-4 w-100 mr-1 bg-dark text-white">
                   Post A Job
                 </p>
-              </div>
-              <div className="col-4 d-flex justify-content-center flex-column align-item-center">
-                <p className="text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 bg-dark text-white">
-                  Search CVs
-                </p>
-              </div>
+              </Link>
               <Link
                 to="/employers/jobs-posted"
                 className="col-4 d-flex justify-content-center flex-column align-item-center"

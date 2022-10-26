@@ -1,73 +1,104 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./jobPostForm.module.css";
-import {useForm} from 'react-hook-form'
+import { useForm, useFieldArray } from "react-hook-form";
+import surveyedSkills from "../../../components/skillList";
+import SkillsetsCard from "../../jobseekers/jobSeekerProfile/resume/SkillsetsCard";
 
 const JobAbout = (props) => {
-const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0);
+  const [accessibilityCharacterCount, setAccessibilityCharacterCount] =
+    useState(0);
 
-// proceeds to accessibility considerstions when next is clicked
+  // proceeds to accessibility considerstions when next is clicked
   function goToAccessibility() {
     if (!props.sectionSaved) {
       alert("Please save before proceeding to the next section");
     } else {
-      console.log("aboutjobschema before going next page", props.aboutJobSchema)
-    props.setCurrentPage("Accessibilty Considerations");
+      props.setCurrentPage("Accessibilty Considerations");
+    }
   }
-}
 
   const navigate = useNavigate();
 
-//react-hook-forms functionality
-  const{
+  //react-hook-forms functionality
+  const {
     register,
     handleSubmit,
-    formState:{errors}
-  }= useForm()
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      tasks: [{ taskItem: "" }],
+    },
+  });
 
-  const onSubmit=(data)=>{
-    props.setAboutJobSchema(data)
-    console.log(data)
-  }
+  const { fields: fieldTask, append: appendTask, remove: removeTask } = useFieldArray({
+    control,
+    name: "tasks",
+  },
+  )
+  const { fields: fieldSkills, append: appendSkills, remove: removeSkills } = useFieldArray({
+    control,
+    name: "skills",
+  });
 
-  const onError=(errors)=> console.log(errors)
+  const onSubmit = (data) => {
+    let revisedData = [];
+    for (let i = 0; i < data.tasks.length; i++) {
+      if (i === 0) {
+        revisedData.push(Object.values(data.tasks[i])[1]);
+      } else {
+        revisedData.push(Object.values(data.tasks[i])[0]);
+      }
+    }
+    console.log(revisedData);
+    data.tasks = revisedData;
+    console.log(data);
+    props.setAboutJobSchema(data);
+  };
+
+  const onError = (errors) => console.log(errors);
 
   return (
     <>
       {/* =====================================================
         FORM ABOUT JOB
         ========================================================= */}
-  <section classname="container-md" id="AboutEmployer">
-    <form id="About Job" onSubmit={handleSubmit(onSubmit, onError)}>
-      <div className="row m-5 text-start">
-        <div className="col-md-6">
+      <section classname="container-md" id="AboutEmployer">
+        <form id="About Job" onSubmit={handleSubmit(onSubmit, onError)}>
+          <div className="row m-5 text-start">
+            <div className="col-md-6">
               {/*================================== Job Title and Job Type ================================== */}
               <label className="form-label ms-3" htmlFor="name">
-                  Job Title
-                </label>
-                <label className={`${styles.label} form label`} htmlFor="name">
-                  Job Type
-                </label>
+                Job Title
+              </label>
+              <label className={`${styles.label} form label`} htmlFor="name">
+                Job Type
+              </label>
               <div className={`form-group mb-4 ${styles.range}`}>
                 <input
                   type="text"
                   className="form-control mb-4"
                   id="name"
                   placeholder="e.g Assistant Chef"
-                  {...register('title',{
-                    required:{
+                  {...register("title", {
+                    required: {
                       value: true,
-                      message: 'Please include job title'
-                    }
+                      message: "Please include job title",
+                    },
                   })}
                 />
-                <select type="text" className={`form-group mb-4 form-select ms-5 ${styles.range}`} id="JobType" 
-                {...register('type',{
-                    required:{
+                <select
+                  type="text"
+                  className={`form-group mb-4 form-select ms-5 ${styles.range}`}
+                  id="JobType"
+                  {...register("type", {
+                    required: {
                       value: true,
-                      message: 'Please select one option'
-                    }
-                  })}>
+                      message: "Please select one option",
+                    },
+                  })}
+                >
                   <option className="default" selected>
                     Select from the drop down list
                   </option>
@@ -129,7 +160,9 @@ const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0
                   Example: Cooks, Administrators, Analysts
                 </label>
               </div>
-              <p className="mt-2 text-danger">{errors.customerFacing?.message}</p>
+              <p className="mt-2 text-danger">
+                {errors.customerFacing?.message}
+              </p>
 
               {/* ================================================================================================== */}
               {/*======================================Job Description ============================================ */}
@@ -142,39 +175,110 @@ const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0
                   id="exampleFormControlTextarea1"
                   rows="3"
                   placeholder="Tip: Keep it simple!"
-                  {...register('desc',{
-                    required:{
+                  {...register("desc", {
+                    required: {
                       value: true,
-                      message: 'Please include a brief description'
-                    }
+                      message: "Please include a brief description",
+                    },
                   })}
                 ></textarea>
               </div>
               <p className="mt-2 text-danger">{errors.desc?.message}</p>
               {/* ================================================================================================== */}
               {/*============================================Job Tasks ============================================ */}
-              <div className="form-group mb-2">
-                <label className="form-label" htmlFor="Job Tasks">
-                  Job Tasks
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="task1"
-                  placeholder="Task 1"
-                  {...register('tasks',{
-                    required:{
-                      value: true,
-                      message: 'Please include at least one task'
-                    }
-                  })}
-                />
-                <button type="button" className={`${styles.circle_btn}`}>
-                  +
-                </button>
-              </div>
+              {fieldTask.map((item, index) => {
+                return (
+                  <div key={item.id}>
+                    <div className="form-group mb-2">
+                      <label className="form-label" htmlFor="Job Tasks">
+                        Job Tasks
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="Job Tasks"
+                        name={`tasks.${index}.tasksItem`}
+                        placeholder="Task 1"
+                        {...register(`tasks.${index}.tasksItem`, {
+                          required: {
+                            value: true,
+                            message: "Please include at least one task",
+                          },
+                        })}
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      className={`${styles.circle_btn}`}
+                      onClick={() => {
+                        removeTask(index);
+                      }}
+                    >
+                      -
+                    </button>
+                  </div>
+                );
+              })}
+
+              <button
+                type="button"
+                className={`${styles.circle_btn}`}
+                onClick={() => {
+                  appendTask();
+                }}
+              >
+                +
+              </button>
+
               <p className="mt-2 text-danger">{errors.tasks?.message}</p>
               {/* ================================================================================================== */}
+              {/*============================================ Skills ============================================ */}
+              <div className="form-group mb-2">
+                <label className="form-label" htmlFor="Job Tasks">
+                  Skills
+                </label>
+                {fieldSkills.map((item, index) => {
+                  return (
+                    <div key={item.id}>
+                      <input
+                        list="skills"
+                        className="form-control mb-4"
+                        name={`skills${[index]}`}
+                        {...register(`skills[${[index]}]`, {
+                          required: {
+                            value: true,
+                            message: "Please include at least one skills",
+                          },
+                        })}
+                      />
+                      <datalist id="skills">
+                        {surveyedSkills.map((skill) => {
+                          return <option value={skill}>{skill}</option>;
+                        })}
+                      </datalist>
+                      <button
+                        type="button"
+                        className={`${styles.circle_btn}`}
+                        onClick={() => {
+                          removeSkills(index);
+                        }}
+                      >
+                        -
+                      </button>
+                      
+                    </div>
+                  );
+                })}
+                <button
+                        type="button"
+                        className={`${styles.circle_btn}`}
+                        onClick={() => {
+                          appendSkills();
+                        }}
+                      >
+                        +
+                </button>
+              </div>
               {/*============================================Expected Salary ============================================ */}
               <div className="form-group mb-4">
                 <label className="form-label" htmlFor="Job Tasks">
@@ -185,11 +289,11 @@ const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0
                   className="form-control mb-2"
                   id="minimum"
                   placeholder="Minimum"
-                  {...register('minSalary',{
-                    required:{
+                  {...register("minSalary", {
+                    required: {
                       value: true,
-                      message: 'Please include minimum salary'
-                    }
+                      message: "Please include minimum salary",
+                    },
                   })}
                 />
                 <p>to</p>
@@ -198,11 +302,11 @@ const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0
                   className="form-control mt-2"
                   id="maximum"
                   placeholder="Maximum"
-                  {...register('maxSalary',{
-                    required:{
+                  {...register("maxSalary", {
+                    required: {
                       value: true,
-                      message: 'Please include maximum salary'
-                    }
+                      message: "Please include maximum salary",
+                    },
                   })}
                 />
               </div>
@@ -216,10 +320,10 @@ const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0
                   type="checkbox"
                   value={true}
                   id="flexCheckDefault"
-                  {...register('locationSame',{
-                    required:{
-                      value: false
-                    }
+                  {...register("locationSame", {
+                    required: {
+                      value: false,
+                    },
                   })}
                 />
                 <label className="form-check-label" htmlfor="flexCheckDefault">
@@ -235,11 +339,11 @@ const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0
                   className="form-control"
                   id="postalCode"
                   placeholder="E.g 730712"
-                  {...register('postalCode',{
-                    required:{
+                  {...register("postalCode", {
+                    required: {
                       value: true,
-                      message: 'Please include postal code'
-                    }
+                      message: "Please include postal code",
+                    },
                   })}
                 />
               </div>
@@ -253,11 +357,11 @@ const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0
                   className="form-control"
                   id="block/streetNumber"
                   placeholder="E.g Blk 712"
-                  {...register('block',{
-                    required:{
+                  {...register("block", {
+                    required: {
                       value: true,
-                      message: 'Please include Block/Street Number '
-                    }
+                      message: "Please include Block/Street Number ",
+                    },
                   })}
                 />
               </div>
@@ -266,19 +370,19 @@ const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0
                 <label className="form-label" htmlFor="Unit Number">
                   Unit Number, <span>if applicable</span>
                 </label>
-              
-              <input
-                type="text"
-                className="form-control"
-                id="unitNumber"
-                placeholder="E.g 10-234"
-                {...register('unit',{
-                  required:{
-                    value: true,
-                    message: 'Please include Unit Number '
-                  }
-                })}
-              />
+
+                <input
+                  type="text"
+                  className="form-control"
+                  id="unitNumber"
+                  placeholder="E.g 10-234"
+                  {...register("unit", {
+                    required: {
+                      value: true,
+                      message: "Please include Unit Number ",
+                    },
+                  })}
+                />
               </div>
               <p className="mt-2 text-danger">{errors.unit?.message}</p>
               <div className="form-check mb-4">
@@ -291,63 +395,71 @@ const [accessibilityCharacterCount, setAccessibilityCharacterCount] = useState(0
                   rows="3"
                   placeholder="
                     Some question to consider:&#10;- What transport might an employee have to take to reach the workplace? &#10;- Is there sufficient space for the use of mobility devices such as wheelchairs?"
-                    {...register('accessibility',{
-                      required:{
-                        value: true,
-                        message: 'Please include a brief description'
-                      },
-                      maxLength: 200,
-                      onChange: (e) => setAccessibilityCharacterCount(e.target.value.length),    
-                    })}
+                  {...register("accessibility", {
+                    required: {
+                      value: true,
+                      message: "Please include a brief description",
+                    },
+                    maxLength: 200,
+                    onChange: (e) =>
+                      setAccessibilityCharacterCount(e.target.value.length),
+                  })}
                 ></textarea>
-              <small className="text-muted">{`${
-                200 - accessibilityCharacterCount
-              } / 200 characters left`}</small>
-                <p className="mt-2 text-danger">{errors.accessibility?.message}</p>
+                <small className="text-muted">{`${
+                  200 - accessibilityCharacterCount
+                } / 200 characters left`}</small>
+                <p className="mt-2 text-danger">
+                  {errors.accessibility?.message}
+                </p>
               </div>
               {/* ================================================================================================== */}
-              <button type="button" class="btn btn-dark mt-3" onClick={goToAccessibility}>
+              <button
+                type="button"
+                class="btn btn-dark mt-3"
+                onClick={goToAccessibility}
+              >
                 Proceed to 'Accessibility Consideration Section'{" "}
-              </button>  
-              </div>
-              <div className="col-md-2"></div>
-              <div className="col-md-4">
-            <div className={`${styles.sideButtonsContainer}`}>
-              <button
-                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`} onClick={props.setSectionSaved}
-              >
-                Save as Draft
               </button>
-              <button
-                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
-              
-              >
-                Previous Job Post
-              </button>
-              <button
-                className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}>
-                Upload Job post
-              </button>
-              <div className="progress mt-4">
-                <div
-                  className="progress-bar"
-                  role="progressbar"
-                  Style="width: 75%"
-                  aria-valuenow="75"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                ></div>
+            </div>
+            <div className="col-md-2"></div>
+            <div className="col-md-4">
+              <div className={`${styles.sideButtonsContainer}`}>
+                <button
+                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                  onClick={props.setSectionSaved}
+                >
+                  Save as Draft
+                </button>
+                <button
+                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                >
+                  Previous Job Post
+                </button>
+                <button
+                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                >
+                  Upload Job post
+                </button>
+                <div className="progress mt-4">
+                  <div
+                    className="progress-bar"
+                    role="progressbar"
+                    Style="width: 75%"
+                    aria-valuenow="75"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  ></div>
+                </div>
+                <div className={`${styles.progressBar} progress_bar`}>
+                  <small className="text-muted" htmlFor="progress-bar">
+                    75% complete
+                  </small>
+                </div>
               </div>
-              <div className={`${styles.progressBar} progress_bar`}>
-                <small className="text-muted" htmlFor="progress-bar">
-                  75% complete
-                </small>
-              </div>
-              </div>
+            </div>
           </div>
-          </div>
-          </form>
-          </section>
+        </form>
+      </section>
     </>
   );
 };
