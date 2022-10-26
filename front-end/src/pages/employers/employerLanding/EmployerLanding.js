@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import UserContext from "../../../context/userContext";
 import Search from "../../../components/Search";
 import eLand1 from "./taskIcons/eLand1.png";
@@ -28,11 +29,14 @@ const EmployerLanding = (props) => {
                   Search CVs
                 </p>
               </div>
-              <div className="col-4 d-flex justify-content-center flex-column align-item-center">
+              <Link
+                to="/employers/jobs-posted"
+                className="col-4 d-flex justify-content-center flex-column align-item-center"
+              >
                 <p className="text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 ml-1 bg-dark text-white">
-                  My Job Listings
+                  My Job Posts
                 </p>
-              </div>
+              </Link>
             </div>
           </div>
         )}
