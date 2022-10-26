@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import styles from "./jobPostForm.module.css";
 import physical from "../../jobListings/filters/abilityDifference/icons/physical.png";
 import visual from "../../jobListings/filters/abilityDifference/icons/visual.png";
@@ -8,7 +8,6 @@ import autism from "../../jobListings/filters/abilityDifference/icons/autism.png
 import { useForm } from "react-hook-form";
 
 const EmployerAccessibility = (props) => {
-  
   //react-hook-forms functionality
   const {
     register,
@@ -17,25 +16,24 @@ const EmployerAccessibility = (props) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const newSchema={
+    const newSchema = {
       abilityDiff: data.abilityDiff,
       support: data.support,
       supportElab: data.supportELab,
       environment: data.environmentSet,
-    }
+    };
     props.setAccessibilityConsiderationsSchema(newSchema);
-    console.log(newSchema)
+    console.log(newSchema);
   };
   const onError = (errors) => {
     console.log(errors);
   };
 
-
   return (
     <>
       <section classname="container-md" id="Accessibility">
-        <div className="row text-start">
           <form id="AboutEmployer" onSubmit={handleSubmit(onSubmit, onError)}>
+          <div className="row text-start">
             <div className={`${styles.form} col-md-6`}>
               {/*================================== Suitable Applicants ================================== */}
               <div className="form-group mb-4">
@@ -98,7 +96,7 @@ const EmployerAccessibility = (props) => {
                 </a>
               </div>
 
-        {/*================================== Nature Of Ability Diff  ================================== */}
+              {/*================================== Nature Of Ability Diff  ================================== */}
 
               <div className="form-group mb-4">
                 <label className="form-label" htmlFor="job-title">
@@ -515,7 +513,7 @@ const EmployerAccessibility = (props) => {
                   class={`form-range ${styles.bar}`}
                   id="noiselevel"
                   min="0"
-                  max="5"
+                  max="4"
                   step="1"
                   {...register("environmentSet.noise", {
                     required: {
@@ -540,7 +538,7 @@ const EmployerAccessibility = (props) => {
                   class={`form-range ${styles.bar}`}
                   id="lightintensity"
                   min="0"
-                  max="5"
+                  max="4"
                   step="1"
                   {...register("environmentSet.light", {
                     required: {
@@ -581,8 +579,7 @@ const EmployerAccessibility = (props) => {
                     },
                   })}
                 ></textarea>
-                <p className="mt-2 text-danger">
-                </p>
+                <p className="mt-2 text-danger"></p>
                 <p className="mt-2 text-danger">{errors.support?.message}</p>
               </div>
               {/* ================================================================================================== */}
@@ -594,7 +591,8 @@ const EmployerAccessibility = (props) => {
             {/*================================== Side Panel ====================================================== */}
             <div className="col-md-4">
               <div className={`${styles.sideButtonsContainer}`}>
-                <button type='submit'
+                <button
+                  type="submit"
                   className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
                 >
                   Save as Draft
@@ -605,29 +603,30 @@ const EmployerAccessibility = (props) => {
                   Previous Job Post
                 </button>
                 <button
-                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`} onClick={props.createJobPost}
+                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                  onClick={props.createJobPost}
                 >
                   Upload Job post
                 </button>
-                <div class="progress mt-4">
+                <div className="form-group">
+                <div className={`${styles.progress} progress mb-1`}>
                   <div
-                    class="progress-bar"
+                    className={styles.progressBar}
                     role="progressbar"
-                    Style="width: 75%"
-                    aria-valuenow="75"
+                    style={{ width: "90%" }}
+                    aria-valuenow="90"
                     aria-valuemin="0"
                     aria-valuemax="100"
                   ></div>
                 </div>
-                <div className={`${styles.progressBar} progress_bar`}>
                   <small className="text-muted" htmlFor="progress-bar">
                     75% complete
                   </small>
                 </div>
               </div>
             </div>
+            </div>
           </form>
-        </div>
       </section>
     </>
   );

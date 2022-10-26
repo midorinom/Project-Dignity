@@ -38,7 +38,6 @@
 / Completed Profile Page
 / ====================*/
 
-/* font weight not working */
 .companyName {
   font-family: "Raleway";
   font-weight: 10;
@@ -97,7 +96,7 @@
   border-radius: 0.3em;
   background-color: white;
   position: absolute;
-  top: 50%;
-  right: 60%;
+  top: 27%;
+  right: 50%;
   border-width: thin;
 }
