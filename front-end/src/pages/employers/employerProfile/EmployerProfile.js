@@ -1,11 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import UserContext from "../../../context/userContext"
 import styles from "./employerProfile.module.css";
 import { Link } from "react-router-dom";
 const EmployerProfile = () => {
-  const [profileIsCompleted, setProfileIsComplete] = useState(false);
+  const userCtx= useContext(UserContext)
+  const [profileData, setProfileData]= useState({})
+
+  useEffect(() => {
+    if (userCtx.userDetails.profileCompleted) {
+      getProfileData();
+    }
+  }, []);
+
+  const getProfileData = async () => {
+    try {
+      const res = await fetch("http://127.0.0.1:5001/api/employers/get", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ id: userCtx.userDetails.id }),
+      });
+      const fetchedProfileData = await res.json();
+      setProfileData(fetchedProfileData)
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   function displayProfile() {
-    if (!profileIsCompleted) {
+    if (!userCtx.userDetails.profileCompleted) {
       // ==============
       // NoProfile Page
       // ==============
@@ -33,57 +55,27 @@ const EmployerProfile = () => {
                 <div
                   className={`${styles.companyName} md-12 d-flex justify-content-between `}
                 >
-                  {/* Need to make it responsive */}
-                  Le Ciel Bakery
+                  {profileData?.company}
                   <button>
                     <Link to="/profile-form">Edit Profile</Link>
                   </button>
                 </div>
                 <h6 className={`${styles.subheading} md-lg-6`}>Who We Are</h6>
                 <p className={`${styles.p} md-lg-4`}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
+                {profileData?.whoWeAre}
                 </p>
 
                 <h6 className={`${styles.subheading} md-lg-6`}>What We Do</h6>
                 <p className={`${styles.p} md-lg-4`}>
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque
-                  ipsa quae ab illo inventore veritatis et quasi architecto
-                  beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                  quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                  consequuntur magni dolores eos qui ratione voluptatem sequi
-                  nesciunt.{" "}
+                {profileData?.whatWeDo}
+                {" "}
                 </p>
 
                 <h6 className={`${styles.subheading} md-lg-6`}>
                   Experience Working with Differently-abled Persons
                 </h6>
                 <p className={`${styles.p} md-lg-4`}>
-                  Le Ciel currently does not have any experience working with
-                  differently-abled persons. However, we are committed to
-                  training employees of all abilities to help them achieve their
-                  potential, and support them in integrating into the workplace.
-                  <li className={`${styles.li} md-lg-4`}>
-                    Our founder and head baker, Edmund, will personally teach
-                    and coach all new employees to help them gain confidence and
-                    competence in performing the assigned tasks.{" "}
-                  </li>
-                  <li className={`${styles.li} md-lg-4`}>
-                    We understand that differently-abled persons are sometimes
-                    concerned with their suitability for a certain job. Where
-                    required, Le Ciel is open to making changes to the physical
-                    workplace environment to improve employee’s accessibility
-                    and enable independence. Le Ciel will work with the employee
-                    on the necessary redesign needed to accommodate ability
-                    differences.
-                  </li>
+                {profileData?.experience}
                 </p>
               </div>
 
@@ -99,15 +91,13 @@ const EmployerProfile = () => {
                 <div className={`${styles.box} container-md`}>
                   <h6 className={`${styles.subheading} md-lg-6`}>Location</h6>
                   <p className={`${styles.p} md-lg-4`}>
-                    Blk 347 Ang Mo Kio Avenue 3, #01-1722, Singapore 560122
+                  {profileData?.location}
                   </p>
                   <h6 className={`${styles.subheading} md-lg-6`}>
                     Accessibility
                   </h6>
                   <p className={`${styles.p} md-lg-4`}>
-                    5 minute walk from Ang Mo Kio MRT - portions of the pathway
-                    between MRT is currently uneven due to construction and
-                    might not be suitable for wheelchair users
+                  {profileData?.accessibility}
                   </p>
                 </div>
 
@@ -115,12 +105,12 @@ const EmployerProfile = () => {
                 <div className={`${styles.box} container-md`}>
                   <h6 className={`${styles.subheading} md-lg-6`}>Contact</h6>
                   <p className={`${styles.p} md-lg-4`}>Contact Number</p>
-                  <p className={`${styles.p} md-lg-4`}>+65 6XXX XXXXX</p>
+                  <p className={`${styles.p} md-lg-4`}>{profileData?.contact}</p>
                   <h6 className={`${styles.subheading} md-lg-6`}>
                     Email Address
                   </h6>
                   <p className={`${styles.p} md-lg-4`}>
-                    enquiry@lecielbakery.com
+                  {profileData?.email}
                   </p>
                 </div>
               </div>
