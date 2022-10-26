@@ -34,8 +34,8 @@ const EmployerAccessibility = (props) => {
   return (
     <>
       <section classname="container-md" id="Accessibility">
-        <div className="row text-start">
           <form id="AboutEmployer" onSubmit={handleSubmit(onSubmit, onError)}>
+          <div className="row text-start">
             <div className={`${styles.form} col-md-6`}>
               {/*================================== Suitable Applicants ================================== */}
               <div className="form-group mb-4">
@@ -609,25 +609,25 @@ const EmployerAccessibility = (props) => {
                 >
                   Upload Job post
                 </button>
-                <div class="progress mt-4">
+                <div className="form-group">
+                <div className={`${styles.progress} progress mb-1`}>
                   <div
-                    class="progress-bar"
+                    className={styles.progressBar}
                     role="progressbar"
-                    Style="width: 75%"
-                    aria-valuenow="75"
+                    style={{ width: "90%" }}
+                    aria-valuenow="90"
                     aria-valuemin="0"
                     aria-valuemax="100"
                   ></div>
                 </div>
-                <div className={`${styles.progressBar} progress_bar`}>
                   <small className="text-muted" htmlFor="progress-bar">
                     75% complete
                   </small>
                 </div>
               </div>
             </div>
+            </div>
           </form>
-        </div>
       </section>
     </>
   );
