@@ -95,71 +95,146 @@ const JobSeekerProfileForm = (props) => {
   }
   const page = displayCurrentPage();
 
-  // console.log(aboutSchema);
-  // console.log(skillsSchema);
-  // console.log(abilityDifferencesSchema);
-  // console.log(experienceSchema);
-  // console.log(educationSchema);
+  console.log(aboutSchema);
+  console.log(skillsSchema);
+  console.log(abilityDifferencesSchema);
+  console.log(experienceSchema);
+  console.log(educationSchema);
 
   console.log(`profile is completed (before):`, props.profileIsCompleted);
   console.log(`to save profile (before)`, toSaveProfile);
 
+  ///////////////////////////////
+  // For new profile creation //
+  ///////////////////////////////
   useEffect(() => {
     // setProfile will only happen if profileIsComplete=false, toSaveProfile=true and all schemas have values
-    if (
-      aboutSchema &&
-      skillsSchema &&
-      abilityDifferencesSchema &&
-      experienceSchema &&
-      educationSchema &&
-      toSaveProfile
-    ) {
-      setNewProfile({
-        about: aboutSchema,
-        skills: skillsSchema,
-        abilityDifferences: abilityDifferencesSchema,
-        experience: experienceSchema,
-        education: educationSchema,
-      });
+    if (!props.profileIsCompleted) {
+      if (
+        aboutSchema &&
+        skillsSchema &&
+        abilityDifferencesSchema &&
+        experienceSchema &&
+        educationSchema &&
+        toSaveProfile
+      ) {
+        setNewProfile({
+          about: aboutSchema,
+          skills: skillsSchema,
+          abilityDifferences: abilityDifferencesSchema,
+          experience: experienceSchema,
+          education: educationSchema,
+        });
 
-      console.log({ Test: aboutSchema });
-      const updateProfileData = async (req, res) => {
-        try {
-          // const hardCodedId = "6352b602869782ec9b076cf3";
+        console.log({ Test: aboutSchema });
+        const updateProfileData = async (req, res) => {
+          try {
+            // const hardCodedId = "6352b602869782ec9b076cf3";
 
-          const res = await fetch(
-            "http://127.0.0.1:5001/api/jobseekers/update",
-            {
-              method: "PATCH",
-              headers: { "content-type": "application/json" },
-              body: JSON.stringify({
-                id: userCtx.userDetails.id,
-                profile: {
-                  about: aboutSchema,
-                  skills: skillsSchema,
-                  abilityDifferences: abilityDifferencesSchema,
-                  experience: experienceSchema,
-                  education: educationSchema,
-                },
-              }),
-            }
-          );
-          const fetchedProfileData = await res.json();
+            const res = await fetch(
+              "http://127.0.0.1:5001/api/jobseekers/update",
+              {
+                method: "PATCH",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify({
+                  id: userCtx.userDetails.id,
+                  profile: {
+                    about: aboutSchema,
+                    skills: skillsSchema,
+                    abilityDifferences: abilityDifferencesSchema,
+                    experience: experienceSchema,
+                    education: educationSchema,
+                  },
+                }),
+              }
+            );
+            const fetchedProfileData = await res.json();
 
-          console.log(fetchedProfileData);
-        } catch (err) {
-          console.log(err);
-        }
-      };
+            console.log(fetchedProfileData);
+          } catch (err) {
+            console.log(err);
+          }
+        };
 
-      updateProfileData();
+        updateProfileData();
 
-      props.setProfileIsCompleted(true);
+        props.setProfileIsCompleted(true);
 
-      navigate("/profile");
-      // } else {
-      //   alert(`Incomplete profile`);
+        navigate("/profile");
+        // } else {
+        //   alert(`Incomplete profile`);
+      }
     }
+  }, [toSaveProfile]);
+
+  ///////////////////////////////////
+  // For updating existing profile //
+  ///////////////////////////////////
+  useEffect(() => {
+    let editedProfile = {};
+
+    if (props.profileIsCompleted && toSaveProfile) {
+      if (aboutSchema) {
+        editedProfile.about = aboutSchema;
+      } else {
+        editedProfile.about = props.profileData.about;
+      }
+
+      if (skillsSchema) {
+        editedProfile.skills = skillsSchema;
+      } else {
+        editedProfile.skills = props.profileData.skills;
+      }
+
+      if (abilityDifferencesSchema) {
+        editedProfile.abilityDifferences = abilityDifferencesSchema;
+      } else {
+        editedProfile.abilityDifferences = props.profileData.abilityDifferences;
+      }
+
+      if (experienceSchema) {
+        editedProfile.experience = experienceSchema;
+      } else {
+        editedProfile.experience = props.profileData.experience;
+      }
+
+      if (educationSchema) {
+        editedProfile.education = educationSchema;
+      } else {
+        editedProfile.education = props.profileData.education;
+      }
+
+      if (editedProfile) {
+        console.log(`edited profile: `, editedProfile);
+        const updateProfileData = async (req, res) => {
+          try {
+            // const hardCodedId = "6352b602869782ec9b076cf3";
+
+            const res = await fetch(
+              "http://127.0.0.1:5001/api/jobseekers/update",
+              {
+                method: "PATCH",
+                headers: { "content-type": "application/json" },
+                body: JSON.stringify({
+                  id: userCtx.userDetails.id,
+                  profile: { ...editedProfile },
+                }),
+              }
+            );
+            const fetchedProfileData = await res.json();
+
+            console.log(fetchedProfileData);
+          } catch (err) {
+            console.log(err);
+          }
+        };
+
+        updateProfileData();
+
+        navigate("/profile");
+      }
+    }
+    console.log(`edited profile: `, newProfile);
   }, [toSaveProfile]);
 
   // created

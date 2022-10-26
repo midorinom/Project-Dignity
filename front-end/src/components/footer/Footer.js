@@ -14,12 +14,13 @@ const Footer = () => {
           <p>Jobseekers Landing Page</p>
           <p>Job Listings</p>
           <p>Saved Jobs</p>
+          <p>Applied Jobs</p>
         </div>
         <div className="col-auto">
           <h5>For Employers</h5>
           <p>Employers Landing Page</p>
           <p>Post a Job</p>
-          <p>Search CVs</p>
+          <p>My Job Listings</p>
         </div>
         <div className="col-auto">
           <h5>About Project Dignity</h5>
