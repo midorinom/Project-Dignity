@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import UserContext from "../../../context/userContext";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,7 @@ const EmployerProfileForm = (props) => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue
   } = useForm();
 
   const onSubmit = (data) => {
@@ -52,6 +53,12 @@ const EmployerProfileForm = (props) => {
     }
   };
 
+  useEffect(()=>{
+    if (userCtx.userDetails.profileCompleted){
+      const fields=['company', 'whoWeAre', 'whatWeDo', 'experience', 'location', 'accessibility', 'contact', 'email'];
+      fields.forEach((field)=> setValue(field, props.employerProfileData[field]))
+    }
+  },[])
   return (
     <section className="container-md" id="jobSeekerProfileForm-AboutSection">
       <form

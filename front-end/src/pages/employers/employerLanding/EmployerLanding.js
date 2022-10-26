@@ -5,7 +5,6 @@ import Search from "../../../components/Search";
 import eLand1 from "./taskIcons/eLand1.png";
 import eLand2 from "./taskIcons/eLand2.png";
 import eLand3 from "./taskIcons/eLand3.png";
-import { Link } from "react-router-dom";
 
 const EmployerLanding = (props) => {
   const userCtx = useContext(UserContext);
