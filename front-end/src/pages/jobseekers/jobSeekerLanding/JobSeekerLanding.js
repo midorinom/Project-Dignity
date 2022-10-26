@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import UserContext from "../../../context/userContext";
 import Search from "../../../components/Search";
 
@@ -9,6 +10,18 @@ import { Link } from "react-router-dom";
 
 const JobSeekerLanding = (props) => {
   const userCtx = useContext(UserContext);
+  const navigate = useNavigate();
+
+  function goToApplied() {
+    props.setManageJobsCurrentPage("applied");
+    navigate("/manage-jobs");
+  }
+
+  function goToSaved() {
+    props.setManageJobsCurrentPage("saved");
+    navigate("/manage-jobs");
+  }
+
   return (
     <div className="p-5">
       <Search
@@ -20,21 +33,30 @@ const JobSeekerLanding = (props) => {
           <div>
             <h1 className="display-5">Manage My Job Search</h1>
             <div className="row">
-              <div className="col-4 d-flex justify-content-center flex-column align-item-center">
+              <div
+                onClick={goToApplied}
+                className="col-4 d-flex justify-content-center flex-column align-item-center"
+              >
                 <p className="text-center d-flex align-items-center justify-content-center my-0 p-4 w-100 mr-1 bg-dark text-white">
                   My Applied Jobs
                 </p>
               </div>
-              <div className="col-4 d-flex justify-content-center flex-column align-item-center">
+              <div
+                onClick={goToSaved}
+                className="col-4 d-flex justify-content-center flex-column align-item-center"
+              >
                 <p className="text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 bg-dark text-white">
                   My Saved Jobs
                 </p>
               </div>
-              <div className="col-4 d-flex justify-content-center flex-column align-item-center">
+              <Link
+                to="/profile"
+                className="col-4 d-flex justify-content-center flex-column align-item-center"
+              >
                 <p className="text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 ml-1 bg-dark text-white">
                   My CV
                 </p>
-              </div>
+              </Link>
             </div>
           </div>
         )}
