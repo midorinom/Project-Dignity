@@ -15,6 +15,7 @@ const SavedJobs = (props) => {
   }, []);
 
   const getJobsSaved = async (savedJobs) => {
+    console.log("running");
     const idArray = savedJobs.map((element) => element.id);
 
     try {
@@ -37,9 +38,7 @@ const SavedJobs = (props) => {
   // useEffect to map cards after JobsSaved has been fetched
   // =======================================================
   useEffect(() => {
-    if (jobsSaved.length > 0) {
-      mapCards();
-    }
+    mapCards();
   }, [jobsSaved]);
 
   function mapCards() {
@@ -60,7 +59,7 @@ const SavedJobs = (props) => {
   return (
     <div>
       <div className="m-4">
-        {jobCards ? (
+        {jobsSaved.length > 0 ? (
           jobCards
         ) : (
           <p className="d-flex justify-content-center">No Jobs Saved</p>
