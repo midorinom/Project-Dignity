@@ -148,11 +148,10 @@ const JobSeekerProfileFormExperience = (props) => {
                       })}
                     >
                       <option value="">Select from drop down list</option>
-                      <option value="Baker">Baker</option>
-                      <option value="Barista">Barista</option>
-                      <option value="Cashier">Cashier</option>
-                      <option value="Packer">Packer</option>
-                      <option value="Waiter">Waiter</option>
+                      <option value="Full-time">Full-time</option>
+                      <option value="Part-time">Part-time</option>
+                      <option value="Internship">Internship</option>
+                      <option value="Mentorship">Mentorship</option>
                     </select>
                     {errors?.experienceSet?.[index]?.type && (
                       <p className="mt-2 text-danger">

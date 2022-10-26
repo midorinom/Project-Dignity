@@ -185,3 +185,5 @@ const surveyedSkills = [
   "writing advertisement",
   "x-ray machine",
 ];
+
+export default surveyedSkills;

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm, useFieldArray } from "react-hook-form";
 import styles from "./jobSeekerProfileForm.module.css";
+import skillsList from "../../../components/skillList";
 
 const JobSeekerProfileFormSkills = (props) => {
   // console.log(props);
@@ -85,9 +86,10 @@ const JobSeekerProfileFormSkills = (props) => {
                     <input
                       className="form-control mb-2 p-3"
                       id="skillset"
+                      list="skillsOptions"
                       name={`skillSet.${index}.skill`}
                       type="text"
-                      placeholder={"e.g Digital Marketing"}
+                      placeholder={"Type to search..."}
                       {...register(`skillSet.${index}.skill`, {
                         required: true,
                       })}
@@ -95,6 +97,15 @@ const JobSeekerProfileFormSkills = (props) => {
                         errors.skillSet?.[index]?.skill ? "true" : "false"
                       }
                     ></input>
+                    <datalist id="skillsOptions">
+                      {skillsList.map((skill, index) => {
+                        return (
+                          <option key={index} value={skill}>
+                            {skill}
+                          </option>
+                        );
+                      })}
+                    </datalist>
                     {errors?.skillSet?.[index]?.skill?.type === "required" && (
                       <p className="mt-2 text-danger">
                         Skillset is required, please enter a least one skill
