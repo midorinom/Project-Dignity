@@ -38,9 +38,17 @@
     transition: 0.5s;
   }
 
-  .progressBar{
-    margin: 30px;
+  .progress {
+    background-color: #fff8f0;
+    border-radius: 3px;
+    width: 100%;
+    height: 25px;
   }
+
+.progressBar{
+  background-color: #fba300;
+  }
+  
 .form{
 margin: 40px;
 }
@@ -70,18 +78,18 @@ color: #0085FF;
 }
 
 .circle_btn {
-    height: 35px;
-    width: 35px;
-    margin-left: 325px;
-    margin-top:10px;
-    background-color: transparent;
-    border: solid 1px #011036;
-    border-radius: 50%;
-  }
-  
-  .circle_btn:hover {
-    border: solid 3px #011036;
-  }
+  height: 35px;
+  width: 35px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+  background-color: transparent;
+  border: solid 2px #011036;
+  border-radius: 50%;
+}
+
+.circle_btn:hover {
+  border: solid 3px #011036;
+}
   
   .label{
     margin-left:290px;
@@ -101,4 +109,8 @@ color: #0085FF;
     color: #FFFFFF;
     background-color: #011036;
     transition: 0.5s;
+  }
+
+  .radio{
+    margin:
   }
