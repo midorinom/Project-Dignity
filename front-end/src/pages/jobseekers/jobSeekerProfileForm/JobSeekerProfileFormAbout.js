@@ -31,19 +31,20 @@ const JobSeekerProfileFormAbout = (props) => {
         setValue(field, props.profileData.about[field])
       );
     }
-  });
+  }, []);
 
   // adding react-hook-forms functionality
   const {
     register,
     handleSubmit,
     setValue,
+    resetField,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
     props.setAboutSchema(data);
-    console.log(data);
+    console.log(`AboutSchema: `, data);
     console.log(data.mobile);
   };
 
@@ -113,6 +114,7 @@ const JobSeekerProfileFormAbout = (props) => {
                   onChange: (e) => setCharacterCount(e.target.value.length),
                 })}
                 aria-invalid={errors.brand ? "true" : "false"}
+                onClick={() => resetField("brand")}
               ></textarea>
               <small className="text-muted">{`${
                 200 - characterCount

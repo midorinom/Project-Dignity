@@ -39,10 +39,11 @@ const JobListings = (props) => {
   });
   const [supportFilters, setSupportFilters] = useState([]);
   const [startPage, setStartPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(13);
+  const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageInput, setPageInput] = useState(false);
-  const pageInputRef = useRef();
+  // Functionality for the ... button. Currently not in use.
+  // const [pageInput, setPageInput] = useState(false);
+  // const pageInputRef = useRef();
 
   // =================
   // onMount useEffect
@@ -162,10 +163,11 @@ const JobListings = (props) => {
       });
       const fetchedJobPosts = await res.json();
 
-      console.log("fetchedJobPostsFiltered", fetchedJobPosts);
+      console.log("Fetched Job Posts", fetchedJobPosts);
       setCurrentPage(1);
       setStartPage(1);
       setTotalPages(Math.ceil(fetchedJobPosts.length / 6));
+
       setJobPosts(fetchedJobPosts);
     } catch (err) {
       console.log(err);
@@ -222,7 +224,7 @@ const JobListings = (props) => {
   // Pages Event Handlers
   // ====================
   function handlePrev() {
-    setPageInput(false);
+    // setPageInput(false);
     if (currentPage === 1) {
       if (startPage < 6) {
         setCurrentPage(startPage - 1);
@@ -237,7 +239,7 @@ const JobListings = (props) => {
   }
 
   function handleNext() {
-    setPageInput(false);
+    // setPageInput(false);
     if (currentPage === 5) {
       setCurrentPage(1);
       setStartPage((prevState) => (prevState += 5));
@@ -249,7 +251,7 @@ const JobListings = (props) => {
   }
 
   function handlePageSkip(e) {
-    setPageInput(false);
+    // setPageInput(false);
     const target = e.currentTarget.value;
     if (target < 6) {
       setCurrentPage(parseInt(target));
@@ -264,25 +266,27 @@ const JobListings = (props) => {
     }
   }
 
-  function togglePageInput() {
-    if (pageInput) {
-      setPageInput(false);
-    } else {
-      setPageInput(true);
-    }
-  }
+  // Functionality for the ... button. Currently not in use.
+  // function togglePageInput() {
+  //   if (pageInput) {
+  //     setPageInput(false);
+  //   } else {
+  //     setPageInput(true);
+  //   }
+  // }
 
-  function pageInputSubmit(e) {
-    e.preventDefault();
-    if (
-      pageInputRef.current.value > 0 &&
-      pageInputRef.current.value <= totalPages
-    ) {
-      setPageInput(false);
-      setStartPage(parseInt(pageInputRef.current.value));
-      setCurrentPage(1);
-    }
-  }
+  // Functionality for the ... button. Currently not in use.
+  // function pageInputSubmit(e) {
+  //   e.preventDefault();
+  //   if (
+  //     pageInputRef.current.value > 0 &&
+  //     pageInputRef.current.value <= totalPages
+  //   ) {
+  //     setPageInput(false);
+  //     setStartPage(parseInt(pageInputRef.current.value));
+  //     setCurrentPage(1);
+  //   }
+  // }
 
   // ======
   // Return
@@ -337,7 +341,8 @@ const JobListings = (props) => {
         </div>
         <div className="postings flex-column w-75 px-4 mb-4">
           {jobCards}
-          <div className="w-100 mt-4">
+
+          <div className="w-100 mt-4 d-flex justify-content-end">
             <button
               className={`${styles.prevBtn} ${
                 startPage === 1 && currentPage === 1
@@ -401,18 +406,19 @@ const JobListings = (props) => {
                 {startPage + 4}
               </button>
             )}
-            {totalPages > 5 && !pageInput && (
+            {totalPages > 5 && (
+              // && !pageInput
               <button
                 className={`${styles.pageNumber} btn btn-outline-primary`}
-                onClick={togglePageInput}
+                // onClick={togglePageInput}
               >
                 ...
               </button>
             )}
-            {pageInput && (
+            {/* {pageInput && (
               <form onSubmit={pageInputSubmit}>
                 <input
-                  className={styles.pageInput}
+                  className="input-group"
                   ref={pageInputRef}
                   type="number"
                   defaultValue={1}
@@ -420,7 +426,7 @@ const JobListings = (props) => {
                   max={totalPages}
                 ></input>
               </form>
-            )}
+            )} */}
             {startPage + 5 <= totalPages && (
               <button
                 className={`${styles.pageNumber} ${
