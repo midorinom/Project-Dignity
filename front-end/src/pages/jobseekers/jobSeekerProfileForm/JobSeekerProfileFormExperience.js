@@ -60,20 +60,23 @@ const JobSeekerProfileFormExperience = (props) => {
     setValue,
     control,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      experienceSet: [
-        {
-          title: "",
-          type: "",
-          company: "",
-          startDate: "",
-          endDate: "",
-          jobDesc: "",
-        },
-      ],
+  } = useForm(
+    {
+      defaultValues: {
+        experienceSet: [
+          {
+            title: "",
+            type: "",
+            company: "",
+            startDate: "",
+            endDate: "",
+            jobDesc: "",
+          },
+        ],
+      },
     },
-  });
+    []
+  );
 
   const { fields, append, remove } = useFieldArray({
     control,
