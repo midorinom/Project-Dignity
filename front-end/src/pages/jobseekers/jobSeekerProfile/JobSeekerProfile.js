@@ -12,6 +12,7 @@ import hearingIcon from "./resume/images/hearing.png";
 import intellectualIcon from "./resume/images/intellectual.png";
 import physicalIcon from "./resume/images/physical.png";
 import visualIcon from "./resume/images/visual.png";
+import profilePic from "./profile.png";
 
 const JobSeekerProfile = (props) => {
   console.log(props);
@@ -110,12 +111,11 @@ const JobSeekerProfile = (props) => {
 
         return (
           <div className={styles.abilityDifferencesIcon} key={Math.random()}>
-            <img
-              src={iconImage}
-              alt={`${element} Ability Difference Icon`}
-              className={styles.abilityDifferencesImage}
-            />
-            <p className={styles.abilityDifferencesName}>{element}</p>
+            <div style={{ transform: "scale(0.8)" }}>
+              <img src={iconImage} alt={`${element} Ability Difference Icon`} />
+            </div>
+
+            <p className="text-center p-0 m-0">{element}</p>
           </div>
         );
       });
@@ -156,11 +156,6 @@ const JobSeekerProfile = (props) => {
       // =====================
       // CompletedProfile Page
       // =====================
-      // Map RecommendedJobsCard
-      const recommendedJobsCards = recommendedJobsData.map((element) => (
-        <RecommendedJobsCard jobData={element} key={Math.random()} />
-      ));
-
       // Convert Support short forms in database to long forms
       let supportFirstIndex = "";
       let supportList = "";
@@ -195,39 +190,43 @@ const JobSeekerProfile = (props) => {
 
       // The CompletedProfile Page
       return (
-        <div className={styles.completedProfileJobSeeker}>
-          <div className={styles.savePrintResumeContainer}>
-            <button className={styles.savePrintResumeButton}>
+        <div className="d-flex align-items-center flex-column">
+          <div className="d-flex justify-content-end mt-3 w-75">
+            <button className="btn btn-secondary mx-2">
               Save Resume as PDF
             </button>
-            <button className={styles.savePrintResumeButton}>
-              Print Your Resume
-            </button>
+            <button className="btn btn-secondary">Print Your Resume</button>
           </div>
-          <div className={styles.completedProfileJobSeekerBottom}>
-            <div className={styles.resume}>
+          <div className="d-flex justify-content-center w-75">
+            <div className="w-100 my-3">
               <div className={styles.resumeBanner}>
                 <button className={styles.editProfileButton}>
                   <Link to="/profile-form">Edit Profile</Link>
                 </button>
-                <div className={styles.bannerContents}>
-                  <img className={styles.bannerPhoto} alt="Banner Mugshot" />
-                  <div className={styles.bannerText}>
-                    <p className={styles.bannerName}>
+                <div className="container d-flex">
+                  <div className="d-flex w-25 justify-content-center">
+                    <img src={profilePic} alt="profile pic" className="w-75" />
+                  </div>
+                  <div className="d-flex flex-column justify-content-center w-75">
+                    <h1 className="display-6">
                       {props.profileData && props.profileData.about.name}
-                    </p>
-                    <p className={styles.bannerAspirations}>
+                    </h1>
+                    <h1 className={styles.bannerAspirations}>
                       {props.profileData && props.profileData.about.aspiration}
-                    </p>
-                    <p className={styles.bannerBrandStatement}>
+                    </h1>
+                    <p className="">
                       {props.profileData && props.profileData.about.brand}
                     </p>
                   </div>
                 </div>
               </div>
+
               <div className={styles.resumeMain}>
                 <div className={styles.resumeSkillsets}>
-                  <p className={styles.skillsetsTitle}>Skillsets</p>
+                  <div className="mx-3">
+                    <h1>Skillsets</h1>
+                  </div>
+
                   <ul className={styles.skillsetsCards}>
                     {mappedComponents.skillsetsCards}
                   </ul>
@@ -306,26 +305,15 @@ const JobSeekerProfile = (props) => {
                     </li>
                   </div>
                 </div>
-                <div className={styles.resumeExperience}>
+                <div className="border border-warning border-top-0 border-2 mb-5">
                   <p className={styles.experienceTitle}>Experience</p>
                   {mappedComponents.experienceCards}
                 </div>
-                <div className={styles.resumeEducation}>
+                <div className="border border-warning border-top-0 border-start-0 border-2 mb-5">
                   <p className={styles.educationTitle}>Education</p>
                   {mappedComponents.educationCards}
                 </div>
               </div>
-            </div>
-            <div className={styles.profileRecommendedJobs}>
-              <div className={styles.recommendedJobsHeader}>
-                <div className={styles.recommendedJobsHeaderLineOne}>
-                  Only visible to you
-                </div>
-                <div className={styles.recommendedJobsHeaderLineTwo}>
-                  Jobs Recommended For You
-                </div>
-              </div>
-              {recommendedJobsCards}
             </div>
           </div>
         </div>
