@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./jobPostForm.module.css";
 import { useForm, useFieldArray } from "react-hook-form";
+import surveyedSkills from "../../../components/skillList";
+import SkillsetsCard from "../../jobseekers/jobSeekerProfile/resume/SkillsetsCard";
 
 const JobAbout = (props) => {
   const [accessibilityCharacterCount, setAccessibilityCharacterCount] =
@@ -26,29 +28,33 @@ const JobAbout = (props) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      tasks: [{taskItem:""}],
+      tasks: [{ taskItem: "" }],
     },
   });
 
-  const { fields, append, remove } = useFieldArray({
+  const { fields: fieldTask, append: appendTask, remove: removeTask } = useFieldArray({
     control,
     name: "tasks",
+  },
+  )
+  const { fields: fieldSkills, append: appendSkills, remove: removeSkills } = useFieldArray({
+    control,
+    name: "skills",
   });
 
   const onSubmit = (data) => {
-    let revisedData = []
-    for (let i=0; i<data.tasks.length; i++) {
-      if (i===0) {
-        revisedData.push(Object.values(data.tasks[i])[1])
+    let revisedData = [];
+    for (let i = 0; i < data.tasks.length; i++) {
+      if (i === 0) {
+        revisedData.push(Object.values(data.tasks[i])[1]);
       } else {
-        revisedData.push(Object.values(data.tasks[i])[0])
+        revisedData.push(Object.values(data.tasks[i])[0]);
       }
     }
-    console.log(revisedData)
-    data.tasks=revisedData;
+    console.log(revisedData);
+    data.tasks = revisedData;
     console.log(data);
     props.setAboutJobSchema(data);
-    
   };
 
   const onError = (errors) => console.log(errors);
@@ -180,7 +186,7 @@ const JobAbout = (props) => {
               <p className="mt-2 text-danger">{errors.desc?.message}</p>
               {/* ================================================================================================== */}
               {/*============================================Job Tasks ============================================ */}
-              {fields.map((item, index) => {
+              {fieldTask.map((item, index) => {
                 return (
                   <div key={item.id}>
                     <div className="form-group mb-2">
@@ -205,7 +211,7 @@ const JobAbout = (props) => {
                       type="button"
                       className={`${styles.circle_btn}`}
                       onClick={() => {
-                        remove(index);
+                        removeTask(index);
                       }}
                     >
                       -
@@ -218,7 +224,7 @@ const JobAbout = (props) => {
                 type="button"
                 className={`${styles.circle_btn}`}
                 onClick={() => {
-                  append();
+                  appendTask();
                 }}
               >
                 +
@@ -226,30 +232,53 @@ const JobAbout = (props) => {
 
               <p className="mt-2 text-danger">{errors.tasks?.message}</p>
               {/* ================================================================================================== */}
-             {/*============================================ Skills ============================================ */}
-             <label className="form-label" htmlFor="Job Tasks">
-              Skills 
-              </label>
-             <select
-                  type="text"
-                  className={`form-group mb-4 form-select ${styles.range}`}
-                  id="JobType"
-                  {...register("type", {
-                    required: {
-                      value: true,
-                      message: "Please select one option",
-                    },
-                  })}
-                >
-                  <option className="default" selected>
-                    Select from the drop down list
-                  </option>
-                  
-                  <option value="Full-Time">Full-Time</option>
-                  <option value="Part-Time">Part-Time</option>
-                  <option value="Internship">Internship</option>
-                  <option value="Mentorship">Mentorship</option>
-                </select>
+              {/*============================================ Skills ============================================ */}
+              <div className="form-group mb-2">
+                <label className="form-label" htmlFor="Job Tasks">
+                  Skills
+                </label>
+                {fieldSkills.map((item, index) => {
+                  return (
+                    <div key={item.id}>
+                      <input
+                        list="skills"
+                        className="form-control mb-4"
+                        name={`skills${[index]}`}
+                        {...register(`skills[${[index]}]`, {
+                          required: {
+                            value: true,
+                            message: "Please include at least one skills",
+                          },
+                        })}
+                      />
+                      <datalist id="skills">
+                        {surveyedSkills.map((skill) => {
+                          return <option value={skill}>{skill}</option>;
+                        })}
+                      </datalist>
+                      <button
+                        type="button"
+                        className={`${styles.circle_btn}`}
+                        onClick={() => {
+                          removeSkills(index);
+                        }}
+                      >
+                        -
+                      </button>
+                      
+                    </div>
+                  );
+                })}
+                <button
+                        type="button"
+                        className={`${styles.circle_btn}`}
+                        onClick={() => {
+                          appendSkills();
+                        }}
+                      >
+                        +
+                </button>
+              </div>
               {/*============================================Expected Salary ============================================ */}
               <div className="form-group mb-4">
                 <label className="form-label" htmlFor="Job Tasks">

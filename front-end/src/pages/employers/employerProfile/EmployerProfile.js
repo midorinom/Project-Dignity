@@ -28,6 +28,7 @@ const EmployerProfile = () => {
 
   function displayProfile() {
     if (!userCtx.userDetails.profileCompleted) {
+      
       // ==============
       // NoProfile Page
       // ==============
