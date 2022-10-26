@@ -341,7 +341,8 @@ const JobListings = (props) => {
         </div>
         <div className="postings flex-column w-75 px-4 mb-4">
           {jobCards}
-          <div className="w-50 mt-4">
+
+          <div className="w-100 mt-4 d-flex justify-content-end">
             <button
               className={`${styles.prevBtn} ${
                 startPage === 1 && currentPage === 1
