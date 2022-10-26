@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import save from "./saved.png";
 import image71 from "./images/image 71.png";
 import image72 from "./images/image 72.png";
@@ -48,10 +48,15 @@ const Card = (props) => {
   //Save applied
   const userCtx = useContext(UserContext);
   const [click, setClick] = useState(false);
-
-  const handleRevert = () => {
-    setClick(false);
-  };
+  useEffect(() => {
+    if (userCtx.userDetails.savedJobs !== undefined) {
+      for (let item of userCtx.userDetails.savedJobs) {
+        if (props.job._id === item.id) {
+          setClick(true);
+        }
+      }
+    }
+  }, []);
 
   const handleClick = () => {
     let data = [];
@@ -68,6 +73,35 @@ const Card = (props) => {
     let newSave = { id: props.job._id, date: nowRev };
 
     data.push(newSave);
+    console.log(data);
+    userCtx.setUserDetails({ ...userCtx.userDetails, savedJobs: data });
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: userCtx.userDetails.id,
+        savedJobs: data,
+      }),
+    });
+    return response.json();
+  }
+
+  const handleRevert = () => {
+    setClick(false);
+    revert("http://127.0.0.1:5001/api/jobseekers/update", props.job_id);
+  };
+
+  async function revert(url) {
+    let data = [...userCtx.userDetails.savedJobs];
+    let indicator = -1;
+    for (let i = 0; i < data.length; i++) {
+      if (props.job_id === data[i].id) {
+        indicator = i;
+      }
+    }
+    data.splice(indicator, 1);
     console.log(data);
     userCtx.setUserDetails({ ...userCtx.userDetails, savedJobs: data });
     const response = await fetch(url, {
@@ -106,7 +140,11 @@ const Card = (props) => {
           )}
           {click && (
             <>
-              <div style={{ transform: "scale(1.5)" }} onClick={handleRevert}>
+              <div
+                style={{ transform: "scale(2)" }}
+                onClick={handleRevert}
+                className="mb-1"
+              >
                 <BookmarkAddedOutlinedIcon />
               </div>
               <p className="text-secondary text-center" onClick={handleRevert}>

@@ -15,6 +15,8 @@ import EmployerProfileForm from "./pages/employers/employerProfileForm/EmployerP
 import JobPostDetails from "./pages/jobListings/jobPostDetails/jobPostDetails";
 import JobPostForm from "./pages/employers/jobPostForm/JobPostForm";
 import SuccessfulApplication from "./pages/jobListings/jobPostDetails/SuccessfulApplication";
+import SavedJobs from "./pages/jobseekers/saved-jobs/SavedJobs";
+import JobsPosted from "./pages/employers/JobsPosted";
 
 function App() {
   // =========
@@ -98,8 +100,8 @@ function App() {
   // ======
   return (
     <>
-      <NavBar />
       <UserContext.Provider value={{ userDetails, setUserDetails }}>
+        <NavBar />
         <Routes>
           <Route path="/" element={landingPage} />
           <Route path="/login" element={<Login />} />
@@ -113,6 +115,7 @@ function App() {
               />
             }
           />
+          <Route path="/saved-jobs" element={<SavedJobs />} />
           <Route
             path="/employers"
             element={
@@ -123,6 +126,7 @@ function App() {
               />
             }
           />
+          <Route path="/employers/jobs-posted" element={<JobsPosted />} />
           <Route
             path="/job-listings"
             element={
@@ -145,8 +149,8 @@ function App() {
           />
           <Route path="/job-post-form" element={<JobPostForm />} />
         </Routes>
+        <Footer />
       </UserContext.Provider>
-      <Footer />
     </>
   );
 }
