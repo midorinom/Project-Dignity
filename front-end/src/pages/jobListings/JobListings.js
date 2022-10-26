@@ -166,7 +166,7 @@ const JobListings = (props) => {
       console.log("fetchedJobPostsFiltered", fetchedJobPosts);
       setCurrentPage(1);
       setStartPage(1);
-      // setTotalPages(Math.ceil(fetchedJobPosts.length / 6));
+      setTotalPages(Math.ceil(fetchedJobPosts.length / 6));
 
       setJobPosts(fetchedJobPosts);
     } catch (err) {
