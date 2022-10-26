@@ -15,8 +15,9 @@ import EmployerProfileForm from "./pages/employers/employerProfileForm/EmployerP
 import JobPostDetails from "./pages/jobListings/jobPostDetails/jobPostDetails";
 import JobPostForm from "./pages/employers/jobPostForm/JobPostForm";
 import SuccessfulApplication from "./pages/jobListings/jobPostDetails/SuccessfulApplication";
-import SavedJobs from "./pages/jobseekers/saved-jobs/SavedJobs";
+import ManageJobs from "./pages/jobseekers/manageJobs.js/ManageJobs";
 import JobsPosted from "./pages/employers/jobsPosted/JobsPosted";
+import CompanyProfile from "./pages/jobListings/jobPostDetails/CompanyProfile";
 
 function App() {
   // =========
@@ -24,12 +25,11 @@ function App() {
   // =========
   const [userDetails, setUserDetails] = useState({});
   const [searchInput, setSearchInput] = useState("");
-  const [selectedJobPost, setSelectedJobPost] = useState({});
-
-  // Managing the states for jobSeekerProfile and jobSeekerProfileForm
-  // Change this profileIsCompleted initial value to false/true to access the NoProfile/CompletedProfile pages
   const [profileIsCompleted, setProfileIsCompleted] = useState(false);
   const [profileData, setProfileData] = useState(undefined); // profile returned from api fetch
+  const [selectedJobPost, setSelectedJobPost] = useState({});
+  const [selectedCompanyProfile, setSelectedCompanyProfile] = useState("");
+  const [manageJobsCurrentPage, setManageJobsCurrentPage] = useState("saved");
 
   // State for employer profile
   const [employerProfileData, setEmployerProfileData]= useState({})
@@ -45,6 +45,7 @@ function App() {
             userType={userDetails.type}
             setSearchInput={setSearchInput}
             searchInput={searchInput}
+            setManageJobsCurrentPage={setManageJobsCurrentPage}
           />
         );
       case "employer":
@@ -117,7 +118,16 @@ function App() {
               />
             }
           />
-          <Route path="/saved-jobs" element={<SavedJobs />} />
+          <Route
+            path="/manage-jobs"
+            element={
+              <ManageJobs
+                manageJobsCurrentPage={manageJobsCurrentPage}
+                setManageJobsCurrentPage={setManageJobsCurrentPage}
+                setSelectedJobPost={setSelectedJobPost}
+              />
+            }
+          />
           <Route
             path="/employers"
             element={
@@ -128,6 +138,7 @@ function App() {
               />
             }
           />
+          <Route path="/job-post-form" element={<JobPostForm />} />
           <Route
             path="/employers/jobs-posted"
             element={<JobsPosted setSelectedJobPost={setSelectedJobPost} />}
@@ -146,13 +157,23 @@ function App() {
           <Route path="/profile-form" element={profileFormPage} />
           <Route
             path="/job-post-details"
-            element={<JobPostDetails selectedJobPost={selectedJobPost} />}
+            element={
+              <JobPostDetails
+                selectedJobPost={selectedJobPost}
+                setSelectedCompanyProfile={setSelectedCompanyProfile}
+              />
+            }
           />
           <Route
             path="/successful-application"
             element={<SuccessfulApplication />}
           />
-          <Route path="/job-post-form" element={<JobPostForm />} />
+          <Route
+            path="/job-post-details/company-profile"
+            element={
+              <CompanyProfile selectedCompanyProfile={selectedCompanyProfile} />
+            }
+          />
         </Routes>
       </UserContext.Provider>
       <Footer />

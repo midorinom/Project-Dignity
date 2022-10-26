@@ -120,12 +120,9 @@ const Card = (props) => {
 
   return (
     <div className="container mb-3 mx-0 px-0">
-      <div className="row w-100 bg-light mx-0">
-        <div
-          className="col-1 d-flex flex-column align-items-center mt-3"
-          onClick={handleJobDetails}
-        >
-          {!click && (
+      <div className="row w-100 bg-light mx-0" onClick={handleJobDetails}>
+        <div className="col-1 d-flex flex-column align-items-center mt-3">
+          {!click && userCtx.userDetails.type === "jobSeeker" && (
             <>
               <img
                 src={save}
@@ -138,7 +135,7 @@ const Card = (props) => {
               </p>
             </>
           )}
-          {click && (
+          {click && userCtx.userDetails.type === "jobSeeker" && (
             <>
               <div
                 style={{ transform: "scale(2)" }}
