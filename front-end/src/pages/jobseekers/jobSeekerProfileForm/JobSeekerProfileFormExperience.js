@@ -51,7 +51,7 @@ const JobSeekerProfileFormExperience = (props) => {
         );
       }
     }
-  });
+  }, []);
 
   // adding react-hook-forms functionality
   const {
