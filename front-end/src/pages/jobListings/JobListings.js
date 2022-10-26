@@ -163,10 +163,10 @@ const JobListings = (props) => {
       });
       const fetchedJobPosts = await res.json();
 
-      console.log("fetchedJobPostsFiltered", fetchedJobPosts);
+      console.log("Fetched Job Posts", fetchedJobPosts);
       setCurrentPage(1);
       setStartPage(1);
-      // setTotalPages(Math.ceil(fetchedJobPosts.length / 6));
+      setTotalPages(Math.ceil(fetchedJobPosts.length / 6));
 
       setJobPosts(fetchedJobPosts);
     } catch (err) {
