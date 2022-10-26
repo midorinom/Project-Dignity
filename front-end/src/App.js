@@ -15,7 +15,7 @@ import EmployerProfileForm from "./pages/employers/employerProfileForm/EmployerP
 import JobPostDetails from "./pages/jobListings/jobPostDetails/jobPostDetails";
 import JobPostForm from "./pages/employers/jobPostForm/JobPostForm";
 import SuccessfulApplication from "./pages/jobListings/jobPostDetails/SuccessfulApplication";
-import SavedJobs from "./pages/jobseekers/saved-jobs/SavedJobs";
+import ManageJobs from "./pages/jobseekers/manageJobs.js/ManageJobs";
 import JobsPosted from "./pages/employers/jobsPosted/JobsPosted";
 
 function App() {
@@ -30,6 +30,7 @@ function App() {
   // Change this profileIsCompleted initial value to false/true to access the NoProfile/CompletedProfile pages
   const [profileIsCompleted, setProfileIsCompleted] = useState(false);
   const [profileData, setProfileData] = useState(undefined); // profile returned from api fetch
+  const [manageJobsCurrentPage, setManageJobsCurrentPage] = useState("saved");
 
   // ===================
   // Conditional Renders
@@ -43,6 +44,7 @@ function App() {
             userType={userDetails.type}
             setSearchInput={setSearchInput}
             searchInput={searchInput}
+            setManageJobsCurrentPage={setManageJobsCurrentPage}
           />
         );
       case "employer":
@@ -115,7 +117,16 @@ function App() {
               />
             }
           />
-          <Route path="/saved-jobs" element={<SavedJobs />} />
+          <Route
+            path="/manage-jobs"
+            element={
+              <ManageJobs
+                manageJobsCurrentPage={manageJobsCurrentPage}
+                setManageJobsCurrentPage={setManageJobsCurrentPage}
+                setSelectedJobPost={setSelectedJobPost}
+              />
+            }
+          />
           <Route
             path="/employers"
             element={

@@ -122,7 +122,7 @@ const JobPostDetails = (props) => {
   return (
     <div className="container">
       <div className="row d-flex">
-        <h1 className="col-auto d-flex align-items-center mt-3 mr-2 display-3">
+        <h1 className="col-auto d-flex align-items-center mt-3 mr-2 display-5">
           {about.title}
         </h1>
         <p className="col-auto d-flex align-items-center mt-4 mb-2">
@@ -189,15 +189,18 @@ const JobPostDetails = (props) => {
 
         {/* accessibility column */}
         <div className="col-3">
-          {userCtx.userDetails.type === "jobSeeker" && (
-            <Link
-              to="/successful-application"
-              className="btn btn-dark w-100"
-              onClick={handleClick}
-            >
-              Apply Now
-            </Link>
-          )}
+          {userCtx.userDetails.type === "jobSeeker" &&
+            !userCtx.userDetails.appliedJobs.some(
+              (element) => element === props.selectedJobPost._id
+            ) && (
+              <Link
+                to="/successful-application"
+                className="btn btn-dark w-100"
+                onClick={handleClick}
+              >
+                Apply Now
+              </Link>
+            )}
           <div className="border border-warning border-2 my-4">
             <h5 className="text-center my-3">Suitable For</h5>
             {abilityDifferencesIcons}
