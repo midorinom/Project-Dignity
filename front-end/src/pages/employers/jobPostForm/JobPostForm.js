@@ -7,7 +7,10 @@ import styles from "./jobPostForm.module.css";
 const JobPost = () => {
   const [currentPage, setCurrentPage] = useState("About The Job");
   const [aboutJobSchema, setAboutJobSchema] = useState({});
-  const [accessibilityConsiderationsSchema,setAccessibilityConsiderationsSchema] = useState();
+  const [
+    accessibilityConsiderationsSchema,
+    setAccessibilityConsiderationsSchema,
+  ] = useState();
   const [sectionSaved, setSectionSaved] = useState(false);
 
   const navigate = useNavigate();
@@ -27,7 +30,10 @@ const JobPost = () => {
           body: JSON.stringify({
             employerId: userCtx.userDetails.id,
             jobPost: {
-              about: { ...aboutJobSchema, company: userCtx.userDetails.company},
+              about: {
+                ...aboutJobSchema,
+                company: userCtx.userDetails.company,
+              },
               accessibility: accessibilityConsiderationsSchema,
             },
           }),
@@ -39,7 +45,9 @@ const JobPost = () => {
         console.log(err);
       }
     } else {
-      alert(`Please save fill in required fields and save as draft before submitting`);
+      alert(
+        `Please save fill in required fields and save as draft before submitting`
+      );
     }
   };
 
@@ -81,12 +89,26 @@ const JobPost = () => {
   return (
     <>
       <ul className={`nav justify-content-center ${styles.navBar}`}>
-        <li className={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
+        <li
+          className={`nav-item ${styles.sectionButtons}`}
+          onClick={manageCurrentPage}
+          style={{
+            backgroundColor: currentPage === "About The Job" ? "#011036" : "",
+            color: currentPage === "About The Job" ? "#FFFFFF" : "",
+          }}
+        >
           <a className="nav-link active" aria-current="page" href="#">
             About The Job
           </a>
         </li>
-        <li className={`nav-item ${styles.li}`} onClick={manageCurrentPage}>
+        <li
+          className={`nav-item ${styles.sectionButtons}`}
+          onClick={manageCurrentPage}
+          style={{
+            backgroundColor: currentPage === "Accessibilty Considerations" ? "#011036" : "",
+            color: currentPage === "Accessibilty Considerations" ? '#FFFFFF' : "",
+          }}
+        >
           <a className={`nav-link active ${styles.li}`} href="#">
             Accessibilty Considerations
           </a>
