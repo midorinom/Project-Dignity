@@ -67,7 +67,7 @@ const JobSeekerLanding = (props) => {
 
         <div className="my-5">
           <h1 className="display-5">What would you like to do today</h1>
-          <div className="row">
+          <div className="row d-flex align-items-start">
             <Link
               to="/job-listings"
               className="col-4 d-flex justify-content-center flex-column align-item-center"
@@ -98,7 +98,7 @@ const JobSeekerLanding = (props) => {
 
         <div className="my-5">
           <h1 className="display-5">Popular Topics</h1>
-          <div className="row mb-4">
+          <div className="row mb-4 d-flex align-items-start">
             <div className="col-4 d-flex justify-content-center flex-column align-item-center">
               <p className="text-center d-flex align-items-center justify-content-center my-0 p-4 w-100 mr-1 border border-secondary">
                 Job Shadowing
@@ -116,7 +116,7 @@ const JobSeekerLanding = (props) => {
             </div>
           </div>
 
-          <div className="row">
+          <div className="row d-flex align-items-start">
             <div className="col-4 d-flex justify-content-center flex-column align-item-center">
               <p className="text-center d-flex align-items-center justify-content-center my-0 p-4 w-100 mr-1 border border-secondary">
                 Internships
