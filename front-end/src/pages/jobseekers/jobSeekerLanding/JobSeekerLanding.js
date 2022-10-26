@@ -31,9 +31,12 @@ const JobSeekerLanding = (props) => {
                 </p>
               </div>
               <div className="col-4 d-flex justify-content-center flex-column align-item-center">
-                <p className="text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 ml-1 bg-dark text-white">
+                <Link
+                  to="/profile"
+                  className="text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 ml-1 bg-dark text-white"
+                >
                   My CV
-                </p>
+                </Link>
               </div>
             </div>
           </div>
