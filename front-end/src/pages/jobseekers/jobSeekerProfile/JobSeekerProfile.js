@@ -13,13 +13,15 @@ import intellectualIcon from "./resume/images/intellectual.png";
 import physicalIcon from "./resume/images/physical.png";
 import visualIcon from "./resume/images/visual.png";
 
-const JobSeekerProfile = () => {
+const JobSeekerProfile = (props) => {
+  console.log(props);
   // =========
   // Variables
   // =========
   // Change this profileIsCompleted initial value to false/true to access the NoProfile/CompletedProfile pages
-  const [profileIsCompleted, setProfileIsComplete] = useState(false);
-  const [profileData, setProfileData] = useState(undefined);
+  // const [profileIsCompleted, setProfileIsComplete] = useState(false);
+  // const [profileData, setProfileData] = useState(undefined);
+
   const [recommendedJobsData, setRecommendedJobsData] = useState(
     dummyRecommendedJobsData
   );
@@ -30,13 +32,11 @@ const JobSeekerProfile = () => {
   // onMount useEffect fetch Profile Data
   // ====================================
   useEffect(() => {
-    setProfileIsComplete(userCtx.userDetails.profileCompleted);
-    if (profileIsCompleted) {
-      getProfileData();
-    }
+    getProfileData();
   }, []);
 
   const getProfileData = async () => {
+    console.log("get profile start");
     try {
       const res = await fetch("http://127.0.0.1:5001/api/jobseekers/get", {
         method: "POST",
@@ -44,40 +44,50 @@ const JobSeekerProfile = () => {
         body: JSON.stringify({ id: userCtx.userDetails.id }),
       });
       const fetchedProfileData = await res.json();
-      setProfileData(fetchedProfileData);
+      props.setProfileData(fetchedProfileData);
+      console.log(`get profile end`);
     } catch (err) {
       console.log(err);
     }
   };
 
+  useEffect(() => {
+    // check if logged in user already has a profile to render the appropriate view
+    if (props.profileData !== undefined) {
+      props.setProfileIsCompleted(true);
+    } else {
+      props.setProfileIsCompleted(false);
+    }
+  }, [props.profileData]);
+
   // ================================================================
   // useEffect to map the Resume Cards after profileData has been set
   // ================================================================
   useEffect(() => {
-    if (profileData !== undefined)
+    if (props.profileData !== undefined)
       // to prevent this from running onMount {
       mapResumeCards();
-  }, [profileData]);
+  }, [props.profileData]);
 
   function mapResumeCards() {
     // Map SkillsetsCard
-    const skillsetsCards = profileData.skills.map((element) => (
+    const skillsetsCards = props.profileData.skills.map((element) => (
       <SkillsetsCard skillset={element} key={Math.random()} />
     ));
 
     // Map Experience Cards
-    const experienceCards = profileData.experience.map((element) => (
+    const experienceCards = props.profileData.experience.map((element) => (
       <ExperienceCard experience={element} key={Math.random()} />
     ));
 
     // Map Education Cards
-    const educationCards = profileData.education.map((element) => (
+    const educationCards = props.profileData.education.map((element) => (
       <EducationCard education={element} key={Math.random()} />
     ));
 
     // Map AbilityDifferencesIcons
-    const abilityDifferencesIcons = profileData.abilityDifferences.diff.map(
-      (element) => {
+    const abilityDifferencesIcons =
+      props.profileData.abilityDifferences.diff.map((element) => {
         let iconImage = "";
 
         switch (element) {
@@ -108,8 +118,7 @@ const JobSeekerProfile = () => {
             <p className={styles.abilityDifferencesName}>{element}</p>
           </div>
         );
-      }
-    );
+      });
 
     // Set the mapped components to state
     setMappedComponents({
@@ -124,7 +133,7 @@ const JobSeekerProfile = () => {
   // Display either the NoProfile page or CompletedProfile page depending on whether profileIsCompleted
   // ==================================================================================================
   function displayProfile() {
-    if (!profileIsCompleted) {
+    if (!props.profileIsCompleted) {
       // ==============
       // NoProfile Page
       // ==============
@@ -156,15 +165,14 @@ const JobSeekerProfile = () => {
       let supportFirstIndex = "";
       let supportList = "";
 
-      if (profileData) {
+      if (props.profileData) {
         supportFirstIndex = supportConvertToFull(
-          profileData.abilityDifferences.support[0]
+          props.profileData.abilityDifferences.support[0]
         );
-        const fullFormSupportArray = profileData.abilityDifferences.support.map(
-          (element) => {
+        const fullFormSupportArray =
+          props.profileData.abilityDifferences.support.map((element) => {
             return supportConvertToFull(element);
-          }
-        );
+          });
         supportList = fullFormSupportArray.join(", ");
       }
 
@@ -206,13 +214,13 @@ const JobSeekerProfile = () => {
                   <img className={styles.bannerPhoto} alt="Banner Mugshot" />
                   <div className={styles.bannerText}>
                     <p className={styles.bannerName}>
-                      {profileData && profileData.about.name}
+                      {props.profileData && props.profileData.about.name}
                     </p>
                     <p className={styles.bannerAspirations}>
-                      {profileData && profileData.about.aspiration}
+                      {props.profileData && props.profileData.about.aspiration}
                     </p>
                     <p className={styles.bannerBrandStatement}>
-                      {profileData && profileData.about.brand}
+                      {props.profileData && props.profileData.about.brand}
                     </p>
                   </div>
                 </div>
@@ -235,11 +243,12 @@ const JobSeekerProfile = () => {
                     <div className={styles.abilityDifferencesDescription}>
                       <p>
                         <b>Diagnosis</b>:{" "}
-                        {profileData &&
-                          profileData.abilityDifferences.diagnosis}
+                        {props.profileData &&
+                          props.profileData.abilityDifferences.diagnosis}
                         <br />
                         <br />
-                        {profileData && profileData.abilityDifferences.diffDesc}
+                        {props.profileData &&
+                          props.profileData.abilityDifferences.diffDesc}
                       </p>
                     </div>
                   </div>
@@ -248,23 +257,25 @@ const JobSeekerProfile = () => {
                       <span className={styles.supportRequiredTypeWords}>
                         Type of Support Required:{" "}
                       </span>
-                      {profileData &&
-                        (profileData.abilityDifferences.support.length === 1
+                      {props.profileData &&
+                        (props.profileData.abilityDifferences.support.length ===
+                        1
                           ? supportFirstIndex
                           : supportList)}
                     </li>
                     <br />
-                    {profileData && profileData.abilityDifferences.supportDesc}
+                    {props.profileData &&
+                      props.profileData.abilityDifferences.supportDesc}
                   </div>
                   <div className={styles.abilityDifferencesExtraInfo}>
                     <li>
                       <span className={styles.supportRequiredTypeWords}>
                         My Preferred Mode of Communication:{" "}
                       </span>
-                      {profileData &&
-                        (profileData.abilityDifferences.comm.length === 1
-                          ? profileData.abilityDifferences.comm[0]
-                          : [...profileData.abilityDifferences.comm].join(
+                      {props.profileData &&
+                        (props.profileData.abilityDifferences.comm.length === 1
+                          ? props.profileData.abilityDifferences.comm[0]
+                          : [...props.profileData.abilityDifferences.comm].join(
                               ", "
                             ))}
                     </li>
@@ -273,10 +284,10 @@ const JobSeekerProfile = () => {
                       <span className={styles.supportRequiredTypeWords}>
                         My Aids Used:{" "}
                       </span>
-                      {profileData &&
-                        (profileData.abilityDifferences.aids.length === 1
-                          ? profileData.abilityDifferences.aids[0]
-                          : [...profileData.abilityDifferences.aids].join(
+                      {props.profileData &&
+                        (props.profileData.abilityDifferences.aids.length === 1
+                          ? props.profileData.abilityDifferences.aids[0]
+                          : [...props.profileData.abilityDifferences.aids].join(
                               ", "
                             ))}
                     </li>
@@ -285,8 +296,8 @@ const JobSeekerProfile = () => {
                       <span className={styles.supportRequiredTravel}>
                         I am{" "}
                         <b>
-                          {profileData &&
-                            (profileData.abilityDifferences.travel
+                          {props.profileData &&
+                            (props.profileData.abilityDifferences.travel
                               ? "Able"
                               : "Unable")}
                         </b>{" "}
