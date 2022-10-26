@@ -16,7 +16,7 @@ import JobPostDetails from "./pages/jobListings/jobPostDetails/jobPostDetails";
 import JobPostForm from "./pages/employers/jobPostForm/JobPostForm";
 import SuccessfulApplication from "./pages/jobListings/jobPostDetails/SuccessfulApplication";
 import SavedJobs from "./pages/jobseekers/saved-jobs/SavedJobs";
-import JobsPosted from "./pages/employers/JobsPosted";
+import JobsPosted from "./pages/employers/jobsPosted/JobsPosted";
 
 function App() {
   // =========
