@@ -134,9 +134,11 @@ const JobPostDetails = (props) => {
         <div className="col-9">
           <div>
             <h1 className="display-6 m-0">{about.company}</h1>
-            <button className="btn btn-outline-primary btn-sm">
-              Read about the company
-            </button>
+            {props.selectedJobPost.employerId !== userCtx.userDetails.id && (
+              <button className="btn btn-outline-primary btn-sm">
+                Read about the company
+              </button>
+            )}
           </div>
           <div className="my-4">
             <h5 className="m-0">Job Description</h5>
@@ -187,13 +189,15 @@ const JobPostDetails = (props) => {
 
         {/* accessibility column */}
         <div className="col-3">
-          <Link
-            to="/successful-application"
-            className="btn btn-dark w-100"
-            onClick={handleClick}
-          >
-            Apply Now
-          </Link>
+          {userCtx.userDetails.type === "jobSeeker" && (
+            <Link
+              to="/successful-application"
+              className="btn btn-dark w-100"
+              onClick={handleClick}
+            >
+              Apply Now
+            </Link>
+          )}
           <div className="border border-warning border-2 my-4">
             <h5 className="text-center my-3">Suitable For</h5>
             {abilityDifferencesIcons}

@@ -187,3 +187,4 @@ const surveyedSkills = [
 ];
 
 export default surveyedSkills
+
