@@ -35,9 +35,7 @@ const AppliedJobs = (props) => {
   // useEffect to map cards after JobsApplied has been fetched
   // =========================================================
   useEffect(() => {
-    if (jobsApplied.length > 0) {
-      mapCards();
-    }
+    mapCards();
   }, [jobsApplied]);
 
   function mapCards() {
@@ -58,7 +56,7 @@ const AppliedJobs = (props) => {
   return (
     <div>
       <div className="m-4">
-        {jobCards ? (
+        {jobsApplied.length > 0 ? (
           jobCards
         ) : (
           <p className="d-flex justify-content-center">No Jobs Applied</p>
