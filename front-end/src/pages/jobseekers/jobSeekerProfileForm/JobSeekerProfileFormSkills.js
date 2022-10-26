@@ -30,7 +30,7 @@ const JobSeekerProfileFormSkills = (props) => {
         );
       }
     }
-  });
+  }, []);
 
   // adding react-hook-forms functionality
   const {

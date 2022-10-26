@@ -47,7 +47,7 @@ const JobSeekerProfileFormEducation = (props) => {
         setValue(`educationSet.${i}.desc`, props.profileData.education[i].desc);
       }
     }
-  });
+  }, []);
 
   // adding react-hook-forms functionality
   const {
