@@ -49,14 +49,14 @@ const JobSeekerLanding = (props) => {
                   My Saved Jobs
                 </p>
               </div>
-              <Link
-                to="/profile"
-                className="col-4 d-flex justify-content-center flex-column align-item-center"
-              >
-                <p className="text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 ml-1 bg-dark text-white">
+              <div className="col-4 d-flex justify-content-center flex-column align-item-center">
+                <Link
+                  to="/profile"
+                  className="text-center d-flex align-items-center justify-content-center m-0 p-4 w-100 ml-1 bg-dark text-white"
+                >
                   My CV
-                </p>
-              </Link>
+                </Link>
+              </div>
             </div>
           </div>
         )}

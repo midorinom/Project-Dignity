@@ -7,10 +7,8 @@ const EmployerProfileForm = (props) => {
   const [employerProfile, setEmployerProfile] = useState();
   const [whoWeAreCharacterCount, setWhoWeAreCharacterCount] = useState(0);
   const [whatWeDoCharacterCount, setwhatWeDoCharacterCount] = useState(0);
-  const [workingWithDiffCharacterCount, setworkingWithDiffCharacterCount] =
-    useState(0);
-  const [accessibilityCharacterCount, setAccessibilityCharacterCount] =
-    useState(0);
+  const [workingWithDiffCharacterCount, setworkingWithDiffCharacterCount] =useState(0);
+  const [accessibilityCharacterCount, setAccessibilityCharacterCount] =useState(0);
   const [sectionSaved, setSectionSaved] = useState();
 
   const userCtx = useContext(UserContext);
@@ -32,6 +30,7 @@ const EmployerProfileForm = (props) => {
 
   const navigate = useNavigate();
   
+  //Update employerprofile
   const createEmployerprofile = async (req, res) => {
     if (employerProfile) {
       try {
