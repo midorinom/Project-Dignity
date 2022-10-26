@@ -46,7 +46,7 @@ const JobSeekerProfileFormAbilityDiff = (props) => {
         setValue(field, props.profileData.abilityDifferences[field])
       );
     }
-  });
+  }, []);
 
   // adding react-hook-forms functionality
   const {
