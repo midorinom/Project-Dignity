@@ -583,8 +583,8 @@ const EmployerAccessibility = (props) => {
                 <p className="mt-2 text-danger">{errors.support?.message}</p>
               </div>
               {/* ================================================================================================== */}
-              <button type="button" className={`${styles.bottom_button}`}>
-                Cancel{" "}
+              <button type="button" className={`${styles.bottom_button}`} onClick={props.createJobPost}>
+                Upload Job Post{" "}
               </button>
             </div>
             <div className="col-md-1"></div>
@@ -598,15 +598,9 @@ const EmployerAccessibility = (props) => {
                   Save as Draft
                 </button>
                 <button
-                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}  
                 >
-                  Previous Job Post
-                </button>
-                <button
-                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
-                  onClick={props.createJobPost}
-                >
-                  Upload Job post
+                  Cancel
                 </button>
                 <div className="form-group">
                 <div className={`${styles.progress} progress mb-1`}>
