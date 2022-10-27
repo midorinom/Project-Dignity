@@ -450,12 +450,7 @@ const JobAbout = (props) => {
                 <button
                   className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
                 >
-                  Previous Job Post
-                </button>
-                <button
-                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
-                >
-                  Upload Job post
+                  Cancel
                 </button>
                 <div className="form-group">
                   <div className={`${styles.progress} progress mb-1`}>
