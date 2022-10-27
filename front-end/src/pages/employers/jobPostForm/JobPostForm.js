@@ -40,7 +40,7 @@ const JobPost = () => {
         });
         const createdJobPost = await res.json();
         console.log(createdJobPost);
-        navigate("/profile");
+        navigate("/employers/jobs-posted");
       } catch (err) {
         console.log(err);
       }
