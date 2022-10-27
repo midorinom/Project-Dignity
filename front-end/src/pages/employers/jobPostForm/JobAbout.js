@@ -29,15 +29,24 @@ const JobAbout = (props) => {
   } = useForm({
     defaultValues: {
       tasks: [{ taskItem: "" }],
+      skills: [""],
     },
   });
 
-  const { fields: fieldTask, append: appendTask, remove: removeTask } = useFieldArray({
+  const {
+    fields: fieldTask,
+    append: appendTask,
+    remove: removeTask,
+  } = useFieldArray({
     control,
     name: "tasks",
-  },
-  )
-  const { fields: fieldSkills, append: appendSkills, remove: removeSkills } = useFieldArray({
+  });
+
+  const {
+    fields: fieldSkills,
+    append: appendSkills,
+    remove: removeSkills,
+  } = useFieldArray({
     control,
     name: "skills",
   });
@@ -78,7 +87,7 @@ const JobAbout = (props) => {
               <div className={`form-group mb-4 ${styles.range}`}>
                 <input
                   type="text"
-                  className="form-control mb-4"
+                  className="form-control p-3"
                   id="name"
                   placeholder="e.g Assistant Chef"
                   {...register("title", {
@@ -90,7 +99,7 @@ const JobAbout = (props) => {
                 />
                 <select
                   type="text"
-                  className={`form-group mb-4 form-select ms-5 ${styles.range}`}
+                  className={`form-group form-select ms-5 p-3 ${styles.range}`}
                   id="JobType"
                   {...register("type", {
                     required: {
@@ -121,7 +130,7 @@ const JobAbout = (props) => {
               </div>
               <div className="form-check mb-4">
                 <input
-                  className="flexRadioDefault"
+                  className="flexRadioDefault m-2"
                   type="radio"
                   value={true}
                   id="flexRadioDefault1"
@@ -132,7 +141,6 @@ const JobAbout = (props) => {
                     },
                   })}
                 />
-
                 <label className="form-check-label" htmlfor="flexCheckDefault">
                   Customer Facing Jobs that involve interacting with customers
                   directly.
@@ -142,7 +150,7 @@ const JobAbout = (props) => {
               </div>
               <div className="form-check mb-4">
                 <input
-                  className="flexRadioDefault"
+                  className="flexRadioDefault m-2"
                   type="radio"
                   value={false}
                   id="flexRadioDefault"
@@ -167,11 +175,11 @@ const JobAbout = (props) => {
               {/* ================================================================================================== */}
               {/*======================================Job Description ============================================ */}
               <div className="form-group mb-4">
-                <label for="JobDescription" className="JobDescription">
+                <label for="JobDescription" className="JobDescription mb-2">
                   Job Description
                 </label>
                 <textarea
-                  className="form-control"
+                  className="form-control p-3"
                   id="exampleFormControlTextarea1"
                   rows="3"
                   placeholder="Tip: Keep it simple!"
@@ -186,19 +194,19 @@ const JobAbout = (props) => {
               <p className="mt-2 text-danger">{errors.desc?.message}</p>
               {/* ================================================================================================== */}
               {/*============================================Job Tasks ============================================ */}
-              {fieldTask.map((item, index) => {
-                return (
-                  <div key={item.id}>
-                    <div className="form-group mb-2">
-                      <label className="form-label" htmlFor="Job Tasks">
-                        Job Tasks
-                      </label>
+              <div className="form-group mb-2">
+                <label className="form-label" htmlFor="Job Tasks">
+                  Job Tasks
+                </label>
+                {fieldTask.map((item, index) => {
+                  return (
+                    <div key={item.id}>
                       <input
                         type="text"
-                        className="form-control"
+                        className="form-control p-3"
                         id="Job Tasks"
                         name={`tasks.${index}.tasksItem`}
-                        placeholder="Task 1"
+                        placeholder="Insert Task"
                         {...register(`tasks.${index}.tasksItem`, {
                           required: {
                             value: true,
@@ -206,30 +214,34 @@ const JobAbout = (props) => {
                           },
                         })}
                       />
+                      {/*<-------------------- delete task  button -------------------->*/}
+                      <div className="form-group align-content-end mb-4">
+                        <button
+                          type="button"
+                          className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-dash-lg mt-3`}
+                          onClick={() => removeTask(index)}
+                        ></button>
+                        <label className="form-label" htmlFor="add-new-skill">
+                          Delete Task
+                        </label>
+                      </div>
+                      <hr></hr>
                     </div>
-                    <button
-                      type="button"
-                      className={`${styles.circle_btn}`}
-                      onClick={() => {
-                        removeTask(index);
-                      }}
-                    >
-                      -
-                    </button>
-                  </div>
-                );
-              })}
+                  );
+                })}
+                {/*<-------------------- add new task button -------------------->*/}
 
-              <button
-                type="button"
-                className={`${styles.circle_btn}`}
-                onClick={() => {
-                  appendTask();
-                }}
-              >
-                +
-              </button>
-
+                <div className="form-group mb-4">
+                  <button
+                    className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-plus-lg mt-3`}
+                    onClick={() => appendTask()}
+                    id="add-new-edu"
+                  ></button>
+                  <label className="form-label" htmlFor="add-new-edu">
+                    Add Another Task
+                  </label>
+                </div>
+              </div>
               <p className="mt-2 text-danger">{errors.tasks?.message}</p>
               {/* ================================================================================================== */}
               {/*============================================ Skills ============================================ */}
@@ -242,8 +254,10 @@ const JobAbout = (props) => {
                     <div key={item.id}>
                       <input
                         list="skills"
-                        className="form-control mb-4"
+                        className="form-control mb-4 p-3"
+                        id="skills"
                         name={`skills${[index]}`}
+                        placeholder="Insert Skill"
                         {...register(`skills[${[index]}]`, {
                           required: {
                             value: true,
@@ -256,28 +270,30 @@ const JobAbout = (props) => {
                           return <option value={skill}>{skill}</option>;
                         })}
                       </datalist>
-                      <button
-                        type="button"
-                        className={`${styles.circle_btn}`}
-                        onClick={() => {
-                          removeSkills(index);
-                        }}
-                      >
-                        -
-                      </button>
-                      
+                      <div className="form-group align-content-end mb-4">
+                        <button
+                          type="button"
+                          className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-dash-lg mt-3`}
+                          onClick={() => removeSkills(index)}
+                        ></button>
+                        <label className="form-label" htmlFor="deleteSkills">
+                          Delete Skill
+                        </label>
+                      </div>
+                      <hr></hr>
                     </div>
                   );
                 })}
-                <button
-                        type="button"
-                        className={`${styles.circle_btn}`}
-                        onClick={() => {
-                          appendSkills();
-                        }}
-                      >
-                        +
-                </button>
+                <div className="form-group mb-4">
+                  <button
+                    className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-plus-lg mt-3`}
+                    onClick={() => appendSkills()}
+                    id="addSkills"
+                  ></button>
+                  <label className="form-label" htmlFor="addSkills">
+                    Add Another Skill
+                  </label>
+                </div>
               </div>
               {/*============================================Expected Salary ============================================ */}
               <div className="form-group mb-4">
@@ -286,7 +302,7 @@ const JobAbout = (props) => {
                 </label>
                 <input
                   type="text"
-                  className="form-control mb-2"
+                  className="form-control mb-2 p-3"
                   id="minimum"
                   placeholder="Minimum"
                   {...register("minSalary", {
@@ -299,7 +315,7 @@ const JobAbout = (props) => {
                 <p>to</p>
                 <input
                   type="text"
-                  className="form-control mt-2"
+                  className="form-control mt-2 p-3"
                   id="maximum"
                   placeholder="Maximum"
                   {...register("maxSalary", {
@@ -336,7 +352,7 @@ const JobAbout = (props) => {
                 </label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control p-3"
                   id="postalCode"
                   placeholder="E.g 730712"
                   {...register("postalCode", {
@@ -354,7 +370,7 @@ const JobAbout = (props) => {
                 </label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control p-3"
                   id="block/streetNumber"
                   placeholder="E.g Blk 712"
                   {...register("block", {
@@ -373,7 +389,7 @@ const JobAbout = (props) => {
 
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control p-3"
                   id="unitNumber"
                   placeholder="E.g 10-234"
                   {...register("unit", {
@@ -390,7 +406,7 @@ const JobAbout = (props) => {
                   Accessibility of Job Location
                 </label>
                 <textarea
-                  className="form-control mb-4"
+                  className="form-control mb-4 p-3"
                   id="exampleFormControlTextarea1"
                   rows="3"
                   placeholder="
@@ -427,30 +443,27 @@ const JobAbout = (props) => {
                 <button
                   className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
                   onClick={props.setSectionSaved}
+                  type="submit"
                 >
                   Save as Draft
                 </button>
                 <button
                   className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                  onClick={() => navigate("/employers")}
                 >
-                  Previous Job Post
+                  Cancel
                 </button>
-                <button
-                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
-                >
-                  Upload Job post
-                </button>
-                <div className="progress mt-4">
-                  <div
-                    className="progress-bar"
-                    role="progressbar"
-                    Style="width: 75%"
-                    aria-valuenow="75"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
-                </div>
-                <div className={`${styles.progressBar} progress_bar`}>
+                <div className="form-group">
+                  <div className={`${styles.progress} progress mb-1`}>
+                    <div
+                      className={styles.progressBar}
+                      role="progressbar"
+                      style={{ width: "90%" }}
+                      aria-valuenow="90"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
                   <small className="text-muted" htmlFor="progress-bar">
                     75% complete
                   </small>

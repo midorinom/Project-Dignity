@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./jobPostForm.module.css";
 import physical from "../../jobListings/filters/abilityDifference/icons/physical.png";
 import visual from "../../jobListings/filters/abilityDifference/icons/visual.png";
@@ -8,6 +9,7 @@ import autism from "../../jobListings/filters/abilityDifference/icons/autism.png
 import { useForm } from "react-hook-form";
 
 const EmployerAccessibility = (props) => {
+  const navigate = useNavigate();
   //react-hook-forms functionality
   const {
     register,
@@ -32,8 +34,8 @@ const EmployerAccessibility = (props) => {
   return (
     <>
       <section classname="container-md" id="Accessibility">
-        <div className="row text-start">
-          <form id="AboutEmployer" onSubmit={handleSubmit(onSubmit, onError)}>
+        <form id="AboutEmployer" onSubmit={handleSubmit(onSubmit, onError)}>
+          <div className="row text-start">
             <div className={`${styles.form} col-md-6`}>
               {/*================================== Suitable Applicants ================================== */}
               <div className="form-group mb-4">
@@ -583,8 +585,12 @@ const EmployerAccessibility = (props) => {
                 <p className="mt-2 text-danger">{errors.support?.message}</p>
               </div>
               {/* ================================================================================================== */}
-              <button type="button" className={`${styles.bottom_button}`}>
-                Cancel{" "}
+              <button
+                type="button"
+                className={`${styles.bottom_button}`}
+                onClick={props.createJobPost}
+              >
+                Upload Job Post{" "}
               </button>
             </div>
             <div className="col-md-1"></div>
@@ -599,34 +605,29 @@ const EmployerAccessibility = (props) => {
                 </button>
                 <button
                   className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                  onClick={() => navigate("/employers")}
                 >
-                  Previous Job Post
+                  Cancel
                 </button>
-                <button
-                  className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
-                  onClick={props.createJobPost}
-                >
-                  Upload Job post
-                </button>
-                <div class="progress mt-4">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    Style="width: 75%"
-                    aria-valuenow="75"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                  ></div>
-                </div>
-                <div className={`${styles.progressBar} progress_bar`}>
+                <div className="form-group">
+                  <div className={`${styles.progress} progress mb-1`}>
+                    <div
+                      className={styles.progressBar}
+                      role="progressbar"
+                      style={{ width: "90%" }}
+                      aria-valuenow="90"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    ></div>
+                  </div>
                   <small className="text-muted" htmlFor="progress-bar">
                     75% complete
                   </small>
                 </div>
               </div>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </section>
     </>
   );

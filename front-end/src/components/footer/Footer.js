@@ -7,7 +7,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 const Footer = () => {
   // const userCtx = useContext(UserContext);
   return (
-    <div className="container-fluid bg-warning px-5 pt-4">
+    <div className="container-fluid bg-warning px-5 pt-4 footer mt-auto">
       <div className="row">
         <div className="col-auto">
           <h5>For Jobseekers</h5>
