@@ -34,7 +34,7 @@ const JobSeekerProfile = (props) => {
   // ====================================
   useEffect(() => {
     getProfileData();
-  }, []);
+  }, [props.profileIsCompleted]);
 
   const getProfileData = async () => {
     console.log("get profile start");
