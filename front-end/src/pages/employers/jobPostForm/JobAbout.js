@@ -195,12 +195,12 @@ const JobAbout = (props) => {
               {/* ================================================================================================== */}
               {/*============================================Job Tasks ============================================ */}
               <div className="form-group mb-2">
-                      <label className="form-label" htmlFor="Job Tasks">
-                        Job Tasks
-                      </label>
-              {fieldTask.map((item, index) => {
-                return (
-                  <div key={item.id}>
+                <label className="form-label" htmlFor="Job Tasks">
+                  Job Tasks
+                </label>
+                {fieldTask.map((item, index) => {
+                  return (
+                    <div key={item.id}>
                       <input
                         type="text"
                         className="form-control p-3"
@@ -214,33 +214,33 @@ const JobAbout = (props) => {
                           },
                         })}
                       />
-                    {/*<-------------------- delete task  button -------------------->*/}
-                    <div className="form-group align-content-end mb-4">
-                      <button
-                        type="button"
-                        className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-dash-lg mt-3`}
-                        onClick={() => removeTask(index)}
-                      ></button>
-                      <label className="form-label" htmlFor="add-new-skill">
-                        Delete Task
-                      </label>
+                      {/*<-------------------- delete task  button -------------------->*/}
+                      <div className="form-group align-content-end mb-4">
+                        <button
+                          type="button"
+                          className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-dash-lg mt-3`}
+                          onClick={() => removeTask(index)}
+                        ></button>
+                        <label className="form-label" htmlFor="add-new-skill">
+                          Delete Task
+                        </label>
+                      </div>
+                      <hr></hr>
                     </div>
-                    <hr></hr>
-                  </div>
-                );
-              })}
-              {/*<-------------------- add new task button -------------------->*/}
+                  );
+                })}
+                {/*<-------------------- add new task button -------------------->*/}
 
-              <div className="form-group mb-4">
-                <button
-                  className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-plus-lg mt-3`}
-                  onClick={() => appendTask()}
-                  id="add-new-edu"
-                ></button>
-                <label className="form-label" htmlFor="add-new-edu">
-                  Add Another Task
-                </label>
-              </div>
+                <div className="form-group mb-4">
+                  <button
+                    className={`${styles.circle_btn} btn btn-outline-dark btn-sm bi-plus-lg mt-3`}
+                    onClick={() => appendTask()}
+                    id="add-new-edu"
+                  ></button>
+                  <label className="form-label" htmlFor="add-new-edu">
+                    Add Another Task
+                  </label>
+                </div>
               </div>
               <p className="mt-2 text-danger">{errors.tasks?.message}</p>
               {/* ================================================================================================== */}
@@ -449,6 +449,7 @@ const JobAbout = (props) => {
                 </button>
                 <button
                   className={`${styles.sideButtons} sidebuttons mt-3 mb-4 p-3`}
+                  onClick={() => navigate("/employers")}
                 >
                   Cancel
                 </button>
