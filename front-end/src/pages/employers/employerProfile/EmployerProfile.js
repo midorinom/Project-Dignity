@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import UserContext from "../../../context/userContext"
 import styles from "./employerProfile.module.css";
 import { Link } from "react-router-dom";
-const EmployerProfile = () => {
+const EmployerProfile = (props) => {
   const userCtx= useContext(UserContext)
-  const [profileData, setProfileData]= useState({})
+  
 
   useEffect(() => {
     if (userCtx.userDetails.profileCompleted) {
@@ -20,7 +20,7 @@ const EmployerProfile = () => {
         body: JSON.stringify({ id: userCtx.userDetails.id }),
       });
       const fetchedProfileData = await res.json();
-      setProfileData(fetchedProfileData)
+      props.setEmployerProfileData(fetchedProfileData)
     } catch (err) {
       console.log(err);
     }
@@ -28,7 +28,7 @@ const EmployerProfile = () => {
 
   function displayProfile() {
     if (!userCtx.userDetails.profileCompleted) {
-      
+
       // ==============
       // NoProfile Page
       // ==============
@@ -56,19 +56,19 @@ const EmployerProfile = () => {
                 <div
                   className={`${styles.companyName} md-12 d-flex justify-content-between `}
                 >
-                  {profileData?.company}
-                  <button>
+                  {props.employerProfileData?.company}
+                  <button className={styles.editProfileButton}>
                     <Link to="/profile-form">Edit Profile</Link>
                   </button>
                 </div>
                 <h6 className={`${styles.subheading} md-lg-6`}>Who We Are</h6>
                 <p className={`${styles.p} md-lg-4`}>
-                {profileData?.whoWeAre}
+                {props.employerProfileData?.whoWeAre}
                 </p>
 
                 <h6 className={`${styles.subheading} md-lg-6`}>What We Do</h6>
                 <p className={`${styles.p} md-lg-4`}>
-                {profileData?.whatWeDo}
+                {props.employerProfileData?.whatWeDo}
                 {" "}
                 </p>
 
@@ -76,7 +76,7 @@ const EmployerProfile = () => {
                   Experience Working with Differently-abled Persons
                 </h6>
                 <p className={`${styles.p} md-lg-4`}>
-                {profileData?.experience}
+                {props.employerProfileData?.experience}
                 </p>
               </div>
 
@@ -92,13 +92,13 @@ const EmployerProfile = () => {
                 <div className={`${styles.box} container-md`}>
                   <h6 className={`${styles.subheading} md-lg-6`}>Location</h6>
                   <p className={`${styles.p} md-lg-4`}>
-                  {profileData?.location}
+                  {props.employerProfileData?.location}
                   </p>
                   <h6 className={`${styles.subheading} md-lg-6`}>
                     Accessibility
                   </h6>
                   <p className={`${styles.p} md-lg-4`}>
-                  {profileData?.accessibility}
+                  {props.employerProfileData?.accessibility}
                   </p>
                 </div>
 
@@ -106,12 +106,12 @@ const EmployerProfile = () => {
                 <div className={`${styles.box} container-md`}>
                   <h6 className={`${styles.subheading} md-lg-6`}>Contact</h6>
                   <p className={`${styles.p} md-lg-4`}>Contact Number</p>
-                  <p className={`${styles.p} md-lg-4`}>{profileData?.contact}</p>
+                  <p className={`${styles.p} md-lg-4`}>{props.employerProfileData?.contact}</p>
                   <h6 className={`${styles.subheading} md-lg-6`}>
                     Email Address
                   </h6>
                   <p className={`${styles.p} md-lg-4`}>
-                  {profileData?.email}
+                  {props.employerProfileData?.email}
                   </p>
                 </div>
               </div>

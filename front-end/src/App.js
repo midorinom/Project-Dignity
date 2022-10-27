@@ -31,6 +31,8 @@ function App() {
   const [selectedCompanyProfile, setSelectedCompanyProfile] = useState("");
   const [manageJobsCurrentPage, setManageJobsCurrentPage] = useState("saved");
 
+  // State for employer profile
+  const [employerProfileData, setEmployerProfileData]= useState({})
   // ===================
   // Conditional Renders
   //====================
@@ -73,7 +75,7 @@ function App() {
           />
         );
       case "employer":
-        return <EmployerProfile />;
+        return <EmployerProfile employerProfileData={employerProfileData} setEmployerProfileData={setEmployerProfileData}/>;
       default:
         return <Login />;
     }
@@ -91,7 +93,7 @@ function App() {
         />
       );
     } else if (userDetails.type === "employer") {
-      return <EmployerProfileForm />;
+      return <EmployerProfileForm employerProfileData={employerProfileData} setEmployerProfileData={setEmployerProfileData}/>;
     }
   }
   const profileFormPage = displayProfileFormPage();
