@@ -13,9 +13,9 @@ Libraries such as Bootstrap, Materials UI and React hook forms were also used to
 ###### Back End
 Our API was coded in Express and the database was hosted on Mongo Atlas.
 To link the front and back end, Mongoose served as our driver. 
-A link to the Github repo of the backend can be found here.
+A link to the Github repo of the backend can be found <a href="https://github.com/otwsia/Project-Dignity-Backend">here</a>.
 
-A link to the API dictionary can be found here.
+A link to the API dictionary can be found <a href="https://docs.google.com/spreadsheets/d/1HyShoObTGmjqsI6gPy4b-fu121c6Yxn6mFU4jJKmKnI/edit?usp=drivesdk">here</a>.
 
 ## Installation instructions for any dependencies
 Dependencies include Bootstrap, Materials UI and React hook form libraries.
