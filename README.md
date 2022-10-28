@@ -1,16 +1,15 @@
 # Project Dignity - Dignity Careers
 
 ## Introduction
-As the project was undertaken as a group of 4, the project was initially split between front-end and back-end, with 2 members allocated to each. Subsequently, since the back-end portion of the project was completed quicker, the 2 members returned to help with the front end. 
+As the project was undertaken as a group of 4, it was initially split between front-end and back-end, with 2 members allocated to each. Subsequently, since the back-end portion of the project was completed quicker, the 2 members returned to help with the front end. 
 
 The objective of the project was to create a job portal to connect differently-abled individuals with open-minded employers who are willing to hire and work with such individuals. The project was inspired by the organisation, Project Dignity, a social enterprise that focuses on providing differently-abled individuals with vocational training and employment opportunities. The website is named Dignity Careers and is designed like as if it were to be adopted by Project Dignity themselves. The website is intended for big screens such as monitors and laptops and thus, responsiveness for mobile devices was not included in the development of the site.
-Explanations of the technologies used
 
-###### Front End
+###### Technologies Used - Front End
 React, HTML, CSS and Javascript gave life to the user interface.
 Libraries such as Bootstrap, Materials UI and React hook forms were also used to enhance aesthetics and functionality.
 
-###### Back End
+###### Technologies Used - Back End
 Our API was coded in Express and the database was hosted on Mongo Atlas.
 To link the front and back end, Mongoose served as our driver. 
 A link to the Github repo of the backend can be found <a href="https://github.com/otwsia/Project-Dignity-Backend">here</a>.
