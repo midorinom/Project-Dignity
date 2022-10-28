@@ -6,18 +6,18 @@ As the project was undertaken as a group of 4, the project was initially split b
 The objective of the project was to create a job portal to connect differently-abled individuals with open-minded employers who are willing to hire and work with such individuals. The project was inspired by the organisation, Project Dignity, a social enterprise that focuses on providing differently-abled individuals with vocational training and employment opportunities. The website is named Dignity Careers and is designed like as if it were to be adopted by Project Dignity themselves. The website is intended for big screens such as monitors and laptops and thus, responsiveness for mobile devices was not included in the development of the site.
 Explanations of the technologies used
 
-######Front End
+###### Front End
 React, HTML, CSS and Javascript gave life to the user interface.
 Libraries such as Bootstrap, Materials UI and React hook forms were also used to enhance aesthetics and functionality.
 
-######Back End
+###### Back End
 Our API was coded in Express and the database was hosted on Mongo Atlas.
 To link the front and back end, Mongoose served as our driver. 
 A link to the Github repo of the backend can be found here.
 
 A link to the API dictionary can be found here.
 
-##Installation instructions for any dependencies
+## Installation instructions for any dependencies
 Dependencies include Bootstrap, Materials UI and React hook form libraries.
 
 Bootstrap was included via CDN and no further installation steps are required to run the app.
@@ -28,8 +28,8 @@ npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 
 npm install react-hook-form
 
-##User Stories 
-######Job seekers:
+## User Stories 
+###### Job seekers:
 The job seekers are differently-abled individuals who are keen in looking for a job to fulfill their aspirations. The job seekers can also encompass the caregiver of the individuals who assist them in the application and seeking of jobs.
 
 The main benefit of the website for these job seekers is providing them with a platform to find jobs that cater to their specific needs and preferences, according to their ability differences. Job posts are required to list various relevant information such as what kinds of ability differences the jobs are suitable for, the type of support provided, environmental conditions such as the light and noise level and more. Job seekers are then able to browse through job posts and decide based on these information provided by the employers, whether those jobs are suitable for them. 
@@ -38,12 +38,12 @@ Furthermore, the job listings page recommends jobs for job seekers, taking into 
 
 Also, as a job portal, there will naturally be various features expected of one, such as being able to apply for jobs and a page for the user to view their applied jobs. Similarly, there is an option to save jobs to a page where the user can revisit to view their saved jobs. The user is also able to withdraw an application or remove a saved job. Clicking on a job post in the job listings page brings the user to another page with detailed information on that job such as job description and tasks, as well as a link to the employer’s profile to read more about the employer listing that job.
 
-######Employers:
+###### Employers:
 The employers are businesses that are willing and open to hiring differently-abled and disadvantaged individuals. The main benefit of the website the employer wants is to assess if applicants are suitable for the job, through the information of the jobseekers that would be provided, they would also want to be able to post the roles that their company is hiring for with relevant description to match the suitable applicants.
 
 Link to your wireframes – sketches of major views/interfaces in your application
 
-##Descriptions of any unsolved problems or major hurdles your team had to overcome
+## Descriptions of any unsolved problems or major hurdles your team had to overcome
 Logic for the forms (jobseeker profile, employer profile, job post) could be improved for a better user experience. Currently the forms require the user to press “save” before being allowed to proceed to the next page. This could simply be replaced with autosaving upon clicking the “next page” button. Also, all progress made on the form is lost if the user were to cancel the process or leave the page before filling in the form entirely. This could be changed to automatically save the user’s progress if they were to leave the form and allow them to return to continue from where they left off.
 
 Could add more features for the employer’s “My Job Posts” page such as being able to view the total number of applicants for each job, browse through the list of applicants, view each applicant’s profile and to accept or reject the applications. Consequently, the jobseeker’s applications on their “My Applied Jobs” page should reflect whether the employer has accepted or rejected their application. Could also explore application outcomes beyond a simple “accept” or “reject”, such as an interview invitation or allowing the employer to provide a customised message along with the application outcome.
