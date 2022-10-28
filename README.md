@@ -1,4 +1,4 @@
-# Project-Dignity
+# Project Dignity - Dignity Careers
 
 ## Introduction
 As the project was undertaken as a group of 4, the project was initially split between front-end and back-end, with 2 members allocated to each. Subsequently, since the back-end portion of the project was completed quicker, the 2 members returned to help with the front end. 
@@ -28,54 +28,54 @@ npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 npm install react-hook-form
 
 ## Component Hierarchy
+```
+App
+    NavBar
+    Login
+        LoginScreen
+        RegisterScreen
+        SuccessfulRegistration
+    UniversalLanding
+    JobListings
+        Search
+        AbilityDifference
+        JobEnvironment
+        JobInteractionType
+        SupportProvided
+        Card
+    JobPostDetails
+    CompanyProfile
+    Footer
 
-* App
-  * NavBar
-  * Login
-    * LoginScreen
-    * RegisterScreen
-    * SuccessfulRegistration
-  * UniversalLanding
-  * JobListings
-    * Search
-    * AbilityDifference
-    * JobEnvironment
-    * JobInteractionType
-    * SupportProvided
-    * Card
-  * JobPostDetails
-  * CompanyProfile
-  * Footer
+    JobSeekerLanding
+        Search
+    JobSeekerProfile
+        SkillsetsCard
+        ExperienceCard
+        EducationCard
+    JobSeekerProfileForm
+        JobSeekerProfileFormAbout
+        JobSeekerProfileFormSkills
+        JobSeekerProfileFormAbilityDiff
+        JobSeekerProfileFormExperience
+        JobSeekerProfileFormEducation
+    ManageJobs
+        AppliedJobs
+            AppliedJobsCard
+        SavedJobs
+           SavedJobsCard
+    SuccessfulApplication
 
-  * JobSeekerLanding
-    * Search
-  * JobSeekerProfile
-    * SkillsetsCard
-    * ExperienceCard
-    * EducationCard
-  * JobSeekerProfileForm
-    * JobSeekerProfileFormAbout
-    * JobSeekerProfileFormSkills
-    * JobSeekerProfileFormAbilityDiff
-    * JobSeekerProfileFormExperience
-    * JobSeekerProfileFormEducation
-  * ManageJobs
-    * AppliedJobs
-      * AppliedJobsCard
-    * SavedJobs
-      * SavedJobsCard
-  * SuccessfulApplication
-
-  * EmployerLanding
-    * Search
-  * EmployerProfile
-  * EmployerProfileForm
-  * JobPostForm   
-    * JobAbout
-    * EmployerAccessibility
-  * JobsPosted
-    * JobsPostedCard
-
+    EmployerLanding
+        Search
+    EmployerProfile
+    EmployerProfileForm
+    JobPostForm   
+        JobAbout
+        EmployerAccessibility
+    JobsPosted
+        JobsPostedCard
+```
 ## User Stories 
 ###### Job Seekers
 The job seekers are differently-abled individuals who are keen in looking for a job to fulfill their aspirations. The job seekers can also encompass the caregiver of the individuals who assist them in the application and seeking of jobs.
