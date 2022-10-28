@@ -29,52 +29,52 @@ npm install react-hook-form
 
 ## Component Hierarchy
 
-App
-    NavBar
-    Login
-        LoginScreen
-        RegisterScreen
-        SuccessfulRegistration
-    UniversalLanding
-    JobListings
-        Search
-        AbilityDifference
-        JobEnvironment
-        JobInteractionType
-        SupportProvided
-        Card
-    JobPostDetails
-    CompanyProfile
-    Footer
+* App
+  * NavBar
+  * Login
+    * LoginScreen
+    * RegisterScreen
+    * SuccessfulRegistration
+  * UniversalLanding
+  * JobListings
+    * Search
+    * AbilityDifference
+    * JobEnvironment
+    * JobInteractionType
+    * SupportProvided
+    * Card
+  * JobPostDetails
+  * CompanyProfile
+  * Footer
 
-    JobSeekerLanding
-        Search
-    JobSeekerProfile
-        SkillsetsCard
-        ExperienceCard
-        EducationCard
-    JobSeekerProfileForm
-        JobSeekerProfileFormAbout
-        JobSeekerProfileFormSkills
-        JobSeekerProfileFormAbilityDiff
-        JobSeekerProfileFormExperience
-        JobSeekerProfileFormEducation
-    ManageJobs
-        AppliedJobs
-            AppliedJobsCard
-        SavedJobs
-           SavedJobsCard
-    SuccessfulApplication
+  * JobSeekerLanding
+    * Search
+  * JobSeekerProfile
+    * SkillsetsCard
+    * ExperienceCard
+    * EducationCard
+  * JobSeekerProfileForm
+    * JobSeekerProfileFormAbout
+    * JobSeekerProfileFormSkills
+    * JobSeekerProfileFormAbilityDiff
+    * JobSeekerProfileFormExperience
+    * JobSeekerProfileFormEducation
+  * ManageJobs
+    * AppliedJobs
+      * AppliedJobsCard
+    * SavedJobs
+      * SavedJobsCard
+  * SuccessfulApplication
 
-    EmployerLanding
-        Search
-    EmployerProfile
-    EmployerProfileForm
-    JobPostForm   
-        JobAbout
-        EmployerAccessibility
-    JobsPosted
-        JobsPostedCard
+  * EmployerLanding
+    * Search
+  * EmployerProfile
+  * EmployerProfileForm
+  * JobPostForm   
+    * JobAbout
+    * EmployerAccessibility
+  * JobsPosted
+    * JobsPostedCard
 
 ## User Stories 
 ###### Job Seekers
@@ -89,7 +89,7 @@ Also, as a job portal, there will naturally be various features expected of one,
 ###### Employers
 The employers are businesses that are willing and open to hiring differently-abled and disadvantaged individuals. The main benefit of the website the employer wants is to assess if applicants are suitable for the job, through the information of the jobseekers that would be provided, they would also want to be able to post the roles that their company is hiring for with relevant description to match the suitable applicants.
 
-## Unsolved Problems or Ideas for Features to Implement
+## Unsolved Problems or Features to Implement
 * Logic for the forms (jobseeker profile, employer profile, job post) could be improved for a better user experience. Currently the forms require the user to press “save” before being allowed to proceed to the next page. This could simply be replaced with autosaving upon clicking the “next page” button. Also, all progress made on the form is lost if the user were to cancel the process or leave the page before filling in the form entirely. This could be changed to automatically save the user’s progress if they were to leave the form and allow them to return to continue from where they left off.
 
 * Could add more features for the employer’s “My Job Posts” page such as being able to view the total number of applicants for each job, browse through the list of applicants, view each applicant’s profile and to accept or reject the applications. Consequently, the jobseeker’s applications on their “My Applied Jobs” page should reflect whether the employer has accepted or rejected their application. Could also explore application outcomes beyond a simple “accept” or “reject”, such as an interview invitation or allowing the employer to provide a customised message along with the application outcome.
