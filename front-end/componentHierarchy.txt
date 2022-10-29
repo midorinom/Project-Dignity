@@ -1,0 +1,53 @@
+App
+    NavBar
+    Login
+        LoginScreen
+        RegisterScreen
+        SuccessfulRegistration
+    UniversalLanding
+    JobListings
+        Search
+        AbilityDifference
+        JobEnvironment
+        JobInteractionType
+        SupportProvided
+        Card
+    JobPostDetails
+    CompanyProfile
+    Footer
+
+    JobSeekerLanding
+        Search
+    JobSeekerProfile
+        SkillsetsCard
+        ExperienceCard
+        EducationCard
+    JobSeekerProfileForm
+        JobSeekerProfileFormAbout
+        JobSeekerProfileFormSkills
+        JobSeekerProfileFormAbilityDiff
+        JobSeekerProfileFormExperience
+        JobSeekerProfileFormEducation
+    ManageJobs
+        AppliedJobs
+            AppliedJobsCard
+        SavedJobs
+           SavedJobsCard
+    SuccessfulApplication
+
+    EmployerLanding
+        Search
+    EmployerProfile
+    EmployerProfileForm
+    JobPostForm   
+        JobAbout
+        EmployerAccessibility
+    JobsPosted
+        JobsPostedCard
+
+    
+   
+
+
+
+    
