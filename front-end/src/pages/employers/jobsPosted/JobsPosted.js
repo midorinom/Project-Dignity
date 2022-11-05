@@ -59,7 +59,7 @@ const JobsPosted = (props) => {
     <div>
       <h1 className="m-4">My Jobs Posted</h1>
       <div className="m-4">
-        {jobCards ? (
+        {jobsPosted.length > 0 ? (
           jobCards
         ) : (
           <p className="d-flex justify-content-center">No Jobs Posted</p>
