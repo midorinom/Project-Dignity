@@ -35,7 +35,9 @@ const AppliedJobs = (props) => {
   // useEffect to map cards after JobsApplied has been fetched
   // =========================================================
   useEffect(() => {
-    mapCards();
+    if (jobsApplied.length > 0) {
+      mapCards();
+    }
   }, [jobsApplied]);
 
   function mapCards() {
