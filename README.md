@@ -90,8 +90,26 @@ Also, as a job portal, there will naturally be various features expected of one,
 ###### Employers
 The employers are businesses that are willing and open to hiring differently-abled and disadvantaged individuals. The main benefit of the website the employer wants is to assess if applicants are suitable for the job, through the information of the jobseekers that would be provided, they would also want to be able to post the roles that their company is hiring for with relevant description to match the suitable applicants.
 
+## Videos
+### Universal User Flow (not logged in)
+https://user-images.githubusercontent.com/107839253/200124666-e6952cbf-0c2a-43a6-a44d-6ad6f05a0604.mp4
+
+### Job Seeker User Flow
+###### Registration + Profile Form
+https://user-images.githubusercontent.com/107839253/200124912-a84230e2-7516-494b-ac5a-e2a6e6234fa8.mp4
+
+###### Navigating the Site
+https://user-images.githubusercontent.com/107839253/200124924-d4a52f5b-0bc6-4e3f-8950-4e2bfacf4e96.mp4
+
+### Employer User Flow
+###### Registration + Profile Form + Job Post Form
+https://user-images.githubusercontent.com/107839253/200124939-9432af03-dac8-4b2f-be9f-b66b6508812e.mp4
+
+###### Navigating the Site
+https://user-images.githubusercontent.com/107839253/200124948-68b3fc62-66a7-4586-8672-01ca2e2e25b6.mp4
+
 ## Unsolved Problems or Features to Implement
-* Logic for the forms (jobseeker profile, employer profile, job post) could be improved for a better user experience. Currently the forms require the user to press “save” before being allowed to proceed to the next page. This could simply be replaced with autosaving upon clicking the “next page” button. Also, all progress made on the form is lost if the user were to cancel the process or leave the page before filling in the form entirely. This could be changed to automatically save the user’s progress if they were to leave the form and allow them to return to continue from where they left off.
+* Logic for the forms (job seeker profile, employer profile, job post) could be improved for a better user experience. Currently the forms require the user to press “save” before being allowed to proceed to the next page. This could simply be replaced with autosaving upon clicking the “next page” button. Also, all progress made on the form is lost if the user were to cancel the process or leave the page before filling in the form entirely. This could be changed to automatically save the user’s progress if they were to leave the form and allow them to return to continue from where they left off.
 
 * Could add more features for the employer’s “My Job Posts” page such as being able to view the total number of applicants for each job, browse through the list of applicants, view each applicant’s profile and to accept or reject the applications. Consequently, the jobseeker’s applications on their “My Applied Jobs” page should reflect whether the employer has accepted or rejected their application. Could also explore application outcomes beyond a simple “accept” or “reject”, such as an interview invitation or allowing the employer to provide a customised message along with the application outcome.
 
