@@ -92,7 +92,7 @@ The employers are businesses that are willing and open to hiring differently-abl
 
 ## Videos
 ### Universal User Flow (not logged in)
-https://user-images.githubusercontent.com/107839253/200124666-e6952cbf-0c2a-43a6-a44d-6ad6f05a0604.mp4
+https://user-images.githubusercontent.com/107839253/200125766-9c792899-1475-4c36-be7a-884b72caa8e5.mp4
 
 ### Job Seeker User Flow
 ###### Registration + Profile Form
