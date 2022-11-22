@@ -39,11 +39,14 @@ const JobSeekerProfile = (props) => {
   const getProfileData = async () => {
     console.log("get profile start");
     try {
-      const res = await fetch("http://127.0.0.1:5001/api/jobseekers/get", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ id: userCtx.userDetails.id }),
-      });
+      const res = await fetch(
+        "https://project-dignity-backend.onrender.com/api/jobseekers/get",
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ id: userCtx.userDetails.id }),
+        }
+      );
       const fetchedProfileData = await res.json();
       props.setProfileData(fetchedProfileData);
       console.log(`get profile end`);

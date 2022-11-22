@@ -19,14 +19,17 @@ const AppliedJobsCard = (props) => {
         return { ...prevState, savedJobs: newSavedJobs };
       });
 
-      const res = await fetch("http://127.0.0.1:5001/api/jobseekers/update", {
-        method: "PATCH",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({
-          id: userCtx.userDetails.id,
-          savedJobs: newSavedJobs,
-        }),
-      });
+      const res = await fetch(
+        "https://project-dignity-backend.onrender.com/api/jobseekers/update",
+        {
+          method: "PATCH",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            id: userCtx.userDetails.id,
+            savedJobs: newSavedJobs,
+          }),
+        }
+      );
       console.log(await res.json());
       props.getJobsSaved(newSavedJobs);
     } catch (err) {

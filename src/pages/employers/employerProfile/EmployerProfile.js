@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import UserContext from "../../../context/userContext"
+import UserContext from "../../../context/userContext";
 import styles from "./employerProfile.module.css";
 import { Link } from "react-router-dom";
 const EmployerProfile = (props) => {
-  const userCtx= useContext(UserContext)
-  
+  const userCtx = useContext(UserContext);
 
   useEffect(() => {
     if (userCtx.userDetails.profileCompleted) {
@@ -14,13 +13,16 @@ const EmployerProfile = (props) => {
 
   const getProfileData = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:5001/api/employers/get", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ id: userCtx.userDetails.id }),
-      });
+      const res = await fetch(
+        "https://project-dignity-backend.onrender.com/api/employers/get",
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ id: userCtx.userDetails.id }),
+        }
+      );
       const fetchedProfileData = await res.json();
-      props.setEmployerProfileData(fetchedProfileData)
+      props.setEmployerProfileData(fetchedProfileData);
     } catch (err) {
       console.log(err);
     }
@@ -28,7 +30,6 @@ const EmployerProfile = (props) => {
 
   function displayProfile() {
     if (!userCtx.userDetails.profileCompleted) {
-
       // ==============
       // NoProfile Page
       // ==============
@@ -63,20 +64,19 @@ const EmployerProfile = (props) => {
                 </div>
                 <h6 className={`${styles.subheading} md-lg-6`}>Who We Are</h6>
                 <p className={`${styles.p} md-lg-4`}>
-                {props.employerProfileData?.whoWeAre}
+                  {props.employerProfileData?.whoWeAre}
                 </p>
 
                 <h6 className={`${styles.subheading} md-lg-6`}>What We Do</h6>
                 <p className={`${styles.p} md-lg-4`}>
-                {props.employerProfileData?.whatWeDo}
-                {" "}
+                  {props.employerProfileData?.whatWeDo}{" "}
                 </p>
 
                 <h6 className={`${styles.subheading} md-lg-6`}>
                   Experience Working with Differently-abled Persons
                 </h6>
                 <p className={`${styles.p} md-lg-4`}>
-                {props.employerProfileData?.experience}
+                  {props.employerProfileData?.experience}
                 </p>
               </div>
 
@@ -92,13 +92,13 @@ const EmployerProfile = (props) => {
                 <div className={`${styles.box} container-md`}>
                   <h6 className={`${styles.subheading} md-lg-6`}>Location</h6>
                   <p className={`${styles.p} md-lg-4`}>
-                  {props.employerProfileData?.location}
+                    {props.employerProfileData?.location}
                   </p>
                   <h6 className={`${styles.subheading} md-lg-6`}>
                     Accessibility
                   </h6>
                   <p className={`${styles.p} md-lg-4`}>
-                  {props.employerProfileData?.accessibility}
+                    {props.employerProfileData?.accessibility}
                   </p>
                 </div>
 
@@ -106,12 +106,14 @@ const EmployerProfile = (props) => {
                 <div className={`${styles.box} container-md`}>
                   <h6 className={`${styles.subheading} md-lg-6`}>Contact</h6>
                   <p className={`${styles.p} md-lg-4`}>Contact Number</p>
-                  <p className={`${styles.p} md-lg-4`}>{props.employerProfileData?.contact}</p>
+                  <p className={`${styles.p} md-lg-4`}>
+                    {props.employerProfileData?.contact}
+                  </p>
                   <h6 className={`${styles.subheading} md-lg-6`}>
                     Email Address
                   </h6>
                   <p className={`${styles.p} md-lg-4`}>
-                  {props.employerProfileData?.email}
+                    {props.employerProfileData?.email}
                   </p>
                 </div>
               </div>

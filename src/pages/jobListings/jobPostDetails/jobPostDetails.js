@@ -99,7 +99,10 @@ const JobPostDetails = (props) => {
     if (userCtx.userDetails.appliedJobs !== undefined) {
       data = [...userCtx.userDetails.appliedJobs];
     }
-    saveApplied("http://127.0.0.1:5001/api/jobseekers/update", data);
+    saveApplied(
+      "https://project-dignity-backend.onrender.com/api/jobseekers/update",
+      data
+    );
   };
 
   async function saveApplied(url, data) {

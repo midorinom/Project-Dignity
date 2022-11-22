@@ -13,11 +13,14 @@ const CompanyProfile = (props) => {
     console.log("selectedCompanyProfile", props.selectedCompanyProfile);
 
     try {
-      const res = await fetch("http://127.0.0.1:5001/api/employers/get", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ id: props.selectedCompanyProfile }),
-      });
+      const res = await fetch(
+        "https://project-dignity-backend.onrender.com/api/employers/get",
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ id: props.selectedCompanyProfile }),
+        }
+      );
       const fetchedProfileData = await res.json();
       setProfileData(fetchedProfileData);
     } catch (err) {

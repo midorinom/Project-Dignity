@@ -20,7 +20,7 @@ const LoginScreen = () => {
     }
   };
   async function postLogin(
-    url = "http://127.0.0.1:5001/api/users/login",
+    url = "https://project-dignity-backend.onrender.com/api/users/login",
     data = user
   ) {
     const response = await fetch(url, {

@@ -20,7 +20,7 @@ const SavedJobs = (props) => {
 
     try {
       const res = await fetch(
-        "http://127.0.0.1:5001/api/jobposts/get/multiple-ids",
+        "https://project-dignity-backend.onrender.com/api/jobposts/get/multiple-ids",
         {
           method: "POST",
           headers: { "content-type": "application/json" },

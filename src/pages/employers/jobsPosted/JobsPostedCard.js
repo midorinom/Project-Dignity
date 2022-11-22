@@ -10,11 +10,14 @@ const JobsPostedCard = (props) => {
 
   const handleDelete = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:5001/api/jobposts/delete", {
-        method: "DELETE",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ id: props.jobPost._id }),
-      });
+      const res = await fetch(
+        "https://project-dignity-backend.onrender.com/api/jobposts/delete",
+        {
+          method: "DELETE",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ id: props.jobPost._id }),
+        }
+      );
       console.log(await res.json());
       props.getJobsPosted();
     } catch (err) {

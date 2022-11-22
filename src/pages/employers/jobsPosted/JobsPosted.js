@@ -17,7 +17,7 @@ const JobsPosted = (props) => {
   const getJobsPosted = async () => {
     try {
       const res = await fetch(
-        "http://127.0.0.1:5001/api/jobposts/get/employer-id",
+        "https://project-dignity-backend.onrender.com/api/jobposts/get/employer-id",
         {
           method: "POST",
           headers: { "content-type": "application/json" },

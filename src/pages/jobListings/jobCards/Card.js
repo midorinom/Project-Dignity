@@ -64,7 +64,10 @@ const Card = (props) => {
       data = [...userCtx.userDetails.savedJobs];
     }
     setClick(true);
-    saved("http://127.0.0.1:5001/api/jobseekers/update", data);
+    saved(
+      "https://project-dignity-backend.onrender.com/api/jobseekers/update",
+      data
+    );
   };
 
   async function saved(url, data) {
@@ -90,7 +93,10 @@ const Card = (props) => {
 
   const handleRevert = () => {
     setClick(false);
-    revert("http://127.0.0.1:5001/api/jobseekers/update", props.job_id);
+    revert(
+      "https://project-dignity-backend.onrender.com/api/jobseekers/update",
+      props.job_id
+    );
   };
 
   async function revert(url) {

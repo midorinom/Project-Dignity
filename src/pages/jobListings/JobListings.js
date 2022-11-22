@@ -132,11 +132,14 @@ const JobListings = (props) => {
   // ===============
   const getProfile = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:5001/api/jobseekers/get", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ id: userContext.userDetails.id }),
-      });
+      const res = await fetch(
+        "https://project-dignity-backend.onrender.com/api/jobseekers/get",
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ id: userContext.userDetails.id }),
+        }
+      );
       const fetchedProfileData = await res.json();
       setProfile(fetchedProfileData);
     } catch (err) {
@@ -156,11 +159,14 @@ const JobListings = (props) => {
         fetchBody.profile = profile;
       }
 
-      const res = await fetch("http://127.0.0.1:5001/api/jobposts/get", {
-        method: "POST",
-        body: JSON.stringify(fetchBody),
-        headers: { "content-type": "application/json" },
-      });
+      const res = await fetch(
+        "https://project-dignity-backend.onrender.com/api/jobposts/get",
+        {
+          method: "POST",
+          body: JSON.stringify(fetchBody),
+          headers: { "content-type": "application/json" },
+        }
+      );
       const fetchedJobPosts = await res.json();
 
       console.log("Fetched Job Posts", fetchedJobPosts);

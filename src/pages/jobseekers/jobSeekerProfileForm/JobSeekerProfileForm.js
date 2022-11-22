@@ -133,7 +133,7 @@ const JobSeekerProfileForm = (props) => {
             // const hardCodedId = "6352b602869782ec9b076cf3";
 
             const res = await fetch(
-              "http://127.0.0.1:5001/api/jobseekers/update",
+              "https://project-dignity-backend.onrender.com/api/jobseekers/update",
               {
                 method: "PATCH",
                 headers: { "content-type": "application/json" },
@@ -213,7 +213,7 @@ const JobSeekerProfileForm = (props) => {
             // const hardCodedId = "6352b602869782ec9b076cf3";
 
             const res = await fetch(
-              "http://127.0.0.1:5001/api/jobseekers/update",
+              "https://project-dignity-backend.onrender.com/api/jobseekers/update",
               {
                 method: "PATCH",
                 headers: { "content-type": "application/json" },

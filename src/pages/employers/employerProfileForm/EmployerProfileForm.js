@@ -20,7 +20,7 @@ const EmployerProfileForm = (props) => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue
+    setValue,
   } = useForm();
 
   const onSubmit = (data) => {
@@ -36,14 +36,17 @@ const EmployerProfileForm = (props) => {
   const createEmployerprofile = async (req, res) => {
     if (employerProfile) {
       try {
-        const res = await fetch("http://127.0.0.1:5001/api/employers/update", {
-          method: "PATCH",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({
-            id: userCtx.userDetails.id,
-            profile: employerProfile,
-          }),
-        });
+        const res = await fetch(
+          "https://project-dignity-backend.onrender.com/api/employers/update",
+          {
+            method: "PATCH",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              id: userCtx.userDetails.id,
+              profile: employerProfile,
+            }),
+          }
+        );
         const createdEmployerProfile = await res.json();
         console.log(createdEmployerProfile);
         userCtx.setUserDetails((prevState) => {
@@ -53,18 +56,29 @@ const EmployerProfileForm = (props) => {
       } catch (err) {
         console.log(err);
       }
-      navigate("/profile")
+      navigate("/profile");
     } else {
       alert("Please save your changes");
     }
   };
 
-  useEffect(()=>{
-    if (userCtx.userDetails.profileCompleted){
-      const fields=['company', 'whoWeAre', 'whatWeDo', 'experience', 'location', 'accessibility', 'contact', 'email'];
-      fields.forEach((field)=> setValue(field, props.employerProfileData[field]))
+  useEffect(() => {
+    if (userCtx.userDetails.profileCompleted) {
+      const fields = [
+        "company",
+        "whoWeAre",
+        "whatWeDo",
+        "experience",
+        "location",
+        "accessibility",
+        "contact",
+        "email",
+      ];
+      fields.forEach((field) =>
+        setValue(field, props.employerProfileData[field])
+      );
     }
-  },[])
+  }, []);
   return (
     <section className="container-md" id="jobSeekerProfileForm-AboutSection">
       <form

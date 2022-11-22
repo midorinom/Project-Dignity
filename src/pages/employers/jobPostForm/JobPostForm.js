@@ -24,20 +24,23 @@ const JobPost = () => {
         // const aboutBody = aboutJobSchema;
         // aboutBody.company = userCtx.userDetails.company;
 
-        const res = await fetch("http://127.0.0.1:5001/api/jobposts/create", {
-          method: "PUT",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({
-            employerId: userCtx.userDetails.id,
-            jobPost: {
-              about: {
-                ...aboutJobSchema,
-                company: userCtx.userDetails.company,
+        const res = await fetch(
+          "https://project-dignity-backend.onrender.com/api/jobposts/create",
+          {
+            method: "PUT",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+              employerId: userCtx.userDetails.id,
+              jobPost: {
+                about: {
+                  ...aboutJobSchema,
+                  company: userCtx.userDetails.company,
+                },
+                accessibility: accessibilityConsiderationsSchema,
               },
-              accessibility: accessibilityConsiderationsSchema,
-            },
-          }),
-        });
+            }),
+          }
+        );
         const createdJobPost = await res.json();
         console.log(createdJobPost);
         navigate("/employers/jobs-posted");
