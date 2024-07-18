@@ -2,7 +2,7 @@
 
 ## Table of Contents
 * [Introduction](#Introduction)
-* [Technologies](#Technologies)
+* [Technologies Used](#Technologies)
 * [Installation instructions for any dependencies](#Installation)
 * [Component Hierarchy](#Hierarchy)
 * [User Stories](#UserStories)
