@@ -2,6 +2,7 @@
 
 ## Table of Contents
 * [Introduction](#Introduction)
+* [Technologies](#Technologies)
 * [Installation instructions for any dependencies](#Installation)
 * [Component Hierarchy](#Hierarchy)
 * [User Stories](#UserStories)
@@ -16,11 +17,27 @@ The objective of the project was to create a job portal to connect differently-a
 
 The website can be accessed <a href="https://project-dignity.vercel.app/">here</a>, hosted on Vercel.
 
-###### Technologies Used - Front End
+<a name="Technologies"></a>
+## Technologies Used
+<div style="display:flex">
+<img src="/public/readme/Javascript.png" alt="Javascript" title="Javascript">
+<img src="/public/readme/React.png" alt="React" title="React">
+<img src="/public/readme/Bootstrap.png" alt="Bootstrap" title="Bootstrap">
+<img src="/public/readme/MaterialUI.png" alt="MaterialUI" title="MaterialUI">
+</div>
+
+<div style="display:flex">
+<img src="/public/readme/Express.png" alt="Express" title="Express">
+<img src="/public/readme/MongoDB Atlas.png" alt="MongoDB Atlas" title="MongoDB Atlas">
+<img src="/public/readme/Mongoose.png" alt="Mongoose" title="Mongoose">
+<img src="/public/readme/Vercel.png" alt="Vercel" title="Vercel">
+</div>
+
+### Front End
 React, HTML, CSS and Javascript gave life to the user interface.
 Libraries such as Bootstrap, Materials UI and React hook forms were also used to enhance aesthetics and functionality.
 
-###### Technologies Used - Back End
+### Back End
 Our API was coded in Express and the database was hosted on Mongo Atlas.
 To link the front and back end, Mongoose served as our driver. 
 
