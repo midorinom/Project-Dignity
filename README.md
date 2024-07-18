@@ -5,6 +5,8 @@ As the project was undertaken as a group of 4, it was initially split between fr
 
 The objective of the project was to create a job portal to connect differently-abled individuals with open-minded employers who are willing to hire and work with such individuals. The project was inspired by the organisation, Project Dignity, a social enterprise that focuses on providing differently-abled individuals with vocational training and employment opportunities. The website is named Dignity Careers and is designed like as if it were to be adopted by Project Dignity themselves. The website is intended for big screens such as monitors and laptops and thus, responsiveness for mobile devices was not included in the development of the site.
 
+The website can be accessed <a href="https://project-dignity.vercel.app/">here</a>, hosted on Vercel.
+
 ###### Technologies Used - Front End
 React, HTML, CSS and Javascript gave life to the user interface.
 Libraries such as Bootstrap, Materials UI and React hook forms were also used to enhance aesthetics and functionality.
