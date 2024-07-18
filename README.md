@@ -1,5 +1,14 @@
 # Project Dignity - Dignity Careers
 
+## Table of Contents
+* [Introduction](#Introduction)
+* [Installation instructions for any dependencies](#Installation)
+* [Component Hierarchy](#Hierarchy)
+* [User Stories](#UserStories)
+* [Videos](#Videos)
+* [Unsolved Problems or Features to Implement](#UnsolvedProblems)
+
+<a name="Introduction"></a>
 ## Introduction
 As the project was undertaken as a group of 4, it was initially split between front-end and back-end, with 2 members allocated to each. Subsequently, since the back-end portion of the project was completed quicker, the 2 members returned to help with the front end. 
 
@@ -19,6 +28,7 @@ A link to the Github repo of the backend can be found <a href="https://github.co
 
 A link to the API dictionary can be found <a href="https://docs.google.com/spreadsheets/d/1HyShoObTGmjqsI6gPy4b-fu121c6Yxn6mFU4jJKmKnI/edit#gid=0">here</a>.
 
+<a name="Installation"></a>
 ## Installation instructions for any dependencies
 Dependencies include Bootstrap, Materials UI and React hook form libraries.
 
@@ -30,6 +40,7 @@ npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 
 npm install react-hook-form
 
+<a name="Hierarchy"></a>
 ## Component Hierarchy
 ```
 App
@@ -79,6 +90,8 @@ App
     JobsPosted
         JobsPostedCard
 ```
+
+<a name="UserStories"></a>
 ## User Stories 
 ###### Job Seekers
 The job seekers are differently-abled individuals who are keen in looking for a job to fulfill their aspirations. The job seekers can also encompass the caregiver of the individuals who assist them in the application and seeking of jobs.
@@ -92,6 +105,7 @@ Also, as a job portal, there will naturally be various features expected of one,
 ###### Employers
 The employers are businesses that are willing and open to hiring differently-abled and disadvantaged individuals. The main benefit of the website the employer wants is to assess if applicants are suitable for the job, through the information of the jobseekers that would be provided, they would also want to be able to post the roles that their company is hiring for with relevant description to match the suitable applicants.
 
+<a name="Videos"></a>
 ## Videos
 ### Universal User Flow (not logged in)
 https://user-images.githubusercontent.com/107839253/200125766-9c792899-1475-4c36-be7a-884b72caa8e5.mp4
@@ -110,6 +124,7 @@ https://user-images.githubusercontent.com/107839253/200124939-9432af03-dac8-4b2f
 ###### Navigating the Site
 https://user-images.githubusercontent.com/107839253/200124948-68b3fc62-66a7-4586-8672-01ca2e2e25b6.mp4
 
+<a name="UnsolvedProblems"></a>
 ## Unsolved Problems or Features to Implement
 * Logic for the forms (job seeker profile, employer profile, job post) could be improved for a better user experience. Currently the forms require the user to press “save” before being allowed to proceed to the next page. This could simply be replaced with autosaving upon clicking the “next page” button. Also, all progress made on the form is lost if the user were to cancel the process or leave the page before filling in the form entirely. This could be changed to automatically save the user’s progress if they were to leave the form and allow them to return to continue from where they left off.
 
